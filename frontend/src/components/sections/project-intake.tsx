@@ -79,11 +79,41 @@ export function ProjectIntake() {
 
   const handleSubmit = async () => {
     setIsSubmitting(true)
-    // Stub backend submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-    setIsSubmitting(false)
-    setIsSuccess(true)
-    localStorage.removeItem("aivora-discovery")
+    
+    try {
+      const { createClient } = await import("@/lib/supabase/client")
+      const supabase = createClient()
+      
+      const message = `
+Project Type: ${formData.projectType}
+Industry: ${formData.industry}
+Current Situation: ${formData.currentSituation}
+Desired Outcome: ${formData.desiredOutcome}
+AI Integration: ${formData.aiIntegration}
+Expected Users: ${formData.expectedUsers}
+Required Integrations: ${formData.requiredIntegrations}
+Timeline: ${formData.timeline}
+Budget: ${formData.budget}
+Contact Method: ${formData.contactMethod}
+      `.trim()
+
+      const { error } = await supabase.from('leads').insert({
+        name: formData.name || 'Anonymous',
+        email: formData.email,
+        company: formData.industry,
+        message: message.length >= 10 ? message : 'Insufficient details provided.'
+      })
+
+      if (error) throw error
+
+      setIsSuccess(true)
+      localStorage.removeItem("aivora-discovery")
+    } catch (error) {
+      console.error("Failed to submit intake form:", error)
+      // Fallback/Silent error for UX gracefully handled by a toast in a full implementation.
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   if (!mounted) return null
