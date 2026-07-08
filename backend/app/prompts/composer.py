@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-PROMPTS_DIR = Path(__file__).parent.parent / "prompts"
+PROMPTS_DIR = Path(__file__).parent
 
 def load_prompt(filename: str) -> str:
     """Loads a prompt from a markdown file in the prompts directory."""

@@ -1,15 +1,12 @@
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, status, Depends
+from supabase import Client
 from app.schemas.schema import LeadCreate
-from app.core.config import settings
-from supabase import create_client, Client
+from app.api.deps import get_supabase_client
 
 router = APIRouter()
 
-# Initialize Supabase client globally for the backend
-supabase: Client = create_client(settings.SUPABASE_URL, settings.SUPABASE_SERVICE_ROLE_KEY)
-
 @router.post("/", status_code=status.HTTP_201_CREATED)
-async def create_lead(payload: LeadCreate):
+async def create_lead(payload: LeadCreate, supabase: Client = Depends(get_supabase_client)):
     """
     Accepts a validated lead payload and inserts it into the Supabase 'leads' table.
     """

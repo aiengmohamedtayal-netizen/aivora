@@ -1,6 +1,6 @@
 from typing import AsyncGenerator
 from app.providers.provider_factory import ProviderFactory
-from app.core.prompts import PromptComposer
+from app.prompts.composer import PromptComposer
 
 class AIService:
     def __init__(self, provider_name: str = "openai"):
@@ -22,5 +22,3 @@ class AIService:
         async for chunk in self.provider.generate_stream(messages=messages):
             yield chunk
 
-# Singleton instance
-ai_service = AIService()
