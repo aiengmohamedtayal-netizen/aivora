@@ -97,7 +97,7 @@ export function SectionThesis() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl ms-auto border-s-2 border-primary ps-8 lg:ps-12 py-4">
           <blockquote className="text-h2 font-display text-foreground leading-tight tracking-tight mb-8">
-            "Most software projects fail because of shortcuts. We don't take them."
+            &quot;Most software projects fail because of shortcuts. We don&apos;t take them.&quot;
           </blockquote>
           <cite className="font-mono text-sm text-muted-foreground not-italic">
             — Aivora Engineering Manifesto

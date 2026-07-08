@@ -53,13 +53,35 @@ export async function generateMetadata({
       template: `%s | ${t("title")}`,
     },
     description: t("description"),
-    metadataBase: new URL("https://aivora.com"), // Should come from env in real app
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://aivora.com"),
     alternates: {
       canonical: `/${locale}`,
       languages: {
         en: "/en",
         ar: "/ar",
       },
+    },
+    openGraph: {
+      title: t("title"),
+      description: t("description"),
+      url: `https://aivora.com/${locale}`,
+      siteName: "Aivora",
+      locale: locale,
+      type: "website",
+      images: [
+        {
+          url: "/og-image.jpg",
+          width: 1200,
+          height: 630,
+          alt: "Aivora - AI Engineering Platform",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("title"),
+      description: t("description"),
+      images: ["/og-image.jpg"],
     },
   }
 }

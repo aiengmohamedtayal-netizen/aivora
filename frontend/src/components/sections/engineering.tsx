@@ -66,7 +66,7 @@ export function SectionTypeSafety() {
   name: z.string().min(<span className="text-gold">2</span>),
   email: z.string().email(),
   company: z.string().optional(),
-  budget: z.enum([<span className="text-green-500">'startup'</span>, <span className="text-green-500">'growth'</span>, <span className="text-green-500">'enterprise'</span>]),
+  budget: z.enum([<span className="text-green-500">&apos;startup&apos;</span>, <span className="text-green-500">&apos;growth&apos;</span>, <span className="text-green-500">&apos;enterprise&apos;</span>]),
 {"}"})
 
 <span className="text-primary">type</span> Lead = z.infer&lt;<span className="text-primary">typeof</span> LeadSchema&gt;
