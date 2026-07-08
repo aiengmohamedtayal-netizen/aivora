@@ -5,7 +5,10 @@ from app.core.config import settings
 
 class OpenAIProvider(AIProvider):
     def __init__(self):
-        self.client = AsyncOpenAI(api_key=settings.OPENAI_API_KEY)
+        client_kwargs = {"api_key": settings.OPENAI_API_KEY}
+        if settings.OPENAI_BASE_URL:
+            client_kwargs["base_url"] = settings.OPENAI_BASE_URL
+        self.client = AsyncOpenAI(**client_kwargs)
 
     async def generate_stream(
         self, 

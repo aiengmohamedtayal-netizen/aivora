@@ -22,6 +22,7 @@ class Settings(BaseSettings):
 
     # OpenAI Integration
     OPENAI_API_KEY: str = ""
+    OPENAI_BASE_URL: Union[str, None] = None
     OPENAI_DEFAULT_MODEL: str = "gpt-4o-mini"
 
     # Rate Limiting & Redis
