@@ -6,9 +6,9 @@ import { staggerContainer, fadeUp } from "@/lib/motion"
 import { GlassCard } from "@/components/ui/GlassCard"
 import { Badge } from "@/components/ui/Badge"
 import { SectionLabel } from "@/components/ui/SectionLabel"
-import { Database, Network, Cpu } from "lucide-react"
+import { Database, Network, Cpu, type LucideIcon } from "lucide-react"
 
-const ICONS: Record<string, React.ElementType> = {
+const ICONS: Record<string, LucideIcon> = {
   "blueprint-ledger": Database,
   "blueprint-ai": Cpu,
   "blueprint-headless": Network,

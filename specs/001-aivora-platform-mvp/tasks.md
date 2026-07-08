@@ -271,7 +271,7 @@
 ## Phase 13 — Performance
 **Goal**: Apply optimization scripts.
 
-- [ ] T023 Setup canvas dynamic loading scripts in frontend/src/components/sections/hero-3d.tsx
+- [x] T023 Setup canvas dynamic loading scripts in frontend/src/components/sections/hero-3d.tsx
   - **Title**: Configure R3F Canvas Lazy Loading
   - **Objective**: Defer loading R3F and GSAP modules until scroll entry viewport markers are hit.
   - **Dependencies**: T012
