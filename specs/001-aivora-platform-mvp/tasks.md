@@ -285,7 +285,7 @@
 ## Phase 14 — Accessibility
 **Goal**: Verify keyboard navigation and semantic HTML layers.
 
-- [ ] T024 Perform accessibility validation overrides in frontend/tests/accessibility/axe.test.ts
+- [x] T024 Perform accessibility validation overrides in frontend/tests/accessibility/axe.test.ts
   - **Title**: Build Accessibility Verification Pipeline
   - **Objective**: Configure automated axe-core test runners to verify WCAG AA standards.
   - **Dependencies**: T011
