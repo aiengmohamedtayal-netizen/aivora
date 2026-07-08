@@ -40,10 +40,9 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  // Experimental — Partial Prerendering + React compiler
+  // Experimental — React compiler
   experimental: {
     reactCompiler: true,
-    ppr: "incremental",
   },
 };
 

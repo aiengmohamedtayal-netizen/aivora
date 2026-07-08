@@ -5,10 +5,10 @@ import { motion } from "framer-motion"
 import { staggerContainer, fadeUp } from "@/lib/motion"
 import { GlassCard } from "@/components/ui/GlassCard"
 import { Badge } from "@/components/ui/Badge"
-import { Brain, Cloud, Building2, Globe, Workflow, LayoutDashboard } from "lucide-react"
+import { Brain, Cloud, Building2, Globe, Workflow, LayoutDashboard, type LucideIcon } from "lucide-react"
 import { SectionLabel } from "@/components/ui/SectionLabel"
 
-const ICONS: Record<string, React.ElementType> = {
+const ICONS: Record<string, LucideIcon> = {
   "ai-systems": Brain,
   "saas-platforms": Cloud,
   "business-platforms": Building2,
