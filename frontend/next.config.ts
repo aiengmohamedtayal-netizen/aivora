@@ -44,10 +44,6 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  // Experimental — React compiler
-  experimental: {
-    reactCompiler: true,
-  },
 };
 
 export default withNextIntl(nextConfig);
