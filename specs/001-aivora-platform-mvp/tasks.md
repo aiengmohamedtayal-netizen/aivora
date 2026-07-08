@@ -248,7 +248,7 @@
 ## Phase 12 — Backend
 **Goal**: Configure FastAPI endpoints and prompt middleware.
 
-- [ ] T021 Configure lead intake endpoint in backend/app/api/v1/endpoints/leads.py
+- [x] T021 Configure lead intake endpoint in backend/app/api/v1/endpoints/leads.py
   - **Title**: Setup Backend Leads Route
   - **Objective**: Validate contact form data payload using Pydantic models.
   - **Dependencies**: T004
@@ -257,7 +257,7 @@
   - **Validation Steps**: Send valid POST requests via swagger docs.
   - **Expected Deliverables**: `backend/app/api/v1/endpoints/leads.py`, `backend/app/schemas/schema.py`.
 
-- [ ] T022 Implement backend AI chat completion service in backend/app/services/ai_service.py
+- [x] T022 Implement backend AI chat completion service in backend/app/services/ai_service.py
   - **Title**: Setup AI Completion Route
   - **Objective**: Setup prompt parameters and stream OpenAI completion outputs.
   - **Dependencies**: T004
