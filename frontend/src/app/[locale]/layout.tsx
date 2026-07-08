@@ -10,6 +10,7 @@ import { Navbar } from "@/components/layout/Navbar"
 import { Footer } from "@/components/layout/Footer"
 import { SkipToContent } from "@/components/common/SkipToContent"
 import { ZodErrorProvider } from "@/i18n/zodErrorMap"
+import { MotionProvider } from "@/components/providers/MotionProvider"
 import "@/styles/globals.css"
 
 const thmanyahSans = localFont({
@@ -91,14 +92,16 @@ export default async function LocaleLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <NextIntlClientProvider messages={messages}>
-            <ZodErrorProvider>
-              <SkipToContent />
-              <Navbar />
-              <main id="main-content" className="flex-1 w-full pt-16">
-                {children}
-              </main>
-              <Footer />
-            </ZodErrorProvider>
+            <MotionProvider>
+              <ZodErrorProvider>
+                <SkipToContent />
+                <Navbar />
+                <main id="main-content" className="flex-1 w-full pt-16">
+                  {children}
+                </main>
+                <Footer />
+              </ZodErrorProvider>
+            </MotionProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>

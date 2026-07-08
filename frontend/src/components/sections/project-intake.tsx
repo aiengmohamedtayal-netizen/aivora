@@ -157,7 +157,10 @@ export function ProjectIntake() {
         </header>
 
         {/* Form Area */}
-        <div className="relative">
+        <form 
+          className="relative"
+          onSubmit={(e) => { e.preventDefault(); if (step > TOTAL_STEPS) handleSubmit(); }}
+        >
           <AnimatePresence mode="wait">
             <motion.div
               key={step}
@@ -170,11 +173,12 @@ export function ProjectIntake() {
               {renderStep(step, formData, handleChange, t)}
             </motion.div>
           </AnimatePresence>
-        </div>
+        </form>
 
         {/* Navigation */}
         <div className="flex items-center justify-between pt-8 border-t border-border/50">
           <button
+            type="button"
             onClick={handlePrev}
             disabled={step === 1 || isSubmitting}
             className="text-muted-foreground hover:text-foreground font-medium disabled:opacity-0 transition-opacity"
@@ -184,6 +188,7 @@ export function ProjectIntake() {
           
           {step <= TOTAL_STEPS ? (
             <button
+              type="button"
               onClick={handleNext}
               className="bg-primary text-primary-foreground px-6 py-3 rounded-xl font-medium hover:opacity-90 transition-opacity"
             >
@@ -191,6 +196,7 @@ export function ProjectIntake() {
             </button>
           ) : (
             <button
+              type="button"
               onClick={handleSubmit}
               disabled={isSubmitting}
               className="bg-primary text-primary-foreground px-8 py-3 rounded-xl font-medium hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center gap-2"
@@ -223,10 +229,10 @@ function getStepKey(step: number): string {
 function renderStep(step: number, data: FormData, onChange: (k: keyof FormData, v: string) => void, t: any) {
   
   const InputGroup = ({ label, children }: { label: string, children: React.ReactNode }) => (
-    <div className="flex flex-col gap-3">
-      <label className="text-sm font-mono uppercase tracking-wider text-muted-foreground">{label}</label>
+    <label className="flex flex-col gap-3 cursor-pointer group">
+      <span className="text-sm font-mono uppercase tracking-wider text-muted-foreground group-focus-within:text-primary transition-colors">{label}</span>
       {children}
-    </div>
+    </label>
   )
 
   const Input = ({ field, type = "text" }: { field: keyof FormData, type?: string }) => (

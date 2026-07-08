@@ -53,7 +53,12 @@ export function SectionTypeSafety() {
             </p>
           </div>
           
-          <div className="bg-card border border-border rounded-2xl p-6 shadow-sm overflow-x-auto relative">
+          <div 
+            className="bg-card border border-border rounded-2xl p-6 shadow-sm overflow-x-auto relative"
+            tabIndex={0}
+            role="region"
+            aria-label="Code example"
+          >
             <div className="absolute top-0 end-0 p-4 font-mono text-xs text-muted-foreground/50 select-none">schema.ts</div>
             <pre className="font-mono text-sm leading-relaxed text-muted-foreground">
               <code className="language-typescript">
