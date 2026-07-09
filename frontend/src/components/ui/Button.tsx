@@ -24,8 +24,8 @@ const variantStyles = {
 
 const sizeStyles = {
   sm: "h-9 px-4 text-sm gap-1.5 rounded-lg",
-  md: "h-11 px-8 text-sm font-bold gap-2 rounded-xl",
-  lg: "h-13 px-10 text-base font-bold gap-2.5 rounded-xl",
+  md: "h-11 px-8 text-sm font-medium gap-2 rounded-xl",
+  lg: "h-13 px-10 text-base font-medium gap-2.5 rounded-xl",
   icon: "h-10 w-10 rounded-lg",
 } as const
 

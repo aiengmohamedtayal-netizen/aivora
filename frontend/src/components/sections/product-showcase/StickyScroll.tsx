@@ -64,7 +64,7 @@ export function StickyScroll({
         {items.map((item, index) => (
           <div key={item.titleKey + index} className="flex flex-col gap-6">
             <div>
-              <h3 className="mb-3 text-2xl font-bold text-foreground">
+              <h3 className="mb-3 text-2xl font-medium text-foreground">
                 {t(item.titleKey)}
               </h3>
               <p className="text-lg leading-relaxed text-muted-foreground">
@@ -93,7 +93,7 @@ export function StickyScroll({
                 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 30 }}
               >
-                <h3 className="text-2xl font-bold leading-tight text-foreground lg:text-4xl">
+                <h3 className="text-2xl font-medium leading-tight text-foreground lg:text-4xl">
                   {t(item.titleKey)}
                 </h3>
                 <p className="text-lg lg:text-xl leading-relaxed text-muted-foreground">

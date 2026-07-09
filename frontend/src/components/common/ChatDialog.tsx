@@ -80,7 +80,7 @@ export const ChatDialog: React.FC<ChatDialogProps> = ({
             <Bot className="w-4 h-4" aria-hidden="true" />
           </div>
           <div>
-            <span className="font-bold text-sm block">{dict.botName}</span>
+            <span className="font-medium text-sm block">{dict.botName}</span>
             <span className="text-[10px] opacity-75 block">{dict.botSubtitle}</span>
           </div>
         </div>
@@ -187,7 +187,7 @@ export const ChatDialog: React.FC<ChatDialogProps> = ({
             key={idx}
             onClick={() => void chat.handleSend(chip.query)}
             disabled={chat.isStreaming}
-            className="px-2.5 py-1 border border-border/80 hover:border-primary/30 bg-background text-[10px] font-mono font-bold text-muted-foreground hover:text-foreground rounded-lg transition-colors whitespace-nowrap disabled:opacity-50"
+            className="px-2.5 py-1 border border-border/80 hover:border-primary/30 bg-background text-[10px] font-mono font-medium text-muted-foreground hover:text-foreground rounded-lg transition-colors whitespace-nowrap disabled:opacity-50"
           >
             {chip.label}
           </button>
@@ -203,7 +203,7 @@ export const ChatDialog: React.FC<ChatDialogProps> = ({
               {chat.pastedSnippets.map((snippet: any) => (
                 <div key={snippet.id} className="relative group shrink-0 w-24 h-24 rounded-xl border border-border/80 bg-muted/30 p-2 flex flex-col justify-between overflow-hidden">
                   <p className="text-[9px] text-muted-foreground font-mono leading-tight break-all line-clamp-3 select-none">{snippet.content}</p>
-                  <div className="inline-flex items-center justify-center px-1 py-[2px] rounded border border-border/80 bg-background text-[8px] font-bold text-muted-foreground">{dict.pastedTag}</div>
+                  <div className="inline-flex items-center justify-center px-1 py-[2px] rounded border border-border/80 bg-background text-[8px] font-medium text-muted-foreground">{dict.pastedTag}</div>
                   <button
                     onClick={() => chat.setPastedSnippets((prev: any[]) => prev.filter(c => c.id !== snippet.id))}
                     className="absolute top-1 right-1 p-0.5 bg-black/60 hover:bg-black/80 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity"
@@ -228,7 +228,7 @@ export const ChatDialog: React.FC<ChatDialogProps> = ({
                           <span className="text-[8px] font-mono text-muted-foreground uppercase truncate">{file.file.name.split(".").pop()}</span>
                         </div>
                         <div>
-                          <p className="text-[9px] font-bold text-foreground truncate" title={file.file.name}>{file.file.name}</p>
+                          <p className="text-[9px] font-medium text-foreground truncate" title={file.file.name}>{file.file.name}</p>
                           <p className="text-[8px] text-muted-foreground">{formatFileSize(file.file.size)}</p>
                         </div>
                       </div>

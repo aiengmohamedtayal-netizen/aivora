@@ -8,6 +8,8 @@ import remarkGfm from "remark-gfm";
 import { cn } from "@/lib/utils";
 import { Message } from "@/hooks/useChat";
 
+import { ErrorMessage } from "./ErrorMessage";
+
 const MemoizedMarkdown = React.memo(function MemoizedMarkdown({ content }: { content: string }) {
   return (
     <div className="prose prose-sm dark:prose-invert max-w-none prose-p:leading-relaxed prose-pre:bg-black/20 prose-pre:border prose-pre:border-white/10">
@@ -31,6 +33,24 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
   onRetry,
   previousMsgText
 }) => {
+  if (msg.isError) {
+    return (
+      <div className="flex flex-col gap-1.5 max-w-[88%] me-auto items-start">
+        {isLast ? (
+          <ErrorMessage
+            message={msg.text}
+            onRetry={() => onRetry(previousMsgText || "")}
+          />
+        ) : (
+          <ErrorMessage message={msg.text} />
+        )}
+        <span className="text-[10px] text-muted-foreground/70 font-mono px-1">
+          {msg.timestamp}
+        </span>
+      </div>
+    );
+  }
+
   return (
     <div
       className={cn(
@@ -43,25 +63,13 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
           "px-4 py-3 rounded-2xl leading-relaxed shadow-sm flex flex-col gap-3",
           msg.role === "user"
             ? "bg-primary text-primary-foreground rounded-se-sm"
-            : msg.isError
-              ? "bg-destructive/10 border border-destructive/20 text-destructive-foreground rounded-ss-sm"
-              : "bg-muted/40 border border-border/50 text-foreground rounded-ss-sm"
+            : "bg-muted/40 border border-border/50 text-foreground rounded-ss-sm"
         )}
       >
         {msg.role === "user" ? (
-          <span className="whitespace-pre-wrap leading-relaxed">{msg.text}</span>
+          <span className="whitespace-pre-wrap leading-relaxed font-medium">{msg.text}</span>
         ) : (
           <MemoizedMarkdown content={msg.text} />
-        )}
-
-        {/* Error Retry Button */}
-        {msg.isError && isLast && (
-          <button
-            onClick={() => onRetry(previousMsgText || "")}
-            className="mt-2 text-xs font-semibold underline underline-offset-2 hover:opacity-80 transition-opacity self-start"
-          >
-            Retry
-          </button>
         )}
 
         {/* Files rendering */}

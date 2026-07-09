@@ -90,7 +90,7 @@ export function SectionWhyAivora() {
                   <div className="p-2.5 bg-primary/5 text-primary rounded-lg w-fit mb-6 group-hover:scale-105 transition-transform">
                     {ben.icon}
                   </div>
-                  <h3 className="text-lg font-bold text-foreground mb-3">{ben.title}</h3>
+                  <h3 className="text-lg font-medium text-foreground mb-3">{ben.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{ben.desc}</p>
                 </CardContent>
               </Card>
@@ -155,14 +155,14 @@ export function SectionCaseStudies() {
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.05),transparent_70%)]" />
                   <div className="relative border border-border/80 bg-background/80 rounded-xl p-6 shadow-xl w-full max-w-xs font-mono text-[10px] space-y-4">
                     <div className="flex items-center justify-between border-b border-border/50 pb-2">
-                      <span className="font-bold text-foreground uppercase tracking-wider">{proj.title}</span>
+                      <span className="font-medium text-foreground uppercase tracking-wider">{proj.title}</span>
                       <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
                     </div>
                     <div className="h-2 bg-muted rounded w-3/4" />
                     <div className="h-2 bg-muted rounded w-1/2" />
                     <div className="h-10 bg-primary/5 border border-primary/20 rounded-lg flex items-center justify-between px-3 text-primary">
                       <span>METRIC_STATUS</span>
-                      <span className="font-bold">ACTIVE</span>
+                      <span className="font-medium">ACTIVE</span>
                     </div>
                   </div>
                 </div>
@@ -171,7 +171,7 @@ export function SectionCaseStudies() {
                 <div className="lg:col-span-7 p-8 lg:p-12 flex flex-col justify-between">
                   <div>
                     <span className="font-mono text-xs text-primary uppercase tracking-widest block mb-2">{proj.sub}</span>
-                    <h3 className="text-2xl font-bold tracking-tight text-foreground mb-6">{proj.title}</h3>
+                    <h3 className="text-2xl font-medium tracking-tight text-foreground mb-6">{proj.title}</h3>
                     
                     <div className="space-y-6 text-sm mb-8">
                       <div>
@@ -190,7 +190,7 @@ export function SectionCaseStudies() {
                   </div>
 
                   <div className="pt-6 border-t border-border/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <div className="flex items-center gap-2 text-primary font-mono text-xs font-bold bg-primary/5 border border-primary/10 px-3 py-1.5 rounded-lg">
+                    <div className="flex items-center gap-2 text-primary font-mono text-xs font-medium bg-primary/5 border border-primary/10 px-3 py-1.5 rounded-lg">
                       {proj.result}
                     </div>
                   </div>

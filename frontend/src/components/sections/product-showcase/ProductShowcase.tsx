@@ -42,7 +42,7 @@ export function ProductShowcase() {
             <span className="h-2 w-2 animate-pulse rounded-full bg-blue-500" />
             Product Showcase
           </div>
-          <h2 className="text-4xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
+          <h2 className="text-4xl font-medium tracking-tight text-foreground md:text-5xl lg:text-6xl">
             {t('ProductShowcase.title')}
           </h2>
           <p className="text-xl leading-relaxed text-muted-foreground md:text-2xl">
@@ -74,7 +74,7 @@ export function ProductShowcase() {
                     <Icon className="h-6 w-6 text-foreground" />
                   </div>
                   <div className="flex flex-col gap-3">
-                    <h4 className="text-xl font-bold text-foreground">
+                    <h4 className="text-xl font-medium text-foreground">
                       {t(item.titleKey)}
                     </h4>
                     <p className="text-base leading-relaxed text-muted-foreground">
@@ -90,7 +90,7 @@ export function ProductShowcase() {
         {/* Premium CTA Section */}
         <div className="mx-auto flex max-w-2xl flex-col items-center justify-center gap-8 pt-12 text-center">
           <div className="flex flex-col gap-4">
-            <h3 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+            <h3 className="text-3xl font-medium tracking-tight text-foreground md:text-4xl">
               Ready to transform your operations?
             </h3>
             <p className="text-lg text-muted-foreground">
@@ -100,14 +100,14 @@ export function ProductShowcase() {
           <div className="flex flex-col sm:flex-row items-center gap-4">
             <Link
               href="/intake"
-              className="group inline-flex items-center justify-center gap-2 rounded-xl bg-foreground px-6 py-3.5 text-[15px] font-bold text-background shadow-md transition-all duration-300 hover:bg-foreground/90"
+              className="group inline-flex items-center justify-center gap-2 rounded-xl bg-foreground px-6 py-3.5 text-[15px] font-medium text-background shadow-md transition-all duration-300 hover:bg-foreground/90"
             >
               Start Your Project
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
             </Link>
             <Link
               href="/intelligence"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-6 py-3.5 text-[15px] font-bold text-foreground backdrop-blur-md transition-all duration-300 hover:bg-white/10 hover:border-white/20"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-6 py-3.5 text-[15px] font-medium text-foreground backdrop-blur-md transition-all duration-300 hover:bg-white/10 hover:border-white/20"
             >
               <MessageSquare className="h-4 w-4" />
               Talk to Aivora AI

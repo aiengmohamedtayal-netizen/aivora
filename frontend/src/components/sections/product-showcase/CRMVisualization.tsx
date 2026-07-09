@@ -23,7 +23,7 @@ export function CRMVisualization() {
           {/* Header */}
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="font-semibold text-lg">Sales Pipeline</h3>
+              <h3 className="font-medium text-lg">Sales Pipeline</h3>
               <p className="text-sm text-muted-foreground">
                 Real-time state synchronization
               </p>

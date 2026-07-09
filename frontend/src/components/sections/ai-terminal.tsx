@@ -239,7 +239,7 @@ export function IntelligenceWorkspace() {
                 className="flex-1 flex flex-col p-6 overflow-y-auto custom-scrollbar"
               >
                 <div className="mb-6">
-                  <h3 className="text-lg font-bold text-foreground">
+                  <h3 className="text-lg font-medium text-foreground">
                     {locale === "ar" ? "لوحة معلومات الأداء" : "Performance Overview"}
                   </h3>
                   <p className="text-xs text-muted-foreground">
@@ -260,7 +260,7 @@ export function IntelligenceWorkspace() {
                         <stat.icon size={16} />
                       </div>
                       <span className="text-[10px] text-muted-foreground uppercase tracking-wider">{stat.label}</span>
-                      <span className="text-lg font-bold text-foreground">{stat.val}</span>
+                      <span className="text-lg font-medium text-foreground">{stat.val}</span>
                     </div>
                   ))}
                 </div>
@@ -269,7 +269,7 @@ export function IntelligenceWorkspace() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1 items-stretch">
                   {/* Left: Active Systems */}
                   <div className="p-5 rounded-xl border border-border/60 bg-card/20 flex flex-col gap-4">
-                    <h4 className="text-sm font-bold flex items-center gap-2">
+                    <h4 className="text-sm font-medium flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                       {locale === "ar" ? "الأنظمة النشطة" : "Active Systems"}
                     </h4>
@@ -281,7 +281,7 @@ export function IntelligenceWorkspace() {
                       ].map((sys, idx) => (
                         <div key={idx} className="flex justify-between items-center p-3 rounded-lg border border-border/40 bg-background/50 text-xs">
                           <div>
-                            <span className="font-semibold block">{sys.name}</span>
+                            <span className="font-medium block">{sys.name}</span>
                             <span className="text-[10px] text-muted-foreground mt-0.5 block">{sys.desc}</span>
                           </div>
                           <Badge className="bg-green-500/10 text-green-500 border border-green-500/20 text-[9px] font-mono">ACTIVE</Badge>
@@ -343,7 +343,7 @@ export function IntelligenceWorkspace() {
                 className="flex-1 flex flex-col p-6 overflow-y-auto custom-scrollbar"
               >
                 <div className="mb-6">
-                  <h3 className="text-lg font-bold text-foreground">
+                  <h3 className="text-lg font-medium text-foreground">
                     {locale === "ar" ? "الوكلاء النشطون" : "Active AI Agents"}
                   </h3>
                   <p className="text-xs text-muted-foreground">
@@ -372,10 +372,10 @@ export function IntelligenceWorkspace() {
                     <div key={i} className="p-5 rounded-xl border border-border/60 bg-muted/10 flex flex-col justify-between h-[180px]">
                       <div>
                         <div className="flex justify-between items-start mb-3">
-                          <span className="px-2 py-0.5 rounded bg-primary/10 text-primary text-[9px] font-mono font-bold uppercase">{agent.role}</span>
+                          <span className="px-2 py-0.5 rounded bg-primary/10 text-primary text-[9px] font-mono font-medium uppercase">{agent.role}</span>
                           <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                         </div>
-                        <h4 className="text-sm font-bold text-foreground mb-2">{agent.name}</h4>
+                        <h4 className="text-sm font-medium text-foreground mb-2">{agent.name}</h4>
                         <p className="text-xs text-muted-foreground leading-relaxed">{agent.desc}</p>
                       </div>
                     </div>
@@ -394,7 +394,7 @@ export function IntelligenceWorkspace() {
                 className="flex-1 flex flex-col p-6 overflow-y-auto custom-scrollbar"
               >
                 <div className="mb-6">
-                  <h3 className="text-lg font-bold text-foreground">
+                  <h3 className="text-lg font-medium text-foreground">
                     {locale === "ar" ? "أتمتة سير العمل" : "Automated Workflows"}
                   </h3>
                   <p className="text-xs text-muted-foreground">
@@ -411,11 +411,11 @@ export function IntelligenceWorkspace() {
                   ].map((flow, i) => (
                     <div key={i} className="flex gap-4 items-start relative pb-4 last:pb-0">
                       {i < 2 && <div className="absolute top-10 bottom-0 left-[18px] w-0.5 bg-border/50" />}
-                      <div className="w-9 h-9 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center font-mono text-xs font-bold text-primary shrink-0">
+                      <div className="w-9 h-9 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center font-mono text-xs font-medium text-primary shrink-0">
                         {flow.step}
                       </div>
                       <div className="pt-1.5">
-                        <span className="font-bold text-sm text-foreground block">{flow.name}</span>
+                        <span className="font-medium text-sm text-foreground block">{flow.name}</span>
                         <span className="text-xs text-muted-foreground leading-normal mt-1 block">{flow.desc}</span>
                       </div>
                     </div>

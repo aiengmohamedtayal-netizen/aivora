@@ -39,7 +39,7 @@ export function SectionManifesto() {
             className="lg:col-span-5 flex flex-col items-start text-start z-20"
           >
             <motion.div variants={fadeUp}>
-              <SectionLabel className="mb-6 flex items-center gap-2 px-3.5 py-1.5 bg-muted/30 border border-border/80 text-foreground text-xs font-mono font-bold uppercase tracking-wider rounded-full shadow-sm">
+              <SectionLabel className="mb-6 flex items-center gap-2 px-3.5 py-1.5 bg-muted/30 border border-border/80 text-foreground text-xs font-mono font-medium uppercase tracking-wider rounded-full shadow-sm">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary/40 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
@@ -68,14 +68,14 @@ export function SectionManifesto() {
             >
               <a 
                 href="#intake" 
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-foreground text-background font-sans text-[15px] font-bold rounded-xl shadow-md hover:bg-foreground/90 transition-all duration-300 group"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-foreground text-background font-sans text-[15px] font-medium rounded-xl shadow-md hover:bg-foreground/90 transition-all duration-300 group"
               >
                 {t("ctaPrimary")}
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
               </a>
               <Link 
                 href="/case-studies" 
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-border/80 bg-card/30 backdrop-blur-md text-foreground font-sans text-[15px] font-bold rounded-xl hover:bg-muted/50 hover:border-foreground/40 transition-all duration-300"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-border/80 bg-card/30 backdrop-blur-md text-foreground font-sans text-[15px] font-medium rounded-xl hover:bg-muted/50 hover:border-foreground/40 transition-all duration-300"
               >
                 {t("ctaSecondary")}
               </Link>
@@ -208,7 +208,7 @@ export function SectionShowcase() {
               <span className="w-2.5 h-2.5 rounded-full bg-destructive/60" />
               <span className="w-2.5 h-2.5 rounded-full bg-gold/60" />
               <span className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
-              <span className="mx-auto text-xs font-semibold text-muted-foreground flex items-center gap-1.5 opacity-80">
+              <span className="mx-auto text-xs font-medium text-muted-foreground flex items-center gap-1.5 opacity-80">
                 <MessageSquare className="w-3.5 h-3.5" />
                 {locale === "ar" ? "مساعد أيفورا الذكي" : "Aivora AI Agent"}
               </span>
@@ -248,7 +248,7 @@ export function SectionShowcase() {
                 <span className="w-2.5 h-2.5 rounded-full bg-muted-foreground/30" />
                 <span className="w-2.5 h-2.5 rounded-full bg-muted-foreground/30" />
                 <span className="w-2.5 h-2.5 rounded-full bg-muted-foreground/30" />
-                <span className="mx-auto text-xs font-semibold text-muted-foreground flex items-center gap-1.5 opacity-80">
+                <span className="mx-auto text-xs font-medium text-muted-foreground flex items-center gap-1.5 opacity-80">
                   <BarChart3 className="w-3.5 h-3.5" />
                   {locale === "ar" ? "لوحة تحكم التحليلات" : "Analytics Dashboard"}
                 </span>
@@ -266,7 +266,7 @@ export function SectionShowcase() {
                 <span className="w-2.5 h-2.5 rounded-full bg-muted-foreground/30" />
                 <span className="w-2.5 h-2.5 rounded-full bg-muted-foreground/30" />
                 <span className="w-2.5 h-2.5 rounded-full bg-muted-foreground/30" />
-                <span className="mx-auto text-xs font-semibold text-muted-foreground flex items-center gap-1.5 opacity-80">
+                <span className="mx-auto text-xs font-medium text-muted-foreground flex items-center gap-1.5 opacity-80">
                   <KanbanSquare className="w-3.5 h-3.5" />
                   {locale === "ar" ? "إدارة الصفقات" : "Pipeline CRM"}
                 </span>
@@ -285,7 +285,7 @@ export function SectionShowcase() {
                   ].map((col, idx) => (
                     <div key={idx} className="border border-border/60 bg-card/50 rounded-xl p-3 flex flex-col gap-2 font-sans text-xs shadow-sm">
                       <div className="flex items-center justify-between border-b border-border/30 pb-2">
-                        <span className="font-bold text-foreground/90">{col.title}</span>
+                        <span className="font-medium text-foreground/90">{col.title}</span>
                         <span className="px-1.5 py-0.5 rounded bg-muted/80 text-[10px] text-muted-foreground">
                           {col.leads.length}
                         </span>
@@ -293,7 +293,7 @@ export function SectionShowcase() {
                       <div className="space-y-2 flex-1 overflow-y-auto scrollbar-none mt-1">
                         {col.leads.map((lead, lIdx) => (
                           <div key={lIdx} className="p-2.5 rounded-lg border border-border/40 bg-background/80 shadow-sm">
-                            <span className="block font-semibold text-[11px] truncate">{lead}</span>
+                            <span className="block font-medium text-[11px] truncate">{lead}</span>
                             <span className="text-[9px] text-muted-foreground block mt-1">USD $12,500</span>
                           </div>
                         ))}

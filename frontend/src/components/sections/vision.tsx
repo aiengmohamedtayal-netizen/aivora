@@ -28,7 +28,7 @@ export function SectionServices() {
       
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-3xl mb-16 mx-auto text-center">
-          <SectionLabel className="mb-4 inline-flex items-center gap-2 px-3 py-1 bg-muted/40 border border-border/50 text-foreground text-xs font-semibold rounded-full shadow-sm">
+          <SectionLabel className="mb-4 inline-flex items-center gap-2 px-3 py-1 bg-muted/40 border border-border/50 text-foreground text-xs font-medium rounded-full shadow-sm">
             <span className="w-1.5 h-1.5 rounded-full bg-primary" />
             {locale === "ar" ? "قدرات الأستوديو" : "Studio Capabilities"}
           </SectionLabel>
@@ -71,21 +71,21 @@ export function SectionServices() {
                 <CardContent className="p-8 pt-4 flex-1 flex flex-col relative z-10">
                   <div className="space-y-5 flex-1 border-t border-border/50 pt-6 mt-2">
                     <div>
-                      <h4 className="text-[11px] font-bold text-destructive/80 uppercase tracking-wider mb-2 flex items-center gap-2">
+                      <h4 className="text-[11px] font-medium text-destructive/80 uppercase tracking-wider mb-2 flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-destructive/60" /> 
                         {locale === "ar" ? "المشكلة" : "Problem"}
                       </h4>
                       <p className="text-sm text-muted-foreground/90 leading-relaxed font-medium">{t(`list.${key}.problem`)}</p>
                     </div>
                     <div>
-                      <h4 className="text-[11px] font-bold text-green-500/80 uppercase tracking-wider mb-2 flex items-center gap-2">
+                      <h4 className="text-[11px] font-medium text-green-500/80 uppercase tracking-wider mb-2 flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-green-500/60" /> 
                         {locale === "ar" ? "الحل" : "Solution"}
                       </h4>
                       <p className="text-sm text-foreground/90 leading-relaxed font-medium">{t(`list.${key}.solution`)}</p>
                     </div>
                     <div>
-                      <h4 className="text-[11px] font-bold text-gold/80 uppercase tracking-wider mb-2 flex items-center gap-2">
+                      <h4 className="text-[11px] font-medium text-gold/80 uppercase tracking-wider mb-2 flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-gold/60" /> 
                         {locale === "ar" ? "النتائج" : "Business Outcome"}
                       </h4>
@@ -97,7 +97,7 @@ export function SectionServices() {
                     <div className="text-[11px] font-mono text-muted-foreground uppercase tracking-widest px-3 py-1 bg-muted/40 rounded-full border border-border/40">
                       {t(`list.${key}.process`)}
                     </div>
-                    <a href="#intake" className="inline-flex items-center text-sm font-bold text-primary hover:text-primary/80 transition-colors group/cta">
+                    <a href="#intake" className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors group/cta">
                       {t(`list.${key}.cta`)}
                       <ArrowRight className="w-4 h-4 ml-1.5 transition-transform group-hover/cta:translate-x-1 rtl:rotate-180 rtl:group-hover/cta:-translate-x-1" />
                     </a>
@@ -158,7 +158,7 @@ export function SectionIndustries() {
                 <div className="p-2.5 bg-primary/5 rounded-lg text-primary group-hover:scale-105 transition-transform">
                   {ind.icon}
                 </div>
-                <span className="font-mono text-xs font-bold text-foreground">
+                <span className="font-mono text-xs font-medium text-foreground">
                   {ind.name}
                 </span>
               </div>

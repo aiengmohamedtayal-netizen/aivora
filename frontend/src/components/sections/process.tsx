@@ -63,7 +63,7 @@ export function SectionProcess() {
                           {getStepIcon(key)}
                         </div>
                       </div>
-                      <h3 className="font-bold text-foreground mb-3">{t(`steps.${key}.title`)}</h3>
+                      <h3 className="font-medium text-foreground mb-3">{t(`steps.${key}.title`)}</h3>
                       <p className="text-xs text-muted-foreground leading-relaxed">{t(`steps.${key}.desc`)}</p>
                     </div>
                   </CardContent>
@@ -138,7 +138,7 @@ export function SectionTeam() {
                   <div className="w-14 h-14 rounded-full bg-primary/5 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform">
                     {member.icon}
                   </div>
-                  <h3 className="font-bold text-foreground mb-2">{member.role}</h3>
+                  <h3 className="font-medium text-foreground mb-2">{member.role}</h3>
                   <span className="text-xs text-muted-foreground font-mono">{member.skills}</span>
                 </CardContent>
               </Card>

@@ -11,7 +11,7 @@ export default function GlobalError({
     <html>
       <body className="bg-background text-foreground flex min-h-screen flex-col items-center justify-center p-8 text-center space-y-6 antialiased">
         <div className="space-y-2">
-          <h2 className="text-2xl font-bold">Critical Application Error</h2>
+          <h2 className="text-2xl font-medium">Critical Application Error</h2>
           <p className="text-muted-foreground text-sm max-w-[500px]">
             {error.message || "A fatal error occurred that crashed the application."}
           </p>

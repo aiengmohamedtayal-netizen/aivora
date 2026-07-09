@@ -95,11 +95,11 @@ function MetricCard({
             <div className="rounded-lg bg-muted/50 p-2 border border-border/50">
               <Icon size={16} className="text-muted-foreground" />
             </div>
-            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{title}</span>
+            <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">{title}</span>
           </div>
           <div
             className={cn(
-              "flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold",
+              "flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-medium",
               trend === "up" ? "bg-green-500/10 text-green-500 border border-green-500/20" : "bg-red-500/10 text-red-500 border border-red-500/20"
             )}
           >
@@ -135,14 +135,14 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     return (
       <div className="rounded-xl border border-border/50 bg-background/95 p-3 shadow-xl backdrop-blur-md">
-        <p className="mb-2 text-xs font-semibold text-muted-foreground">{label}</p>
+        <p className="mb-2 text-xs font-medium text-muted-foreground">{label}</p>
         {payload.map((p: any, i: number) => (
           <div key={i} className="flex items-center gap-4 justify-between">
             <span className="flex items-center gap-2 text-sm font-medium text-foreground">
               <span className="h-2 w-2 rounded-full" style={{ background: p.color }} />
               {p.name}
             </span>
-            <span className="font-mono text-sm font-bold text-foreground">
+            <span className="font-mono text-sm font-medium text-foreground">
               {p.name.toLowerCase().includes('revenue') ? `$${p.value.toLocaleString()}` : p.value.toLocaleString()}
             </span>
           </div>
@@ -417,7 +417,7 @@ export function AnalyticsWorkspace() {
           </h3>
           <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full border border-green-500/20 bg-green-500/10">
             <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-            <span className="text-[10px] font-bold text-green-500">LIVE</span>
+            <span className="text-[10px] font-medium text-green-500">LIVE</span>
           </div>
         </div>
         <div className="flex-1 w-full -ml-4">

@@ -192,14 +192,14 @@ Message: ${message}
                 />
               </div>
               <div className="flex-1 flex flex-col gap-1.5">
-                <span className="font-mono text-xs font-bold text-foreground flex items-center gap-2">
+                <span className="font-mono text-xs font-medium text-foreground flex items-center gap-2">
                   <Instagram className="w-3.5 h-3.5 text-primary" />
                   {t.instagram}
                 </span>
                 <p className="text-[10px] sm:text-xs text-muted-foreground leading-normal max-w-[200px]">
                   {t.igSub}
                 </p>
-                <span className="text-[10px] font-mono font-bold text-primary group-hover:underline flex items-center gap-1 mt-1">
+                <span className="text-[10px] font-mono font-medium text-primary group-hover:underline flex items-center gap-1 mt-1">
                   {t.igFollow}
                   <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform rtl:rotate-180" />
                 </span>
@@ -222,7 +222,7 @@ Message: ${message}
                     <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6">
                       <Check className="w-6 h-6" strokeWidth={3} />
                     </div>
-                    <h3 className="text-xl font-bold text-foreground mb-3">{t.successTitle}</h3>
+                    <h3 className="text-xl font-medium text-foreground mb-3">{t.successTitle}</h3>
                     <p className="text-sm text-muted-foreground max-w-sm leading-relaxed">
                       {t.successMsg}
                     </p>
@@ -336,7 +336,7 @@ Message: ${message}
                     <Button
                       type="submit"
                       disabled={isPending}
-                      className="w-full py-4 text-xs font-mono font-bold tracking-wider uppercase text-center flex items-center justify-center gap-2"
+                      className="w-full py-4 text-xs font-mono font-medium tracking-wider uppercase text-center flex items-center justify-center gap-2"
                     >
                       {isPending ? locale === "ar" ? "جاري الإرسال..." : "Submitting..." : t.formSubmit}
                       {!isPending && <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />}

@@ -146,7 +146,7 @@ Contact Method: ${formData.contactMethod}
                   `}>
                     0{s}
                   </div>
-                  <span className={`text-sm ${i === 0 ? "font-bold text-foreground" : "text-muted-foreground"}`}>
+                  <span className={`text-sm ${i === 0 ? "font-medium text-foreground" : "text-muted-foreground"}`}>
                     {t(`actions.successFlow.step${s}`)}
                   </span>
                 </li>

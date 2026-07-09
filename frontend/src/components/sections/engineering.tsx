@@ -28,7 +28,7 @@ export function SectionConstitution() {
               <CardContent className="p-6 flex flex-col gap-4">
                 <p.icon className="h-6 w-6 text-primary" />
                 <div>
-                  <h3 className="font-bold text-foreground mb-1">{p.title}</h3>
+                  <h3 className="font-medium text-foreground mb-1">{p.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
                 </div>
               </CardContent>

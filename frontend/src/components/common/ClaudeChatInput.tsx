@@ -127,7 +127,7 @@ const PastedContentCard: React.FC<PastedContentCardProps> = ({ content, onRemove
 
             <div className="flex items-center justify-between w-full mt-2">
                 <div className="inline-flex items-center justify-center px-1.5 py-[2px] rounded border border-[#E5E5E5] dark:border-[#404040] bg-white dark:bg-transparent">
-                    <span className="text-[9px] font-bold text-[#6B7280] dark:text-[#9CA3AF] uppercase tracking-wider font-sans">PASTED</span>
+                    <span className="text-[9px] font-medium text-[#6B7280] dark:text-[#9CA3AF] uppercase tracking-wider font-sans">PASTED</span>
                 </div>
             </div>
 
@@ -203,7 +203,7 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({ models, selectedModel, on
                         >
                             <div className="flex flex-col gap-0.5">
                                 <div className="flex items-center gap-2">
-                                    <span className="text-[13px] font-semibold text-foreground">
+                                    <span className="text-[13px] font-medium text-foreground">
                                         {model.name}
                                     </span>
                                     {model.badge && (
@@ -228,7 +228,7 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({ models, selectedModel, on
                     <div className="h-px bg-border/50 my-1 mx-2" />
 
                     <button className="w-full text-left px-3 py-2.5 rounded-xl flex items-center justify-between group transition-colors hover:bg-muted/40 text-foreground">
-                        <span className="text-[13px] font-semibold">More models</span>
+                        <span className="text-[13px] font-medium">More models</span>
                         <Icons.SelectArrow className="w-4 h-4 -rotate-90 text-muted-foreground" />
                     </button>
                 </div>

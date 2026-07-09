@@ -49,7 +49,7 @@ export function Footer() {
           <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
-                <h3 className="text-sm font-bold leading-6 text-foreground">{t("capabilities")}</h3>
+                <h3 className="text-sm font-medium leading-6 text-foreground">{t("capabilities")}</h3>
                 <ul role="list" className="mt-6 space-y-4">
                   <li>
                     <Link href="/capabilities/web" className="text-sm leading-6 text-muted-foreground hover:text-foreground">
@@ -74,7 +74,7 @@ export function Footer() {
                 </ul>
               </div>
               <div className="mt-10 md:mt-0">
-                <h3 className="text-sm font-bold leading-6 text-foreground">{t("company")}</h3>
+                <h3 className="text-sm font-medium leading-6 text-foreground">{t("company")}</h3>
                 <ul role="list" className="mt-6 space-y-4">
                   <li>
                     <Link href="/about" className="text-sm leading-6 text-muted-foreground hover:text-foreground">
@@ -101,7 +101,7 @@ export function Footer() {
             </div>
             <div className="md:grid md:grid-cols-1 md:gap-8">
               <div className="mt-10 xl:mt-0">
-                <h3 className="text-sm font-bold leading-6 text-foreground">{t("newsletter")}</h3>
+                <h3 className="text-sm font-medium leading-6 text-foreground">{t("newsletter")}</h3>
                 <p className="mt-2 text-sm leading-6 text-muted-foreground">
                   {t("newsletterDesc")}
                 </p>

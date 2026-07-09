@@ -36,7 +36,7 @@ export function SectionTechnologies() {
           {techs.map((tech, idx) => (
             <span 
               key={idx}
-              className="px-6 py-3 border border-border/80 bg-card/40 backdrop-blur-sm text-foreground font-mono text-xs font-bold rounded-xl shadow-sm hover:border-primary/30 transition-colors"
+              className="px-6 py-3 border border-border/80 bg-card/40 backdrop-blur-sm text-foreground font-mono text-xs font-medium rounded-xl shadow-sm hover:border-primary/30 transition-colors"
             >
               {tech}
             </span>
@@ -105,10 +105,10 @@ export function SectionTestimonials() {
                 </div>
                 <div className="pt-6 border-t border-border/50 flex items-center justify-between">
                   <div>
-                    <h3 className="font-bold text-foreground text-sm">{rev.author}</h3>
+                    <h3 className="font-medium text-foreground text-sm">{rev.author}</h3>
                     <span className="text-[11px] text-muted-foreground block mt-0.5">{rev.role}</span>
                   </div>
-                  <span className="font-mono text-xs font-bold text-primary bg-primary/5 px-2.5 py-1 rounded">
+                  <span className="font-mono text-xs font-medium text-primary bg-primary/5 px-2.5 py-1 rounded">
                     {rev.company}
                   </span>
                 </div>
@@ -176,7 +176,7 @@ export function SectionFAQ() {
               >
                 <button
                   onClick={() => toggle(idx)}
-                  className="w-full px-6 py-5 text-start font-bold text-sm sm:text-base flex items-center justify-between gap-4 text-foreground hover:bg-card/40 transition-colors"
+                  className="w-full px-6 py-5 text-start font-medium text-sm sm:text-base flex items-center justify-between gap-4 text-foreground hover:bg-card/40 transition-colors"
                 >
                   <span>{faq.q}</span>
                   {isOpen ? (

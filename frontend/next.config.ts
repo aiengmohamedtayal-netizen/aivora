@@ -46,6 +46,7 @@ const nextConfig: NextConfig = {
 
   // Rewrites to proxy FastAPI backend locally
   async rewrites() {
+    if (process.env.NODE_ENV === "production") return [];
     return [
       {
         source: "/api/v1/:path*",

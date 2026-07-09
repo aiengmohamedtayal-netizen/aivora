@@ -88,7 +88,7 @@ export function HeroComposition() {
                 <div className="w-3 h-3 rounded-full bg-primary/60" />
               </div>
               <div className="w-px h-4 bg-border" />
-              <div className="flex items-center gap-2 text-sm font-semibold">
+              <div className="flex items-center gap-2 text-sm font-medium">
                 <div className="w-6 h-6 rounded bg-primary/10 flex items-center justify-center">
                   <Sparkles className="w-3.5 h-3.5 text-primary" />
                 </div>
@@ -129,7 +129,7 @@ export function HeroComposition() {
                   <h3 className="text-xl font-display font-bold">Active Pipeline</h3>
                   <p className="text-sm text-muted-foreground">Q3 Lead conversion tracking</p>
                 </div>
-                <div className="hidden sm:flex px-3 py-1.5 bg-primary/10 text-primary text-xs font-semibold rounded-lg border border-primary/20 items-center gap-2">
+                <div className="hidden sm:flex px-3 py-1.5 bg-primary/10 text-primary text-xs font-medium rounded-lg border border-primary/20 items-center gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
                   Auto-sync active
                 </div>
@@ -137,7 +137,7 @@ export function HeroComposition() {
 
               {/* Data Table Mockup */}
               <div className="border border-border/50 rounded-xl bg-card/30 backdrop-blur-sm overflow-hidden flex-1">
-                <div className="grid grid-cols-4 gap-4 px-4 py-3 border-b border-border/50 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                <div className="grid grid-cols-4 gap-4 px-4 py-3 border-b border-border/50 text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   <div className="col-span-2">Client</div>
                   <div>Status</div>
                   <div>Value</div>
@@ -150,7 +150,7 @@ export function HeroComposition() {
                   ].map((row, i) => (
                     <div key={i} className="grid grid-cols-4 gap-4 px-4 py-3 border-b border-border/50 last:border-0 items-center hover:bg-muted/20 transition-colors cursor-pointer">
                       <div className="col-span-2 flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center font-bold text-xs">
+                        <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center font-medium text-xs">
                           {row.name.charAt(0)}
                         </div>
                         <div>
@@ -159,7 +159,7 @@ export function HeroComposition() {
                         </div>
                       </div>
                       <div>
-                        <span className={`px-2.5 py-1 rounded-full text-[10px] font-semibold ${
+                        <span className={`px-2.5 py-1 rounded-full text-[10px] font-medium ${
                           row.status === 'Qualified' ? 'bg-green-500/10 text-green-500 border border-green-500/20' :
                           row.status === 'Proposal' ? 'bg-blue-500/10 text-blue-500 border border-blue-500/20' :
                           'bg-gold/10 text-gold border border-gold/20'
@@ -167,7 +167,7 @@ export function HeroComposition() {
                           {row.status}
                         </span>
                       </div>
-                      <div className="text-sm font-semibold">{row.val}</div>
+                      <div className="text-sm font-medium">{row.val}</div>
                     </div>
                   ))}
                 </div>
@@ -190,7 +190,7 @@ export function HeroComposition() {
               <Sparkles className="w-3 h-3 text-primary-foreground" />
             </div>
             <div>
-              <div className="text-xs font-bold leading-none">Aivora AI</div>
+              <div className="text-xs font-medium leading-none">Aivora AI</div>
               <div className="text-[9px] text-muted-foreground mt-0.5">Business Consultant</div>
             </div>
           </div>
@@ -206,7 +206,7 @@ export function HeroComposition() {
                 <Sparkles className="w-2.5 h-2.5 text-primary-foreground" />
               </div>
               <div className="bg-primary/10 border border-primary/20 p-2 rounded-xl rounded-tl-sm text-[11px] text-foreground leading-relaxed">
-                <span className="font-semibold block mb-1 text-primary">I&apos;ve analyzed 42 new leads:</span>
+                <span className="font-medium block mb-1 text-primary">I&apos;ve analyzed 42 new leads:</span>
                 3 qualify for Enterprise plans. I&apos;ve drafted personalized proposals and staged them in your CRM. Should I email them?
               </div>
             </div>
@@ -225,7 +225,7 @@ export function HeroComposition() {
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <Workflow className="w-4 h-4 text-primary" />
-              <span className="text-xs font-semibold">Lead Automation</span>
+              <span className="text-xs font-medium">Lead Automation</span>
             </div>
             <MoreHorizontal className="w-4 h-4 text-muted-foreground" />
           </div>
@@ -270,7 +270,7 @@ export function HeroComposition() {
           style={{ translateZ: 50 }}
         >
           <div className="flex items-center justify-between mb-1">
-            <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider">Revenue</span>
+            <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">Revenue</span>
             <TrendingUp className="w-3 h-3 text-green-500" />
           </div>
           <div className="flex items-baseline gap-2 mb-3">

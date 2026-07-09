@@ -117,7 +117,7 @@ export function Navbar() {
             asChild 
             variant="primary" 
             size="sm" 
-            className="h-8 px-4 text-xs font-semibold tracking-wide shadow-md shadow-primary/20 hover:shadow-primary/30 transition-all"
+            className="h-8 px-4 text-xs font-medium tracking-wide shadow-md shadow-primary/20 hover:shadow-primary/30 transition-all"
           >
             <Link href="/intake">{t("contact")}</Link>
           </Button>
