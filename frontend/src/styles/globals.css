@@ -369,3 +369,94 @@ html[lang="ar"] .font-display {
 .dark ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.15);
 }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   13. PREMIUM BRAND ANIMATIONS (AURORA, GRID, BEAMS)
+   ───────────────────────────────────────────────────────────────────────── */
+
+@keyframes aurora-float {
+  0% {
+    transform: translate(0px, 0px) rotate(0deg) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) rotate(120deg) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) rotate(240deg) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) rotate(360deg) scale(1);
+  }
+}
+
+@keyframes grid-drift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 32px 32px;
+  }
+}
+
+@keyframes border-beam {
+  0% {
+    offset-distance: 0%;
+  }
+  100% {
+    offset-distance: 100%;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.25;
+    transform: scale(1.05);
+  }
+}
+
+.animate-aurora-1 {
+  animation: aurora-float 25s ease-in-out infinite;
+}
+
+.animate-aurora-2 {
+  animation: aurora-float 30s ease-in-out infinite reverse;
+}
+
+.animate-grid-drift {
+  animation: grid-drift 20s linear infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 6s ease-in-out infinite;
+}
+
+/* Border Beam effect */
+.border-beam-container {
+  position: relative;
+}
+
+.border-beam-container::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(to right, var(--primary), var(--gold), transparent, var(--primary));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.5;
+  background-size: 200% 200%;
+  animation: grid-drift 4s linear infinite;
+}
+
+/* Noise overlay */
+.noise-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+}
+
