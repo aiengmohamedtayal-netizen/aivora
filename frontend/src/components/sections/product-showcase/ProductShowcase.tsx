@@ -4,10 +4,19 @@ import { useTranslations } from 'next-intl';
 import { StickyScroll } from './StickyScroll';
 import { BentoGrid, BentoItem } from './BentoGrid';
 import { showcaseProducts } from '@/lib/data/showcase-data';
-import { CRMVisualization } from './CRMVisualization';
-import { AssistantVisualization } from './AssistantVisualization';
 import { Link } from '@/i18n/routing';
 import { ArrowRight, MessageSquare } from 'lucide-react';
+import dynamic from 'next/dynamic';
+
+const CRMVisualization = dynamic(() => import('./CRMVisualization').then(m => m.CRMVisualization), {
+  ssr: false,
+  loading: () => <div className="w-full h-[400px] bg-card/10 animate-pulse rounded-2xl border border-white/5" />
+});
+
+const AssistantVisualization = dynamic(() => import('./AssistantVisualization').then(m => m.AssistantVisualization), {
+  ssr: false,
+  loading: () => <div className="w-full h-[400px] bg-card/10 animate-pulse rounded-2xl border border-white/5" />
+});
 
 export function ProductShowcase() {
   const t = useTranslations('showcase');

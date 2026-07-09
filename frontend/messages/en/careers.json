@@ -1,0 +1,28 @@
+{
+  "seoTitle": "Careers – Aivora – Join Our Team",
+  "seoDescription": "Explore job openings at Aivora. We're looking for talented engineers, designers, and product managers.",
+  "keywords": "Aivora jobs, software engineer openings, designer careers, work at Aivora",
+  "headline": "CAREERS",
+  "subheadline": "Build the Future of Digital Products",
+  "supportingText": "We are always looking for talented, passionate individuals to join our product and engineering team.",
+  "intro": "At Aivora, you'll work on cutting-edge AI and modern software projects alongside a team of dedicated designers and engineers. We value high craftsmanship, continuous learning, and clean, resilient systems.",
+  "applyText": "Check back for updates or email us your CV / resume at",
+  "positionsHeader": "Open Positions",
+  "positions": [
+    {
+      "title": "Software Engineer",
+      "type": "Full-time / Remote",
+      "description": "Build scalable Next.js applications and lead key feature development with high quality standards."
+    },
+    {
+      "title": "UI/UX Designer",
+      "type": "Full-time / Remote",
+      "description": "Design polished, premium, and interactive user experiences with modern design tokens."
+    },
+    {
+      "title": "Backend Engineer",
+      "type": "Full-time / Remote",
+      "description": "Architect secure database environments, robust APIs, and deterministic integration pipelines."
+    }
+  ]
+}

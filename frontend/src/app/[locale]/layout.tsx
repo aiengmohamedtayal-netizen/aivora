@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
 import { GeistSans } from "geist/font/sans"
-import { Newsreader } from "next/font/google"
 import localFont from "next/font/local"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages } from "next-intl/server"
@@ -16,11 +15,9 @@ import { MotionProvider } from "@/components/providers/MotionProvider"
 import { GlobalWaveBackground } from "@/components/common/GlobalWaveBackground"
 import "@/styles/globals.css"
 
-const newsreader = Newsreader({
-  subsets: ["latin"],
-  variable: "--font-newsreader",
-  display: "swap",
-})
+const newsreader = {
+  variable: "font-newsreader-class",
+}
 
 const thmanyahSans = localFont({
   src: [

@@ -1,38 +1,69 @@
 {
-  "seoTitle": "Aivora Services – AI, SaaS & Custom Software",
-  "seoDescription": "Discover how our AI and software engineering services help businesses scale, automate, and dominate their markets.",
-  "keywords": "AI Engineering, Platform Engineering, Data Integration, Cloud Architecture, Automation",
-  "headline": "STUDIO CAPABILITIES",
+  "seoTitle": "Our Services – Aivora",
+  "seoDescription": "Overview of Aivora's services in AI solutions, SaaS, custom software, cloud, and more.",
+  "keywords": "AI Engineering, Platform Engineering, SaaS Development, Web Development, Automation, Startup MVP",
+  "headline": "OUR SERVICES",
   "subheadline": "Solutions Built for Real Business Growth",
-  "supportingText": "A focused set of services designed to help businesses launch, automate, and scale with confidence.",
-  "items": {
-    "aiProducts": {
-      "title": "Enterprise AI Engineering",
-      "description": "Custom AI solutions that improve customer experience, automate tasks, and support better decision-making.",
-      "problem": "Manual work slows down growth, and outdated systems cannot keep up with modern business needs.",
-      "solution": "We build secure, scalable AI systems that fit naturally into your business operations.",
-      "result": "Cut operational overhead, increase efficiency, and create new opportunities for growth."
-    },
-    "customPlatform": {
-      "title": "Custom Platform Engineering",
-      "description": "Modern websites and SaaS platforms built to help you launch faster and compete with confidence.",
-      "problem": "Generic software often fails to match the way your business actually works.",
-      "solution": "We design tailored platforms that match your exact business requirements.",
-      "result": "Full ownership of your product, a polished user experience, and reliable technical performance."
-    },
-    "dataIntegration": {
-      "title": "Data & Systems Integration",
-      "description": "Integration systems that connect your tools, synchronize your data, and reduce repetitive work.",
-      "problem": "Disconnected tools and scattered data create delays and gaps in operations.",
-      "solution": "We build reliable integration layers that bring your systems together into one connected environment.",
-      "result": "More accurate data, less manual entry, and smoother cross-platform operations."
-    },
-    "cloudScaling": {
-      "title": "Cloud Architecture & Scaling",
-      "description": "Cloud systems and technical consulting that support growth, reliability, and long-term scale.",
-      "problem": "As your product grows, weak architecture can become slow, fragile, and expensive to maintain.",
-      "solution": "We refactor and modernize systems into more resilient and scalable architectures.",
-      "result": "Better scalability, higher reliability, and lower infrastructure cost over time."
-    }
+  "supportingText": "Explore our focused set of services designed to help businesses launch, automate, and scale with confidence.",
+  "viewDetails": "Learn More",
+  "ai-solutions": {
+    "title": "AI Solutions",
+    "seoTitle": "AI Solutions – Aivora",
+    "seoDescription": "Tailored AI solutions to optimize your business processes.",
+    "description": "Custom AI integrations, chatbots, and intelligent automation tools that enhance customer experience and internal processes.",
+    "details": "We design, build, and deploy secure, scalable AI systems that interface with your core business data. From customer support agents to predictive analytics models, we integrate intelligence directly into your workflows to save time and reduce costs.",
+    "challenge": "Businesses lose hours to manual processes, and legacy software cannot adapt to unstructured data.",
+    "solution": "We construct secure AI orchestration layers and agentic workflows tailored to your database.",
+    "outcome": "Unlock 24/7 automated support, cut operations overhead by 50%, and enable faster, data-driven decisions."
+  },
+  "custom-software": {
+    "title": "Custom Software",
+    "seoTitle": "Custom Software – Aivora",
+    "seoDescription": "Enterprise-grade software designed for your specific needs.",
+    "description": "Enterprise-grade software designed for your specific needs, ensuring ownership of IP and seamless performance.",
+    "details": "When generic tools fail, you need bespoke software built for your exact operational workflows. We construct secure, maintainable core systems, client portals, and CRM/ERP modules that adapt to your business, not the other way around.",
+    "challenge": "Off-the-shelf software limits your unique business processes and competitive edge.",
+    "solution": "We build custom platforms from the ground up with clean architectures and total IP ownership.",
+    "outcome": "Complete operational control, eliminated licensing fees, and infinite scalability as your needs grow."
+  },
+  "saas-development": {
+    "title": "SaaS Development",
+    "seoTitle": "SaaS Development – Aivora",
+    "seoDescription": "Modern SaaS platforms built to validate ideas and dominate markets.",
+    "description": "Modern web applications and SaaS platforms tailored to your business workflows.",
+    "details": "From multi-tenant databases to subscription integrations and real-time dashboard analytics, we build production-grade SaaS products. We focus on scalability, clean UI/UX, and rapid execution.",
+    "challenge": "Launching a SaaS requires managing complex authentication, billing, and high-performance databases.",
+    "solution": "We engineer stress-tested platforms using Next.js, Supabase, and containerized API microservices.",
+    "outcome": "Deploy a secure, launch-ready platform in weeks with a polished user experience and robust payment workflows."
+  },
+  "web-development": {
+    "title": "Web Development",
+    "seoTitle": "Web Development – Aivora",
+    "seoDescription": "Premium web application design and development.",
+    "description": "Premium web application design, responsive layouts, fast load times, and rich interactive visuals.",
+    "details": "We build fast, responsive, and visually stunning web applications that look great on any device. We use modern visual layout design and fluid micro-interactions to leave a premium, lasting impression.",
+    "challenge": "Slow, unresponsive websites lose visitors and rank poorly on Google search engines.",
+    "solution": "We construct lightweight React/Next.js pages optimized for speed, SEO, and complete device responsiveness.",
+    "outcome": "Get a state-of-the-art web presence with perfect Core Web Vitals, high search visibility, and maximum user engagement."
+  },
+  "automation": {
+    "title": "Business Automation",
+    "seoTitle": "Business Automation – Aivora",
+    "seoDescription": "End-to-end automation of repetitive tasks and data flows.",
+    "description": "End-to-end automation of repetitive tasks and data flows to improve efficiency and reduce errors.",
+    "details": "Connect your disconnected tools, CRM, databases, and APIs into one cohesive workflow. We build automated background pipelines that run reliably and replace manual copy-paste cycles.",
+    "challenge": "Siloed data and disconnected tools cause critical information gaps and operational drag.",
+    "solution": "We build reliable integrations and event-driven middleware to sync data across your software suite.",
+    "outcome": "Eliminated manual data entry, guaranteed data consistency, and streamlined cross-platform sync."
+  },
+  "startup-mvp": {
+    "title": "Startup MVP",
+    "seoTitle": "Startup MVP – Aivora",
+    "seoDescription": "Validate your ideas with a high-quality Minimum Viable Product.",
+    "description": "Fast-tracked development to validate ideas and launch MVPs with high quality.",
+    "details": "Validate your product idea in the real market quickly. We focus on core high-value features, rapid sprint development, and clean architecture so that your MVP can grow into a full product without rewriting code.",
+    "challenge": "Startups need to validate product-market fit fast before running out of capital.",
+    "solution": "We focus on key features, design a premium MVP, and deliver it in weeks with a clean upgrade path.",
+    "outcome": "Launch to early customers quickly, secure user feedback, and demonstrate value to investors."
   }
 }

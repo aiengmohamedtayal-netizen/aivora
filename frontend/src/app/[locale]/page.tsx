@@ -14,16 +14,35 @@ import {
 import { ProductShowcase } from "@/components/sections/product-showcase/ProductShowcase"
 
 export default async function HomePage() {
-  const jsonLd = {
+  const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Aivora",
-    "url": "https://aivora.com",
-    "logo": "https://aivora.com/logo.png",
+    "url": "https://aivora-lac.vercel.app",
+    "logo": "https://aivora-lac.vercel.app/logo.png",
     "sameAs": [
-      "https://twitter.com/aivora",
-      "https://linkedin.com/company/aivora"
-    ]
+      "https://www.instagram.com/aiivoraa",
+      "https://www.linkedin.com/company/aivora",
+      "https://github.com/aiengmohamedtayal-netizen/aivora"
+    ],
+    "description": "Aivora is an AI software engineering company that designs, builds, and scales modern digital products for startups and businesses.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Cairo",
+      "addressCountry": "Egypt"
+    }
+  }
+
+  const websiteJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Aivora",
+    "url": "https://aivora-lac.vercel.app",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://aivora-lac.vercel.app/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
   }
 
   return (
@@ -31,7 +50,12 @@ export default async function HomePage() {
       <Script
         id="organization-jsonld"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+      />
+      <Script
+        id="website-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
       />
       
       {/* 1. Hero / Title */}

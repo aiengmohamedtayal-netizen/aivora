@@ -49,25 +49,25 @@ export function Footer() {
           <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
-                <h3 className="text-sm font-medium leading-6 text-foreground">{t("capabilities")}</h3>
+                <h3 className="text-sm font-medium leading-6 text-foreground">{t("services")}</h3>
                 <ul role="list" className="mt-6 space-y-4">
                   <li>
-                    <Link href="/capabilities/web" className="text-sm leading-6 text-muted-foreground hover:text-foreground">
+                    <Link href="/services/web-development" className="text-sm leading-6 text-muted-foreground hover:text-foreground">
                       {t("links.webDev")}
                     </Link>
                   </li>
                   <li>
-                    <Link href="/capabilities/ai" className="text-sm leading-6 text-muted-foreground hover:text-foreground">
+                    <Link href="/services/ai-solutions" className="text-sm leading-6 text-muted-foreground hover:text-foreground">
                       {t("links.aiIntegration")}
                     </Link>
                   </li>
                   <li>
-                    <Link href="/capabilities/cloud" className="text-sm leading-6 text-muted-foreground hover:text-foreground">
+                    <Link href="/services/custom-software" className="text-sm leading-6 text-muted-foreground hover:text-foreground">
                       {t("links.cloud")}
                     </Link>
                   </li>
                   <li>
-                    <Link href="/capabilities/automation" className="text-sm leading-6 text-muted-foreground hover:text-foreground">
+                    <Link href="/services/automation" className="text-sm leading-6 text-muted-foreground hover:text-foreground">
                       {t("links.automation")}
                     </Link>
                   </li>
@@ -82,8 +82,8 @@ export function Footer() {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/capabilities" className="text-sm leading-6 text-muted-foreground hover:text-foreground">
-                      {t("capabilities")}
+                    <Link href="/services" className="text-sm leading-6 text-muted-foreground hover:text-foreground">
+                      {t("services")}
                     </Link>
                   </li>
                   <li>
@@ -130,10 +130,10 @@ export function Footer() {
             &copy; {new Date().getFullYear()} Aivora. {t("rights")}
           </p>
           <div className="flex gap-6">
-            <Link href="/privacy" className="text-xs text-muted-foreground hover:text-foreground">
+            <Link href="/privacy-policy" className="text-xs text-muted-foreground hover:text-foreground">
               {t("links.privacy")}
             </Link>
-            <Link href="/terms" className="text-xs text-muted-foreground hover:text-foreground">
+            <Link href="/terms-of-service" className="text-xs text-muted-foreground hover:text-foreground">
               {t("links.terms")}
             </Link>
           </div>

@@ -3,6 +3,7 @@
 import { useTranslations, useLocale } from "next-intl"
 import { motion } from "framer-motion"
 import { SectionLabel, Card, CardHeader, CardTitle, CardContent } from "@/components/ui"
+import { Link } from "@/i18n/routing"
 import { fadeUp, staggerContainer, viewport } from "@/lib/motion"
 import { Brain, Rocket, Cpu, TrendingUp, HeartPulse, GraduationCap, ShoppingBag, Factory, Building, Compass, ArrowRight } from "lucide-react"
 
@@ -10,14 +11,14 @@ export function SectionServices() {
   const t = useTranslations("services")
   const locale = useLocale()
 
-  const serviceKeys = ["aiProducts", "customPlatform", "dataIntegration", "cloudScaling"] as const
+  const serviceKeys = ["ai-solutions", "saas-development", "automation", "custom-software"] as const
   
   const getIcon = (key: typeof serviceKeys[number]) => {
     switch (key) {
-      case "aiProducts": return <Brain className="w-8 h-8 text-primary" />
-      case "customPlatform": return <Rocket className="w-8 h-8 text-primary" />
-      case "dataIntegration": return <Cpu className="w-8 h-8 text-primary" />
-      case "cloudScaling": return <TrendingUp className="w-8 h-8 text-primary" />
+      case "ai-solutions": return <Brain className="w-8 h-8 text-primary" />
+      case "saas-development": return <Rocket className="w-8 h-8 text-primary" />
+      case "automation": return <Cpu className="w-8 h-8 text-primary" />
+      case "custom-software": return <TrendingUp className="w-8 h-8 text-primary" />
     }
   }
 
@@ -61,10 +62,10 @@ export function SectionServices() {
                   </div>
                   
                   <CardTitle className="text-h3 text-foreground mb-3">
-                    {t(`items.${key}.title`)}
+                    {t(`${key}.title`)}
                   </CardTitle>
                   <p className="text-[15px] text-muted-foreground leading-relaxed">
-                    {t(`items.${key}.description`)}
+                    {t(`${key}.description`)}
                   </p>
                 </CardHeader>
 
@@ -73,31 +74,31 @@ export function SectionServices() {
                     <div>
                       <h4 className="text-[11px] font-medium text-destructive/80 uppercase tracking-wider mb-2 flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-destructive/60" /> 
-                        {locale === "ar" ? "المشكلة" : "Problem"}
+                        {locale === "ar" ? "التحدي" : "Challenge"}
                       </h4>
-                      <p className="text-sm text-muted-foreground/90 leading-relaxed font-medium">{t(`items.${key}.problem`)}</p>
+                      <p className="text-sm text-muted-foreground/90 leading-relaxed font-medium">{t(`${key}.challenge`)}</p>
                     </div>
                     <div>
                       <h4 className="text-[11px] font-medium text-green-500/80 uppercase tracking-wider mb-2 flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-green-500/60" /> 
                         {locale === "ar" ? "الحل" : "Solution"}
                       </h4>
-                      <p className="text-sm text-foreground/90 leading-relaxed font-medium">{t(`items.${key}.solution`)}</p>
+                      <p className="text-sm text-foreground/90 leading-relaxed font-medium">{t(`${key}.solution`)}</p>
                     </div>
                     <div>
                       <h4 className="text-[11px] font-medium text-gold/80 uppercase tracking-wider mb-2 flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-gold/60" /> 
-                        {locale === "ar" ? "النتائج" : "Business Outcome"}
+                        {locale === "ar" ? "النتيجة" : "Business Outcome"}
                       </h4>
-                      <p className="text-sm text-muted-foreground/90 leading-relaxed font-medium">{t(`items.${key}.result`)}</p>
+                      <p className="text-sm text-muted-foreground/90 leading-relaxed font-medium">{t(`${key}.outcome`)}</p>
                     </div>
                   </div>
 
                   <div className="mt-8 pt-6 border-t border-border/50 flex items-center justify-between">
-                    <a href="#intake" className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors group/cta">
+                    <Link href={`/services/${key}`} className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors group/cta focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-2 rounded">
                       {locale === "ar" ? "استكشف الخدمة" : "Explore Service"}
                       <ArrowRight className="w-4 h-4 ms-1.5 transition-transform group-hover/cta:translate-x-1 rtl:rotate-180 rtl:group-hover/cta:-translate-x-1" />
-                    </a>
+                    </Link>
                   </div>
                 </CardContent>
               </Card>

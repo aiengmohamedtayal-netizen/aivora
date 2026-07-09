@@ -7,6 +7,10 @@
 
 @import "tailwindcss";
 
+.font-newsreader-class {
+  --font-newsreader: Georgia, "Times New Roman", serif;
+}
+
 /* ─────────────────────────────────────────────────────────────────────────
    1. THEME TOKENS — Tailwind v4 @theme inline directive
    Maps CSS custom properties → Tailwind utility classes.

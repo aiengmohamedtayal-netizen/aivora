@@ -4,7 +4,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aivora.com"
 
   const locales = ["en", "ar"]
-  const routes = ["", "/about", "/capabilities", "/case-studies", "/intelligence"]
+  const routes = [
+    "",
+    "/about",
+    "/services",
+    "/services/ai-solutions",
+    "/services/custom-software",
+    "/services/saas-development",
+    "/services/web-development",
+    "/services/automation",
+    "/services/startup-mvp",
+    "/work",
+    "/portfolio",
+    "/case-studies",
+    "/process",
+    "/blog",
+    "/contact",
+    "/faqs",
+    "/careers",
+    "/privacy-policy",
+    "/terms-of-service",
+    "/thank-you",
+    "/404"
+  ]
 
   const sitemap: MetadataRoute.Sitemap = []
 

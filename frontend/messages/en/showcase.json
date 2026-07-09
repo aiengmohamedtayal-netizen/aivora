@@ -1,11 +1,11 @@
 {
-  "seoTitle": "High-Throughput SaaS Products Showcase",
-  "seoDescription": "Explore our portfolio of deterministic AI systems, CRM portals, and scalable database architectures.",
-  "keywords": "AI showcase, enterprise SaaS, Next.js dashboard, workflow builder",
+  "seoTitle": "Products We Build – Aivora Projects",
+  "seoDescription": "Explore real examples of digital products we design and develop for startups and businesses.",
+  "keywords": "AI showcase, custom CRM, web applications, business automation",
   "headline": "Product Showcase",
-  "subheadline": "Engineering the Future of Enterprise Platforms",
-  "supportingText": "We build stress-tested, high-throughput systems designed to eliminate operational bottlenecks and scale linearly.",
-  "bullets": ["More Capabilities"],
+  "subheadline": "Products We Build",
+  "supportingText": "Explore real examples of digital products we design and develop for startups and businesses.",
+  "bullets": ["What We Can Build"],
   "primaryCTA": "Start Your Project",
   "secondaryCTA": "Talk to Aivora AI",
   "statistics": [],
@@ -13,42 +13,42 @@
   "structuredData": {},
   "ctaSection": {
     "title": "Ready to scale your digital operations?",
-    "description": "Partner with Aivora to design and deploy custom enterprise platforms built for high-throughput."
+    "description": "Partner with Aivora to design and deploy custom enterprise platforms built for growth."
   },
   "products": {
     "assistant": {
-      "title": "Agentic AI Business Intelligence",
-      "description": "An autonomous reasoning agent that securely indexes your private databases to resolve inquiries and trigger downstream system workflows."
+      "title": "AI Business Assistant",
+      "description": "An AI assistant that helps businesses automate customer support, internal operations, and repetitive workflows."
     },
     "crm": {
-      "title": "High-Performance CRM & ERP",
-      "description": "A high-performance relationship management system engineered with strict multi-tenant data isolation and real-time state synchronization."
+      "title": "Custom CRM Platform",
+      "description": "A custom CRM platform designed around your business instead of forcing your business to adapt to generic software."
     },
     "automation": {
-      "title": "Stateless Workflow Automation",
-      "description": "Event-driven background processing pipelines that safely execute deterministic operations across integrated enterprise APIs."
+      "title": "Business Automation",
+      "description": "Automation systems that remove manual work and connect your tools into one efficient workflow."
     },
     "analytics": {
-      "title": "Real-Time Telemetry & Analytics",
-      "description": "Interactive data visualization panels optimized to render massive, complex datasets smoothly without main-thread blocking."
+      "title": "Analytics Dashboard",
+      "description": "Dashboards that turn your data into clear insights your team can use to make faster decisions."
     },
     "portal": {
-      "title": "Secure Client Operations Portals",
-      "description": "Bespoke tenant portals featuring robust client access controls, detailed audit logs, and granular security."
+      "title": "Client Portal",
+      "description": "Secure client portals that give your customers simple, reliable access to their data and services."
     },
     "workflow": {
-      "title": "Node-Based Workflow Builder",
-      "description": "Visual logic builders empowering operations teams to construct and modify automated flows without writing code."
+      "title": "Workflow Builder",
+      "description": "Workflow tools that help your team design and launch business processes with less manual effort."
     },
     "custom": {
-      "title": "Bespoke Enterprise Core Systems",
-      "description": "Bespoke architectures built from scratch to replace legacy bottlenecks and ensure long-term resilience."
+      "title": "Custom Enterprise Software",
+      "description": "Custom software built from the ground up to solve the specific challenges your business faces."
     }
   },
   "visualizations": {
     "agent": {
-      "userQuery": "Analyze our Q3 sales data and generate a pipeline forecast.",
-      "agentResponse": "I've analyzed the deterministic pipeline data. Q3 shows a 24% increase in closed-won deals."
+      "userQuery": "Analyze our sales data and generate a pipeline forecast.",
+      "agentResponse": "I've analyzed the pipeline data. Closed-won deals are tracking higher this month."
     },
     "crm": {
       "salesPipeline": "Sales Pipeline",

