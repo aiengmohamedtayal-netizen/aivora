@@ -167,7 +167,7 @@ Contact Method: ${formData.contactMethod}
           <div>
             <SectionLabel>{t("title")}</SectionLabel>
           </div>
-          <h1 className="text-3xl lg:text-4xl font-bold text-foreground">
+          <h1 className="text-h1 text-foreground">
             {step <= TOTAL_STEPS ? t(`steps.${getStepKey(step)}.title`) : t("steps.review.title")}
           </h1>
           <p className="text-lg text-muted-foreground">

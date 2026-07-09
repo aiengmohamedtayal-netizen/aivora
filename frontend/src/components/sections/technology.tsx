@@ -21,7 +21,7 @@ export function SectionTechnologies() {
           <SectionLabel className="mb-4">
             {locale === "ar" ? "بنيتنا البرمجية" : "Built With Modern Technologies"}
           </SectionLabel>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-6">
+          <h2 className="text-h2 text-foreground mb-6">
             {locale === "ar" ? "تقنيات حديثة لمنتجات قوية" : "We build with stress-tested, modern tools"}
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
@@ -70,7 +70,7 @@ export function SectionFAQ() {
           <SectionLabel className="mb-4">
             {t("headline")}
           </SectionLabel>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-6">
+          <h2 className="text-h2 text-foreground mb-6">
             {t("subheadline")}
           </h2>
         </div>

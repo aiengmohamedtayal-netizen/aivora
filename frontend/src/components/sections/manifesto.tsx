@@ -60,7 +60,7 @@ export function SectionManifesto() {
           >
             <motion.h1 
               variants={fadeUp}
-              className="text-4xl sm:text-5xl lg:text-[62px] font-black tracking-tight text-foreground leading-[1.05] mb-6 text-balance"
+              className="text-display text-foreground mb-6 text-balance"
             >
               {t("headline")}
             </motion.h1>

@@ -48,7 +48,7 @@ export function SectionWhyAivora() {
           <SectionLabel className="mb-4">
             {t("headline")}
           </SectionLabel>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-6">
+          <h2 className="text-h2 text-foreground mb-6">
             {t("subheadline")}
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">

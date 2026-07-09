@@ -28,7 +28,7 @@ export function EngineeringCulture() {
             <div>
               <SectionLabel>{t("headline")}</SectionLabel>
             </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-[1.3] lg:leading-[1.2] tracking-tight">
+            <h1 className="text-h1 text-foreground">
               {t("manifesto")}
             </h1>
           </motion.header>
