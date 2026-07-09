@@ -21,13 +21,15 @@ export function SectionManifesto() {
       aria-label="Manifesto" 
       className="relative min-h-[90vh] flex flex-col justify-center py-20 lg:py-28 overflow-hidden bg-background"
     >
-      {/* Background radial spotlights & aurora meshes */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-1/2 right-10 w-[400px] h-[400px] bg-gold/5 rounded-full blur-3xl pointer-events-none" />
+      {/* Premium Tech Grid Overlay */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_10%,#000_70%,transparent_100%)] pointer-events-none" />
+
+      {/* Layered ambient top spotlights */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-10 right-1/4 w-[400px] h-[400px] bg-gold/5 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 w-full relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-4 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
           {/* Left Column: Copy & CTAs */}
           <motion.div 
@@ -37,22 +39,25 @@ export function SectionManifesto() {
             className="lg:col-span-5 flex flex-col items-start text-start z-20"
           >
             <motion.div variants={fadeUp}>
-              <SectionLabel className="mb-6 flex items-center gap-2 px-3 py-1 bg-primary/10 border border-primary/20 text-primary rounded-full">
-                <Globe className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: '6s' }} />
+              <SectionLabel className="mb-6 flex items-center gap-2 px-3.5 py-1.5 bg-muted/30 border border-border/80 text-foreground text-xs font-mono font-bold uppercase tracking-wider rounded-full shadow-sm">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary/40 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                </span>
                 {t("welcome")}
               </SectionLabel>
             </motion.div>
             
             <motion.h1 
               variants={fadeUp}
-              className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold tracking-tight text-foreground leading-[1.1] mb-6"
+              className="text-4xl sm:text-5xl lg:text-[62px] font-display font-black tracking-tight text-foreground leading-[1.05] mb-6 text-balance"
             >
               {t("title")}
             </motion.h1>
             
             <motion.p 
               variants={fadeUp}
-              className="text-lg sm:text-xl text-muted-foreground max-w-xl mb-10 leading-relaxed"
+              className="text-lg sm:text-xl text-muted-foreground/90 max-w-xl mb-10 leading-relaxed text-balance font-medium"
             >
               {t("description")}
             </motion.p>
@@ -63,14 +68,14 @@ export function SectionManifesto() {
             >
               <a 
                 href="#intake" 
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-primary text-primary-foreground font-mono text-sm font-bold rounded-xl shadow-lg shadow-primary/25 hover:bg-primary/95 hover:shadow-primary/35 transition-all duration-300 group"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-foreground text-background font-sans text-[15px] font-bold rounded-xl shadow-md hover:bg-foreground/90 transition-all duration-300 group"
               >
                 {t("ctaPrimary")}
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
               </a>
               <Link 
-                href="/intelligence" 
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-border/80 bg-card/40 backdrop-blur-md text-foreground font-mono text-sm font-bold rounded-xl hover:bg-muted/50 hover:border-foreground/20 transition-all duration-300"
+                href="/case-studies" 
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-border/80 bg-card/30 backdrop-blur-md text-foreground font-sans text-[15px] font-bold rounded-xl hover:bg-muted/50 hover:border-foreground/40 transition-all duration-300"
               >
                 {t("ctaSecondary")}
               </Link>
@@ -81,7 +86,7 @@ export function SectionManifesto() {
           <motion.div 
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
             className="lg:col-span-7 flex justify-center lg:justify-end w-full"
           >
             <HeroComposition />
@@ -118,9 +123,8 @@ export function SectionTrustedBy() {
 
 export function SectionShowcase() {
   const locale = useLocale()
-  const [activeTab, setActiveTab] = useState<"chat" | "crm" | "analytics" | "web">("chat")
   const [messages, setMessages] = useState<{ role: "user" | "assistant"; text: string }[]>([])
-  const [inputText, setInputText] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     if (locale === "ar") {
@@ -133,8 +137,6 @@ export function SectionShowcase() {
       ])
     }
   }, [locale])
-
-  const [isLoading, setIsLoading] = useState(false)
 
   const handleClaudeSend = async (data: any) => {
     if ((!data.message.trim() && data.files.length === 0 && data.pastedContent.length === 0) || isLoading) return
@@ -181,235 +183,125 @@ export function SectionShowcase() {
   }
 
   return (
-    <section aria-label="Product Showcase" className="py-24 lg:py-32 bg-background relative overflow-hidden">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+    <section aria-label="Product Showcase" className="py-24 lg:py-32 bg-muted/20 relative overflow-hidden border-t border-border/40">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Heading */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <SectionLabel className="mb-4">
-            {locale === "ar" ? "معرض أعمالنا التفاعلي" : "Interactive Product Showcase"}
-          </SectionLabel>
-          <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight text-foreground mb-6">
-            {locale === "ar" ? "شاهد جودة ومستوى الأنظمة الرقمية التي نبنيها" : "Experience the quality of the products we engineer"}
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold tracking-tight text-foreground mb-6 text-balance">
+            {locale === "ar" ? "منتجات مصممة للأداء المطلق" : "Products engineered for absolute performance."}
           </h2>
-          <p className="text-muted-foreground leading-relaxed">
+          <p className="text-lg text-muted-foreground leading-relaxed text-balance">
             {locale === "ar" 
               ? "نصمم واجهات عصرية وأنظمة ذكية تفاعلية تمنح عملاءك تجربة استخدام متميزة." 
-              : "We construct high-fidelity interactive previews demonstrating CRM pipelines, AI chats, and responsive panels."}
+              : "We construct high-fidelity interactive platforms demonstrating AI chat engines, CRM pipelines, and enterprise analytics panels."}
           </p>
         </div>
 
-        {/* Carousel / Tab selection */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:h-[600px] items-stretch">
           
-          {/* Tabs selector */}
-          <div className="lg:col-span-3 flex flex-col gap-3 justify-center">
-            <button
-              onClick={() => setActiveTab("chat")}
-              className={cn(
-                "p-4 rounded-xl border font-sans text-xs font-bold text-start flex items-center gap-3 transition-all duration-300",
-                activeTab === "chat"
-                  ? "border-primary bg-primary/10 text-foreground"
-                  : "border-border/60 bg-card/40 text-muted-foreground hover:border-foreground/20 hover:text-foreground"
-              )}
-            >
-              <MessageSquare className="w-4 h-4 text-primary" />
-              <div>
-                <span className="block">{locale === "ar" ? "وكيل دردشة ذكي" : "AI Agent Chat"}</span>
-                <span className="text-[10px] font-normal text-muted-foreground mt-0.5 block">
-                  {locale === "ar" ? "مساعد أعمال تفاعلي" : "Interactive business agent"}
-                </span>
+          {/* Main Card: AI Agent Chat */}
+          <div className="lg:col-span-8 border border-border/80 bg-card/60 backdrop-blur-xl rounded-2xl shadow-xl shadow-black/5 relative flex flex-col overflow-hidden h-[500px] lg:h-full transition-transform duration-500 hover:shadow-2xl hover:-translate-y-1">
+            {/* macOS title bar */}
+            <div className="flex items-center gap-2 px-4 py-3 border-b border-border/50 bg-background/50">
+              <span className="w-2.5 h-2.5 rounded-full bg-destructive/60" />
+              <span className="w-2.5 h-2.5 rounded-full bg-gold/60" />
+              <span className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
+              <span className="mx-auto text-xs font-semibold text-muted-foreground flex items-center gap-1.5 opacity-80">
+                <MessageSquare className="w-3.5 h-3.5" />
+                {locale === "ar" ? "مساعد أيفورا الذكي" : "Aivora AI Agent"}
+              </span>
+            </div>
+            
+            <div className="flex flex-col flex-1 p-6 overflow-hidden">
+              <div className="flex-1 overflow-y-auto space-y-4 font-sans text-sm pe-4 mb-4 scrollbar-thin">
+                {messages.map((msg, i) => (
+                  <div
+                    key={i}
+                    className={cn(
+                      "p-3.5 rounded-2xl max-w-[85%] leading-relaxed shadow-sm",
+                      msg.role === "user"
+                        ? "bg-foreground text-background ms-auto rounded-se-sm"
+                        : "bg-muted/50 border border-border/50 text-foreground rounded-ss-sm"
+                    )}
+                  >
+                    {msg.text}
+                  </div>
+                ))}
               </div>
-            </button>
-
-            <button
-              onClick={() => setActiveTab("crm")}
-              className={cn(
-                "p-4 rounded-xl border font-sans text-xs font-bold text-start flex items-center gap-3 transition-all duration-300",
-                activeTab === "crm"
-                  ? "border-primary bg-primary/10 text-foreground"
-                  : "border-border/60 bg-card/40 text-muted-foreground hover:border-foreground/20 hover:text-foreground"
-              )}
-            >
-              <KanbanSquare className="w-4 h-4 text-primary" />
-              <div>
-                <span className="block">{locale === "ar" ? "خط أنابيب مبيعات CRM" : "CRM Sales Pipeline"}</span>
-                <span className="text-[10px] font-normal text-muted-foreground mt-0.5 block">
-                  {locale === "ar" ? "أتمتة وإدارة صفقات" : "Deals pipeline & automation"}
-                </span>
+              <div className="mt-auto">
+                <ClaudeChatInput 
+                  onSendMessage={handleClaudeSend} 
+                  disabled={isLoading}
+                />
               </div>
-            </button>
-
-            <button
-              onClick={() => setActiveTab("analytics")}
-              className={cn(
-                "p-4 rounded-xl border font-sans text-xs font-bold text-start flex items-center gap-3 transition-all duration-300",
-                activeTab === "analytics"
-                  ? "border-primary bg-primary/10 text-foreground"
-                  : "border-border/60 bg-card/40 text-muted-foreground hover:border-foreground/20 hover:text-foreground"
-              )}
-            >
-              <BarChart3 className="w-4 h-4 text-primary" />
-              <div>
-                <span className="block">{locale === "ar" ? "لوحة تحكم التحليلات" : "Analytics Dashboard"}</span>
-                <span className="text-[10px] font-normal text-muted-foreground mt-0.5 block">
-                  {locale === "ar" ? "تحليلات أعمال متقدمة" : "Enterprise business analytics"}
-                </span>
-              </div>
-            </button>
-
-            <button
-              onClick={() => setActiveTab("web")}
-              className={cn(
-                "p-4 rounded-xl border font-sans text-xs font-bold text-start flex items-center gap-3 transition-all duration-300",
-                activeTab === "web"
-                  ? "border-primary bg-primary/10 text-foreground"
-                  : "border-border/60 bg-card/40 text-muted-foreground hover:border-foreground/20 hover:text-foreground"
-              )}
-            >
-              <Monitor className="w-4 h-4 text-primary" />
-              <div>
-                <span className="block">{locale === "ar" ? "تطوير الويب" : "Web Development"}</span>
-                <span className="text-[10px] font-normal text-muted-foreground mt-0.5 block">
-                  {locale === "ar" ? "منصات حديثة متجاوبة" : "Modern responsive platforms"}
-                </span>
-              </div>
-            </button>
+            </div>
           </div>
 
-          {/* Interactive display area */}
-          <div className="lg:col-span-9 border border-border/80 bg-card/30 backdrop-blur-md rounded-2xl p-6 shadow-xl relative min-h-[360px] flex flex-col justify-between">
-            <div className="absolute top-3 start-4 flex gap-1.5 pointer-events-none">
-              <span className="w-2.5 h-2.5 rounded-full bg-destructive/30" />
-              <span className="w-2.5 h-2.5 rounded-full bg-gold/30" />
-              <span className="w-2.5 h-2.5 rounded-full bg-primary/30" />
+          {/* Right Column Stack */}
+          <div className="lg:col-span-4 flex flex-col gap-6 h-full">
+            
+            {/* Top Right: Analytics */}
+            <div className="flex-1 border border-border/80 bg-card/60 backdrop-blur-xl rounded-2xl shadow-xl shadow-black/5 relative overflow-hidden flex flex-col min-h-[280px] transition-transform duration-500 hover:shadow-2xl hover:-translate-y-1">
+              <div className="flex items-center gap-2 px-4 py-3 border-b border-border/50 bg-background/50 z-10 relative">
+                <span className="w-2.5 h-2.5 rounded-full bg-muted-foreground/30" />
+                <span className="w-2.5 h-2.5 rounded-full bg-muted-foreground/30" />
+                <span className="w-2.5 h-2.5 rounded-full bg-muted-foreground/30" />
+                <span className="mx-auto text-xs font-semibold text-muted-foreground flex items-center gap-1.5 opacity-80">
+                  <BarChart3 className="w-3.5 h-3.5" />
+                  {locale === "ar" ? "لوحة تحكم التحليلات" : "Analytics Dashboard"}
+                </span>
+              </div>
+              <div className="flex-1 overflow-hidden relative bg-background/20">
+                <div className="absolute inset-[-15px] sm:inset-[-5px] lg:inset-[-25px] scale-[0.80] sm:scale-95 lg:scale-[0.70] origin-top pointer-events-none">
+                  <AnalyticsWorkspace />
+                </div>
+              </div>
             </div>
 
-            <div className="mt-4 flex-1">
-              <AnimatePresence mode="wait">
-                
-                {/* 1. Chat Interface */}
-                {activeTab === "chat" && (
-                  <motion.div
-                    key="chat"
-                    initial={{ opacity: 0, scale: 0.98 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.98 }}
-                    className="flex flex-col h-[320px] justify-between"
-                  >
-                    <div className="flex-1 overflow-y-auto space-y-3 font-sans text-xs pe-2">
-                      {messages.map((msg, i) => (
-                        <div
-                          key={i}
-                          className={cn(
-                            "p-3 rounded-xl max-w-[80%] leading-relaxed",
-                            msg.role === "user"
-                              ? "bg-primary text-primary-foreground ms-auto"
-                              : "bg-muted/40 border border-border/50 text-foreground"
-                          )}
-                        >
-                          {msg.text}
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="pt-2">
-                      <ClaudeChatInput 
-                        onSendMessage={handleClaudeSend} 
-                        disabled={isLoading}
-                      />
-                    </div>
-                  </motion.div>
-                )}
-
-                {/* 2. CRM pipeline */}
-                {activeTab === "crm" && (
-                  <motion.div
-                    key="crm"
-                    initial={{ opacity: 0, scale: 0.98 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.98 }}
-                    className="grid grid-cols-3 gap-4 h-[300px]"
-                  >
-                    {[
-                      {
-                        title: locale === "ar" ? "قائمة الانتظار" : "Inbox",
-                        leads: ["Vercel Deal", "Stripe Integration"]
-                      },
-                      {
-                        title: locale === "ar" ? "قيد الدراسة" : "In Progress",
-                        leads: ["OpenAI AI Setup"]
-                      },
-                      {
-                        title: locale === "ar" ? "مكتملة" : "Completed",
-                        leads: ["Supabase Launch", "Framer Redesign"]
-                      }
-                    ].map((col, idx) => (
-                      <div key={idx} className="border border-border/50 bg-background/40 rounded-xl p-3 flex flex-col gap-3 font-sans text-xs">
-                        <div className="flex items-center justify-between border-b border-border/30 pb-2">
-                          <span className="font-bold text-foreground">{col.title}</span>
-                          <span className="px-1.5 py-0.5 rounded bg-muted text-[10px] text-muted-foreground">
-                            {col.leads.length}
-                          </span>
-                        </div>
-                        <div className="space-y-2 flex-1 overflow-y-auto">
-                          {col.leads.map((lead, lIdx) => (
-                            <div key={lIdx} className="p-2.5 rounded-lg border border-border/60 bg-card/60 hover:border-primary/45 transition-colors">
-                              <span className="block font-bold">{lead}</span>
-                              <span className="text-[10px] text-muted-foreground block mt-1">USD $12,500</span>
-                            </div>
-                          ))}
-                        </div>
+            {/* Bottom Right: CRM */}
+            <div className="flex-1 border border-border/80 bg-card/60 backdrop-blur-xl rounded-2xl shadow-xl shadow-black/5 relative overflow-hidden flex flex-col min-h-[280px] transition-transform duration-500 hover:shadow-2xl hover:-translate-y-1">
+              <div className="flex items-center gap-2 px-4 py-3 border-b border-border/50 bg-background/50">
+                <span className="w-2.5 h-2.5 rounded-full bg-muted-foreground/30" />
+                <span className="w-2.5 h-2.5 rounded-full bg-muted-foreground/30" />
+                <span className="w-2.5 h-2.5 rounded-full bg-muted-foreground/30" />
+                <span className="mx-auto text-xs font-semibold text-muted-foreground flex items-center gap-1.5 opacity-80">
+                  <KanbanSquare className="w-3.5 h-3.5" />
+                  {locale === "ar" ? "إدارة الصفقات" : "Pipeline CRM"}
+                </span>
+              </div>
+              <div className="flex-1 p-5 bg-background/20 overflow-hidden pointer-events-none">
+                <div className="grid grid-cols-2 gap-4 h-full">
+                  {[
+                    {
+                      title: locale === "ar" ? "قيد الدراسة" : "In Progress",
+                      leads: ["OpenAI Setup", "Vercel Migration"]
+                    },
+                    {
+                      title: locale === "ar" ? "مكتملة" : "Completed",
+                      leads: ["Supabase Auth"]
+                    }
+                  ].map((col, idx) => (
+                    <div key={idx} className="border border-border/60 bg-card/50 rounded-xl p-3 flex flex-col gap-2 font-sans text-xs shadow-sm">
+                      <div className="flex items-center justify-between border-b border-border/30 pb-2">
+                        <span className="font-bold text-foreground/90">{col.title}</span>
+                        <span className="px-1.5 py-0.5 rounded bg-muted/80 text-[10px] text-muted-foreground">
+                          {col.leads.length}
+                        </span>
                       </div>
-                    ))}
-                  </motion.div>
-                )}
-
-                {/* 3. Analytics Dashboard */}
-                {activeTab === "analytics" && (
-                  <motion.div
-                    key="analytics"
-                    initial={{ opacity: 0, scale: 0.98 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.98 }}
-                    className="w-full h-full"
-                  >
-                    <AnalyticsWorkspace />
-                  </motion.div>
-                )}
-
-                {/* 4. Web Development */}
-                {activeTab === "web" && (
-                  <motion.div
-                    key="web"
-                    initial={{ opacity: 0, scale: 0.98 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.98 }}
-                    className="w-full h-full border border-border/50 bg-background/40 rounded-xl overflow-hidden font-mono text-xs flex flex-col"
-                  >
-                    <div className="flex items-center gap-2 px-3 py-2 border-b border-border/30 bg-muted/20">
-                      <div className="flex gap-1.5">
-                        <span className="w-2.5 h-2.5 rounded-full bg-destructive/60" />
-                        <span className="w-2.5 h-2.5 rounded-full bg-gold/60" />
-                        <span className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
+                      <div className="space-y-2 flex-1 overflow-y-auto scrollbar-none mt-1">
+                        {col.leads.map((lead, lIdx) => (
+                          <div key={lIdx} className="p-2.5 rounded-lg border border-border/40 bg-background/80 shadow-sm">
+                            <span className="block font-semibold text-[11px] truncate">{lead}</span>
+                            <span className="text-[9px] text-muted-foreground block mt-1">USD $12,500</span>
+                          </div>
+                        ))}
                       </div>
-                      <span className="ml-2 text-muted-foreground">app/page.tsx</span>
                     </div>
-                    <div className="p-4 flex-1 text-muted-foreground overflow-y-auto">
-                      <div className="text-primary/70">export default function <span className="text-foreground">Home</span>() {"{"}</div>
-                      <div className="pl-4">return (</div>
-                      <div className="pl-8 text-gold/80">&lt;main className=<span className="text-green-500/80">&quot;flex min-h-screen flex-col items-center p-24&quot;</span>&gt;</div>
-                      <div className="pl-12 text-primary/70">&lt;HeroSection /&gt;</div>
-                      <div className="pl-12 text-primary/70">&lt;FeatureGrid /&gt;</div>
-                      <div className="pl-12 text-primary/70">&lt;InteractiveShowcase /&gt;</div>
-                      <div className="pl-8 text-gold/80">&lt;/main&gt;</div>
-                      <div className="pl-4">)</div>
-                      <div>{"}"}</div>
-                    </div>
-                  </motion.div>
-                )}
-
-              </AnimatePresence>
+                  ))}
+                </div>
+              </div>
             </div>
 
           </div>

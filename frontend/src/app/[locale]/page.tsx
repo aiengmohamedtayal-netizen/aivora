@@ -2,7 +2,6 @@ import { getTranslations } from "next-intl/server"
 import Script from "next/script"
 import { 
   SectionManifesto, 
-  SectionShowcase,
   SectionServices,
   SectionIndustries,
   SectionWhyAivora,
@@ -12,6 +11,7 @@ import {
   SectionFAQ,
   SectionConversion 
 } from "@/components/sections"
+import { ProductShowcase } from "@/components/sections/product-showcase/ProductShowcase"
 
 export default async function HomePage() {
   const jsonLd = {
@@ -38,7 +38,7 @@ export default async function HomePage() {
       <SectionManifesto />
       
       {/* 3. Interactive Product Showcase */}
-      <SectionShowcase />
+      <ProductShowcase />
       
       {/* 4. Result-Oriented Services */}
       <SectionServices />

@@ -31,7 +31,7 @@ class AIService:
         except Exception:
             return []
 
-    async def stream_chat(self, query: str, session_id: str = None) -> AsyncGenerator[str, None]:
+    async def stream_chat(self, query: str, session_id: str = None, background_tasks = None) -> AsyncGenerator[str, None]:
         """
         Processes an incoming query, fetches history, attaches system prompt,
         and streams the response through the configured AI provider.
@@ -84,31 +84,37 @@ class AIService:
         
         messages.append({"role": "user", "content": query})
         
-        # C-02: Yield properly-formatted SSE chunks so the frontend parser works correctly.
-        # Format: "data: {content}\n\n" per the SSE specification (RFC 8898).
         accumulated_response = ""
-        async for chunk in self.provider.generate_stream(messages=messages):
-            accumulated_response += chunk
-            # Escape newlines inside the chunk so they don't break SSE frame boundaries
-            safe_chunk = chunk.replace("\n", "\\n")
-            yield f"data: {safe_chunk}\n\n"
-        
-        # Signal end of stream
-        yield "data: [DONE]\n\n"
-
+        try:
+            # C-02: Yield properly-formatted SSE chunks so the frontend parser works correctly.
+            # Format: "data: {content}\n\n" per the SSE specification (RFC 8898).
+            async for chunk in self.provider.generate_stream(messages=messages):
+                accumulated_response += chunk
+                # Escape newlines inside the chunk so they don't break SSE frame boundaries
+                safe_chunk = chunk.replace("\n", "\\n")
+                yield f"data: {safe_chunk}\n\n"
             
-        # Save the assistant response to the database
-        def save_assistant_msg():
-            # Estimate tokens roughly for now
-            token_usage = len(accumulated_response) // 4
-            self.supabase.table("chat_messages").insert({
-                "session_id": session_id,
-                "role": "assistant",
-                "content": accumulated_response,
-                "token_usage": token_usage
-            }).execute()
-            # Update last_activity on session
-            self.supabase.table("chat_sessions").update({
-                "last_activity": "now()"
-            }).eq("id", session_id).execute()
-        await run_in_threadpool(save_assistant_msg)
+            # Signal end of stream
+            yield "data: [DONE]\n\n"
+        finally:
+            if accumulated_response:
+                # Save the assistant response to the database
+                def save_assistant_msg():
+                    # Estimate tokens roughly for now
+                    token_usage = len(accumulated_response) // 4
+                    self.supabase.table("chat_messages").insert({
+                        "session_id": session_id,
+                        "role": "assistant",
+                        "content": accumulated_response,
+                        "token_usage": token_usage
+                    }).execute()
+                    # Update last_activity on session
+                    self.supabase.table("chat_sessions").update({
+                        "last_activity": "now()"
+                    }).eq("id", session_id).execute()
+                
+                if background_tasks:
+                    background_tasks.add_task(save_assistant_msg)
+                else:
+                    import asyncio
+                    asyncio.create_task(run_in_threadpool(save_assistant_msg))

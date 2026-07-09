@@ -13,9 +13,6 @@ export async function POST(request: Request) {
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
-      },
-      tls: {
-        ciphers:'SSLv3'
       }
     });
 

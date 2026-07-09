@@ -57,11 +57,11 @@
   },
   "HomePage": {
     "hero": {
-      "welcome": "WELCOME TO AIVORA",
-      "title": "We build digital products that help businesses grow.",
-      "description": "AI solutions, modern web applications, SaaS platforms and automation systems designed for ambitious businesses.",
-      "ctaPrimary": "Start Your Project",
-      "ctaSecondary": "View Our Work"
+      "welcome": "PREMIUM AI PRODUCT STUDIO",
+      "title": "We build AI systems that run without compromise.",
+      "description": "Aivora is a premium AI engineering studio. We build deterministic agentic workflows, high-throughput backend services, and secure enterprise software for ambitious teams.",
+      "ctaPrimary": "Start a Project",
+      "ctaSecondary": "Explore Case Studies"
     },
     "trust": {
       "title": "Why companies choose Aivora",
@@ -94,20 +94,40 @@
       "subtitle": "An integrated suite of technical services built to solve complex business challenges.",
       "list": {
         "aiProducts": {
-          "title": "Build AI Products",
-          "desc": "Custom AI models, natural language interfaces, and agentic workflows engineered to give your business an unfair advantage."
+          "title": "Enterprise AI Engineering",
+          "desc": "Custom LLM integrations and autonomous agents engineered to give your business an unfair advantage.",
+          "problem": "Manual workflows bottleneck growth, and legacy software cannot adapt to unstructured data.",
+          "solution": "We architect secure, scalable AI systems that directly interface with your core business logic.",
+          "benefits": "Reduce operational overhead, unlock new revenue streams, and automate complex decision-making.",
+          "process": "Architecture → Integration → Fine-tuning → Deployment",
+          "cta": "Explore AI Capabilities"
         },
         "launchFaster": {
-          "title": "Launch Faster",
-          "desc": "Modern web applications, startup MVPs, and mobile-ready SaaS platforms built to validate ideas and dominate markets quickly."
+          "title": "Custom Platform Engineering",
+          "desc": "Modern web applications and SaaS platforms built to validate ideas and dominate markets.",
+          "problem": "Off-the-shelf software limits your unique business processes and competitive edge.",
+          "solution": "We build high-performance, tailored platforms designed specifically for your exact operational needs.",
+          "benefits": "Complete ownership of IP, pixel-perfect UX, and uncompromised technical performance.",
+          "process": "Prototyping → Development → Testing → Launch",
+          "cta": "View Platform Services"
         },
         "automateOps": {
-          "title": "Automate Operations",
-          "desc": "Stateless automation pipelines, custom internal CRM systems, and data synchronization hooks that replace manual work loops."
+          "title": "Data & Systems Integration",
+          "desc": "Stateless automation pipelines and data synchronization hooks that replace manual work loops.",
+          "problem": "Siloed data and disconnected tools cause critical information gaps and operational drag.",
+          "solution": "We engineer robust middleware and event-driven architectures to unify your digital ecosystem.",
+          "benefits": "Real-time data accuracy, eliminated redundant data entry, and seamless cross-platform sync.",
+          "process": "Audit → Mapping → Middleware Engineering → Monitoring",
+          "cta": "Learn About Integrations"
         },
         "scaleBusiness": {
-          "title": "Scale Your Business",
-          "desc": "High-performance cloud architectures, database scaling setups, and strategic technical consulting to support enterprise growth."
+          "title": "Cloud Architecture & Scaling",
+          "desc": "High-performance cloud infrastructures and strategic technical consulting for enterprise growth.",
+          "problem": "As traffic grows, monolithic codebases become fragile, slow, and expensive to maintain.",
+          "solution": "We migrate and refactor systems into resilient, serverless, or microservices architectures.",
+          "benefits": "Infinite horizontal scalability, 99.99% uptime, and significantly lower cloud infrastructure costs.",
+          "process": "Analysis → Refactoring → Migration → Optimization",
+          "cta": "Scale Your Infrastructure"
         }
       }
     },
@@ -497,6 +517,40 @@
         "Agentic pipeline engaged. Topological boundaries verified.",
         "Output successfully generated within immutable boundaries."
       ]
+    }
+  },
+  "ProductShowcase": {
+    "title": "Engineering the Future of SaaS",
+    "subtitle": "Discover the high-throughput systems we build for our partners.",
+    "products": {
+      "assistant": {
+        "title": "AI Business Assistant",
+        "description": "An autonomous agentic interface that connects your business data with advanced language models to resolve customer queries and automate internal workflows."
+      },
+      "crm": {
+        "title": "CRM Platform",
+        "description": "A high-performance customer relationship management system engineered with strict data isolation and real-time state synchronization."
+      },
+      "automation": {
+        "title": "Business Automation",
+        "description": "Event-driven background processing pipelines that execute deterministic logic across integrated third-party APIs."
+      },
+      "analytics": {
+        "title": "Analytics Dashboard",
+        "description": "Real-time telemetry and data visualization interfaces optimized for massive dataset rendering without main-thread blocking."
+      },
+      "portal": {
+        "title": "Client Portal",
+        "description": "Secure, multi-tenant portals designed to provide your customers with seamless access to their data and services."
+      },
+      "workflow": {
+        "title": "Workflow Builder",
+        "description": "Visual, node-based workflow engines that empower your team to design and deploy complex business logic without writing code."
+      },
+      "custom": {
+        "title": "Custom Enterprise Software",
+        "description": "Bespoke architectural solutions engineered from the ground up to solve your most complex operational bottlenecks."
+      }
     }
   }
 }
