@@ -26,7 +26,7 @@ export function CaseStudiesEditorial() {
             <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mt-6 mb-4 animate-pulse">
               <Clock size={32} />
             </div>
-            <h2 className="text-h2 text-foreground mb-4">
+            <h2 className="text-h2 text-foreground mb-6">
               {t("subheadline")}
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
