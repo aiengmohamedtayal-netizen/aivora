@@ -52,7 +52,7 @@ export async function POST(req: Request) {
       await supabase.from('chat_sessions').insert({
         id: currentSessionId,
         title: query.substring(0, 50) + '...',
-        model: process.env.OPENAI_DEFAULT_MODEL || 'llama-3.3-70b-versatile',
+        model: 'llama-3.3-70b-versatile',
         user_agent: 'Aivora Assistant',
       });
     } else {
@@ -68,7 +68,7 @@ export async function POST(req: Request) {
         await supabase.from('chat_sessions').insert({
           id: currentSessionId,
           title: query.substring(0, 50) + '...',
-          model: process.env.OPENAI_DEFAULT_MODEL || 'llama-3.3-70b-versatile',
+          model: 'llama-3.3-70b-versatile',
           user_agent: 'Aivora Assistant',
         });
       }
@@ -105,7 +105,7 @@ export async function POST(req: Request) {
         'Authorization': `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: process.env.OPENAI_DEFAULT_MODEL || 'llama-3.3-70b-versatile',
+        model: 'llama-3.3-70b-versatile',
         messages,
         stream: true,
       }),
