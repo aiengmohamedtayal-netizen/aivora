@@ -55,6 +55,41 @@
     "maxLength": "Must be at most {max} characters",
     "url": "Invalid URL format"
   },
+  "HomePage": {
+    "hero": {
+      "label": "Deterministic AI Platforms",
+      "title": "We build software that runs without compromise.",
+      "description": "Deterministic AI systems and high-throughput enterprise APIs engineered for zero-latency execution in high-load environments.",
+      "ctaPrimary": "Initialize Discovery",
+      "ctaSecondary": "Explore Sandbox",
+      "coordinates": "48.8566° N, 2.3522° E — Aivora HQ",
+      "metrics": {
+        "activeModel": "Active Model",
+        "throughput": "Throughput",
+        "latency": "Latency",
+        "activeAgents": "Active Agents",
+        "consoleTitle": "aivora-agent-console",
+        "statusIdle": "IDLE",
+        "statusActive": "ACTIVE",
+        "runStatus": "Runtime Status"
+      }
+    },
+    "globalOps": {
+      "label": "GLOBAL INFRASTRUCTURE",
+      "title": "Enterprise scale, deployed worldwide.",
+      "active": "Active",
+      "nodes": {
+        "frankfurt": "Frankfurt",
+        "singapore": "Singapore",
+        "virginia": "Virginia",
+        "dubai": "Dubai"
+      }
+    },
+    "thesis": {
+      "quote": "\"Most software projects fail because of shortcuts. We don't take them.\"",
+      "attribution": "— Aivora Engineering Manifesto"
+    }
+  },
   "CapabilitiesPage": {
     "title": "Engineering Capabilities",
     "subtitle": "Deterministic engineering solutions built for scale and high throughput.",
