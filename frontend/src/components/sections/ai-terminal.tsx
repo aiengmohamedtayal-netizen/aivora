@@ -199,7 +199,7 @@ export function IntelligenceWorkspace() {
           <div className="w-8 h-8 rounded bg-primary/10 flex items-center justify-center border border-primary/20">
             <Cpu size={16} className="text-primary animate-pulse" />
           </div>
-          <span className="font-display font-bold tracking-tight text-lg">
+          <span className="font-bold tracking-tight text-lg">
             {locale === "ar" ? "ذكاء أيفورا" : "Aivora OS"}
           </span>
         </div>

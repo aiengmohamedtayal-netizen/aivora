@@ -27,7 +27,7 @@ export function SectionCapabilities() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-3xl mb-16">
           <SectionLabel className="mb-4 text-primary">WHAT WE BUILD</SectionLabel>
-          <h2 className="text-h2 font-display">Full-spectrum engineering. From database schema to pixel.</h2>
+          <h2 className="text-h2">Full-spectrum engineering. From database schema to pixel.</h2>
         </div>
 
         <motion.div 

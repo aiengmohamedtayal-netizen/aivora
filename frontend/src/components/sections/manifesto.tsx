@@ -50,7 +50,7 @@ export function SectionManifesto() {
             
             <motion.h1 
               variants={fadeUp}
-              className="text-4xl sm:text-5xl lg:text-[62px] font-display font-black tracking-tight text-foreground leading-[1.05] mb-6 text-balance"
+              className="text-4xl sm:text-5xl lg:text-[62px] font-black tracking-tight text-foreground leading-[1.05] mb-6 text-balance"
             >
               {t("title")}
             </motion.h1>
@@ -109,7 +109,7 @@ export function SectionTrustedBy() {
           <span className="font-mono text-xs text-muted-foreground uppercase tracking-widest text-center lg:text-start">
             {text}
           </span>
-          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-4 opacity-40 font-display font-bold text-sm tracking-tight text-muted-foreground">
+          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-4 opacity-40 font-bold text-sm tracking-tight text-muted-foreground">
             <span>VERCEL_STUDIO</span>
             <span>SUPABASE_RLS</span>
             <span>OPENAI_PARTNERS</span>
@@ -188,7 +188,7 @@ export function SectionShowcase() {
         
         {/* Section Heading */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold tracking-tight text-foreground mb-6 text-balance">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-6 text-balance">
             {locale === "ar" ? "منتجات مصممة للأداء المطلق" : "Products engineered for absolute performance."}
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed text-balance">

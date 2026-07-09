@@ -26,7 +26,7 @@ export function Footer() {
                   className="object-contain"
                 />
               </div>
-              <span className="font-display text-xl font-bold tracking-tight">Aivora</span>
+              <span className="text-xl font-bold tracking-tight">Aivora</span>
             </div>
             <p className="text-sm leading-6 text-muted-foreground max-w-xs">
               {t("description")}

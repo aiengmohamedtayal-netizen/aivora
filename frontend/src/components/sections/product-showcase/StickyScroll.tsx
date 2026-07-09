@@ -109,6 +109,7 @@ export function StickyScroll({
           <div className="relative w-full max-w-xl">
             <AnimatePresence mode="wait">
               <motion.div
+                suppressHydrationWarning
                 key={activeCard}
                 initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20, scale: shouldReduceMotion ? 1 : 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}

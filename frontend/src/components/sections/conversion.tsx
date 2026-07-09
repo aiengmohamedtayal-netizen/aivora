@@ -144,7 +144,7 @@ Message: ${message}
           <div className="lg:col-span-5 flex flex-col gap-10">
             <div>
               <SectionLabel className="mb-4">{locale === "ar" ? "تواصل معنا" : "Let's Talk"}</SectionLabel>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold tracking-tight text-foreground leading-[1.15] whitespace-pre-line mb-6">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground leading-[1.15] whitespace-pre-line mb-6">
                 {t.heading}
               </h2>
               <p className="text-muted-foreground leading-relaxed max-w-md">

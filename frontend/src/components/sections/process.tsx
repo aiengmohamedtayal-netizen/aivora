@@ -34,7 +34,7 @@ export function SectionProcess() {
           <SectionLabel className="mb-4">
             {locale === "ar" ? "خطوات العمل" : "How We Work"}
           </SectionLabel>
-          <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight text-foreground mb-6">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-6">
             {t("title")}
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
@@ -113,7 +113,7 @@ export function SectionTeam() {
           <SectionLabel className="mb-4">
             {locale === "ar" ? "فريق عمل أيفورا" : "Meet The Team"}
           </SectionLabel>
-          <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight text-foreground mb-6">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-6">
             {locale === "ar" ? "مهندسون ومصممون يركزون على الأعمال" : "Engineers & designers focused on your growth"}
           </h2>
           <p className="text-muted-foreground leading-relaxed">

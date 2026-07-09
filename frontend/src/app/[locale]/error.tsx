@@ -21,7 +21,7 @@ export default function ErrorBoundary({
         <AlertCircle className="h-8 w-8 text-destructive" />
       </div>
       <div className="space-y-2">
-        <h2 className="text-2xl font-display font-bold">Something went wrong</h2>
+        <h2 className="text-2xl font-bold">Something went wrong</h2>
         <p className="text-muted-foreground max-w-[500px] mx-auto text-sm">
           {error.message || "An unexpected error occurred in this module."}
         </p>

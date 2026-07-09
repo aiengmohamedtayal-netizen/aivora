@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { GeistSans } from "geist/font/sans"
+import { Newsreader } from "next/font/google"
 import localFont from "next/font/local"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages } from "next-intl/server"
@@ -14,6 +15,12 @@ import { ZodErrorProvider } from "@/i18n/zodErrorMap"
 import { MotionProvider } from "@/components/providers/MotionProvider"
 import { GlobalWaveBackground } from "@/components/common/GlobalWaveBackground"
 import "@/styles/globals.css"
+
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  variable: "--font-newsreader",
+  display: "swap",
+})
 
 const thmanyahSans = localFont({
   src: [
@@ -107,11 +114,12 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} dir={dir} suppressHydrationWarning>
       <body
-        className={`${GeistSans.variable} ${thmanyahSans.variable} ${thmanyahDisplay.variable} bg-background text-foreground antialiased min-h-screen flex flex-col`}
+        className={`${GeistSans.variable} ${newsreader.variable} ${thmanyahSans.variable} ${thmanyahDisplay.variable} bg-background text-foreground antialiased min-h-screen flex flex-col`}
         style={{
-          "--font-body": locale === "ar" ? "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" : "var(--font-geist-sans)",
-          "--font-heading": locale === "ar" ? "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" : "var(--font-geist-sans)",
-          "--font-display": locale === "ar" ? "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" : "var(--font-geist-sans)",
+          "--font-body": locale === "ar" ? "var(--font-thmanyah-sans)" : "var(--font-geist-sans)",
+          "--font-ui": locale === "ar" ? "var(--font-thmanyah-sans)" : "var(--font-geist-sans)",
+          "--font-heading": locale === "ar" ? "var(--font-thmanyah-display)" : "var(--font-newsreader)",
+          "--font-display": locale === "ar" ? "var(--font-thmanyah-display)" : "var(--font-newsreader)",
         } as React.CSSProperties}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>

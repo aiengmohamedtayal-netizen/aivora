@@ -32,7 +32,7 @@ export function SectionServices() {
             <span className="w-1.5 h-1.5 rounded-full bg-primary" />
             {locale === "ar" ? "قدرات الأستوديو" : "Studio Capabilities"}
           </SectionLabel>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold tracking-tight text-foreground mb-6 text-balance">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-6 text-balance">
             {t("title")}
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed text-balance">
@@ -60,7 +60,7 @@ export function SectionServices() {
                     </div>
                   </div>
                   
-                  <CardTitle className="text-2xl font-display font-bold tracking-tight text-foreground mb-3">
+                  <CardTitle className="text-2xl font-bold tracking-tight text-foreground mb-3">
                     {t(`list.${key}.title`)}
                   </CardTitle>
                   <p className="text-[15px] text-muted-foreground leading-relaxed">
@@ -135,7 +135,7 @@ export function SectionIndustries() {
           <SectionLabel className="mb-4">
             {locale === "ar" ? "المجالات التي نخدمها" : "Industries We Serve"}
           </SectionLabel>
-          <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight text-foreground mb-6">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-6">
             {locale === "ar" ? "خبرة قطاعية لحل التحديات التشغيلية" : "Deep expertise across diverse industries"}
           </h2>
           <p className="text-muted-foreground leading-relaxed">

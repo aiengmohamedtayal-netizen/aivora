@@ -40,7 +40,7 @@ export function CaseStudiesEditorial() {
         >
           <motion.div variants={fadeUp} className="mb-4 text-center">
             <SectionLabel>{t("title")}</SectionLabel>
-            <h2 className="text-h2 mt-4 font-display font-bold text-foreground">
+            <h2 className="text-h2 mt-4 font-bold text-foreground">
               {t("subtitle")}
             </h2>
           </motion.div>
@@ -60,7 +60,7 @@ export function CaseStudiesEditorial() {
                         <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
                           <Icon size={32} strokeWidth={1.5} />
                         </div>
-                        <h3 className="text-h3 font-display font-bold text-foreground leading-tight">
+                        <h3 className="text-h3 font-bold text-foreground leading-tight">
                           {study.title}
                         </h3>
                       </header>

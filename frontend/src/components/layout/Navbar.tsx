@@ -71,7 +71,7 @@ export function Navbar() {
                 priority
               />
             </div>
-            <span className="font-display text-[1.15rem] font-bold tracking-tight">
+            <span className="text-[1.15rem] font-bold tracking-tight">
               {locale === "ar" ? "أيفورا" : "Aivora"}
             </span>
           </Link>

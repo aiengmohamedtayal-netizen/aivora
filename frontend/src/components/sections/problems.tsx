@@ -65,7 +65,7 @@ export function SectionWhyAivora() {
           <SectionLabel className="mb-4">
             {locale === "ar" ? "لماذا أيفورا؟" : "Why Choose Aivora"}
           </SectionLabel>
-          <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight text-foreground mb-6">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-6">
             {locale === "ar" ? "الالتزام بالجودة والابتكار المستمر" : "Engineered for high performance and reliability"}
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
@@ -134,7 +134,7 @@ export function SectionCaseStudies() {
           <SectionLabel className="mb-4">
             {locale === "ar" ? "المشاريع المتميزة" : "Featured Projects"}
           </SectionLabel>
-          <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight text-foreground mb-6">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-6">
             {locale === "ar" ? "أعمال تتحدث عن جودتها" : "Real-world business outcomes"}
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">

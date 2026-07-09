@@ -28,7 +28,7 @@ export function EngineeringCulture() {
             <div>
               <SectionLabel>{t("title")}</SectionLabel>
             </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-foreground leading-[1.3] lg:leading-[1.2] tracking-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-[1.3] lg:leading-[1.2] tracking-tight">
               {t("manifesto")}
             </h1>
           </motion.header>
@@ -47,7 +47,7 @@ export function EngineeringCulture() {
                   <span className="text-primary font-mono text-sm tracking-wider mb-4 opacity-80">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <h2 className="text-2xl lg:text-3xl font-display font-bold text-foreground leading-snug">
+                  <h2 className="text-2xl lg:text-3xl font-bold text-foreground leading-snug">
                     {pillar.title}
                   </h2>
                 </div>

@@ -16,7 +16,7 @@ export function SectionConstitution() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-16">
           <SectionLabel className="mb-4">ENGINEERING DISCIPLINE</SectionLabel>
-          <h2 className="text-h2 font-display mb-6">A team governed by code quality laws.</h2>
+          <h2 className="text-h2 mb-6">A team governed by code quality laws.</h2>
           <p className="text-body text-muted-foreground">
             We operate under a strict internal Engineering Constitution. It is not a suggestion; it is the absolute standard for every line of code we push to production.
           </p>
@@ -47,7 +47,7 @@ export function SectionTypeSafety() {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div>
             <SectionLabel className="mb-4">TYPE SAFETY</SectionLabel>
-            <h2 className="text-h2 font-display mb-6">Zod validation at the perimeter. Strict compile-time safety inside.</h2>
+            <h2 className="text-h2 mb-6">Zod validation at the perimeter. Strict compile-time safety inside.</h2>
             <p className="text-body text-muted-foreground">
               Our APIs do not trust client input. We enforce strict schema validation at every network boundary, ensuring that invalid data never reaches our internal logic or databases.
             </p>

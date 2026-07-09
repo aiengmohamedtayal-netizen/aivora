@@ -126,7 +126,7 @@ export function HeroComposition() {
             <div className="flex-1 p-5 sm:p-6 flex flex-col gap-6 overflow-y-auto custom-scrollbar">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-xl font-display font-bold">Active Pipeline</h3>
+                  <h3 className="text-xl font-bold">Active Pipeline</h3>
                   <p className="text-sm text-muted-foreground">Q3 Lead conversion tracking</p>
                 </div>
                 <div className="hidden sm:flex px-3 py-1.5 bg-primary/10 text-primary text-xs font-medium rounded-lg border border-primary/20 items-center gap-2">
@@ -274,7 +274,7 @@ export function HeroComposition() {
             <TrendingUp className="w-3 h-3 text-green-500" />
           </div>
           <div className="flex items-baseline gap-2 mb-3">
-            <span className="text-xl font-bold font-display">$84.5K</span>
+            <span className="text-xl font-bold">$84.5K</span>
             <span className="text-[10px] text-green-500 font-medium">+14.2%</span>
           </div>
           

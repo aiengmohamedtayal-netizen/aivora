@@ -21,7 +21,7 @@ export function SectionTechnologies() {
           <SectionLabel className="mb-4">
             {locale === "ar" ? "بنيتنا البرمجية" : "Built With Modern Technologies"}
           </SectionLabel>
-          <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight text-foreground mb-6">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-6">
             {locale === "ar" ? "تقنيات حديثة لمنتجات قوية" : "We build with stress-tested, modern tools"}
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
@@ -81,7 +81,7 @@ export function SectionTestimonials() {
           <SectionLabel className="mb-4">
             {locale === "ar" ? "آراء العملاء" : "Client Testimonials"}
           </SectionLabel>
-          <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight text-foreground mb-6">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-6">
             {locale === "ar" ? "ماذا يقول شركاؤنا عن جودة أعمالنا؟" : "What our clients say about our partnership"}
           </h2>
         </div>
@@ -160,7 +160,7 @@ export function SectionFAQ() {
           <SectionLabel className="mb-4">
             {locale === "ar" ? "الأسئلة الشائعة" : "Common Questions"}
           </SectionLabel>
-          <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight text-foreground mb-6">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-6">
             {locale === "ar" ? "إجابات على استفساراتك" : "Answers to your queries"}
           </h2>
         </div>

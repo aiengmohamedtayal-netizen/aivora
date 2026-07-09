@@ -23,10 +23,10 @@ const variantStyles = {
 } as const
 
 const sizeStyles = {
-  sm: "h-9 px-4 text-sm gap-1.5 rounded-lg",
-  md: "h-11 px-8 text-sm font-medium gap-2 rounded-xl",
-  lg: "h-13 px-10 text-base font-medium gap-2.5 rounded-xl",
-  icon: "h-10 w-10 rounded-lg",
+  sm: "min-h-9 px-4 text-sm gap-1.5 rounded-lg",
+  md: "min-h-11 px-8 text-sm gap-2 rounded-xl",
+  lg: "min-h-[52px] px-10 text-base gap-2.5 rounded-xl",
+  icon: "min-h-10 min-w-10 rounded-lg",
 } as const
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -76,7 +76,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         <Slot
           ref={ref}
           className={cn(
-            "inline-flex items-center justify-center font-medium transition-all",
+            "inline-flex items-center justify-center font-medium leading-[1.15] tracking-normal whitespace-nowrap transition-all text-ui",
             variantStyles[variant],
             sizeStyles[size],
             isDisabled && "pointer-events-none opacity-50",
@@ -93,7 +93,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <motion.button
         ref={ref}
         className={cn(
-          "inline-flex items-center justify-center font-medium transition-all",
+          "inline-flex items-center justify-center font-medium leading-[1.15] tracking-normal whitespace-nowrap transition-all text-ui",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
           variantStyles[variant],
           sizeStyles[size],

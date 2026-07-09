@@ -109,7 +109,7 @@ function MetricCard({
         </div>
 
         <div className="flex items-end justify-between">
-          <div className="text-3xl font-display font-bold tracking-tight text-foreground">{value}</div>
+          <div className="text-3xl font-bold tracking-tight text-foreground">{value}</div>
           <div className="h-12 w-24">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={data}>
@@ -245,7 +245,7 @@ export function AnalyticsWorkspace() {
         <div className="relative z-10 flex flex-col h-full min-h-[300px]">
           <div className="mb-6 flex items-center justify-between">
             <div>
-              <h3 className="font-display text-lg font-bold text-foreground">
+              <h3 className="text-lg font-bold text-foreground">
                 {locale === 'ar' ? 'نمو الإيرادات' : 'Revenue Growth'}
               </h3>
               <p className="text-xs text-muted-foreground font-mono">
@@ -326,7 +326,7 @@ export function AnalyticsWorkspace() {
         variants={itemVariants}
         className="col-span-1 lg:col-span-1 rounded-3xl border border-border/50 bg-card/40 p-6 shadow-xl backdrop-blur-2xl flex flex-col min-h-[300px] hover:border-primary/30 transition-colors"
       >
-        <h3 className="font-display text-sm font-bold text-foreground mb-4">
+        <h3 className="text-sm font-bold text-foreground mb-4">
           {locale === 'ar' ? 'توزيع الخدمات' : 'Service Distribution'}
         </h3>
         <div className="flex-1 w-full relative min-h-[180px]">
@@ -351,7 +351,7 @@ export function AnalyticsWorkspace() {
             </PieChart>
           </ResponsiveContainer>
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <span className="font-display text-xl font-bold">100%</span>
+            <span className="text-xl font-bold">100%</span>
           </div>
         </div>
         <div className="grid grid-cols-2 gap-2 mt-4">
@@ -369,7 +369,7 @@ export function AnalyticsWorkspace() {
         variants={itemVariants}
         className="col-span-1 md:col-span-2 lg:col-span-2 rounded-3xl border border-border/50 bg-card/40 p-6 shadow-xl backdrop-blur-2xl min-h-[260px] flex flex-col"
       >
-        <h3 className="font-display text-sm font-bold text-foreground mb-4">
+        <h3 className="text-sm font-bold text-foreground mb-4">
           {locale === 'ar' ? 'قمع المبيعات' : 'Sales Funnel'}
         </h3>
         <div className="flex-1 w-full -ml-4">
@@ -412,7 +412,7 @@ export function AnalyticsWorkspace() {
         className="col-span-1 md:col-span-2 lg:col-span-2 rounded-3xl border border-border/50 bg-card/40 p-6 shadow-xl backdrop-blur-2xl min-h-[260px] flex flex-col"
       >
         <div className="flex justify-between items-center mb-4">
-          <h3 className="font-display text-sm font-bold text-foreground">
+          <h3 className="text-sm font-bold text-foreground">
             {locale === 'ar' ? 'الطلبات الحية' : 'Live Telemetry'}
           </h3>
           <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full border border-green-500/20 bg-green-500/10">

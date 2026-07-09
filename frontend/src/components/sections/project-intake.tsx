@@ -127,7 +127,7 @@ Contact Method: ${formData.contactMethod}
             <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
               <Check size={32} strokeWidth={2} />
             </div>
-            <h2 className="text-h2 font-display font-bold">{t("actions.successTitle")}</h2>
+            <h2 className="text-h2 font-bold">{t("actions.successTitle")}</h2>
             <p className="text-muted-foreground text-lg max-w-md mx-auto">
               {t("actions.successMessage")}
             </p>
@@ -167,7 +167,7 @@ Contact Method: ${formData.contactMethod}
           <div>
             <SectionLabel>{t("title")}</SectionLabel>
           </div>
-          <h1 className="text-3xl lg:text-4xl font-display font-bold text-foreground">
+          <h1 className="text-3xl lg:text-4xl font-bold text-foreground">
             {step <= TOTAL_STEPS ? t(`steps.${getStepKey(step)}.title`) : t("steps.review.title")}
           </h1>
           <p className="text-lg text-muted-foreground">
