@@ -44,13 +44,14 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  // Rewrites to proxy FastAPI backend locally
+  // Rewrites to proxy FastAPI backend locally and to the serverless function in production
   async rewrites() {
-    if (process.env.NODE_ENV === "production") return [];
     return [
       {
         source: "/api/v1/:path*",
-        destination: "http://127.0.0.1:8000/api/v1/:path*",
+        destination: process.env.NODE_ENV === "development"
+            ? "http://127.0.0.1:8000/api/v1/:path*"
+            : "/api/",
       },
     ];
   },
