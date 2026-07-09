@@ -110,7 +110,7 @@ Message: ${message}
         if (error) throw error
 
         // Send email via API route
-        await fetch('/api/contact', {
+        await fetch('/next-api/contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
