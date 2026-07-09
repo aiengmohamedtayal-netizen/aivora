@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { fadeUp, staggerContainer } from "@/lib/motion"
 import { SectionLabel, Card, Button } from "@/components/ui"
-import { Waves } from "@/components/ui/wave-background"
 import { HeroComposition } from "@/components/common/hero-composition"
 import { ClaudeChatInput } from "@/components/common/ClaudeChatInput"
 import { AnalyticsWorkspace } from "@/components/common/AnalyticsWorkspace"
@@ -22,15 +21,6 @@ export function SectionManifesto() {
       aria-label="Manifesto" 
       className="relative min-h-[90vh] flex flex-col justify-center py-20 lg:py-28 overflow-hidden bg-background"
     >
-      {/* Animated wave background — sits at z-0, fully behind content */}
-      <Waves
-        className="pointer-events-none"
-        strokeColor="rgba(99,102,241,0.18)"
-        backgroundColor="transparent"
-        opacity={0.7}
-        pointerSize={0.4}
-      />
-
       {/* Background radial spotlights & aurora meshes */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />

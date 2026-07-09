@@ -8,5 +8,11 @@ class LeadCreate(BaseModel):
     message: str = Field(..., min_length=10, description="Inquiry message or project details")
 
 class ChatQuery(BaseModel):
-    query: str = Field(..., description="The command or query from the AI Engineering Workspace")
+    # C-03: Enforce minimum and maximum query length to prevent cost explosion and prompt injection
+    query: str = Field(
+        ...,
+        min_length=1,
+        max_length=2000,
+        description="The user query — max 2000 characters"
+    )
     session_id: Optional[str] = Field(None, description="Current session UUID for context continuation")

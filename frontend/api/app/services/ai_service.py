@@ -63,11 +63,18 @@ class AIService:
         
         messages.append({"role": "user", "content": query})
         
-        # Stream response and accumulate
+        # C-02: Yield properly-formatted SSE chunks so the frontend parser works correctly.
+        # Format: "data: {content}\n\n" per the SSE specification (RFC 8898).
         accumulated_response = ""
         async for chunk in self.provider.generate_stream(messages=messages):
             accumulated_response += chunk
-            yield chunk
+            # Escape newlines inside the chunk so they don't break SSE frame boundaries
+            safe_chunk = chunk.replace("\n", "\\n")
+            yield f"data: {safe_chunk}\n\n"
+        
+        # Signal end of stream
+        yield "data: [DONE]\n\n"
+
             
         # Save the assistant response to the database
         def save_assistant_msg():

@@ -8,6 +8,7 @@ from slowapi.errors import RateLimitExceeded
 
 from app.api.v1.router import api_router
 from app.core.config import settings
+from app.core.limiter import limiter
 
 log = logging.getLogger(__name__)
 
@@ -25,6 +26,9 @@ app = FastAPI(
     docs_url="/docs",
     openapi_url=f"{settings.API_V1_STR}/openapi.json",
 )
+
+# C-04: Register the rate limiter state so slowapi can intercept requests
+app.state.limiter = limiter
 
 # Security: CORS Middleware
 if settings.BACKEND_CORS_ORIGINS:

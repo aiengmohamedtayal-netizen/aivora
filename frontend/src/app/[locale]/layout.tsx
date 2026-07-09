@@ -12,6 +12,7 @@ import { AivoraAssistant } from "@/components/common/AivoraAssistant"
 import { SkipToContent } from "@/components/common/SkipToContent"
 import { ZodErrorProvider } from "@/i18n/zodErrorMap"
 import { MotionProvider } from "@/components/providers/MotionProvider"
+import { GlobalWaveBackground } from "@/components/common/GlobalWaveBackground"
 import "@/styles/globals.css"
 
 const thmanyahSans = localFont({
@@ -117,14 +118,26 @@ export default async function LocaleLayout({
           <NextIntlClientProvider messages={messages}>
             <MotionProvider>
               <ZodErrorProvider>
-                <SkipToContent />
-                <Navbar />
-                <main id="main-content" className="flex-1 w-full pt-16">
-                  {children}
-                </main>
-                <Footer />
-                <AivoraAssistant />
-              </ZodErrorProvider>
+                  {/*
+                    ─── Global Z-Index Design System ─────────────────────────────
+                    z-0  → GlobalWaveBackground (fixed, pointer-events-none)
+                    z-10 → Page content (main)
+                    z-20 → Navbar
+                    z-30 → Drawers / Sheet panels
+                    z-40 → Toasts / Dialogs
+                    ──────────────────────────────────────────────────────────────
+                  */}
+                  {/* z-0: Animated atmospheric wave — global, page-aware intensity */}
+                  <GlobalWaveBackground />
+
+                  <SkipToContent />
+                  <Navbar />
+                  <main id="main-content" className="flex-1 w-full pt-16 relative z-10">
+                    {children}
+                  </main>
+                  <Footer />
+                  <AivoraAssistant />
+                </ZodErrorProvider>
             </MotionProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
