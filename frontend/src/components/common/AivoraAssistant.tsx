@@ -649,94 +649,117 @@ export function AivoraAssistant() {
             {/* Messages Area */}
             <div
               ref={scrollRef}
-              className="flex-1 p-4 overflow-y-auto space-y-4 font-sans text-xs sm:text-sm"
+              className="flex-1 p-4 overflow-y-auto space-y-5 font-sans text-[13px] sm:text-sm scroll-smooth"
               aria-live="polite"
               aria-label="Conversation"
             >
               {/* History loading skeleton */}
               {isLoadingHistory && (
-                <div className="space-y-3">
+                <div className="space-y-4">
                   {[80, 60, 90].map((w, i) => (
-                    <div key={i} className={cn("h-8 rounded-xl bg-muted/40 animate-pulse", i % 2 === 0 ? "mr-auto" : "ml-auto")} style={{ width: `${w}%` }} />
+                    <div key={i} className={cn("h-10 rounded-2xl bg-muted/30 animate-pulse", i % 2 === 0 ? "mr-auto" : "ml-auto")} style={{ width: `${w}%` }} />
                   ))}
                 </div>
               )}
 
-              {messages.map((msg, i) => (
-                <div
-                  key={i}
-                  className={cn(
-                    "flex flex-col gap-1 max-w-[85%]",
-                    msg.role === "user" ? "ms-auto items-end" : "me-auto items-start"
-                  )}
-                >
-                  <div
+              <AnimatePresence initial={false}>
+                {messages.map((msg, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 10, filter: "blur(4px)" }}
+                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
                     className={cn(
-                      "p-3.5 rounded-2xl leading-relaxed border shadow-sm flex flex-col gap-3",
-                      msg.role === "user"
-                        ? "bg-primary border-primary/20 text-primary-foreground"
-                        : msg.isError
-                          ? "bg-destructive/10 border-destructive/20 text-destructive-foreground"
-                          : "bg-muted/40 border-border/50 text-foreground"
+                      "flex flex-col gap-1.5 max-w-[88%]",
+                      msg.role === "user" ? "ms-auto items-end" : "me-auto items-start"
                     )}
                   >
-                    {msg.role === "user" ? (
-                      <span className="whitespace-pre-wrap leading-relaxed">{msg.text}</span>
-                    ) : (
-                      <MemoizedMarkdown content={msg.text} />
-                    )}
+                    <div
+                      className={cn(
+                        "px-4 py-3 rounded-2xl leading-relaxed shadow-sm flex flex-col gap-3",
+                        msg.role === "user"
+                          ? "bg-primary text-primary-foreground rounded-tr-sm"
+                          : msg.isError
+                            ? "bg-destructive/10 border border-destructive/20 text-destructive-foreground rounded-tl-sm"
+                            : "bg-muted/40 border border-border/50 text-foreground rounded-tl-sm"
+                      )}
+                    >
+                      {msg.role === "user" ? (
+                        <span className="whitespace-pre-wrap leading-relaxed">{msg.text}</span>
+                      ) : (
+                        <MemoizedMarkdown content={msg.text} />
+                      )}
 
-                    {msg.files && msg.files.length > 0 && (
-                      <div className="flex flex-wrap gap-2 mt-1">
-                        {msg.files.map(file => (
-                          <div key={file.id} className="p-1.5 rounded-lg bg-black/10 border border-white/10 flex items-center gap-1.5 text-[10px] max-w-[150px] truncate">
-                            <FileText className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
-                            <span className="truncate">{file.file.name}</span>
-                          </div>
-                        ))}
+                      {/* Error Retry Button */}
+                      {msg.isError && i === messages.length - 1 && (
+                        <button
+                          onClick={() => {
+                            setMessages(prev => prev.slice(0, -1))
+                            handleSend(messages[i - 1]?.text || "")
+                          }}
+                          className="mt-2 text-xs font-semibold underline underline-offset-2 hover:opacity-80 transition-opacity self-start"
+                        >
+                          Retry
+                        </button>
+                      )}
+
+                      {msg.files && msg.files.length > 0 && (
+                        <div className="flex flex-wrap gap-2 mt-1">
+                          {msg.files.map(file => (
+                            <div key={file.id} className="p-1.5 rounded-lg bg-black/10 border border-white/10 flex items-center gap-1.5 text-[11px] max-w-[160px] truncate">
+                              <FileText className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+                              <span className="truncate">{file.file.name}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      {msg.pastedContent && msg.pastedContent.length > 0 && (
+                        <div className="flex flex-col gap-1.5 mt-1">
+                          {msg.pastedContent.map(snippet => (
+                            <div key={snippet.id} className="p-2.5 rounded-lg bg-black/10 font-mono text-[11px] border border-white/5 whitespace-pre-wrap max-h-[100px] overflow-y-auto">
+                              {snippet.content}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    <span className="text-[10px] text-muted-foreground/70 font-mono px-1">
+                      {msg.timestamp}
+                    </span>
+                  </motion.div>
+                ))}
+
+                {/* Streaming bubble */}
+                {streamingText && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, filter: "blur(4px)" }}
+                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    className="flex flex-col gap-1.5 max-w-[88%] me-auto items-start"
+                  >
+                    <div className="px-4 py-3 rounded-2xl rounded-tl-sm leading-relaxed border shadow-sm bg-muted/40 border-border/50 text-foreground overflow-x-hidden">
+                      <MemoizedMarkdown content={streamingText} />
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* Premium Typing Indicator (Perplexity/ChatGPT style) */}
+                {isStreaming && !streamingText && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    className="flex items-center gap-3 text-muted-foreground text-[13px] px-2 py-1 me-auto"
+                  >
+                    <div className="flex items-center gap-1">
+                      <div className="w-4 h-4 rounded-full bg-primary/20 flex items-center justify-center">
+                        <Brain className="w-2.5 h-2.5 text-primary animate-pulse" />
                       </div>
-                    )}
-
-                    {msg.pastedContent && msg.pastedContent.length > 0 && (
-                      <div className="flex flex-col gap-1.5 mt-1">
-                        {msg.pastedContent.map(snippet => (
-                          <div key={snippet.id} className="p-2 rounded bg-black/10 font-mono text-[9px] border border-white/5 whitespace-pre-wrap max-h-[80px] overflow-y-auto">
-                            {snippet.content}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                  <span className="text-[9px] text-muted-foreground font-mono px-1">
-                    {msg.timestamp}
-                  </span>
-                </div>
-              ))}
-
-              {/* Streaming bubble */}
-              {streamingText && (
-                <div className="flex flex-col gap-1 max-w-[85%] me-auto items-start">
-                  <div className="p-3.5 rounded-2xl leading-relaxed border shadow-sm bg-muted/40 border-border/50 text-foreground overflow-x-hidden">
-                    <MemoizedMarkdown content={streamingText} />
-                  </div>
-                </div>
-              )}
-
-              {/* Typing indicator (pre-stream) */}
-              {isStreaming && !streamingText && (
-                <div className="flex items-center gap-2 text-muted-foreground text-xs p-2 me-auto">
-                  <div className="flex gap-1">
-                    {[0, 150, 300].map(delay => (
-                      <span
-                        key={delay}
-                        className="w-1.5 h-1.5 rounded-full bg-primary/60 animate-bounce"
-                        style={{ animationDelay: `${delay}ms` }}
-                      />
-                    ))}
-                  </div>
-                  <span className="font-mono">{dict.thinking}</span>
-                </div>
-              )}
+                    </div>
+                    <span className="animate-pulse">{dict.thinking}</span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             {/* Suggestion Chips */}
@@ -826,7 +849,7 @@ export function AivoraAssistant() {
                   placeholder={dict.placeholder}
                   aria-label={dict.placeholder}
                   className={cn(
-                    "w-full bg-transparent border-0 outline-none text-foreground text-xs placeholder:text-muted-foreground resize-none leading-relaxed block h-8 min-h-[2rem]",
+                    "w-full bg-transparent border-0 outline-none text-foreground text-[16px] sm:text-[14px] placeholder:text-muted-foreground resize-none leading-relaxed block h-8 min-h-[2rem] focus-visible:ring-0",
                     charOverLimit && "text-destructive"
                   )}
                   rows={1}

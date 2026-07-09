@@ -21,7 +21,7 @@ export async function POST(request: Request) {
 
     const mailOptions = {
       from: process.env.SMTP_USER,
-      to: 'aivoraaa@outlook.com',
+      to: process.env.CONTACT_EMAIL || 'aivoraaa@outlook.com',
       subject: `New Project Request from ${name || 'Aivora User'}`,
       text: `
         New Lead Submission:
