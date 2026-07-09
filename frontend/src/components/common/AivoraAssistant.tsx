@@ -678,10 +678,10 @@ export function AivoraAssistant() {
                       className={cn(
                         "px-4 py-3 rounded-2xl leading-relaxed shadow-sm flex flex-col gap-3",
                         msg.role === "user"
-                          ? "bg-primary text-primary-foreground rounded-tr-sm"
+                          ? "bg-primary text-primary-foreground rounded-se-sm"
                           : msg.isError
-                            ? "bg-destructive/10 border border-destructive/20 text-destructive-foreground rounded-tl-sm"
-                            : "bg-muted/40 border border-border/50 text-foreground rounded-tl-sm"
+                            ? "bg-destructive/10 border border-destructive/20 text-destructive-foreground rounded-ss-sm"
+                            : "bg-muted/40 border border-border/50 text-foreground rounded-ss-sm"
                       )}
                     >
                       {msg.role === "user" ? (
@@ -737,7 +737,7 @@ export function AivoraAssistant() {
                     animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                     className="flex flex-col gap-1.5 max-w-[88%] me-auto items-start"
                   >
-                    <div className="px-4 py-3 rounded-2xl rounded-tl-sm leading-relaxed border shadow-sm bg-muted/40 border-border/50 text-foreground overflow-x-hidden">
+                    <div className="px-4 py-3 rounded-2xl rounded-ss-sm leading-relaxed border shadow-sm bg-muted/40 border-border/50 text-foreground overflow-x-hidden">
                       <MemoizedMarkdown content={streamingText} />
                     </div>
                   </motion.div>
