@@ -5,12 +5,17 @@ from app.core.config import settings
 from app.services.ai_service import AIService
 from app.providers.provider_factory import ProviderFactory
 
-# Supabase Client Dependency
+# H-01: Global singleton to prevent connection pool exhaustion
+_supabase_client: Client | None = None
+
 def get_supabase_client() -> Client:
     """
-    Dependency that returns a configured Supabase client.
+    Dependency that returns a configured, singleton Supabase client.
     """
-    return create_client(settings.SUPABASE_URL, settings.SUPABASE_SERVICE_ROLE_KEY)
+    global _supabase_client
+    if _supabase_client is None:
+        _supabase_client = create_client(settings.SUPABASE_URL, settings.SUPABASE_SERVICE_ROLE_KEY)
+    return _supabase_client
 
 # AI Service Dependency
 def get_ai_service(supabase: Client = Depends(get_supabase_client)) -> AIService:

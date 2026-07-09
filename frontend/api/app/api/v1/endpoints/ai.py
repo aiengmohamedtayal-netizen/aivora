@@ -7,6 +7,14 @@ from app.core.limiter import limiter
 
 router = APIRouter()
 
+@router.get("/sessions/{session_id}/messages")
+async def get_history(session_id: str, ai_service: AIService = Depends(get_ai_service)):
+    """
+    H-05: Returns formatted chat history for a session without exposing internal DB structure.
+    """
+    messages = await ai_service.get_session_history(session_id=session_id)
+    return {"messages": messages}
+
 @router.post("/chat")
 @limiter.limit("10/minute")  # C-04: Enforce 10 requests/minute per IP
 async def chat_endpoint(

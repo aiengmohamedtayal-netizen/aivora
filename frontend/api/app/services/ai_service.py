@@ -10,6 +10,27 @@ class AIService:
         self.supabase = supabase
         self.provider = ProviderFactory.get_provider(provider_name)
 
+    async def get_session_history(self, session_id: str) -> list[dict]:
+        """
+        H-05: Fetches conversation history for a given session.
+        Returns only the fields required by the UI (role, content, created_at).
+        """
+        def fetch():
+            return self.supabase.table("chat_messages")\
+                .select("role, content, created_at")\
+                .eq("session_id", session_id)\
+                .order("created_at")\
+                .execute()
+        
+        try:
+            res = await run_in_threadpool(fetch)
+            return [
+                {"role": row["role"], "text": row["content"], "timestamp": row["created_at"]}
+                for row in res.data
+            ]
+        except Exception:
+            return []
+
     async def stream_chat(self, query: str, session_id: str = None) -> AsyncGenerator[str, None]:
         """
         Processes an incoming query, fetches history, attaches system prompt,

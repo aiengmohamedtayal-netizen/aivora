@@ -212,30 +212,69 @@ export function AivoraAssistant() {
     recognitionRef.current = rec
   }, [])
 
-  // ─── Health Check with Timeout + Graceful Degradation ─────────────────────
+  // ─── Health Check & History Hydration ───────────────────────────────────────
   useEffect(() => {
-    async function checkHealth() {
+    async function init() {
+      // 1. Health check
       try {
         const res = await fetch("/api/v1/health", {
           signal: AbortSignal.timeout(HEALTH_TIMEOUT_MS)
         })
-        setHealthStatus(res.ok ? true : "degraded")
+        if (!res.ok) throw new Error("Health check failed")
+        setHealthStatus(true)
       } catch {
         setHealthStatus("degraded")
+        return // Skip history if backend is down
       }
-    }
-    checkHealth()
-  }, [])
 
-  // ─── Welcome Message (fires once health resolves) ──────────────────────────
-  useEffect(() => {
-    if (healthStatus === true && messages.length === 0) {
+      // 2. Fetch History (H-05)
+      try {
+        setIsLoadingHistory(true)
+        const sid = sessionIdRef.current
+        if (sid) {
+          const histRes = await fetch(`/api/v1/ai/sessions/${sid}/messages`)
+          if (histRes.ok) {
+            const data = await histRes.json()
+            if (data.messages && data.messages.length > 0) {
+              // Convert backend format to frontend Message format
+              const formattedHistory = data.messages.map((m: any) => {
+                // If timestamp is ISO string, format it for UI
+                let timeStr = ""
+                try {
+                  timeStr = new Date(m.timestamp).toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" })
+                } catch {
+                  timeStr = ""
+                }
+                return {
+                  role: m.role,
+                  text: m.text,
+                  timestamp: timeStr
+                }
+              })
+              setMessages(formattedHistory)
+              return // Return early so we don't append the default welcome msg
+            }
+          }
+        }
+      } catch (err) {
+        console.error("Failed to load history", err)
+      } finally {
+        setIsLoadingHistory(false)
+      }
+
+      // 3. Fallback Welcome Message (if no history)
       setMessages([{
         role: "assistant",
         text: dict.initMsg,
         timestamp: new Date().toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" })
       }])
     }
+
+    init()
+  }, [dict.initMsg, locale])
+
+  // ─── Degraded Fallback Message ─────────────────────────────────────────────
+  useEffect(() => {
     if (healthStatus === "degraded" && messages.length === 0) {
       setMessages([{
         role: "assistant",
@@ -244,7 +283,7 @@ export function AivoraAssistant() {
         isError: true
       }])
     }
-  }, [healthStatus, dict.initMsg, dict.unavailable, locale, messages.length])
+  }, [healthStatus, dict.unavailable, locale, messages.length])
 
   // ─── Smart Welcome (30s timer / scroll trigger) ───────────────────────────
   useEffect(() => {
