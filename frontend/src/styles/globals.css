@@ -32,6 +32,14 @@
   --color-ring: var(--ring);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-error: var(--error);
+  --color-error-foreground: var(--error-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
 
   /* ── Typography ── */
   --font-sans: var(--font-body), system-ui, -apple-system, sans-serif;
@@ -49,19 +57,36 @@
   --radius-full: 9999px;
 
   /* ── Shadows ── */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-2xl: var(--shadow-2xl);
 
-  /* ── Motion ── */
+  /* ── Motion & Transitions ── */
   --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-in: cubic-bezier(0.4, 0, 1, 1);
   --ease-out: cubic-bezier(0, 0, 0.2, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-duration-fast: var(--animate-duration-fast);
+  --transition-duration-normal: var(--animate-duration-normal);
+  --transition-duration-slow: var(--animate-duration-slow);
 
-  /* ── Breakpoints (reference only — Tailwind v4 auto-detects) ── */
+  /* ── Z-Index Scale ── */
+  --z-bg: 0;
+  --z-main: 10;
+  --z-nav: 20;
+  --z-panel: 30;
+  --z-dialog: 40;
+  --z-toast: 50;
+
+  /* ── Opacity Tokens ── */
+  --opacity-hover: var(--alpha-hover);
+  --opacity-active: var(--alpha-active);
+  --opacity-disabled: var(--alpha-disabled);
+  --opacity-muted: var(--alpha-muted);
+
+  /* ── Breakpoints ── */
   --breakpoint-sm: 640px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
@@ -91,28 +116,54 @@
   --accent-foreground: #0066cc;
   --gold: #d97706;
 
-  /* Semantic */
+  /* Semantic Colors */
   --destructive: #EF4444;
   --destructive-foreground: #FFFFFF;
+  --success: #10b981;
+  --success-foreground: #ffffff;
+  --warning: #f59e0b;
+  --warning-foreground: #111111;
+  --error: #ef4444;
+  --error-foreground: #ffffff;
+  --info: #3b82f6;
+  --info-foreground: #ffffff;
+
+  /* Borders & Focus */
   --border: rgba(0, 0, 0, 0.08);
   --input: rgba(0, 0, 0, 0.08);
   --ring: #0066cc;
-
-  /* Glassmorphism */
-  --glass-bg: rgba(255, 255, 255, 0.65);
-  --glass-border: rgba(0, 0, 0, 0.05);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
-  --glass-shadow-hover: inset 0 1px 1px rgba(255, 255, 255, 0.8), 0 4px 8px rgba(0, 0, 0, 0.05), 0 16px 32px rgba(0, 0, 0, 0.08);
-
-  /* Focus */
   --focus-ring: 0 0 0 2px var(--background), 0 0 0 4px var(--ring);
+
+  /* Elevation Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.12);
+
+  /* Glassmorphism System */
+  --glass-bg-sm: rgba(255, 255, 255, 0.4);
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-bg-lg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(0, 0, 0, 0.05);
+  --glass-border-lg: rgba(0, 0, 0, 0.08);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.04);
+  --glass-shadow-hover: inset 0 1px 1px rgba(255, 255, 255, 0.8), 0 4px 8px rgba(0, 0, 0, 0.04), 0 16px 32px rgba(0, 0, 0, 0.06);
+
+  /* Opacities */
+  --alpha-hover: 0.8;
+  --alpha-active: 0.7;
+  --alpha-disabled: 0.5;
+  --alpha-muted: 0.6;
+
+  /* Durations */
+  --animate-duration-fast: 150ms;
+  --animate-duration-normal: 300ms;
+  --animate-duration-slow: 500ms;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────
-   3. CSS CUSTOM PROPERTIES — Dark Theme
-   ───────────────────────────────────────────────────────────────────────── */
-
 .dark {
+  /* Surfaces */
   --background: #030303;
   --foreground: #f5f5f7;
   --card: #0a0a0a;
@@ -120,6 +171,7 @@
   --muted: #121212;
   --muted-foreground: #a1a1a6;
 
+  /* Brand */
   --primary: #2563eb;
   --primary-foreground: #FFFFFF;
   --secondary: #1c1c1e;
@@ -128,18 +180,50 @@
   --accent-foreground: #93c5fd;
   --gold: #fbbf24;
 
+  /* Semantic Colors */
   --destructive: #EF4444;
   --destructive-foreground: #FFFFFF;
+  --success: #34d399;
+  --success-foreground: #064e3b;
+  --warning: #fbbf24;
+  --warning-foreground: #78350f;
+  --error: #f87171;
+  --error-foreground: #7f1d1d;
+  --info: #60a5fa;
+  --info-foreground: #1e3a8a;
+
+  /* Borders & Focus */
   --border: rgba(255, 255, 255, 0.08);
   --input: rgba(255, 255, 255, 0.08);
   --ring: #3b82f6;
+  --focus-ring: 0 0 0 2px var(--background), 0 0 0 4px var(--ring);
 
+  /* Elevation Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+
+  /* Glassmorphism System */
+  --glass-bg-sm: rgba(10, 10, 10, 0.4);
   --glass-bg: rgba(10, 10, 10, 0.65);
+  --glass-bg-lg: rgba(10, 10, 10, 0.85);
   --glass-border: rgba(255, 255, 255, 0.05);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+  --glass-border-lg: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
   --glass-shadow-hover: inset 0 1px 1px rgba(255, 255, 255, 0.05), 0 4px 8px rgba(0, 0, 0, 0.5), 0 16px 32px rgba(0, 0, 0, 0.6);
 
-  --focus-ring: 0 0 0 2px var(--background), 0 0 0 4px var(--ring);
+  /* Opacities */
+  --alpha-hover: 0.8;
+  --alpha-active: 0.7;
+  --alpha-disabled: 0.5;
+  --alpha-muted: 0.6;
+
+  /* Durations */
+  --animate-duration-fast: 150ms;
+  --animate-duration-normal: 300ms;
+  --animate-duration-slow: 500ms;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -262,16 +346,32 @@ html[lang="ar"] .font-display {
    7. GLASSMORPHISM UTILITIES
    ───────────────────────────────────────────────────────────────────────── */
 
+.glass-surface-sm {
+  background: var(--glass-bg-sm);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(8px) saturate(140%);
+  -webkit-backdrop-filter: blur(8px) saturate(140%);
+}
+
 .glass-surface {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
+  transition: border-color var(--transition-duration-fast) var(--ease-default), box-shadow var(--transition-duration-fast) var(--ease-default);
 }
 
 .glass-surface:hover {
   box-shadow: var(--glass-shadow-hover);
+}
+
+.glass-surface-lg {
+  background: var(--glass-bg-lg);
+  border: 1px solid var(--glass-border-lg);
+  box-shadow: var(--glass-shadow-lg);
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
 }
 
 /* ─────────────────────────────────────────────────────────────────────────

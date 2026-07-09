@@ -2,10 +2,10 @@ import { test } from "@playwright/test";
 import * as path from "path";
 import * as fs from "fs";
 
-test("Capture Visual Baselines for English and Arabic", async ({ page }) => {
+test("Capture Visual Snapshots after Design Token Changes", async ({ page }) => {
   test.setTimeout(90000);
   const locales = ["en", "ar"];
-  const outputDir = path.resolve("C:/Users/Click Labtop/.gemini/antigravity/brain/89623e87-fc77-4ffc-92a1-174e72ac788b/baselines");
+  const outputDir = path.resolve("C:/Users/Click Labtop/.gemini/antigravity/brain/89623e87-fc77-4ffc-92a1-174e72ac788b/after_tokens");
 
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
