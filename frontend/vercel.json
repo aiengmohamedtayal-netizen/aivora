@@ -1,14 +1,9 @@
 {
-  "builds": [
-    {
-      "src": "api/index.py",
-      "use": "@vercel/python"
-    },
-    {
-      "src": "package.json",
-      "use": "@vercel/next"
+  "functions": {
+    "api/index.py": {
+      "runtime": "@vercel/python@4.1.0"
     }
-  ],
+  },
   "rewrites": [
     {
       "source": "/api/(.*)",
