@@ -28,11 +28,20 @@ export function SectionManifesto() {
       {/* Canvas Wave Background */}
       <CanvasWaveBackground 
         className="absolute inset-0 z-0" 
-        opacity={0.3} 
+        opacity={0.45} 
         speed={0.0015} 
-        amplitude={60} 
-        frequency={0.0008} 
-        blur={1}
+        amplitude={72} 
+        frequency={0.0006} 
+        blur={3}
+        strokeWidth={1.8}
+        colors={[
+          'rgba(255, 255, 255, 0.16)',
+          'rgba(255, 255, 255, 0.10)',
+          'rgba(255, 255, 255, 0.06)',
+          'rgba(255, 255, 255, 0.16)',
+          'rgba(255, 255, 255, 0.10)',
+          'rgba(255, 255, 255, 0.06)'
+        ]}
       />
 
       {/* Layered ambient top spotlights */}

@@ -12,6 +12,7 @@ interface CanvasWaveBackgroundProps {
   colors?: string[];
   blur?: number;
   opacity?: number;
+  strokeWidth?: number;
 }
 
 export function CanvasWaveBackground({
@@ -22,6 +23,7 @@ export function CanvasWaveBackground({
   colors = ['rgba(255, 255, 255, 0.1)', 'rgba(255, 255, 255, 0.05)', 'rgba(255, 255, 255, 0.02)'],
   blur = 0,
   opacity = 0.5,
+  strokeWidth = 1,
 }: CanvasWaveBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -43,22 +45,6 @@ export function CanvasWaveBackground({
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
-
-    // Reduced motion listener
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    isReducedMotionRef.current = mq.matches;
-    const handleMotionChange = (e: MediaQueryListEvent) => {
-      isReducedMotionRef.current = e.matches;
-      if (isReducedMotionRef.current && rafIdRef.current) {
-        cancelAnimationFrame(rafIdRef.current);
-        rafIdRef.current = null;
-        // Draw one static frame
-        drawFrame(0);
-      } else if (!isReducedMotionRef.current && !rafIdRef.current) {
-        animate();
-      }
-    };
-    mq.addEventListener('change', handleMotionChange);
 
     let width = 0;
     let height = 0;
@@ -90,7 +76,7 @@ export function CanvasWaveBackground({
       
       for (let i = 0; i < linesCount; i++) {
         ctx.beginPath();
-        ctx.lineWidth = 1;
+        ctx.lineWidth = strokeWidth;
         ctx.strokeStyle = colors[i]!;
         
         // Draw line across the screen horizontally
@@ -98,10 +84,12 @@ export function CanvasWaveBackground({
         
         for (let x = 0; x <= width; x += 5) {
           // Add some organic variation to frequency and amplitude based on the line index
-          const freq = frequency * (1 + i * 0.2);
+          const freq = frequency * (1 + i * 0.15);
           const amp = amplitude * (1 + i * 0.1);
+          // Parallax effect: inner layers move slightly slower
+          const parallaxSpeed = speed * (1 - i * 0.05);
           
-          const y = yOffset + noise2D(x * freq, t * speed + i * 100) * amp;
+          const y = yOffset + noise2D(x * freq, t * parallaxSpeed + i * 100) * amp;
           
           if (x === 0) {
             ctx.moveTo(x, y);
@@ -113,19 +101,46 @@ export function CanvasWaveBackground({
       }
     };
 
-    const animate = () => {
+    let lastTime = 0;
+
+    const animate = (timestamp: number) => {
       if (isReducedMotionRef.current) return;
-      timeRef.current += 1;
+      
+      if (!lastTime) lastTime = timestamp;
+      const deltaTime = timestamp - lastTime;
+      lastTime = timestamp;
+
+      // At 60 FPS, deltaTime is ~16.66ms. We originally added 1 per frame.
+      // So time increments by deltaTime * (60 / 1000) to keep the exact same visual speed.
+      timeRef.current += deltaTime * (60 / 1000);
+      
       drawFrame(timeRef.current);
       rafIdRef.current = requestAnimationFrame(animate);
     };
+
+    // Reduced motion listener
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    isReducedMotionRef.current = mq.matches;
+    const handleMotionChange = (e: MediaQueryListEvent) => {
+      isReducedMotionRef.current = e.matches;
+      if (isReducedMotionRef.current && rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+        rafIdRef.current = null;
+        // Draw one static frame
+        drawFrame(0);
+      } else if (!isReducedMotionRef.current && !rafIdRef.current) {
+        lastTime = performance.now(); // reset time to prevent massive jump
+        rafIdRef.current = requestAnimationFrame(animate);
+      }
+    };
+    mq.addEventListener('change', handleMotionChange);
 
     // Initial setup
     resize();
     window.addEventListener('resize', resize);
     
     if (!isReducedMotionRef.current) {
-      animate();
+      rafIdRef.current = requestAnimationFrame(animate);
     } else {
       drawFrame(0);
     }
@@ -137,7 +152,7 @@ export function CanvasWaveBackground({
         cancelAnimationFrame(rafIdRef.current);
       }
     };
-  }, [isMounted, speed, amplitude, frequency, colors, blur]);
+  }, [isMounted, speed, amplitude, frequency, colors, blur, strokeWidth]);
 
   return (
     <div
