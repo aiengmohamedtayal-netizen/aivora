@@ -1,24 +1,86 @@
 from typing import AsyncGenerator
+import uuid
+from starlette.concurrency import run_in_threadpool
+from supabase import Client
 from app.providers.provider_factory import ProviderFactory
 from app.prompts.composer import PromptComposer
 
 class AIService:
-    def __init__(self, provider_name: str = "openai"):
+    def __init__(self, supabase: Client, provider_name: str = "openai"):
+        self.supabase = supabase
         self.provider = ProviderFactory.get_provider(provider_name)
 
     async def stream_chat(self, query: str, session_id: str = None) -> AsyncGenerator[str, None]:
         """
-        Processes an incoming query, attaches the composed system prompt,
+        Processes an incoming query, fetches history, attaches system prompt,
         and streams the response through the configured AI provider.
         """
         system_prompt = PromptComposer.get_workspace_system_prompt()
+        messages = [{"role": "system", "content": system_prompt}]
         
-        # Build strict message payload
-        messages = [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": query}
-        ]
+        # Ensure session exists or create one if none provided
+        if not session_id:
+            session_id = str(uuid.uuid4())
+            def create_session():
+                self.supabase.table("chat_sessions").insert({
+                    "id": session_id,
+                    "title": query[:50] + "...",
+                    "model": "gpt-4o",
+                    "user_agent": "Aivora Assistant"
+                }).execute()
+            await run_in_threadpool(create_session)
+        else:
+            # Try to fetch existing messages
+            def fetch_history():
+                return self.supabase.table("chat_messages").select("role, content").eq("session_id", session_id).order("created_at").execute()
+            
+            try:
+                history_res = await run_in_threadpool(fetch_history)
+                for row in history_res.data:
+                    messages.append({"role": row["role"], "content": row["content"]})
+            except Exception:
+                # Session might not exist yet, create it
+                def create_session():
+                    self.supabase.table("chat_sessions").insert({
+                        "id": session_id,
+                        "title": query[:50] + "...",
+                        "model": "gpt-4o",
+                        "user_agent": "Aivora Assistant"
+                    }).execute()
+                try:
+                    await run_in_threadpool(create_session)
+                except Exception:
+                    pass
         
+        # Append the new user query to the database
+        def save_user_msg():
+            self.supabase.table("chat_messages").insert({
+                "session_id": session_id,
+                "role": "user",
+                "content": query
+            }).execute()
+        await run_in_threadpool(save_user_msg)
+        
+        messages.append({"role": "user", "content": query})
+        
+        # Stream response and accumulate
+        accumulated_response = ""
         async for chunk in self.provider.generate_stream(messages=messages):
+            accumulated_response += chunk
             yield chunk
-
+            
+        # Save the assistant response to the database
+        def save_assistant_msg():
+            # Estimate tokens roughly for now
+            token_usage = len(accumulated_response) // 4
+            self.supabase.table("chat_messages").insert({
+                "session_id": session_id,
+                "role": "assistant",
+                "content": accumulated_response,
+                "token_usage": token_usage
+            }).execute()
+            # Update last_activity on session
+            self.supabase.table("chat_sessions").update({
+                "last_activity": "now()"
+            }).eq("id", session_id).execute()
+        await run_in_threadpool(save_assistant_msg)

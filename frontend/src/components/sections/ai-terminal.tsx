@@ -7,6 +7,7 @@ import { Terminal, Bot, Workflow, Database, Book, Command, History, Settings, Pl
 import { GlassCard } from "@/components/ui/GlassCard"
 import { Badge } from "@/components/ui/Badge"
 import { cn } from "@/lib/utils"
+import { ClaudeChatInput } from "@/components/common/ClaudeChatInput"
 
 // -----------------------------------------------------------------------------
 // Types
@@ -38,7 +39,6 @@ export function IntelligenceWorkspace() {
     entries: []
   })
   
-  const [input, setInput] = React.useState("")
   const [streamedContent, setStreamedContent] = React.useState("")
   const [isBooted, setIsBooted] = React.useState(false)
   const [hasStarted, setHasStarted] = React.useState(false)
@@ -46,7 +46,6 @@ export function IntelligenceWorkspace() {
   
   const abortControllerRef = React.useRef<AbortController | null>(null)
   const scrollRef = React.useRef<HTMLDivElement>(null)
-  const inputRef = React.useRef<HTMLInputElement>(null)
 
   // -----------------------------------------------------------------------------
   // Navigation Definitions
@@ -83,8 +82,6 @@ export function IntelligenceWorkspace() {
     
     setSession(prev => ({ ...prev, status: "idle" }))
     setIsBooted(true)
-    // Focus input after boot
-    setTimeout(() => inputRef.current?.focus(), 100)
   }, [t])
 
   // Auto-scroll
@@ -123,18 +120,20 @@ export function IntelligenceWorkspace() {
     })
   }
 
-  const handleSubmit = async (e?: React.FormEvent) => {
-    e?.preventDefault()
-    if (!input.trim() || session.status === "processing") return
-
-    const query = input
-    setInput("")
+  const handleClaudeSubmit = async (data: {
+      message: string;
+      files: any[];
+      pastedContent: any[];
+      model: string;
+      isThinkingEnabled: boolean;
+  }) => {
+    if ((!data.message.trim() && data.files.length === 0 && data.pastedContent.length === 0) || session.status === "processing") return
 
     // 1. Dispatch User Entry
     const userEntry: TerminalEntry = {
       id: `usr_${Date.now()}`,
       type: "user",
-      content: query,
+      content: data.message || "Attached files/content",
       timestamp: Date.now()
     }
 
@@ -183,18 +182,19 @@ export function IntelligenceWorkspace() {
       ]
     }))
     setStreamedContent("")
-    setTimeout(() => inputRef.current?.focus(), 50)
   }
 
-  const handleSuggestion = (suggestion: string) => {
+  const handleSuggestion = async (suggestion: string) => {
     if (!hasStarted) {
-      // Begin boot sequence and prepopulate
-      setInput(suggestion)
-      startBootSequence()
-    } else {
-      setInput(suggestion)
-      inputRef.current?.focus()
+      await startBootSequence()
     }
+    handleClaudeSubmit({
+      message: suggestion,
+      files: [],
+      pastedContent: [],
+      model: "sonnet-4.5",
+      isThinkingEnabled: false
+    })
   }
 
   // -----------------------------------------------------------------------------
@@ -359,41 +359,11 @@ export function IntelligenceWorkspace() {
 
           {/* Input Footer */}
           {hasStarted && (
-            <div className="p-4 border-t border-border/50 bg-muted/10 shrink-0">
-              <form 
-                onSubmit={handleSubmit}
-                className="flex items-center gap-2 bg-background/50 border border-border/50 rounded-lg px-4 py-2 focus-within:border-primary/50 focus-within:ring-1 focus-within:ring-primary/50 transition-all"
-              >
-                <span className="text-primary font-mono text-sm">{">"}</span>
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  disabled={session.status === "booting" || session.status === "processing"}
-                  placeholder={t("terminal.inputPlaceholder")}
-                  className="flex-1 bg-transparent outline-none text-sm font-mono text-foreground placeholder:text-muted-foreground/50 disabled:opacity-50"
-                  aria-label={t("terminal.inputPlaceholder")}
-                />
-                
-                {/* Blinking Cursor when Idle */}
-                {session.status === "idle" && !input && (
-                  <motion.span 
-                    animate={{ opacity: [1, 0] }} 
-                    transition={{ repeat: Infinity, duration: 0.8 }}
-                    className="inline-block w-2 h-4 bg-primary/70 mr-auto"
-                  />
-                )}
-                
-                <button 
-                  type="submit" 
-                  disabled={!input.trim() || session.status !== "idle"}
-                  className="text-muted-foreground hover:text-primary disabled:opacity-30 transition-colors p-1"
-                >
-                  <Play size={16} />
-                  <span className="sr-only">Submit</span>
-                </button>
-              </form>
+            <div className="p-4 border-t border-border/50 shrink-0 w-full max-w-4xl mx-auto">
+              <ClaudeChatInput 
+                onSendMessage={handleClaudeSubmit} 
+                disabled={session.status === "booting" || session.status === "processing"} 
+              />
             </div>
           )}
         </GlassCard>

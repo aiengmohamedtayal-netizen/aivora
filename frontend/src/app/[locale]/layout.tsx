@@ -8,6 +8,7 @@ import { routing } from "@/i18n/routing"
 import { ThemeProvider } from "@/components/providers/ThemeProvider"
 import { Navbar } from "@/components/layout/Navbar"
 import { Footer } from "@/components/layout/Footer"
+import { AivoraAssistant } from "@/components/common/AivoraAssistant"
 import { SkipToContent } from "@/components/common/SkipToContent"
 import { ZodErrorProvider } from "@/i18n/zodErrorMap"
 import { MotionProvider } from "@/components/providers/MotionProvider"
@@ -107,9 +108,9 @@ export default async function LocaleLayout({
       <body
         className={`${GeistSans.variable} ${thmanyahSans.variable} ${thmanyahDisplay.variable} bg-background text-foreground antialiased min-h-screen flex flex-col`}
         style={{
-          "--font-body": locale === "ar" ? "var(--font-thmanyah-sans)" : "var(--font-geist-sans)",
-          "--font-heading": locale === "ar" ? "var(--font-thmanyah-display)" : "var(--font-geist-sans)",
-          "--font-display": locale === "ar" ? "var(--font-thmanyah-display)" : "var(--font-geist-sans)",
+          "--font-body": locale === "ar" ? "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" : "var(--font-geist-sans)",
+          "--font-heading": locale === "ar" ? "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" : "var(--font-geist-sans)",
+          "--font-display": locale === "ar" ? "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" : "var(--font-geist-sans)",
         } as React.CSSProperties}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
@@ -122,6 +123,7 @@ export default async function LocaleLayout({
                   {children}
                 </main>
                 <Footer />
+                <AivoraAssistant />
               </ZodErrorProvider>
             </MotionProvider>
           </NextIntlClientProvider>

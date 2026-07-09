@@ -15,7 +15,7 @@ port = "5432"
 
 db_url = f"postgresql://{user}:{encoded_password}@{host}:{port}/{db}"
 
-migration_path = "../supabase/migrations/20260709000000_init.sql"
+migration_path = "../supabase/migrations/20260709000001_chat_memory.sql"
 
 print(f"Connecting to {host}...")
 try:

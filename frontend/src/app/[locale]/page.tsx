@@ -2,18 +2,14 @@ import { getTranslations } from "next-intl/server"
 import Script from "next/script"
 import { 
   SectionManifesto, 
-  SectionGlobalOps, 
-  SectionThesis, 
-  SectionTechShift, 
-  SectionVision, 
-  SectionFragility, 
-  SectionIntegration, 
-  SectionConstitution, 
-  SectionTypeSafety, 
-  SectionCapabilities, 
-  SectionStack, 
-  SectionProcess, 
-  SectionQualityGates, 
+  SectionShowcase,
+  SectionServices,
+  SectionIndustries,
+  SectionWhyAivora,
+  SectionProcess,
+  SectionTeam,
+  SectionTechnologies,
+  SectionFAQ,
   SectionConversion 
 } from "@/components/sections"
 
@@ -38,34 +34,34 @@ export default async function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      {/* 1. Attention */}
+      {/* 1. Hero / Title */}
       <SectionManifesto />
-      <SectionGlobalOps />
-      <SectionThesis />
-
-      {/* 2. Future */}
-      <SectionTechShift />
-      <SectionVision />
-
-      {/* 3. Problem */}
-      <SectionFragility />
-      <SectionIntegration />
-
-      {/* 4. Engineering Mindset */}
-      <SectionConstitution />
-      <SectionTypeSafety />
-
-      {/* 5. Capabilities */}
-      <SectionCapabilities />
-
-      {/* 6. Technology */}
-      <SectionStack />
-
-      {/* 7. Process */}
+      
+      {/* 3. Interactive Product Showcase */}
+      <SectionShowcase />
+      
+      {/* 4. Result-Oriented Services */}
+      <SectionServices />
+      
+      {/* 5. Industries served */}
+      <SectionIndustries />
+      
+      {/* 6. Why Aivora (Comparison / Benefits) */}
+      <SectionWhyAivora />
+      
+      {/* 8. Process Flow */}
       <SectionProcess />
-      <SectionQualityGates />
-
-      {/* 8. Conversion */}
+      
+      {/* 9. Meet The Team */}
+      <SectionTeam />
+      
+      {/* 10. Modern Technologies badges */}
+      <SectionTechnologies />
+      
+      {/* 12. FAQ Accordion */}
+      <SectionFAQ />
+      
+      {/* 13. Contact Form & Lead Intake (Supabase integration) */}
       <SectionConversion />
     </div>
   )

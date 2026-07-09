@@ -1,90 +1,127 @@
-import { SectionLabel, Card, CardHeader, CardTitle, CardContent, Badge } from "@/components/ui"
+"use client"
 
-export function SectionTechShift() {
+import { useTranslations, useLocale } from "next-intl"
+import { motion } from "framer-motion"
+import { SectionLabel, Card, CardHeader, CardTitle, CardContent } from "@/components/ui"
+import { fadeUp, staggerContainer } from "@/lib/motion"
+import { Brain, Rocket, Cpu, TrendingUp, HeartPulse, GraduationCap, ShoppingBag, Factory, Building, Compass } from "lucide-react"
+
+export function SectionServices() {
+  const t = useTranslations("HomePage.services")
+  const locale = useLocale()
+
+  const serviceKeys = ["aiProducts", "launchFaster", "automateOps", "scaleBusiness"] as const
+  
+  const getIcon = (key: typeof serviceKeys[number]) => {
+    switch (key) {
+      case "aiProducts": return <Brain className="w-8 h-8 text-primary" />
+      case "launchFaster": return <Rocket className="w-8 h-8 text-primary" />
+      case "automateOps": return <Cpu className="w-8 h-8 text-primary" />
+      case "scaleBusiness": return <TrendingUp className="w-8 h-8 text-primary" />
+    }
+  }
+
   return (
-    <section aria-label="Technological Shift" className="py-24 lg:py-32 bg-secondary/30">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section aria-label="Services" className="py-24 lg:py-32 bg-secondary/20 relative overflow-hidden">
+      {/* Background neon glows */}
+      <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+      
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-3xl mb-16">
-          <SectionLabel className="mb-4">THE FUTURE OF SOFTWARE</SectionLabel>
-          <h2 className="text-h2 font-display mb-6">AI is not a feature. It is the new architectural layer.</h2>
-          <p className="text-body text-muted-foreground">
-            Traditional monolithic applications are rigid state machines. The future belongs to deterministic systems where intelligent agent nodes orchestrate complex workflows securely and autonomously.
+          <SectionLabel className="mb-4">{locale === "ar" ? "خدماتنا" : "Our Services"}</SectionLabel>
+          <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight text-foreground mb-6">
+            {t("title")}
+          </h2>
+          <p className="text-lg text-muted-foreground leading-relaxed">
+            {t("subtitle")}
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          <Card className="bg-background/50 border-border/50 shadow-none">
-            <CardHeader>
-              <CardTitle className="text-lg">Traditional Architecture</CardTitle>
-            </CardHeader>
-            <CardContent className="flex flex-col gap-4">
-              <div className="flex items-center gap-3 text-sm text-muted-foreground font-mono">
-                <span className="w-1.5 h-1.5 rounded-full bg-destructive" /> Sequential Execution
-              </div>
-              <div className="flex items-center gap-3 text-sm text-muted-foreground font-mono">
-                <span className="w-1.5 h-1.5 rounded-full bg-destructive" /> Fragile State Management
-              </div>
-              <div className="flex items-center gap-3 text-sm text-muted-foreground font-mono">
-                <span className="w-1.5 h-1.5 rounded-full bg-destructive" /> Manual Scaling
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-primary/20 shadow-sm relative overflow-hidden">
-            <div className="absolute inset-0 bg-primary/5 pointer-events-none" />
-            <CardHeader>
-              <CardTitle className="text-lg text-primary">Agentic Architecture</CardTitle>
-            </CardHeader>
-            <CardContent className="flex flex-col gap-4">
-              <div className="flex items-center gap-3 text-sm font-mono">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary" /> Autonomous Workflows
-              </div>
-              <div className="flex items-center gap-3 text-sm font-mono">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary" /> Self-healing Systems
-              </div>
-              <div className="flex items-center gap-3 text-sm font-mono">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary" /> Adaptive Intelligence
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        <motion.div 
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid md:grid-cols-2 gap-8"
+        >
+          {serviceKeys.map((key) => (
+            <motion.div key={key} variants={fadeUp}>
+              <Card className="bg-card/40 backdrop-blur-md border-border/80 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 group h-full relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <CardHeader className="p-8">
+                  <div className="mb-6 p-3 bg-primary/5 rounded-xl w-fit group-hover:scale-105 transition-transform duration-300">
+                    {getIcon(key)}
+                  </div>
+                  <CardTitle className="text-2xl font-bold tracking-tight mb-4">
+                    {t(`list.${key}.title`)}
+                  </CardTitle>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {t(`list.${key}.desc`)}
+                  </p>
+                </CardHeader>
+              </Card>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   )
 }
 
-export function SectionVision() {
-  const phases = [
-    { id: "Phase 1", title: "MVP Launch", desc: "Core architecture and primary user flows." },
-    { id: "Phase 2", title: "Platform Growth", desc: "Horizontal scaling and deep integrations." },
-    { id: "Phase 3", title: "AI Orchestration", desc: "Deployment of autonomous worker nodes." },
-    { id: "Phase 4", title: "Enterprise Scale", desc: "Global edge delivery and compliance." },
+export function SectionIndustries() {
+  const locale = useLocale()
+
+  const industries = [
+    { name: locale === "ar" ? "الرعاية الصحية" : "Healthcare", icon: <HeartPulse className="w-5 h-5" /> },
+    { name: locale === "ar" ? "التعليم والتدريب" : "Education", icon: <GraduationCap className="w-5 h-5" /> },
+    { name: locale === "ar" ? "التجارة والتجزئة" : "Retail", icon: <ShoppingBag className="w-5 h-5" /> },
+    { name: locale === "ar" ? "التصنيع والخدمات" : "Manufacturing", icon: <Factory className="w-5 h-5" /> },
+    { name: locale === "ar" ? "الشركات الناشئة" : "Startups", icon: <Rocket className="w-5 h-5" /> },
+    { name: locale === "ar" ? "العقارات والمقاولات" : "Real Estate", icon: <Building className="w-5 h-5" /> }
   ]
 
   return (
-    <section aria-label="Platform Vision" className="py-24 lg:py-32 bg-background">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-16">
-          <SectionLabel className="mb-4">PLATFORM VISION</SectionLabel>
-          <h2 className="text-h2 font-display">Scalability from Day One. Built for decades.</h2>
+    <section aria-label="Industries We Serve" className="py-24 lg:py-32 bg-background relative overflow-hidden">
+      <div className="absolute right-0 top-1/2 w-[350px] h-[350px] bg-gold/5 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Section Title */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <SectionLabel className="mb-4">
+            {locale === "ar" ? "المجالات التي نخدمها" : "Industries We Serve"}
+          </SectionLabel>
+          <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight text-foreground mb-6">
+            {locale === "ar" ? "خبرة قطاعية لحل التحديات التشغيلية" : "Deep expertise across diverse industries"}
+          </h2>
+          <p className="text-muted-foreground leading-relaxed">
+            {locale === "ar"
+              ? "نصمم حلول برمجية ووكلاء ذكاء اصطناعي تلبي المتطلبات الفريدة لكل قطاع من الرعاية الصحية للتجارة الإلكترونية."
+              : "We construct custom software tailored to the operational demands and regulatory environments of key industries."}
+          </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {phases.map((phase, i) => (
-            <div key={phase.id} className="relative">
-              {i !== phases.length - 1 && (
-                <div className="hidden lg:block absolute top-4 start-0 w-full h-[1px] bg-border z-0" />
-              )}
-              <div className="relative z-10 flex flex-col gap-4 bg-background pt-4 lg:pt-0 lg:pe-8">
-                <Badge variant={i === 0 ? "default" : "outline"} className="w-fit">
-                  {phase.id}
-                </Badge>
-                <h3 className="font-bold text-foreground">{phase.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{phase.desc}</p>
+        <motion.div 
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-2 md:grid-cols-3 gap-6"
+        >
+          {industries.map((ind, i) => (
+            <motion.div key={i} variants={fadeUp}>
+              <div className="border border-border/80 bg-card/30 backdrop-blur-sm p-6 rounded-xl flex items-center gap-4 hover:border-primary/30 transition-all duration-300 group">
+                <div className="p-2.5 bg-primary/5 rounded-lg text-primary group-hover:scale-105 transition-transform">
+                  {ind.icon}
+                </div>
+                <span className="font-mono text-xs font-bold text-foreground">
+                  {ind.name}
+                </span>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
+
       </div>
     </section>
   )

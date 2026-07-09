@@ -13,10 +13,10 @@ def get_supabase_client() -> Client:
     return create_client(settings.SUPABASE_URL, settings.SUPABASE_SERVICE_ROLE_KEY)
 
 # AI Service Dependency
-def get_ai_service() -> AIService:
+def get_ai_service(supabase: Client = Depends(get_supabase_client)) -> AIService:
     """
     Dependency that returns a configured AI service.
     """
     # In a larger application, this might be cached or injected 
     # depending on the request lifecycle.
-    return AIService()
+    return AIService(supabase=supabase)

@@ -57,37 +57,120 @@
   },
   "HomePage": {
     "hero": {
-      "label": "Deterministic AI Platforms",
-      "title": "We build software that runs without compromise.",
-      "description": "Deterministic AI systems and high-throughput enterprise APIs engineered for zero-latency execution in high-load environments.",
-      "ctaPrimary": "Initialize Discovery",
-      "ctaSecondary": "Explore Sandbox",
-      "coordinates": "48.8566° N, 2.3522° E — Aivora HQ",
-      "metrics": {
-        "activeModel": "Active Model",
-        "throughput": "Throughput",
-        "latency": "Latency",
-        "activeAgents": "Active Agents",
-        "consoleTitle": "aivora-agent-console",
-        "statusIdle": "IDLE",
-        "statusActive": "ACTIVE",
-        "runStatus": "Runtime Status"
+      "welcome": "WELCOME TO AIVORA",
+      "title": "We build digital products that help businesses grow.",
+      "description": "AI solutions, modern web applications, SaaS platforms and automation systems designed for ambitious businesses.",
+      "ctaPrimary": "Start Your Project",
+      "ctaSecondary": "View Our Work"
+    },
+    "trust": {
+      "title": "Why companies choose Aivora",
+      "subtitle": "Focused on quality, innovation, and real business impact.",
+      "cards": {
+        "fast": {
+          "title": "Rapid Deployment",
+          "desc": "Agile sprints and structured delivery loops to launch your product ahead of schedule."
+        },
+        "scale": {
+          "title": "Scalable Architecture",
+          "desc": "Engineered with resilient foundations designed to support millions of active users."
+        },
+        "tech": {
+          "title": "Modern Technologies",
+          "desc": "Leveraging state-of-the-art frameworks and highly optimized cloud infrastructures."
+        },
+        "partner": {
+          "title": "Long-Term Partnership",
+          "desc": "We align with your roadmap to continuously support your product scaling and security."
+        },
+        "comm": {
+          "title": "Clear Communication",
+          "desc": "Transparent progress updates and collaborative engineering channels."
+        }
       }
     },
-    "globalOps": {
-      "label": "GLOBAL INFRASTRUCTURE",
-      "title": "Enterprise scale, deployed worldwide.",
-      "active": "Active",
-      "nodes": {
-        "frankfurt": "Frankfurt",
-        "singapore": "Singapore",
-        "virginia": "Virginia",
-        "dubai": "Dubai"
+    "services": {
+      "title": "Engineering Solutions Designed for Growth",
+      "subtitle": "An integrated suite of technical services built to solve complex business challenges.",
+      "list": {
+        "aiProducts": {
+          "title": "Build AI Products",
+          "desc": "Custom AI models, natural language interfaces, and agentic workflows engineered to give your business an unfair advantage."
+        },
+        "launchFaster": {
+          "title": "Launch Faster",
+          "desc": "Modern web applications, startup MVPs, and mobile-ready SaaS platforms built to validate ideas and dominate markets quickly."
+        },
+        "automateOps": {
+          "title": "Automate Operations",
+          "desc": "Stateless automation pipelines, custom internal CRM systems, and data synchronization hooks that replace manual work loops."
+        },
+        "scaleBusiness": {
+          "title": "Scale Your Business",
+          "desc": "High-performance cloud architectures, database scaling setups, and strategic technical consulting to support enterprise growth."
+        }
       }
     },
-    "thesis": {
-      "quote": "\"Most software projects fail because of shortcuts. We don't take them.\"",
-      "attribution": "— Aivora Engineering Manifesto"
+    "about": {
+      "title": "We are Aivora",
+      "subtitle": "Building the future, together.",
+      "desc": "We established Aivora with a singular focus: to make technology a real tool for business growth. We combine design excellence with robust engineering to deliver digital products that stand the test of time."
+    },
+    "process": {
+      "title": "How We Work",
+      "subtitle": "From initial discovery to a verified launch.",
+      "steps": {
+        "discover": {
+          "title": "Discover",
+          "desc": "We analyze your requirements, business challenges, and long-term goals."
+        },
+        "plan": {
+          "title": "Plan",
+          "desc": "We architect the system design and define the implementation roadmap."
+        },
+        "design": {
+          "title": "Design",
+          "desc": "We construct premium UX flows and modern visual layouts."
+        },
+        "develop": {
+          "title": "Develop",
+          "desc": "We write clean, secure, and fully typed code."
+        },
+        "launch": {
+          "title": "Launch",
+          "desc": "We deploy your platform with verified performance gates."
+        },
+        "support": {
+          "title": "Support",
+          "desc": "Continuous monitoring and long-term optimization loops."
+        }
+      }
+    },
+    "whyAivora": {
+      "title": "Why Choose Aivora?",
+      "subtitle": "Our commitment to quality, innovation, and partnership.",
+      "points": {
+        "comm": "Transparent communication and progress feeds.",
+        "quality": "Production-ready quality, stress-tested assets.",
+        "support": "Continuous support and technical partnership.",
+        "architecture": "Scalable, self-healing database architectures.",
+        "ux": "Premium user experience and fluid motion graphics.",
+        "performance": "Performance-first mindset with sub-second page loads."
+      }
+    },
+    "caseStudies": {
+      "title": "Case Studies",
+      "subtitle": "Real projects. Real business outcomes.",
+      "labels": {
+        "problem": "Problem",
+        "solution": "Solution",
+        "result": "Result"
+      }
+    },
+    "cta": {
+      "title": "Let's Build Something Exceptional",
+      "subtitle": "Partner with Aivora to transform your vision into a scalable, high-performing digital product.",
+      "button": "Start Your Project"
     }
   },
   "CapabilitiesPage": {
