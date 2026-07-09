@@ -10,9 +10,7 @@ export async function GET() {
       NEXT_PUBLIC_SUPABASE_URL: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
       SUPABASE_SERVICE_ROLE_KEY: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
       OPENAI_API_KEY: !!process.env.OPENAI_API_KEY,
-      OPENAI_API_KEY_prefix: process.env.OPENAI_API_KEY?.substring(0, 7) || 'MISSING',
       OPENAI_BASE_URL: process.env.OPENAI_BASE_URL || 'NOT_SET',
-      GEMINI_API_KEY: !!process.env.GEMINI_API_KEY,
     },
   });
 }
