@@ -117,11 +117,11 @@ Message: ${message}
               href="https://www.instagram.com/aiivoraa" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="border border-border/80 bg-card/20 hover:border-primary/30 rounded-2xl p-6 flex items-center gap-6 group transition-all duration-300 shadow-md relative overflow-hidden"
+              className="border border-border bg-card/20 hover:border-primary/30 rounded-2xl p-6 flex items-center gap-6 group transition-all duration-300 shadow-md relative overflow-hidden"
             >
               <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-primary/45 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               {/* QR Code Container */}
-              <div className="w-[100px] h-[100px] bg-white rounded-xl p-1.5 flex items-center justify-center border border-border/80 group-hover:scale-102 transition-transform duration-300 shadow-[0_0_15px_rgba(255,255,255,0.05)]">
+              <div className="w-[100px] h-[100px] bg-white rounded-xl p-1.5 flex items-center justify-center border border-border group-hover:scale-102 transition-transform duration-300 shadow-[0_0_15px_rgba(255,255,255,0.05)]">
                 <Image 
                   src="/qr-code.jpg" 
                   alt="Aivora Instagram QR Code" 
@@ -148,7 +148,7 @@ Message: ${message}
 
           {/* Right Column: Contact Intake Form */}
           <div className="lg:col-span-7">
-            <Card className="bg-card/40 backdrop-blur-md border-border/80 p-8 rounded-2xl shadow-xl relative">
+            <Card className="bg-card/40 backdrop-blur-md border-border p-8 rounded-2xl shadow-xl relative">
               <AnimatePresence mode="wait">
                 {isSuccess ? (
                   <motion.div
@@ -174,66 +174,71 @@ Message: ${message}
                   >
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                       <div>
-                        <label className="block font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">
+                        <label htmlFor="cf-name" className="section-label block mb-2">
                           {t("form.fullName")}
                         </label>
                         <input
+                          id="cf-name"
                           type="text"
                           required
                           value={name}
                           onChange={(e) => setName(e.target.value)}
-                          className="w-full bg-background/50 border border-border/80 rounded-xl px-4 py-3 text-xs font-mono focus:outline-none focus:border-primary transition-colors text-foreground"
+                          className="form-field"
                         />
                       </div>
                       <div>
-                        <label className="block font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">
+                        <label htmlFor="cf-company" className="section-label block mb-2">
                           {t("form.companyName")}
                         </label>
                         <input
+                          id="cf-company"
                           type="text"
                           value={company}
                           onChange={(e) => setCompany(e.target.value)}
-                          className="w-full bg-background/50 border border-border/80 rounded-xl px-4 py-3 text-xs font-mono focus:outline-none focus:border-primary transition-colors text-foreground"
+                          className="form-field"
                         />
                       </div>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                       <div>
-                        <label className="block font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">
+                        <label htmlFor="cf-email" className="section-label block mb-2">
                           {t("form.email")}
                         </label>
                         <input
+                          id="cf-email"
                           type="email"
                           required
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
-                          className="w-full bg-background/50 border border-border/80 rounded-xl px-4 py-3 text-xs font-mono focus:outline-none focus:border-primary transition-colors text-foreground"
+                          className="form-field"
                         />
                       </div>
                       <div>
-                        <label className="block font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">
+                        <label htmlFor="cf-phone" className="section-label block mb-2">
                           {t("form.phone")}
                         </label>
                         <input
+                          id="cf-phone"
                           type="tel"
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
-                          className="w-full bg-background/50 border border-border/80 rounded-xl px-4 py-3 text-xs font-mono focus:outline-none focus:border-primary transition-colors text-foreground"
+                          className="form-field"
                         />
                       </div>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                       <div>
-                        <label className="block font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">
+                        <label htmlFor="cf-type" className="section-label block mb-2">
                           {t("form.projectType")}
                         </label>
                         <select
+                          id="cf-type"
                           required
                           value={projectType}
                           onChange={(e) => setProjectType(e.target.value)}
-                          className="w-full bg-background/50 border border-border/80 rounded-xl px-4 py-3 text-xs font-mono focus:outline-none focus:border-primary transition-colors text-foreground appearance-none"
+                          className="form-field"
                         >
                           <option value="" disabled className="text-muted-foreground">{t("form.projectTypePlaceholder")}</option>
                           {t.raw("types").map((type: string, i: number) => (
@@ -242,14 +247,15 @@ Message: ${message}
                         </select>
                       </div>
                       <div>
-                        <label className="block font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">
+                        <label htmlFor="cf-budget" className="section-label block mb-2">
                           {t("form.budget")}
                         </label>
                         <select
+                          id="cf-budget"
                           required
                           value={budget}
                           onChange={(e) => setBudget(e.target.value)}
-                          className="w-full bg-background/50 border border-border/80 rounded-xl px-4 py-3 text-xs font-mono focus:outline-none focus:border-primary transition-colors text-foreground appearance-none"
+                          className="form-field"
                         >
                           <option value="" disabled className="text-muted-foreground">{t("form.budgetPlaceholder")}</option>
                           {t.raw("budgets").map((b: string, i: number) => (
@@ -260,15 +266,16 @@ Message: ${message}
                     </div>
 
                     <div>
-                      <label className="block font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">
+                      <label htmlFor="cf-details" className="section-label block mb-2">
                         {t("form.details")}
                       </label>
                       <textarea
+                        id="cf-details"
                         required
                         rows={4}
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
-                        className="w-full bg-background/50 border border-border/80 rounded-xl px-4 py-3 text-xs font-mono focus:outline-none focus:border-primary transition-colors text-foreground resize-none"
+                        className="form-field resize-none"
                       />
                     </div>
 
@@ -282,7 +289,7 @@ Message: ${message}
                     </Button>
 
                     {/* Trust Indicators */}
-                    <div className="pt-6 border-t border-border/40 flex flex-col gap-3 font-mono text-[10px] text-muted-foreground">
+                    <div className="pt-6 border-t border-border flex flex-col gap-3 font-mono text-[10px] text-muted-foreground">
                       <div className="flex items-center gap-2">
                         <Clock className="w-3.5 h-3.5 text-primary" />
                         <span>{t("helpers.response")}</span>

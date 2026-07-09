@@ -60,7 +60,7 @@ export function SectionServices() {
                     </div>
                   </div>
                   
-                  <CardTitle className="text-2xl font-bold tracking-tight text-foreground mb-3">
+                  <CardTitle className="text-h3 text-foreground mb-3">
                     {t(`items.${key}.title`)}
                   </CardTitle>
                   <p className="text-[15px] text-muted-foreground leading-relaxed">

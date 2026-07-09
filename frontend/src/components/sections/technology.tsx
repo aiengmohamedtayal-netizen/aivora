@@ -82,7 +82,7 @@ export function SectionFAQ() {
             return (
               <div 
                 key={idx}
-                className="border border-border/85 bg-card/20 rounded-xl overflow-hidden transition-all duration-300"
+                className="border border-border bg-card/20 rounded-xl overflow-hidden transition-all duration-300"
               >
                 <button
                   onClick={() => toggle(idx)}
