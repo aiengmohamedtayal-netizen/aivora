@@ -17,7 +17,7 @@ const dictionary = {
     contactTitle: "Direct Connection",
     email: "aivoraaa@outlook.com",
     instagram: "@aiivoraa",
-    website: "aivora.dev",
+    website: "https://aivora-lac.vercel.app/en",
     igFollow: "Follow our journey",
     igSub: "Scan or click to connect on Instagram",
     formName: "Full Name",
@@ -46,7 +46,7 @@ const dictionary = {
     contactTitle: "اتصال مباشر",
     email: "aivoraaa@outlook.com",
     instagram: "@aiivoraa",
-    website: "aivora.dev",
+    website: "https://aivora-lac.vercel.app/ar",
     igFollow: "تابع رحلتنا",
     igSub: "امسح الرمز أو اضغط للتواصل عبر إنستجرام",
     formName: "الاسم الكامل",
@@ -166,9 +166,9 @@ Message: ${message}
                   <Instagram className="w-4 h-4 text-primary" />
                   <span>{t.instagram}</span>
                 </a>
-                <a href="https://aivora.dev" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
+                <a href={t.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
                   <Globe className="w-4 h-4 text-primary" />
-                  <span>{t.website}</span>
+                  <span>{t.website.replace("https://", "")}</span>
                 </a>
               </div>
             </Card>
@@ -188,7 +188,7 @@ Message: ${message}
                   alt="Aivora Instagram QR Code" 
                   width={88}
                   height={88}
-                  className="object-cover object-center scale-[1.3] rounded"
+                  className="object-contain rounded"
                 />
               </div>
               <div className="flex-1 flex flex-col gap-1.5">

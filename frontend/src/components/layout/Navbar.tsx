@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import Image from "next/image"
 import { useTranslations, useLocale } from "next-intl"
 import { Menu, X } from "lucide-react"
 import { Link, usePathname } from "@/i18n/routing"
@@ -54,11 +55,14 @@ export function Navbar() {
             className="group flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-md"
             aria-label={locale === "ar" ? "الرئيسية أيفورا" : "Aivora Home"}
           >
-            {/* Simple geometric logo representation */}
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm transition-transform group-hover:scale-105">
-              <span className="font-display text-lg font-bold">
-                {locale === "ar" ? "أ" : "A"}
-              </span>
+            <div className="relative h-8 w-8 flex items-center justify-center transition-transform group-hover:scale-105">
+              <Image
+                src="/logo.png"
+                alt="Aivora Logo"
+                width={32}
+                height={32}
+                className="object-contain"
+              />
             </div>
             <span className="font-display text-xl font-bold tracking-tight">
               {locale === "ar" ? "أيفورا" : "Aivora"}

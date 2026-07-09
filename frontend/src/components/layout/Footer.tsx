@@ -1,8 +1,9 @@
 import { useTranslations } from "next-intl"
+import Image from "next/image"
 import { Link } from "@/i18n/routing"
 import { Button } from "@/components/ui/Button"
 import { Input } from "@/components/ui/Input"
-import { ArrowRight, Github, Linkedin, Twitter } from "lucide-react"
+import { ArrowRight, Github, Instagram, Mail } from "lucide-react"
 
 export function Footer() {
   const t = useTranslations("Footer")
@@ -16,8 +17,14 @@ export function Footer() {
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div className="space-y-8 xl:col-span-1">
             <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
-                <span className="font-display text-lg font-bold">A</span>
+              <div className="relative h-8 w-8 flex items-center justify-center">
+                <Image
+                  src="/logo.png"
+                  alt="Aivora Logo"
+                  width={32}
+                  height={32}
+                  className="object-contain"
+                />
               </div>
               <span className="font-display text-xl font-bold tracking-tight">Aivora</span>
             </div>
@@ -25,17 +32,17 @@ export function Footer() {
               {t("description")}
             </p>
             <div className="flex space-x-6 rtl:space-x-reverse">
-              <a href="#" className="text-muted-foreground hover:text-foreground">
+              <a href="https://github.com/aiengmohamedtayal-netizen" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
                 <span className="sr-only">GitHub</span>
                 <Github className="h-5 w-5" aria-hidden="true" />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground">
-                <span className="sr-only">Twitter</span>
-                <Twitter className="h-5 w-5" aria-hidden="true" />
+              <a href="https://www.instagram.com/aiivoraa" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
+                <span className="sr-only">Instagram</span>
+                <Instagram className="h-5 w-5" aria-hidden="true" />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground">
-                <span className="sr-only">LinkedIn</span>
-                <Linkedin className="h-5 w-5" aria-hidden="true" />
+              <a href="mailto:aivoraaa@outlook.com" className="text-muted-foreground hover:text-foreground">
+                <span className="sr-only">Outlook</span>
+                <Mail className="h-5 w-5" aria-hidden="true" />
               </a>
             </div>
           </div>
