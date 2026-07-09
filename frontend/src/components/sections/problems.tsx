@@ -7,52 +7,35 @@ import { fadeUp, staggerContainer } from "@/lib/motion"
 import { ShieldCheck, Zap, Heart, Sparkles, Layout, Database, Check } from "lucide-react"
 
 export function SectionWhyAivora() {
+  const t = useTranslations("about")
   const locale = useLocale()
 
   const benefits = [
     {
-      title: locale === "ar" ? "حلول مخصصة بالكامل" : "100% Custom Solutions",
-      desc: locale === "ar" 
-        ? "لا نستخدم القوالب الجاهزة. كل سطر كود يتم تصميمه وكتابته خصيصاً ليناسب منطق عملك ويضمن الأداء الأمثل."
-        : "We don't use templates. Every line of code is tailored to match your specific business goals and optimize performance.",
+      key: "custom",
       icon: <Layout className="w-5 h-5" />
     },
     {
-      title: locale === "ar" ? "سرعة ودقة الإطلاق" : "Rapid Delivery Cycles",
-      desc: locale === "ar" 
-        ? "نعتمد على منهجية عمل مرنة واختبارات جودة تلقائية تضمن تسليم المنتج الرقمي الخاص بك في أسرع وقت."
-        : "Agile sprints coupled with automated quality gates ensure your digital product is deployed cleanly and ahead of schedule.",
+      key: "delivery",
       icon: <Zap className="w-5 h-5" />
     },
     {
-      title: locale === "ar" ? "تصميم وتجربة مستخدم عصرية" : "Premium UX & Design",
-      desc: locale === "ar" 
-        ? "نوفر واجهات مستخدم مذهلة بصرياً ومبنية على دراسة عميقة لسلوك المستخدم لتسهيل التفاعل وزيادة نسبة التحويل."
-        : "Fluid motion design combined with modern visual layouts ensures your clients experience a premium, memorable journey.",
+      key: "ux",
       icon: <Sparkles className="w-5 h-5" />
     },
     {
-      title: locale === "ar" ? "شراكة ودعم طويل الأجل" : "Long-Term Technical Support",
-      desc: locale === "ar" 
-        ? "لسنا مجرد مزود كود. نحن شريكك التقني المستمر لتحديث النظام وتوسيع خياراته وصيانته دورياً."
-        : "We align with your product roadmap, offering continuous maintenance, security updates, and scalability optimizations.",
+      key: "support",
       icon: <Heart className="w-5 h-5" />
     },
     {
-      title: locale === "ar" ? "بنية تحتية مرنة وقابلة للتوسع" : "Scalable Architecture",
-      desc: locale === "ar" 
-        ? "نبني بنية سحابية مرنة تدعم زيادة أعداد المستخدمين والطلبات المتزامنة دون توقف أو بطء في الأداء."
-        : "Engineered with modern containerized microservices and highly optimized database backends designed to support high load.",
+      key: "scale",
       icon: <Database className="w-5 h-5" />
     },
     {
-      title: locale === "ar" ? "تفكير يركز على الذكاء الاصطناعي" : "AI-First Development",
-      desc: locale === "ar" 
-        ? "ندمج قدرات الذكاء الاصطناعي والأتمتة في قلب أنظمتك لتسهيل اتخاذ القرار وتحسين الإنتاجية التشغيلية."
-        : "We embed autonomous agents and intelligent workflows directly into your platform to optimize productivity.",
+      key: "ai",
       icon: <ShieldCheck className="w-5 h-5" />
     }
-  ]
+  ] as const
 
   return (
     <section aria-label="Why Choose Aivora" className="py-24 lg:py-32 bg-background relative overflow-hidden">
@@ -63,15 +46,13 @@ export function SectionWhyAivora() {
         {/* Section Heading */}
         <div className="max-w-3xl mb-16">
           <SectionLabel className="mb-4">
-            {locale === "ar" ? "لماذا أيفورا؟" : "Why Choose Aivora"}
+            {t("headline")}
           </SectionLabel>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-6">
-            {locale === "ar" ? "الالتزام بالجودة والابتكار المستمر" : "Engineered for high performance and reliability"}
+            {t("subheadline")}
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            {locale === "ar"
-              ? "نجمع بين جمالية التصميم وقوة البرمجة لنبني أنظمة رقمية تدعم نمو أعمالك وتحقق عوائد حقيقية للاستثمار."
-              : "We integrate elite visual design with solid software engineering principles to deliver software that scales."}
+            {t("supportingText")}
           </p>
         </div>
 
@@ -90,8 +71,8 @@ export function SectionWhyAivora() {
                   <div className="p-2.5 bg-primary/5 text-primary rounded-lg w-fit mb-6 group-hover:scale-105 transition-transform">
                     {ben.icon}
                   </div>
-                  <h3 className="text-lg font-medium text-foreground mb-3">{ben.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{ben.desc}</p>
+                  <h3 className="text-lg font-medium text-foreground mb-3">{t(`items.${ben.key}.title`)}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{t(`items.${ben.key}.description`)}</p>
                 </CardContent>
               </Card>
             </motion.div>

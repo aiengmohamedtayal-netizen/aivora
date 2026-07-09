@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/Input"
 import { ArrowRight, Github, Instagram, Mail } from "lucide-react"
 
 export function Footer() {
-  const t = useTranslations("Footer")
+  const t = useTranslations("footer")
 
   return (
     <footer className="border-t border-border bg-background" aria-labelledby="footer-heading">
@@ -29,7 +29,7 @@ export function Footer() {
               <span className="text-xl font-bold tracking-tight">Aivora</span>
             </div>
             <p className="text-sm leading-6 text-muted-foreground max-w-xs">
-              {t("description")}
+              {t("supportingText")}
             </p>
             <div className="flex space-x-6 rtl:space-x-reverse">
               <a href="https://github.com/aiengmohamedtayal-netizen" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
@@ -117,7 +117,7 @@ export function Footer() {
                   </div>
                   <div className="mt-4 sm:ms-4 sm:mt-0 sm:flex-shrink-0 flex items-end">
                     <Button type="submit" variant="primary" className="h-[46px]">
-                      {t("subscribe")}
+                      {t("primaryCTA")}
                     </Button>
                   </div>
                 </form>

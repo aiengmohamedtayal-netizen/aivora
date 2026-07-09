@@ -7,7 +7,7 @@ import { SectionLabel } from "@/components/ui/SectionLabel"
 
 
 export function EngineeringCulture() {
-  const t = useTranslations("EngineeringCulturePage")
+  const t = useTranslations("engineering-culture")
   const pillars = t.raw("pillars") as Array<{
     id: string
     title: string
@@ -15,7 +15,7 @@ export function EngineeringCulture() {
   }>
 
   return (
-    <article className="py-24 lg:py-32 bg-background relative" aria-label={t("title")}>
+    <article className="py-24 lg:py-32 bg-background relative" aria-label={t("headline")}>
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={staggerContainer}
@@ -26,7 +26,7 @@ export function EngineeringCulture() {
           {/* Header & Manifesto */}
           <motion.header variants={fadeUp} className="flex flex-col gap-12 lg:gap-16">
             <div>
-              <SectionLabel>{t("title")}</SectionLabel>
+              <SectionLabel>{t("headline")}</SectionLabel>
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-[1.3] lg:leading-[1.2] tracking-tight">
               {t("manifesto")}

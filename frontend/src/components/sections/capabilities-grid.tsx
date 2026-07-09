@@ -18,7 +18,7 @@ const ICONS: Record<string, LucideIcon> = {
 }
 
 export function CapabilitiesGrid() {
-  const t = useTranslations("CapabilitiesPage")
+  const t = useTranslations("capabilities")
   const capabilities = t.raw("capabilities") as Array<{
     id: string
     title: string
@@ -28,7 +28,7 @@ export function CapabilitiesGrid() {
   }>
 
   return (
-    <section className="py-24 lg:py-32 bg-background relative" aria-label={t("title")}>
+    <section className="py-24 lg:py-32 bg-background relative" aria-label={t("headline")}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={staggerContainer}
@@ -37,9 +37,9 @@ export function CapabilitiesGrid() {
           className="flex flex-col gap-12 lg:gap-16"
         >
           <motion.div variants={fadeUp} className="mb-8 lg:mb-12">
-            <SectionLabel>{t("title")}</SectionLabel>
+            <SectionLabel>{t("headline")}</SectionLabel>
             <h2 className="text-h2 mt-4 font-bold text-foreground">
-              {t("subtitle")}
+              {t("subheadline")}
             </h2>
           </motion.div>
 

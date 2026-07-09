@@ -1,0 +1,38 @@
+{
+  "seoTitle": "Aivora Services – AI, SaaS & Custom Software",
+  "seoDescription": "Discover how our AI and software engineering services help businesses scale, automate, and dominate their markets.",
+  "keywords": "AI Engineering, Platform Engineering, Data Integration, Cloud Architecture, Automation",
+  "headline": "STUDIO CAPABILITIES",
+  "subheadline": "Solutions Built for Real Business Growth",
+  "supportingText": "A focused set of services designed to help businesses launch, automate, and scale with confidence.",
+  "items": {
+    "aiProducts": {
+      "title": "Enterprise AI Engineering",
+      "description": "Custom AI solutions that improve customer experience, automate tasks, and support better decision-making.",
+      "problem": "Manual work slows down growth, and outdated systems cannot keep up with modern business needs.",
+      "solution": "We build secure, scalable AI systems that fit naturally into your business operations.",
+      "result": "Cut operational overhead, increase efficiency, and create new opportunities for growth."
+    },
+    "customPlatform": {
+      "title": "Custom Platform Engineering",
+      "description": "Modern websites and SaaS platforms built to help you launch faster and compete with confidence.",
+      "problem": "Generic software often fails to match the way your business actually works.",
+      "solution": "We design tailored platforms that match your exact business requirements.",
+      "result": "Full ownership of your product, a polished user experience, and reliable technical performance."
+    },
+    "dataIntegration": {
+      "title": "Data & Systems Integration",
+      "description": "Integration systems that connect your tools, synchronize your data, and reduce repetitive work.",
+      "problem": "Disconnected tools and scattered data create delays and gaps in operations.",
+      "solution": "We build reliable integration layers that bring your systems together into one connected environment.",
+      "result": "More accurate data, less manual entry, and smoother cross-platform operations."
+    },
+    "cloudScaling": {
+      "title": "Cloud Architecture & Scaling",
+      "description": "Cloud systems and technical consulting that support growth, reliability, and long-term scale.",
+      "problem": "As your product grows, weak architecture can become slow, fragile, and expensive to maintain.",
+      "solution": "We refactor and modernize systems into more resilient and scalable architectures.",
+      "result": "Better scalability, higher reliability, and lower infrastructure cost over time."
+    }
+  }
+}

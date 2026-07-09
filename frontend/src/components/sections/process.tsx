@@ -7,7 +7,7 @@ import { fadeUp, staggerContainer } from "@/lib/motion"
 import { Compass, FileText, Palette, Terminal, Flame, ShieldAlert, Cpu, Code2, Eye, Network } from "lucide-react"
 
 export function SectionProcess() {
-  const t = useTranslations("HomePage.process")
+  const t = useTranslations("process")
   const locale = useLocale()
 
   const stepKeys = ["discover", "plan", "design", "develop", "launch", "support"] as const
@@ -32,13 +32,13 @@ export function SectionProcess() {
         {/* Section Heading */}
         <div className="max-w-3xl mb-16">
           <SectionLabel className="mb-4">
-            {locale === "ar" ? "خطوات العمل" : "How We Work"}
+            {t("headline")}
           </SectionLabel>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-6">
-            {t("title")}
+            {t("subheadline")}
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            {t("subtitle")}
+            {t("supportingText")}
           </p>
         </div>
 
@@ -64,7 +64,7 @@ export function SectionProcess() {
                         </div>
                       </div>
                       <h3 className="font-medium text-foreground mb-3">{t(`steps.${key}.title`)}</h3>
-                      <p className="text-xs text-muted-foreground leading-relaxed">{t(`steps.${key}.desc`)}</p>
+                      <p className="text-xs text-muted-foreground leading-relaxed">{t(`steps.${key}.description`)}</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -79,30 +79,26 @@ export function SectionProcess() {
 }
 
 export function SectionTeam() {
-  const locale = useLocale()
+  const t = useTranslations("team")
 
   const members = [
     {
-      role: locale === "ar" ? "مهندس ذكاء اصطناعي" : "AI Product Architect",
-      skills: locale === "ar" ? "نماذج مخصصة، أتمتة" : "Custom models, automation",
+      key: "aiArchitect",
       icon: <Cpu className="w-6 h-6 text-primary" />
     },
     {
-      role: locale === "ar" ? "مهندس برمجيات أول" : "Senior Software Engineer",
-      skills: locale === "ar" ? "بنى برمجية، أداء فائق" : "System architecture, high load",
+      key: "seniorDev",
       icon: <Code2 className="w-6 h-6 text-primary" />
     },
     {
-      role: locale === "ar" ? "مهندس واجهات ومصمم" : "Lead UI/UX Designer",
-      skills: locale === "ar" ? "رسوم حركية، تميز بصري" : "Premium layout, motion system",
+      key: "designer",
       icon: <Eye className="w-6 h-6 text-primary" />
     },
     {
-      role: locale === "ar" ? "مهندس بنية خلفية" : "Backend & Cloud Engineer",
-      skills: locale === "ar" ? "قواعد بيانات سحابية، مزامنة" : "Supabase, serverless, RLS",
+      key: "backendDev",
       icon: <Network className="w-6 h-6 text-primary" />
     }
-  ]
+  ] as const
 
   return (
     <section aria-label="Meet The Team" className="py-24 lg:py-32 bg-secondary/20 relative overflow-hidden">
@@ -111,15 +107,13 @@ export function SectionTeam() {
         {/* Section Heading */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <SectionLabel className="mb-4">
-            {locale === "ar" ? "فريق عمل أيفورا" : "Meet The Team"}
+            {t("headline")}
           </SectionLabel>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-6">
-            {locale === "ar" ? "مهندسون ومصممون يركزون على الأعمال" : "Engineers & designers focused on your growth"}
+            {t("subheadline")}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
-            {locale === "ar"
-              ? "نعمل معاً كفريق هندسي وتصميم متكامل لتحويل الأفكار المعقدة إلى منتجات قابلة للاستخدام الفوري."
-              : "We collaborate as a focused engineering studio to build premium digital products."}
+            {t("supportingText")}
           </p>
         </div>
 
@@ -138,8 +132,8 @@ export function SectionTeam() {
                   <div className="w-14 h-14 rounded-full bg-primary/5 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform">
                     {member.icon}
                   </div>
-                  <h3 className="font-medium text-foreground mb-2">{member.role}</h3>
-                  <span className="text-xs text-muted-foreground font-mono">{member.skills}</span>
+                  <h3 className="font-medium text-foreground mb-2">{t(`members.${member.key}.role`)}</h3>
+                  <span className="text-xs text-muted-foreground font-mono">{t(`members.${member.key}.skills`)}</span>
                 </CardContent>
               </Card>
             </motion.div>

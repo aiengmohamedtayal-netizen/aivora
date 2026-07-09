@@ -13,7 +13,7 @@ import { VisuallyHidden } from "@/components/ui/VisuallyHidden"
 import { motion } from "framer-motion"
 
 export function Navbar() {
-  const t = useTranslations("Navigation")
+  const t = useTranslations("navigation")
   const locale = useLocale()
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = React.useState(false)
@@ -34,7 +34,6 @@ export function Navbar() {
 
   const navLinks = [
     { href: "/capabilities", label: t("capabilities") },
-    { href: "/case-studies", label: t("caseStudies") },
     { href: "/about", label: t("about") },
     { href: "/intelligence", label: t("intelligence") },
   ] as const

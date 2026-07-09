@@ -9,11 +9,10 @@ import {
   useReducedMotion,
 } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { useTranslations } from 'next-intl';
 
 export interface StickyScrollItem {
-  titleKey: string;
-  descriptionKey: string;
+  title: string;
+  description: string;
   content: React.ReactNode;
 }
 
@@ -24,7 +23,6 @@ export function StickyScroll({
   className?: string;
   items: StickyScrollItem[];
 }) {
-  const t = useTranslations();
   const [activeCard, setActiveCard] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
@@ -69,13 +67,13 @@ export function StickyScroll({
       {/* Mobile view: Stacked */}
       <div className="flex w-full flex-col gap-16 md:hidden">
         {items.map((item, index) => (
-          <div key={item.titleKey + index} className="flex flex-col gap-6">
+          <div key={index} className="flex flex-col gap-6">
             <div>
               <h3 className="mb-3 text-2xl font-medium text-foreground">
-                {t(item.titleKey)}
+                {item.title}
               </h3>
               <p className="text-lg leading-relaxed text-muted-foreground">
-                {t(item.descriptionKey)}
+                {item.description}
               </p>
             </div>
             <div className="relative w-full">{item.content}</div>
@@ -90,7 +88,7 @@ export function StickyScroll({
           <div className="flex w-full flex-col gap-[30vh] pb-[30vh] pt-[30vh] px-2 lg:px-0">
             {items.map((item, index) => (
               <motion.div
-                key={item.titleKey + index}
+                key={index}
                 className="flex max-w-lg flex-col gap-4 lg:gap-6"
                 initial={{ opacity: "0.3" }}
                 animate={{
@@ -101,10 +99,10 @@ export function StickyScroll({
                 transition={{ type: 'spring', stiffness: 300, damping: 30 }}
               >
                 <h3 className="text-2xl font-medium leading-tight text-foreground lg:text-4xl">
-                  {t(item.titleKey)}
+                  {item.title}
                 </h3>
                 <p className="text-lg lg:text-xl leading-relaxed text-muted-foreground">
-                  {t(item.descriptionKey)}
+                  {item.description}
                 </p>
               </motion.div>
             ))}

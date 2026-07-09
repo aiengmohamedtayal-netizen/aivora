@@ -42,7 +42,7 @@ const initialData: FormData = {
 const TOTAL_STEPS = 5
 
 export function ProjectIntake() {
-  const t = useTranslations("IntakePortalPage")
+  const t = useTranslations("intake-portal")
   
   const [step, setStep] = useState(1)
   const [formData, setFormData] = useState<FormData>(initialData)

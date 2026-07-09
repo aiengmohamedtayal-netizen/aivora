@@ -10,7 +10,27 @@ export default getRequestConfig(async ({ requestLocale }) => {
 
   return {
     locale,
-    messages: (await import(`../../messages/${locale}.json`)).default,
+    messages: {
+      common: (await import(`../../messages/${locale}/common.json`)).default,
+      navigation: (await import(`../../messages/${locale}/navigation.json`)).default,
+      metadata: (await import(`../../messages/${locale}/metadata.json`)).default,
+      validation: (await import(`../../messages/${locale}/validation.json`)).default,
+      hero: (await import(`../../messages/${locale}/hero.json`)).default,
+      services: (await import(`../../messages/${locale}/services.json`)).default,
+      process: (await import(`../../messages/${locale}/process.json`)).default,
+      industries: (await import(`../../messages/${locale}/industries.json`)).default,
+      about: (await import(`../../messages/${locale}/about.json`)).default,
+      contact: (await import(`../../messages/${locale}/contact.json`)).default,
+      faq: (await import(`../../messages/${locale}/faq.json`)).default,
+      footer: (await import(`../../messages/${locale}/footer.json`)).default,
+      capabilities: (await import(`../../messages/${locale}/capabilities.json`)).default,
+      "case-studies": (await import(`../../messages/${locale}/case-studies.json`)).default,
+      "engineering-culture": (await import(`../../messages/${locale}/engineering-culture.json`)).default,
+      "intake-portal": (await import(`../../messages/${locale}/intake-portal.json`)).default,
+      intelligence: (await import(`../../messages/${locale}/intelligence.json`)).default,
+      showcase: (await import(`../../messages/${locale}/showcase.json`)).default,
+      team: (await import(`../../messages/${locale}/team.json`)).default,
+    },
     now: new Date(),
     timeZone: "Asia/Dubai",
     formats: {

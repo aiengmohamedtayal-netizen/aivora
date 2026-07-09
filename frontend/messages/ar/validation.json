@@ -1,0 +1,19 @@
+{
+  "seoTitle": "رسائل التحقق من الصحة",
+  "seoDescription": "مفاتيح ترجمة التحقق من صحة المدخلات",
+  "keywords": "",
+  "headline": "",
+  "subheadline": "",
+  "supportingText": "",
+  "bullets": [],
+  "primaryCTA": "",
+  "secondaryCTA": "",
+  "statistics": [],
+  "imageAlt": "",
+  "structuredData": {},
+  "required": "هذا الحقل مطلوب",
+  "email": "البريد الإلكتروني غير صحيح",
+  "minLength": "يجب ألا يقل عن {min} أحرف",
+  "maxLength": "يجب ألا يزيد عن {max} أحرف",
+  "url": "الرابط غير صحيح"
+}

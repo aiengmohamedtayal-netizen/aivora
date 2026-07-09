@@ -1,0 +1,33 @@
+{
+  "Navigation": {
+    "capabilities": "القدرات",
+    "services": "الخدمات",
+    "caseStudies": "دراسات الحالة",
+    "about": "من نحن",
+    "portfolio": "أعمالنا",
+    "blog": "المدونة",
+    "careers": "الوظائف",
+    "intelligence": "الذكاء",
+    "contact": "تواصل معنا",
+    "menu": "القائمة",
+    "closeMenu": "إغلاق القائمة",
+    "skipToContent": "تخطي إلى المحتوى"
+  },
+  "Common": {
+    "loading": "جاري التحميل...",
+    "error": "حدث خطأ.",
+    "success": "نجاح",
+    "submit": "إرسال",
+    "cancel": "إلغاء",
+    "back": "رجوع",
+    "next": "التالي",
+    "readMore": "اقرأ المزيد"
+  },
+  "Validation": {
+    "required": "هذا الحقل مطلوب",
+    "email": "عنوان البريد الإلكتروني غير صالح",
+    "minLength": "يجب أن يحتوي على الأقل على {min} أحرف",
+    "maxLength": "يجب أن يحتوي على الأكثر على {max} أحرف",
+    "url": "تنسيق الرابط غير صالح"
+  }
+}

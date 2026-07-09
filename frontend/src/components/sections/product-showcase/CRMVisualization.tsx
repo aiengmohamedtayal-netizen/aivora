@@ -3,8 +3,11 @@
 import { BarChart, Users, Activity, ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { MacWindow } from './MacWindow';
+import { useTranslations } from 'next-intl';
 
 export function CRMVisualization() {
+  const t = useTranslations('showcase');
+
   return (
     <MacWindow title="Aivora CRM" className="h-[400px] w-full">
       <div className="flex h-full w-full bg-background/50 text-foreground">
@@ -23,9 +26,9 @@ export function CRMVisualization() {
           {/* Header */}
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="font-medium text-lg">Sales Pipeline</h3>
+              <h3 className="font-medium text-lg">{t('visualizations.crm.salesPipeline')}</h3>
               <p className="text-sm text-muted-foreground">
-                Real-time state synchronization
+                {t('visualizations.crm.realtimeSync')}
               </p>
             </div>
             <div className="flex items-center gap-2 text-emerald-400 text-sm font-medium bg-emerald-400/10 px-2 py-1 rounded-full">

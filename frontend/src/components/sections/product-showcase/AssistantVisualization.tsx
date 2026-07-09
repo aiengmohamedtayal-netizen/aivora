@@ -3,8 +3,11 @@
 import { Sparkles, Send } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { MacWindow } from './MacWindow';
+import { useTranslations } from 'next-intl';
 
 export function AssistantVisualization() {
+  const t = useTranslations('showcase');
+
   return (
     <MacWindow title="Aivora Agent" className="h-[400px] w-full">
       <div className="flex flex-col h-full w-full bg-background/50 relative">
@@ -15,9 +18,9 @@ export function AssistantVisualization() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.4 }}
             viewport={{ once: true }}
-            className="self-end max-w-[80%] bg-white/10 border border-white/10 rounded-2xl rtl:rounded-tl-sm ltr:rounded-tr-sm px-4 py-3 text-sm text-foreground"
+            className="self-end max-w-[80%] bg-white/10 border border-white/10 rounded-2xl rtl:rounded-tl-sm ltr:rounded-tr-sm px-4 py-3 text-sm text-foreground animate-fade-in"
           >
-            Analyze our Q3 sales data and generate a pipeline forecast.
+            {t('visualizations.agent.userQuery')}
           </motion.div>
 
           <motion.div
@@ -30,8 +33,7 @@ export function AssistantVisualization() {
             <Sparkles className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
             <div className="flex flex-col gap-3">
               <p className="text-foreground">
-                I&apos;ve analyzed the deterministic pipeline data. Q3 shows a 24%
-                increase in closed-won deals.
+                {t('visualizations.agent.agentResponse')}
               </p>
               <div 
                 dir="ltr"

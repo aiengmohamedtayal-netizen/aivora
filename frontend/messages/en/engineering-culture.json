@@ -1,0 +1,48 @@
+{
+  "seoTitle": "Aivora Engineering Studio Manifesto",
+  "seoDescription": "Read Aivora's engineering manifesto. We reject technical debt and focus on custom-built, resilient, and deterministic architectures.",
+  "keywords": "engineering culture, software craftsman, software studio principles, code quality",
+  "headline": "Engineering Manifesto",
+  "subheadline": "Building Digital Infrastructure That Endures",
+  "supportingText": "Software is the highest leverage tool humanity has ever created. Building systems that endure requires abandoning shortcuts in favor of deliberate, uncompromised craftsmanship.",
+  "bullets": [],
+  "primaryCTA": "",
+  "secondaryCTA": "",
+  "statistics": [],
+  "imageAlt": "Aivora team collaboration design blueprint",
+  "structuredData": {},
+  "title": "Engineering Manifesto",
+  "manifesto": "Software is the highest leverage tool humanity has ever created. Building systems that endure requires abandoning shortcuts in favor of deliberate, uncompromised craftsmanship.",
+  "pillars": [
+    {
+      "id": "why-build",
+      "title": "Why We Build",
+      "content": "We build to eliminate fragility from enterprise systems. The modern web is plagued by over-engineered abstractions and under-engineered fundamentals. Our goal is to deploy deterministic, high-throughput software that operates autonomously and scales linearly, providing mathematical confidence in digital operations."
+    },
+    {
+      "id": "how-think",
+      "title": "How We Think",
+      "content": "Code is inherently a liability; the underlying product is the asset. We approach software engineering as an exercise in constraint management. By reducing surface area, strictly controlling side effects, and favoring simplicity over cleverness, we create architectures that are trivial to reason about and impossible to break unintentionally."
+    },
+    {
+      "id": "principles",
+      "title": "Core Engineering Principles",
+      "content": "Strict type safety at the absolute boundaries. Zero implicit assumptions. Immutable deployments. If an operational process cannot be measured, it cannot be optimized. We reject 'works on my machine' in favor of reproducible, containerized execution."
+    },
+    {
+      "id": "ai-paradigm",
+      "title": "The AI Architectural Paradigm",
+      "content": "Artificial Intelligence is no longer a peripheral feature—it is the new architectural runtime. We embed deterministic LLM orchestration directly into the backend. We utilize these models not merely for text generation, but for complex, secure decision-making, allowing systems to self-heal and adapt dynamically."
+    },
+    {
+      "id": "architecture",
+      "title": "Long-Term Architecture",
+      "content": "The technology landscape shifts exponentially. Systems built for the immediate term quickly become insurmountable bottlenecks. We allocate dedicated cycles to research and migrate to emerging primitives before legacy systems accumulate debt, ensuring the architecture outlives its original specifications."
+    },
+    {
+      "id": "quality",
+      "title": "Compounding Quality",
+      "content": "We do not accept technical debt as an unavoidable cost of doing business. Code must be highly cohesive, loosely coupled, and brutally reviewed. A pristine commit history and comprehensive, deterministic test coverage are non-negotiable standards that yield compound interest over the lifespan of the software."
+    }
+  ]
+}

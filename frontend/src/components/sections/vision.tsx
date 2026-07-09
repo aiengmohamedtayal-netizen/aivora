@@ -7,17 +7,17 @@ import { fadeUp, staggerContainer } from "@/lib/motion"
 import { Brain, Rocket, Cpu, TrendingUp, HeartPulse, GraduationCap, ShoppingBag, Factory, Building, Compass, ArrowRight } from "lucide-react"
 
 export function SectionServices() {
-  const t = useTranslations("HomePage.services")
+  const t = useTranslations("services")
   const locale = useLocale()
 
-  const serviceKeys = ["aiProducts", "launchFaster", "automateOps", "scaleBusiness"] as const
+  const serviceKeys = ["aiProducts", "customPlatform", "dataIntegration", "cloudScaling"] as const
   
   const getIcon = (key: typeof serviceKeys[number]) => {
     switch (key) {
       case "aiProducts": return <Brain className="w-8 h-8 text-primary" />
-      case "launchFaster": return <Rocket className="w-8 h-8 text-primary" />
-      case "automateOps": return <Cpu className="w-8 h-8 text-primary" />
-      case "scaleBusiness": return <TrendingUp className="w-8 h-8 text-primary" />
+      case "customPlatform": return <Rocket className="w-8 h-8 text-primary" />
+      case "dataIntegration": return <Cpu className="w-8 h-8 text-primary" />
+      case "cloudScaling": return <TrendingUp className="w-8 h-8 text-primary" />
     }
   }
 
@@ -30,13 +30,13 @@ export function SectionServices() {
         <div className="max-w-3xl mb-16 mx-auto text-center">
           <SectionLabel className="mb-4 inline-flex items-center gap-2 px-3 py-1 bg-muted/40 border border-border/50 text-foreground text-xs font-medium rounded-full shadow-sm">
             <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-            {locale === "ar" ? "قدرات الأستوديو" : "Studio Capabilities"}
+            {t("headline")}
           </SectionLabel>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-6 text-balance">
-            {t("title")}
+            {t("subheadline")}
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed text-balance">
-            {t("subtitle")}
+            {t("supportingText")}
           </p>
         </div>
 
@@ -61,10 +61,10 @@ export function SectionServices() {
                   </div>
                   
                   <CardTitle className="text-2xl font-bold tracking-tight text-foreground mb-3">
-                    {t(`list.${key}.title`)}
+                    {t(`items.${key}.title`)}
                   </CardTitle>
                   <p className="text-[15px] text-muted-foreground leading-relaxed">
-                    {t(`list.${key}.desc`)}
+                    {t(`items.${key}.description`)}
                   </p>
                 </CardHeader>
 
@@ -75,30 +75,27 @@ export function SectionServices() {
                         <span className="w-1.5 h-1.5 rounded-full bg-destructive/60" /> 
                         {locale === "ar" ? "المشكلة" : "Problem"}
                       </h4>
-                      <p className="text-sm text-muted-foreground/90 leading-relaxed font-medium">{t(`list.${key}.problem`)}</p>
+                      <p className="text-sm text-muted-foreground/90 leading-relaxed font-medium">{t(`items.${key}.problem`)}</p>
                     </div>
                     <div>
                       <h4 className="text-[11px] font-medium text-green-500/80 uppercase tracking-wider mb-2 flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-green-500/60" /> 
                         {locale === "ar" ? "الحل" : "Solution"}
                       </h4>
-                      <p className="text-sm text-foreground/90 leading-relaxed font-medium">{t(`list.${key}.solution`)}</p>
+                      <p className="text-sm text-foreground/90 leading-relaxed font-medium">{t(`items.${key}.solution`)}</p>
                     </div>
                     <div>
                       <h4 className="text-[11px] font-medium text-gold/80 uppercase tracking-wider mb-2 flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-gold/60" /> 
                         {locale === "ar" ? "النتائج" : "Business Outcome"}
                       </h4>
-                      <p className="text-sm text-muted-foreground/90 leading-relaxed font-medium">{t(`list.${key}.benefits`)}</p>
+                      <p className="text-sm text-muted-foreground/90 leading-relaxed font-medium">{t(`items.${key}.result`)}</p>
                     </div>
                   </div>
 
                   <div className="mt-8 pt-6 border-t border-border/50 flex items-center justify-between">
-                    <div className="text-[11px] font-mono text-muted-foreground uppercase tracking-widest px-3 py-1 bg-muted/40 rounded-full border border-border/40">
-                      {t(`list.${key}.process`)}
-                    </div>
                     <a href="#intake" className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors group/cta">
-                      {t(`list.${key}.cta`)}
+                      {locale === "ar" ? "استكشف الخدمة" : "Explore Service"}
                       <ArrowRight className="w-4 h-4 ml-1.5 transition-transform group-hover/cta:translate-x-1 rtl:rotate-180 rtl:group-hover/cta:-translate-x-1" />
                     </a>
                   </div>
@@ -113,15 +110,16 @@ export function SectionServices() {
 }
 
 export function SectionIndustries() {
+  const t = useTranslations("industries")
   const locale = useLocale()
 
   const industries = [
-    { name: locale === "ar" ? "الرعاية الصحية" : "Healthcare", icon: <HeartPulse className="w-5 h-5" /> },
-    { name: locale === "ar" ? "التعليم والتدريب" : "Education", icon: <GraduationCap className="w-5 h-5" /> },
-    { name: locale === "ar" ? "التجارة والتجزئة" : "Retail", icon: <ShoppingBag className="w-5 h-5" /> },
-    { name: locale === "ar" ? "التصنيع والخدمات" : "Manufacturing", icon: <Factory className="w-5 h-5" /> },
-    { name: locale === "ar" ? "الشركات الناشئة" : "Startups", icon: <Rocket className="w-5 h-5" /> },
-    { name: locale === "ar" ? "العقارات والمقاولات" : "Real Estate", icon: <Building className="w-5 h-5" /> }
+    { name: t("items.healthcare"), icon: <HeartPulse className="w-5 h-5" /> },
+    { name: t("items.education"), icon: <GraduationCap className="w-5 h-5" /> },
+    { name: t("items.retail"), icon: <ShoppingBag className="w-5 h-5" /> },
+    { name: t("items.manufacturing"), icon: <Factory className="w-5 h-5" /> },
+    { name: t("items.startups"), icon: <Rocket className="w-5 h-5" /> },
+    { name: t("items.realestate"), icon: <Building className="w-5 h-5" /> }
   ]
 
   return (
@@ -133,15 +131,13 @@ export function SectionIndustries() {
         {/* Section Title */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <SectionLabel className="mb-4">
-            {locale === "ar" ? "المجالات التي نخدمها" : "Industries We Serve"}
+            {t("headline")}
           </SectionLabel>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-6">
-            {locale === "ar" ? "خبرة قطاعية لحل التحديات التشغيلية" : "Deep expertise across diverse industries"}
+            {t("subheadline")}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
-            {locale === "ar"
-              ? "نصمم حلول برمجية ووكلاء ذكاء اصطناعي تلبي المتطلبات الفريدة لكل قطاع من الرعاية الصحية للتجارة الإلكترونية."
-              : "We construct custom software tailored to the operational demands and regulatory environments of key industries."}
+            {t("supportingText")}
           </p>
         </div>
 

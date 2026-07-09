@@ -1,77 +1,16 @@
 "use client"
 
 import { useState, useTransition } from "react"
-import { useLocale } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { SectionLabel, Card, Button } from "@/components/ui"
 import { fadeUp } from "@/lib/motion"
 import { Check, Mail, Instagram, Globe, Clock, ShieldCheck, HeartHandshake, ArrowRight, Phone } from "lucide-react"
 
-const dictionary = {
-  en: {
-    heading: "Have an idea?\nLet's build it together.",
-    desc: "Aivora helps startups, founders, and businesses transform ambitious ideas into scalable, high-performance digital products.",
-    btnPrimary: "Start Your Project",
-    btnSecondary: "Book a Call",
-    contactTitle: "Direct Connection",
-    email: "aivoraaa@outlook.com",
-    instagram: "@aiivoraa",
-    website: "https://aivora-lac.vercel.app/en",
-    igFollow: "Follow our journey",
-    igSub: "Scan or click to connect on Instagram",
-    formName: "Full Name",
-    formCompany: "Company Name",
-    formEmail: "Email Address",
-    formPhone: "Phone Number (Optional)",
-    formType: "Project Type",
-    formTypePlaceholder: "Select project type...",
-    formBudget: "Estimated Budget",
-    formBudgetPlaceholder: "Select budget range...",
-    formMessage: "Message / Project details",
-    formSubmit: "Submit Proposal",
-    trust1: "Typically respond in under 24 hours",
-    trust2: "Free initial consultation",
-    trust3: "All data is secure and confidential",
-    types: ["AI Product", "Web Application", "SaaS Platform", "Automation System", "Other"],
-    budgets: ["Under 10k EGP", "10k - 25k EGP", "25k - 50k EGP", "50k+ EGP"],
-    successTitle: "Proposal Submitted",
-    successMsg: "Thank you! Our engineering team will review your project details and get back to you shortly."
-  },
-  ar: {
-    heading: "هل لديك فكرة؟\nلنحوّلها إلى منتج رقمي احترافي.",
-    desc: "أيفورا تساعد الشركات الناشئة، المؤسسين، والشركات على تحويل الأفكار الطموحة إلى منتجات رقمية قابلة للتوسع وفائقة الأداء.",
-    btnPrimary: "ابدأ مشروعك",
-    btnSecondary: "احجز مكالمة",
-    contactTitle: "اتصال مباشر",
-    email: "aivoraaa@outlook.com",
-    instagram: "@aiivoraa",
-    website: "https://aivora-lac.vercel.app/ar",
-    igFollow: "تابع رحلتنا",
-    igSub: "امسح الرمز أو اضغط للتواصل عبر إنستجرام",
-    formName: "الاسم الكامل",
-    formCompany: "اسم الشركة",
-    formEmail: "البريد الإلكتروني",
-    formPhone: "رقم الهاتف (اختياري)",
-    formType: "نوع المشروع",
-    formTypePlaceholder: "اختر نوع المشروع...",
-    formBudget: "الميزانية التقديرية",
-    formBudgetPlaceholder: "اختر ميزانية المشروع...",
-    formMessage: "تفاصيل المشروع",
-    formSubmit: "ابدأ مشروعك",
-    trust1: "عادةً نرد خلال أقل من 24 ساعة",
-    trust2: "استشارة أولية مجانية",
-    trust3: "جميع البيانات آمنة وسرية",
-    types: ["منتج ذكاء اصطناعي", "تطبيق ويب", "منصة SaaS", "نظام أتمتة", "أخرى"],
-    budgets: ["أقل من 10 آلاف جنيه", "10 - 25 ألف جنيه", "25 - 50 ألف جنيه", "أكثر من 50 ألف جنيه"],
-    successTitle: "تم استلام طلبك",
-    successMsg: "شكراً لك! سيقوم فريقنا الهندسي بمراجعة تفاصيل مشروعك والتواصل معك قريباً."
-  }
-}
-
 export function SectionConversion() {
-  const locale = useLocale() as "en" | "ar"
-  const t = dictionary[locale] || dictionary.en
+  const t = useTranslations("contact")
+  const locale = useLocale()
 
   const [name, setName] = useState("")
   const [company, setCompany] = useState("")
@@ -145,30 +84,30 @@ Message: ${message}
             <div>
               <SectionLabel className="mb-4">{locale === "ar" ? "تواصل معنا" : "Let's Talk"}</SectionLabel>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground leading-[1.15] whitespace-pre-line mb-6">
-                {t.heading}
+                {t("headline")}
               </h2>
               <p className="text-muted-foreground leading-relaxed max-w-md">
-                {t.desc}
+                {t("supportingText")}
               </p>
             </div>
 
             {/* Direct Connect Card */}
             <Card className="bg-card/40 backdrop-blur-md border-border/80 p-6 rounded-2xl flex flex-col gap-4">
               <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground border-b border-border/50 pb-2">
-                {t.contactTitle}
+                {t("directContact")}
               </span>
               <div className="flex flex-col gap-3.5 text-xs sm:text-sm font-mono">
-                <a href={`mailto:${t.email}`} className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
+                <a href={`mailto:${t("email")}`} className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
                   <Mail className="w-4 h-4 text-primary" />
-                  <span>{t.email}</span>
+                  <span>{t("email")}</span>
                 </a>
                 <a href="https://www.instagram.com/aiivoraa" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
                   <Instagram className="w-4 h-4 text-primary" />
-                  <span>{t.instagram}</span>
+                  <span>{t("igHandle")}</span>
                 </a>
-                <a href={t.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
+                <a href={t("website")} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
                   <Globe className="w-4 h-4 text-primary" />
-                  <span>{t.website.replace("https://", "")}</span>
+                  <span>{t("website").replace("https://", "")}</span>
                 </a>
               </div>
             </Card>
@@ -194,13 +133,13 @@ Message: ${message}
               <div className="flex-1 flex flex-col gap-1.5">
                 <span className="font-mono text-xs font-medium text-foreground flex items-center gap-2">
                   <Instagram className="w-3.5 h-3.5 text-primary" />
-                  {t.instagram}
+                  {t("igHandle")}
                 </span>
                 <p className="text-[10px] sm:text-xs text-muted-foreground leading-normal max-w-[200px]">
-                  {t.igSub}
+                  {t("instagram")}
                 </p>
                 <span className="text-[10px] font-mono font-medium text-primary group-hover:underline flex items-center gap-1 mt-1">
-                  {t.igFollow}
+                  {t("igFollow")}
                   <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform rtl:rotate-180" />
                 </span>
               </div>
@@ -222,9 +161,9 @@ Message: ${message}
                     <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6">
                       <Check className="w-6 h-6" strokeWidth={3} />
                     </div>
-                    <h3 className="text-xl font-medium text-foreground mb-3">{t.successTitle}</h3>
+                    <h3 className="text-xl font-medium text-foreground mb-3">{t("successTitle")}</h3>
                     <p className="text-sm text-muted-foreground max-w-sm leading-relaxed">
-                      {t.successMsg}
+                      {t("successMsg")}
                     </p>
                   </motion.div>
                 ) : (
@@ -236,7 +175,7 @@ Message: ${message}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                       <div>
                         <label className="block font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">
-                          {t.formName}
+                          {t("form.fullName")}
                         </label>
                         <input
                           type="text"
@@ -248,7 +187,7 @@ Message: ${message}
                       </div>
                       <div>
                         <label className="block font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">
-                          {t.formCompany}
+                          {t("form.companyName")}
                         </label>
                         <input
                           type="text"
@@ -262,7 +201,7 @@ Message: ${message}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                       <div>
                         <label className="block font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">
-                          {t.formEmail}
+                          {t("form.email")}
                         </label>
                         <input
                           type="email"
@@ -274,7 +213,7 @@ Message: ${message}
                       </div>
                       <div>
                         <label className="block font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">
-                          {t.formPhone}
+                          {t("form.phone")}
                         </label>
                         <input
                           type="tel"
@@ -288,7 +227,7 @@ Message: ${message}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                       <div>
                         <label className="block font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">
-                          {t.formType}
+                          {t("form.projectType")}
                         </label>
                         <select
                           required
@@ -296,15 +235,15 @@ Message: ${message}
                           onChange={(e) => setProjectType(e.target.value)}
                           className="w-full bg-background/50 border border-border/80 rounded-xl px-4 py-3 text-xs font-mono focus:outline-none focus:border-primary transition-colors text-foreground appearance-none"
                         >
-                          <option value="" disabled className="text-muted-foreground">{t.formTypePlaceholder}</option>
-                          {t.types.map((type, i) => (
+                          <option value="" disabled className="text-muted-foreground">{t("form.projectTypePlaceholder")}</option>
+                          {t.raw("types").map((type: string, i: number) => (
                             <option key={i} value={type} className="bg-card text-foreground">{type}</option>
                           ))}
                         </select>
                       </div>
                       <div>
                         <label className="block font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">
-                          {t.formBudget}
+                          {t("form.budget")}
                         </label>
                         <select
                           required
@@ -312,8 +251,8 @@ Message: ${message}
                           onChange={(e) => setBudget(e.target.value)}
                           className="w-full bg-background/50 border border-border/80 rounded-xl px-4 py-3 text-xs font-mono focus:outline-none focus:border-primary transition-colors text-foreground appearance-none"
                         >
-                          <option value="" disabled className="text-muted-foreground">{t.formBudgetPlaceholder}</option>
-                          {t.budgets.map((b, i) => (
+                          <option value="" disabled className="text-muted-foreground">{t("form.budgetPlaceholder")}</option>
+                          {t.raw("budgets").map((b: string, i: number) => (
                             <option key={i} value={b} className="bg-card text-foreground">{b}</option>
                           ))}
                         </select>
@@ -322,7 +261,7 @@ Message: ${message}
 
                     <div>
                       <label className="block font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">
-                        {t.formMessage}
+                        {t("form.details")}
                       </label>
                       <textarea
                         required
@@ -338,7 +277,7 @@ Message: ${message}
                       disabled={isPending}
                       className="w-full py-4 text-xs font-mono font-medium tracking-wider uppercase text-center flex items-center justify-center gap-2"
                     >
-                      {isPending ? locale === "ar" ? "جاري الإرسال..." : "Submitting..." : t.formSubmit}
+                      {isPending ? (locale === "ar" ? "جاري الإرسال..." : "Submitting...") : t("form.submit")}
                       {!isPending && <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />}
                     </Button>
 
@@ -346,15 +285,15 @@ Message: ${message}
                     <div className="pt-6 border-t border-border/40 flex flex-col gap-3 font-mono text-[10px] text-muted-foreground">
                       <div className="flex items-center gap-2">
                         <Clock className="w-3.5 h-3.5 text-primary" />
-                        <span>{t.trust1}</span>
+                        <span>{t("helpers.response")}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <HeartHandshake className="w-3.5 h-3.5 text-primary" />
-                        <span>{t.trust2}</span>
+                        <span>{t("helpers.consultation")}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <ShieldCheck className="w-3.5 h-3.5 text-primary" />
-                        <span>{t.trust3}</span>
+                        <span>{t("helpers.secure")}</span>
                       </div>
                     </div>
 
