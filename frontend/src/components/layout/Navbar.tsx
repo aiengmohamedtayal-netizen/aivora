@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { useTranslations } from "next-intl"
+import { useTranslations, useLocale } from "next-intl"
 import { Menu, X } from "lucide-react"
 import { Link, usePathname } from "@/i18n/routing"
 import { cn } from "@/lib/utils"
@@ -12,6 +12,7 @@ import { VisuallyHidden } from "@/components/ui/VisuallyHidden"
 
 export function Navbar() {
   const t = useTranslations("Navigation")
+  const locale = useLocale()
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = React.useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false)
@@ -51,14 +52,16 @@ export function Navbar() {
           <Link
             href="/"
             className="group flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-md"
-            aria-label="Aivora Home"
+            aria-label={locale === "ar" ? "الرئيسية أيفورا" : "Aivora Home"}
           >
             {/* Simple geometric logo representation */}
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm transition-transform group-hover:scale-105">
-              <span className="font-display text-lg font-bold">A</span>
+              <span className="font-display text-lg font-bold">
+                {locale === "ar" ? "أ" : "A"}
+              </span>
             </div>
             <span className="font-display text-xl font-bold tracking-tight">
-              Aivora
+              {locale === "ar" ? "أيفورا" : "Aivora"}
             </span>
           </Link>
         </div>
