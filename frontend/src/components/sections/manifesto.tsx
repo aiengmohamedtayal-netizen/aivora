@@ -4,7 +4,7 @@ import { useTranslations, useLocale } from "next-intl"
 import { Link } from "@/i18n/routing"
 import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
-import { fadeUp, staggerContainer } from "@/lib/motion"
+import { fadeUp, staggerContainer, heroEntrance } from "@/lib/motion"
 import { SectionLabel, Card, Button } from "@/components/ui"
 import { HeroComposition } from "@/components/common/hero-composition"
 import { ClaudeChatInput } from "@/components/common/ClaudeChatInput"
@@ -92,7 +92,7 @@ export function SectionManifesto() {
               </a>
               <Link 
                 href="/capabilities" 
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-border/80 bg-card/30 backdrop-blur-md text-foreground font-sans text-[15px] font-medium rounded-xl hover:bg-muted/50 hover:border-foreground/40 transition-all duration-300"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-border bg-card/30 backdrop-blur-md text-foreground font-sans text-[15px] font-medium rounded-xl hover:bg-muted/50 hover:border-foreground/40 transition-all duration-300"
               >
                 {t("secondaryCta")}
               </Link>
@@ -101,9 +101,9 @@ export function SectionManifesto() {
           
           {/* Right Column: Premium Hero Composition */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+            variants={heroEntrance}
+            initial="hidden"
+            animate="visible"
             className="lg:col-span-7 flex justify-center lg:justify-end w-full"
           >
             <HeroComposition />

@@ -4,7 +4,7 @@ import { useTranslations, useLocale } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
 import { useState } from "react"
 import { SectionLabel, Card, CardContent } from "@/components/ui"
-import { fadeUp, staggerContainer } from "@/lib/motion"
+import { fadeUp, staggerContainer, collapseProps } from "@/lib/motion"
 import { ChevronDown, Plus, Minus, MessageSquare, Quote } from "lucide-react"
 
 export function SectionTechnologies() {
@@ -98,13 +98,10 @@ export function SectionFAQ() {
                 <AnimatePresence initial={false}>
                   {isOpen && (
                     <motion.div
-                      initial={{ height: 0 }}
-                      animate={{ height: "auto" }}
-                      exit={{ height: 0 }}
-                      transition={{ duration: 0.25 }}
+                      {...collapseProps}
                       className="overflow-hidden"
                     >
-                      <div className="px-6 pb-6 text-xs sm:text-sm text-muted-foreground leading-relaxed border-t border-border/40 pt-4 bg-card/10">
+                      <div className="px-6 pb-6 text-xs sm:text-sm text-muted-foreground leading-relaxed border-t border-border pt-4 bg-card/10">
                         {t(`items.${key}.answer`)}
                       </div>
                     </motion.div>

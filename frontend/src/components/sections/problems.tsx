@@ -3,7 +3,7 @@
 import { useTranslations, useLocale } from "next-intl"
 import { motion } from "framer-motion"
 import { SectionLabel, Card, CardHeader, CardTitle, CardContent } from "@/components/ui"
-import { fadeUp, staggerContainer } from "@/lib/motion"
+import { fadeUp, staggerContainer, viewport } from "@/lib/motion"
 import { ShieldCheck, Zap, Heart, Sparkles, Layout, Database, Check } from "lucide-react"
 
 export function SectionWhyAivora() {
@@ -61,12 +61,12 @@ export function SectionWhyAivora() {
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={viewport.default}
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {benefits.map((ben, i) => (
             <motion.div key={i} variants={fadeUp}>
-              <Card className="bg-card/30 backdrop-blur-md border-border/80 hover:border-primary/30 transition-all duration-300 h-full relative overflow-hidden group">
+              <Card className="bg-card/30 backdrop-blur-md border-border hover:border-primary/30 transition-all duration-300 h-full relative overflow-hidden group">
                 <CardContent className="p-8">
                   <div className="p-2.5 bg-primary/5 text-primary rounded-lg w-fit mb-6 group-hover:scale-105 transition-transform">
                     {ben.icon}

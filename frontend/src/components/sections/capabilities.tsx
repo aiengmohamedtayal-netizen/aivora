@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { SectionLabel, Card, CardHeader, CardTitle, CardContent } from "@/components/ui"
-import { staggerContainer, fadeUp } from "@/lib/motion"
+import { staggerContainer, fadeUp, viewport } from "@/lib/motion"
 
 export function SectionCapabilities() {
   const capabilities = [
@@ -34,7 +34,7 @@ export function SectionCapabilities() {
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={viewport.default}
           className="grid lg:grid-cols-3 gap-8"
         >
           {capabilities.map((cap, i) => (

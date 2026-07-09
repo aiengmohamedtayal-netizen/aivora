@@ -3,7 +3,7 @@
 import { useTranslations, useLocale } from "next-intl"
 import { motion } from "framer-motion"
 import { SectionLabel, Card, CardContent } from "@/components/ui"
-import { fadeUp, staggerContainer } from "@/lib/motion"
+import { fadeUp, staggerContainer, viewport } from "@/lib/motion"
 import { Compass, FileText, Palette, Terminal, Flame, ShieldAlert, Cpu, Code2, Eye, Network } from "lucide-react"
 
 export function SectionProcess() {
@@ -49,7 +49,7 @@ export function SectionProcess() {
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={viewport.default}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 relative z-10"
           >
             {stepKeys.map((key, idx) => (
@@ -122,7 +122,7 @@ export function SectionTeam() {
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={viewport.default}
           className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8"
         >
           {members.map((member, i) => (

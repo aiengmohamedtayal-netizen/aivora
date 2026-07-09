@@ -3,6 +3,7 @@
 import { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { duration, viewport } from '@/lib/motion';
 
 export interface MacWindowProps {
   children: ReactNode;
@@ -24,8 +25,8 @@ export function MacWindow({
     ? {
         initial: { opacity: 0, y: 15 },
         whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true, margin: '-50px' },
-        transition: { duration: 0.5, ease: 'easeOut' as const },
+        viewport: viewport.tight,
+        transition: { duration: duration.slow, ease: 'easeOut' as const },
       }
     : {};
 

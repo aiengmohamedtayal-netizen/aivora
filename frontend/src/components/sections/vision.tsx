@@ -3,7 +3,7 @@
 import { useTranslations, useLocale } from "next-intl"
 import { motion } from "framer-motion"
 import { SectionLabel, Card, CardHeader, CardTitle, CardContent } from "@/components/ui"
-import { fadeUp, staggerContainer } from "@/lib/motion"
+import { fadeUp, staggerContainer, viewport } from "@/lib/motion"
 import { Brain, Rocket, Cpu, TrendingUp, HeartPulse, GraduationCap, ShoppingBag, Factory, Building, Compass, ArrowRight } from "lucide-react"
 
 export function SectionServices() {
@@ -44,7 +44,7 @@ export function SectionServices() {
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={viewport.default}
           className="grid lg:grid-cols-2 gap-8"
         >
           {serviceKeys.map((key) => (
@@ -145,7 +145,7 @@ export function SectionIndustries() {
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={viewport.default}
           className="grid grid-cols-2 md:grid-cols-3 gap-6"
         >
           {industries.map((ind, i) => (
