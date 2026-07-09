@@ -48,21 +48,18 @@ export function useChatStream() {
           buffer = lines.pop() ?? "";
 
           for (const line of lines) {
-            const trimmedLine = line.trim();
-            if (!trimmedLine) continue;
-            if (trimmedLine.startsWith("data:")) {
-              const data = trimmedLine.slice(5).trim();
-              if (data === "[DONE]") break;
-              if (data) {
-                const unescaped = data.replace(/\\n/g, "\n");
-                completeResponse += unescaped;
-                setStreamingText(completeResponse);
-              }
+            if (!line.trim() || !line.startsWith("data:")) continue;
+            let data = line.startsWith("data: ") ? line.slice(6) : line.slice(5);
+            if (data === "[DONE]") break;
+            if (data) {
+              const unescaped = data.replace(/\\n/g, "\n");
+              completeResponse += unescaped;
+              setStreamingText(completeResponse);
             }
           }
         }
         if (buffer.startsWith("data:")) {
-          const data = buffer.slice(5).trim();
+          let data = buffer.startsWith("data: ") ? buffer.slice(6) : buffer.slice(5);
           if (data && data !== "[DONE]") completeResponse += data;
         }
       }
