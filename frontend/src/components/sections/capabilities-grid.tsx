@@ -61,7 +61,7 @@ export function CapabilitiesGrid() {
                       </div>
                       
                       {/* Middle Col: Description & Outcome */}
-                      <div className="lg:col-span-5 flex flex-col gap-6 border-s border-border ps-6 lg:ps-8">
+                      <div className="lg:col-span-5 flex flex-col gap-6 border-s-0 lg:border-s border-border ps-0 lg:ps-8">
                         <p className="text-body text-muted-foreground leading-relaxed">
                           {capability.description}
                         </p>

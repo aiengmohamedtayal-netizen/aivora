@@ -431,6 +431,7 @@ export const ClaudeChatInput: React.FC<ClaudeChatInputProps> = ({ onSendMessage,
                                 onKeyDown={handleKeyDown}
                                 disabled={disabled}
                                 placeholder="How can I help you today?"
+                                aria-label="Ask Aivora Assistant"
                                 className="w-full bg-transparent border-0 outline-none text-foreground text-[16px] placeholder:text-muted-foreground resize-none overflow-hidden py-0 leading-relaxed block font-normal antialiased disabled:opacity-50"
                                 rows={1}
                                 style={{ minHeight: '1.5em' }}
@@ -447,7 +448,7 @@ export const ClaudeChatInput: React.FC<ClaudeChatInputProps> = ({ onSendMessage,
                             <button
                                 onClick={() => fileInputRef.current?.click()}
                                 disabled={disabled}
-                                className="inline-flex items-center justify-center relative shrink-0 transition-colors duration-200 h-8 w-8 rounded-lg active:scale-95 text-muted-foreground hover:text-foreground hover:bg-muted/40 disabled:opacity-50"
+                                className="inline-flex items-center justify-center relative shrink-0 transition-colors duration-200 h-8 w-8 rounded-lg active:scale-95 text-muted-foreground hover:text-foreground hover:bg-muted/40 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                                 type="button"
                                 aria-label="Toggle menu"
                             >
@@ -459,7 +460,7 @@ export const ClaudeChatInput: React.FC<ClaudeChatInputProps> = ({ onSendMessage,
                                 <button
                                     onClick={() => setIsThinkingEnabled(!isThinkingEnabled)}
                                     disabled={disabled}
-                                    className={`transition-all duration-200 h-8 w-8 flex items-center justify-center rounded-lg active:scale-95 disabled:opacity-50
+                                    className={`transition-all duration-200 h-8 w-8 flex items-center justify-center rounded-lg active:scale-95 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background
                                         ${isThinkingEnabled
                                             ? 'text-primary bg-primary/10'
                                             : 'text-muted-foreground hover:text-foreground hover:bg-muted/40'}
@@ -495,7 +496,7 @@ export const ClaudeChatInput: React.FC<ClaudeChatInputProps> = ({ onSendMessage,
                                     onClick={handleSend}
                                     disabled={!hasContent || disabled}
                                     className={`
-                                        inline-flex items-center justify-center relative shrink-0 transition-colors h-8 w-8 rounded-md active:scale-95 !rounded-xl !h-8 !w-8
+                                        inline-flex items-center justify-center relative shrink-0 transition-colors h-8 w-8 rounded-md active:scale-95 !rounded-xl !h-8 !w-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background
                                         ${hasContent && !disabled
                                             ? 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-md'
                                             : 'bg-primary/30 text-primary-foreground/60 cursor-default'}

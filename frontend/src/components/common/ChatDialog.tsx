@@ -87,7 +87,7 @@ export const ChatDialog: React.FC<ChatDialogProps> = ({
         <div className="flex items-center gap-1">
           <button
             onClick={chat.exportTranscript}
-            className="p-1.5 rounded-lg hover:bg-white/10 transition-colors"
+            className="p-1.5 rounded-lg hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
             aria-label="Export conversation transcript"
             title="Export Transcript"
           >
@@ -95,7 +95,7 @@ export const ChatDialog: React.FC<ChatDialogProps> = ({
           </button>
           <button
             onClick={() => setIsOpen(false)}
-            className="p-1.5 rounded-lg hover:bg-white/10 transition-colors"
+            className="p-1.5 rounded-lg hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
             aria-label="Close Aivora Assistant"
           >
             <X className="w-4 h-4" aria-hidden="true" />
@@ -128,7 +128,7 @@ export const ChatDialog: React.FC<ChatDialogProps> = ({
         {chat.isLoadingHistory && (
           <div className="space-y-4">
             {[80, 60, 90].map((w, i) => (
-              <div key={i} className={cn("h-10 rounded-2xl bg-muted/30 animate-pulse", i % 2 === 0 ? "mr-auto" : "ml-auto")} style={{ width: `${w}%` }} />
+              <div key={i} className={cn("h-10 rounded-2xl bg-muted/30 animate-pulse", i % 2 === 0 ? "me-auto" : "ms-auto")} style={{ width: `${w}%` }} />
             ))}
           </div>
         )}
@@ -187,7 +187,7 @@ export const ChatDialog: React.FC<ChatDialogProps> = ({
             key={idx}
             onClick={() => void chat.handleSend(chip.query)}
             disabled={chat.isStreaming}
-            className="px-2.5 py-1 border border-border/80 hover:border-primary/30 bg-background text-[10px] font-mono font-medium text-muted-foreground hover:text-foreground rounded-lg transition-colors whitespace-nowrap disabled:opacity-50"
+            className="px-2.5 py-1 border border-border hover:border-primary/30 bg-background text-[10px] font-mono font-medium text-muted-foreground hover:text-foreground rounded-lg transition-colors whitespace-nowrap disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             {chip.label}
           </button>
@@ -206,7 +206,7 @@ export const ChatDialog: React.FC<ChatDialogProps> = ({
                   <div className="inline-flex items-center justify-center px-1 py-[2px] rounded border border-border/80 bg-background text-[8px] font-medium text-muted-foreground">{dict.pastedTag}</div>
                   <button
                     onClick={() => chat.setPastedSnippets((prev: any[]) => prev.filter(c => c.id !== snippet.id))}
-                    className="absolute top-1 right-1 p-0.5 bg-black/60 hover:bg-black/80 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                    className="absolute top-1 right-1 p-0.5 bg-black/60 hover:bg-black/80 rounded-full text-white opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 focus-visible:opacity-100 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background"
                     aria-label="Remove pasted content"
                   >
                     <X className="w-2.5 h-2.5" aria-hidden="true" />
@@ -235,7 +235,7 @@ export const ChatDialog: React.FC<ChatDialogProps> = ({
                     )}
                     <button
                       onClick={() => chat.removeFile(file.id)}
-                      className="absolute top-1 right-1 p-0.5 bg-black/60 hover:bg-black/80 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                      className="absolute top-1 right-1 p-0.5 bg-black/60 hover:bg-black/80 rounded-full text-white opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 focus-visible:opacity-100 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background"
                       aria-label={`Remove ${file.file.name}`}
                     >
                       <X className="w-2.5 h-2.5" aria-hidden="true" />
@@ -280,7 +280,7 @@ export const ChatDialog: React.FC<ChatDialogProps> = ({
                 onClick={chat.toggleRecording}
                 disabled={chat.voiceUnsupported}
                 className={cn(
-                  "p-1.5 rounded-lg transition-colors",
+                  "p-1.5 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                   chat.isRecording
                     ? "text-red-500 bg-red-500/10 animate-pulse"
                     : "text-muted-foreground hover:text-foreground hover:bg-muted/40",
@@ -295,7 +295,7 @@ export const ChatDialog: React.FC<ChatDialogProps> = ({
 
               <button
                 onClick={() => fileInputRef.current?.click()}
-                className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/40 transition-colors"
+                className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 type="button"
                 aria-label="Attach file"
               >
@@ -305,7 +305,7 @@ export const ChatDialog: React.FC<ChatDialogProps> = ({
               <button
                 onClick={() => chat.setIsThinkingEnabled(!chat.isThinkingEnabled)}
                 className={cn(
-                  "p-1.5 rounded-lg transition-colors",
+                  "p-1.5 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                   chat.isThinkingEnabled ? "text-primary bg-primary/10" : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
                 )}
                 type="button"
@@ -320,7 +320,7 @@ export const ChatDialog: React.FC<ChatDialogProps> = ({
               onClick={() => void chat.handleSend(chat.messageText)}
               disabled={!hasContent || chat.isStreaming || charOverLimit}
               className={cn(
-                "w-7 h-7 rounded-lg flex items-center justify-center transition-colors",
+                "w-7 h-7 rounded-lg flex items-center justify-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                 hasContent && !charOverLimit
                   ? "bg-primary text-primary-foreground shadow"
                   : "bg-muted text-muted-foreground cursor-default"

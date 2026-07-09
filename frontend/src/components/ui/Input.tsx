@@ -76,6 +76,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               "w-full rounded-t-xl border-0 border-b-2 bg-secondary/50 px-4 py-3 text-foreground outline-none transition-all",
               "placeholder:text-muted-foreground",
               "focus:border-primary focus:ring-0",
+              "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
               "disabled:cursor-not-allowed disabled:opacity-50",
               error
                 ? "border-destructive focus:border-destructive"

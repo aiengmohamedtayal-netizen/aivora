@@ -142,7 +142,7 @@ export function AivoraAssistant() {
           setIsOpen(!isOpen)
           setHasUnread(false)
         }}
-        className="w-14 h-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all duration-300 relative"
+        className="w-14 h-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all duration-300 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         aria-label={isOpen ? "Close Aivora Assistant" : "Open Aivora Assistant"}
         aria-expanded={isOpen}
       >

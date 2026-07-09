@@ -4,8 +4,10 @@ import { useState, useEffect } from "react"
 import { useTranslations } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
 import { fadeUp } from "@/lib/motion"
+import { cn } from "@/lib/utils"
 import { GlassCard } from "@/components/ui/GlassCard"
 import { SectionLabel } from "@/components/ui/SectionLabel"
+import { Button } from "@/components/ui/Button"
 import { Check } from "lucide-react"
 
 // Types
@@ -189,7 +191,14 @@ Contact Method: ${formData.contactMethod}
         {/* Form Area */}
         <form 
           className="relative"
-          onSubmit={(e) => { e.preventDefault(); if (step > TOTAL_STEPS) handleSubmit(); }}
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (step <= TOTAL_STEPS) {
+              handleNext();
+            } else {
+              handleSubmit();
+            }
+          }}
         >
           <AnimatePresence mode="wait">
             <motion.div
@@ -203,38 +212,41 @@ Contact Method: ${formData.contactMethod}
               {renderStep(step, formData, handleChange, t)}
             </motion.div>
           </AnimatePresence>
-        </form>
-
+        
         {/* Navigation */}
-        <div className="flex items-center justify-between pt-8 border-t border-border/50">
-          <button
+        <div className="flex items-center justify-between pt-8 border-t border-border/50 mt-8">
+          <Button
             type="button"
+            variant="ghost"
             onClick={handlePrev}
             disabled={step === 1 || isSubmitting}
-            className="text-muted-foreground hover:text-foreground font-medium disabled:opacity-0 transition-opacity"
+            className={cn(
+              "text-muted-foreground hover:text-foreground font-medium transition-opacity",
+              (step === 1 || isSubmitting) ? "opacity-0 pointer-events-none" : ""
+            )}
           >
             {t("actions.prev")}
-          </button>
+          </Button>
           
           {step <= TOTAL_STEPS ? (
-            <button
-              type="button"
-              onClick={handleNext}
-              className="bg-primary text-primary-foreground px-6 py-3 rounded-xl font-medium hover:opacity-90 transition-opacity"
+            <Button
+              type="submit"
+              className="shadow-md shadow-primary/20"
             >
               {t("actions.next")}
-            </button>
+            </Button>
           ) : (
-            <button
-              type="button"
-              onClick={handleSubmit}
+            <Button
+              type="submit"
               disabled={isSubmitting}
-              className="bg-primary text-primary-foreground px-8 py-3 rounded-xl font-medium hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center gap-2"
+              loading={isSubmitting}
+              className="shadow-md shadow-primary/20"
             >
-              {isSubmitting ? t("actions.submitting") : t("actions.submit")}
-            </button>
+              {t("actions.submit")}
+            </Button>
           )}
         </div>
+        </form>
 
       </div>
     </section>
@@ -258,30 +270,38 @@ function getStepKey(step: number): string {
 
 function renderStep(step: number, data: FormData, onChange: (k: keyof FormData, v: string) => void, t: any) {
   
-  const InputGroup = ({ label, children }: { label: string, children: React.ReactNode }) => (
-    <label className="flex flex-col gap-3 cursor-pointer group">
-      <span className="text-sm font-mono uppercase tracking-wider text-muted-foreground group-focus-within:text-primary transition-colors">{label}</span>
+  const InputGroup = ({ label, children, htmlFor }: { label: string, children: React.ReactNode, htmlFor: string }) => (
+    <div className="flex flex-col gap-3 group">
+      <label htmlFor={htmlFor} className="text-sm font-mono uppercase tracking-wider text-muted-foreground group-focus-within:text-primary transition-colors cursor-pointer w-fit">
+        {label}
+      </label>
       {children}
-    </label>
+    </div>
   )
 
-  const Input = ({ field, type = "text" }: { field: keyof FormData, type?: string }) => (
+  const Input = ({ field, type = "text", required = true }: { field: keyof FormData, type?: string, required?: boolean }) => (
     <input 
+      id={field}
       type={type}
       value={data[field]}
       onChange={(e) => onChange(field, e.target.value)}
       placeholder={t(`fields.${field}.placeholder`)}
-      className="bg-transparent border-b border-border/50 focus:border-primary pb-4 outline-none text-lg text-foreground placeholder:text-muted-foreground/50 transition-colors rounded-none"
+      required={required}
+      aria-required={required}
+      className="bg-transparent border-b border-border/50 focus:border-primary pb-4 outline-none text-lg text-foreground placeholder:text-muted-foreground/50 transition-colors rounded-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
     />
   )
   
-  const Select = ({ field }: { field: keyof FormData }) => {
+  const Select = ({ field, required = true }: { field: keyof FormData, required?: boolean }) => {
     const opts = t.raw(`fields.${field}.options`)
     return (
       <select 
+        id={field}
         value={data[field]}
         onChange={(e) => onChange(field, e.target.value)}
-        className="bg-transparent border-b border-border/50 focus:border-primary pb-4 outline-none text-lg text-foreground transition-colors appearance-none rounded-none cursor-pointer"
+        required={required}
+        aria-required={required}
+        className="bg-transparent border-b border-border/50 focus:border-primary pb-4 outline-none text-lg text-foreground transition-colors appearance-none rounded-none cursor-pointer focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
       >
         <option value="" disabled>{t(`fields.${field}.placeholder`)}</option>
         {Object.entries(opts).map(([k, v]) => (
@@ -291,13 +311,16 @@ function renderStep(step: number, data: FormData, onChange: (k: keyof FormData, 
     )
   }
 
-  const Textarea = ({ field }: { field: keyof FormData }) => (
+  const Textarea = ({ field, required = true }: { field: keyof FormData, required?: boolean }) => (
     <textarea 
+      id={field}
       value={data[field]}
       onChange={(e) => onChange(field, e.target.value)}
       placeholder={t(`fields.${field}.placeholder`)}
       rows={4}
-      className="bg-transparent border border-border/50 focus:border-primary p-4 outline-none text-lg text-foreground placeholder:text-muted-foreground/50 transition-colors rounded-xl resize-none"
+      required={required}
+      aria-required={required}
+      className="bg-transparent border border-border/50 focus:border-primary p-4 outline-none text-lg text-foreground placeholder:text-muted-foreground/50 transition-colors rounded-xl resize-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
     />
   )
 
@@ -305,38 +328,38 @@ function renderStep(step: number, data: FormData, onChange: (k: keyof FormData, 
     case 1:
       return (
         <>
-          <InputGroup label={t("fields.projectType.label")}><Select field="projectType" /></InputGroup>
-          <InputGroup label={t("fields.industry.label")}><Input field="industry" /></InputGroup>
+          <InputGroup label={t("fields.projectType.label")} htmlFor="projectType"><Select field="projectType" /></InputGroup>
+          <InputGroup label={t("fields.industry.label")} htmlFor="industry"><Input field="industry" /></InputGroup>
         </>
       )
     case 2:
       return (
         <>
-          <InputGroup label={t("fields.currentSituation.label")}><Textarea field="currentSituation" /></InputGroup>
-          <InputGroup label={t("fields.desiredOutcome.label")}><Textarea field="desiredOutcome" /></InputGroup>
+          <InputGroup label={t("fields.currentSituation.label")} htmlFor="currentSituation"><Textarea field="currentSituation" /></InputGroup>
+          <InputGroup label={t("fields.desiredOutcome.label")} htmlFor="desiredOutcome"><Textarea field="desiredOutcome" /></InputGroup>
         </>
       )
     case 3:
       return (
         <>
-          <InputGroup label={t("fields.aiIntegration.label")}><Select field="aiIntegration" /></InputGroup>
-          <InputGroup label={t("fields.expectedUsers.label")}><Input field="expectedUsers" /></InputGroup>
-          <InputGroup label={t("fields.requiredIntegrations.label")}><Input field="requiredIntegrations" /></InputGroup>
+          <InputGroup label={t("fields.aiIntegration.label")} htmlFor="aiIntegration"><Select field="aiIntegration" required={false} /></InputGroup>
+          <InputGroup label={t("fields.expectedUsers.label")} htmlFor="expectedUsers"><Input field="expectedUsers" required={false} /></InputGroup>
+          <InputGroup label={t("fields.requiredIntegrations.label")} htmlFor="requiredIntegrations"><Input field="requiredIntegrations" required={false} /></InputGroup>
         </>
       )
     case 4:
       return (
         <>
-          <InputGroup label={t("fields.timeline.label")}><Select field="timeline" /></InputGroup>
-          <InputGroup label={t("fields.budget.label")}><Select field="budget" /></InputGroup>
+          <InputGroup label={t("fields.timeline.label")} htmlFor="timeline"><Select field="timeline" /></InputGroup>
+          <InputGroup label={t("fields.budget.label")} htmlFor="budget"><Select field="budget" /></InputGroup>
         </>
       )
     case 5:
       return (
         <>
-          <InputGroup label={t("fields.name.label")}><Input field="name" /></InputGroup>
-          <InputGroup label={t("fields.email.label")}><Input field="email" type="email" /></InputGroup>
-          <InputGroup label={t("fields.contactMethod.label")}><Select field="contactMethod" /></InputGroup>
+          <InputGroup label={t("fields.name.label")} htmlFor="name"><Input field="name" /></InputGroup>
+          <InputGroup label={t("fields.email.label")} htmlFor="email"><Input field="email" type="email" /></InputGroup>
+          <InputGroup label={t("fields.contactMethod.label")} htmlFor="contactMethod"><Select field="contactMethod" /></InputGroup>
         </>
       )
     case 6:

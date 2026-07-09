@@ -220,7 +220,7 @@ export function IntelligenceWorkspace() {
               key={item.id}
               onClick={() => setActiveTab(item.id as any)}
               className={cn(
-                "flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-sans font-medium transition-all duration-300 whitespace-nowrap",
+                "flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-sans font-medium transition-all duration-300 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                 activeTab === item.id 
                   ? "bg-primary/10 text-primary border border-primary/20 shadow-[0_0_15px_rgba(37,99,235,0.05)]" 
                   : "text-muted-foreground hover:bg-muted/40 hover:text-foreground border border-transparent"
@@ -498,7 +498,7 @@ export function IntelligenceWorkspace() {
                         <button
                           key={i}
                           onClick={() => handleSuggestion(suggestion)}
-                          className="px-2.5 py-1 rounded-lg border border-border/50 bg-muted/20 text-[10px] text-muted-foreground hover:text-foreground hover:border-primary/50 transition-colors"
+                          className="px-2.5 py-1 rounded-lg border border-border bg-muted/20 text-[10px] text-muted-foreground hover:text-foreground hover:border-primary/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                         >
                           {suggestion}
                         </button>

@@ -86,7 +86,7 @@ export function SectionFAQ() {
               >
                 <button
                   onClick={() => toggle(idx)}
-                  className="w-full px-6 py-5 text-start font-medium text-sm sm:text-base flex items-center justify-between gap-4 text-foreground hover:bg-card/40 transition-colors"
+                  className="w-full px-6 py-5 text-start font-medium text-sm sm:text-base flex items-center justify-between gap-4 text-foreground hover:bg-card/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   <span>{t(`items.${key}.question`)}</span>
                   {isOpen ? (

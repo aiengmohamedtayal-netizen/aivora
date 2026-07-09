@@ -96,7 +96,7 @@ export function SectionServices() {
                   <div className="mt-8 pt-6 border-t border-border/50 flex items-center justify-between">
                     <a href="#intake" className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors group/cta">
                       {locale === "ar" ? "استكشف الخدمة" : "Explore Service"}
-                      <ArrowRight className="w-4 h-4 ml-1.5 transition-transform group-hover/cta:translate-x-1 rtl:rotate-180 rtl:group-hover/cta:-translate-x-1" />
+                      <ArrowRight className="w-4 h-4 ms-1.5 transition-transform group-hover/cta:translate-x-1 rtl:rotate-180 rtl:group-hover/cta:-translate-x-1" />
                     </a>
                   </div>
                 </CardContent>
