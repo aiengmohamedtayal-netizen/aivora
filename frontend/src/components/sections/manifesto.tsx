@@ -11,6 +11,7 @@ import { ClaudeChatInput } from "@/components/common/ClaudeChatInput"
 import { AnalyticsWorkspace } from "@/components/common/AnalyticsWorkspace"
 import { ArrowRight, Globe, Layers, ArrowDown, Send, MessageSquare, BarChart3, Users, KanbanSquare, Monitor } from "lucide-react"
 import { useState, useEffect } from "react"
+import { CanvasWaveBackground } from "@/components/ui/canvas-wave-background"
 
 export function SectionManifesto() {
   const t = useTranslations("HomePage.hero")
@@ -22,7 +23,17 @@ export function SectionManifesto() {
       className="relative min-h-[90vh] flex flex-col justify-center py-20 lg:py-28 overflow-hidden bg-background"
     >
       {/* Premium Tech Grid Overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_10%,#000_70%,transparent_100%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_10%,#000_70%,transparent_100%)] pointer-events-none z-0" />
+
+      {/* Canvas Wave Background */}
+      <CanvasWaveBackground 
+        className="absolute inset-0 z-0" 
+        opacity={0.3} 
+        speed={0.0015} 
+        amplitude={60} 
+        frequency={0.0008} 
+        blur={1}
+      />
 
       {/* Layered ambient top spotlights */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />

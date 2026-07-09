@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   useScroll,
   useMotionValueEvent,
@@ -28,6 +28,13 @@ export function StickyScroll({
   const [activeCard, setActiveCard] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const safeReduceMotion = isMounted ? shouldReduceMotion : false;
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -85,11 +92,11 @@ export function StickyScroll({
               <motion.div
                 key={item.titleKey + index}
                 className="flex max-w-lg flex-col gap-4 lg:gap-6"
-                initial={{ opacity: 0.3 }}
+                initial={{ opacity: "0.3" }}
                 animate={{
-                  opacity: activeCard === index ? 1 : 0.3,
-                  scale: shouldReduceMotion ? 1 : (activeCard === index ? 1 : 0.95),
-                  filter: shouldReduceMotion ? 'blur(0px)' : (activeCard === index ? 'blur(0px)' : 'blur(1px)'),
+                  opacity: activeCard === index ? "1" : "0.3",
+                  scale: safeReduceMotion ? "1" : (activeCard === index ? "1" : "0.95"),
+                  filter: safeReduceMotion ? 'blur(0px)' : (activeCard === index ? 'blur(0px)' : 'blur(1px)'),
                 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 30 }}
               >
@@ -109,11 +116,10 @@ export function StickyScroll({
           <div className="relative w-full max-w-xl">
             <AnimatePresence mode="wait">
               <motion.div
-                suppressHydrationWarning
                 key={activeCard}
-                initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20, scale: shouldReduceMotion ? 1 : 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: shouldReduceMotion ? 0 : -20, scale: shouldReduceMotion ? 1 : 0.95 }}
+                initial={{ opacity: "0", y: safeReduceMotion ? "0px" : "20px", scale: safeReduceMotion ? "1" : "0.95" }}
+                animate={{ opacity: "1", y: "0px", scale: "1" }}
+                exit={{ opacity: "0", y: safeReduceMotion ? "0px" : "-20px", scale: safeReduceMotion ? "1" : "0.95" }}
                 transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                 className="flex w-full items-center justify-center"
               >
