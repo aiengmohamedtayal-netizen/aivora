@@ -291,16 +291,42 @@ export function IntelligenceWorkspace() {
                   </div>
 
                   {/* Right: Live Logs */}
-                  <div className="p-5 rounded-xl border border-border/60 bg-black/30 font-mono text-[10px] text-muted-foreground flex flex-col gap-3 min-h-[160px] overflow-hidden">
-                    <h4 className="text-[11px] font-bold text-foreground border-b border-border/30 pb-2">
-                      {locale === "ar" ? "سجل التشغيل المباشر" : "Live Runtime Logs"}
-                    </h4>
-                    <div className="space-y-2 flex-1 overflow-y-auto custom-scrollbar">
-                      <div className="text-green-500/80">[12:34:56] system: Initializing CRM sync session...</div>
-                      <div className="text-primary/70">[12:35:10] AI Agent: Qualified lead Nexus Corp. Staged in CRM.</div>
-                      <div>[12:35:12] system: Dispatched Slack notification.</div>
-                      <div className="text-primary/70">[12:35:28] AI Agent: Autocategorized invoice #2938 (EGP 120k).</div>
-                      <div className="text-green-500/80">[12:36:01] system: Health check passed. Uptime: 99.98%.</div>
+                  <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4 font-mono text-[10px] text-zinc-400 flex flex-col gap-2 min-h-[160px] overflow-hidden shadow-lg select-none text-left" dir="ltr">
+                    {/* Terminal Window Header */}
+                    <div className="flex items-center justify-between border-b border-zinc-800/80 pb-2 mb-1 shrink-0">
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+                      </div>
+                      <span className="text-[9px] font-sans font-medium text-zinc-500 uppercase tracking-wider">
+                        {locale === "ar" ? "سجل التشغيل المباشر" : "Live Runtime Logs"}
+                      </span>
+                      <div className="w-8" /> {/* Balance spacer */}
+                    </div>
+                    {/* Log Lines */}
+                    <div className="space-y-2 flex-1 overflow-y-auto custom-scrollbar leading-relaxed">
+                      <div className="flex gap-2">
+                        <span className="text-zinc-600">[12:34:56]</span>
+                        <span className="text-emerald-400">system: Initializing CRM sync session...</span>
+                      </div>
+                      <div className="flex gap-2">
+                        <span className="text-zinc-600">[12:35:10]</span>
+                        <span className="text-sky-400">AI Agent: Qualified lead Nexus Corp. Staged in CRM.</span>
+                      </div>
+                      <div className="flex gap-2">
+                        <span className="text-zinc-600">[12:35:12]</span>
+                        <span className="text-zinc-300">system: Dispatched Slack notification.</span>
+                      </div>
+                      <div className="flex gap-2">
+                        <span className="text-zinc-600">[12:35:28]</span>
+                        <span className="text-sky-400">AI Agent: Autocategorized invoice #2938 (EGP 120k).</span>
+                      </div>
+                      <div className="flex gap-2">
+                        <span className="text-zinc-600">[12:36:01]</span>
+                        <span className="text-emerald-400">system: Health check passed. Uptime: 99.98%.</span>
+                        <span className="animate-pulse inline-block w-1.5 h-3 bg-emerald-400 ml-0.5 align-middle" />
+                      </div>
                     </div>
                   </div>
                 </div>
