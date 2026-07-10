@@ -79,6 +79,14 @@
       "label": "System Integration Boundaries",
       "placeholder": "e.g., Salesforce, Stripe, legacy mainframes"
     },
+    "currentSystems": {
+      "label": "Current Systems (Yes/No)",
+      "placeholder": "Do you have existing systems or software?",
+      "options": {
+        "yes": "Yes, we have existing systems",
+        "no": "No, this is built from scratch"
+      }
+    },
     "timeline": {
       "label": "Target Delivery Window",
       "placeholder": "Select window",
@@ -97,6 +105,10 @@
         "tier3": "$250k+"
       }
     },
+    "preferredStartDate": {
+      "label": "Preferred Start Date",
+      "placeholder": "When would you like to start? (e.g., Q3 2026)"
+    },
     "name": {
       "label": "Lead Stakeholder Name",
       "placeholder": "John Doe"
@@ -113,6 +125,10 @@
         "video": "Video Conference",
         "phone": "Phone Call"
       }
+    },
+    "additionalComments": {
+      "label": "Additional Comments",
+      "placeholder": "Any other details, requirements, or comments..."
     }
   },
   "actions": {

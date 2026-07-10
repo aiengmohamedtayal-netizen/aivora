@@ -19,11 +19,14 @@ type FormData = {
   aiIntegration: string
   expectedUsers: string
   requiredIntegrations: string
+  currentSystems: string
   timeline: string
   budget: string
+  preferredStartDate: string
   name: string
   email: string
   contactMethod: string
+  additionalComments: string
 }
 
 const initialData: FormData = {
@@ -34,11 +37,14 @@ const initialData: FormData = {
   aiIntegration: "",
   expectedUsers: "",
   requiredIntegrations: "",
+  currentSystems: "",
   timeline: "",
   budget: "",
+  preferredStartDate: "",
   name: "",
   email: "",
   contactMethod: "",
+  additionalComments: "",
 }
 
 const TOTAL_STEPS = 5
@@ -94,9 +100,12 @@ Desired Outcome: ${formData.desiredOutcome}
 AI Integration: ${formData.aiIntegration}
 Expected Users: ${formData.expectedUsers}
 Required Integrations: ${formData.requiredIntegrations}
+Current Systems: ${formData.currentSystems}
 Timeline: ${formData.timeline}
 Budget: ${formData.budget}
+Preferred Start Date: ${formData.preferredStartDate}
 Contact Method: ${formData.contactMethod}
+Additional Comments: ${formData.additionalComments}
       `.trim()
 
       const { error } = await supabase.from('leads').insert({
@@ -345,6 +354,7 @@ function renderStep(step: number, data: FormData, onChange: (k: keyof FormData, 
           <InputGroup label={t("fields.aiIntegration.label")} htmlFor="aiIntegration"><Select field="aiIntegration" required={false} /></InputGroup>
           <InputGroup label={t("fields.expectedUsers.label")} htmlFor="expectedUsers"><Input field="expectedUsers" required={false} /></InputGroup>
           <InputGroup label={t("fields.requiredIntegrations.label")} htmlFor="requiredIntegrations"><Input field="requiredIntegrations" required={false} /></InputGroup>
+          <InputGroup label={t("fields.currentSystems.label")} htmlFor="currentSystems"><Select field="currentSystems" /></InputGroup>
         </>
       )
     case 4:
@@ -352,6 +362,7 @@ function renderStep(step: number, data: FormData, onChange: (k: keyof FormData, 
         <>
           <InputGroup label={t("fields.timeline.label")} htmlFor="timeline"><Select field="timeline" /></InputGroup>
           <InputGroup label={t("fields.budget.label")} htmlFor="budget"><Select field="budget" /></InputGroup>
+          <InputGroup label={t("fields.preferredStartDate.label")} htmlFor="preferredStartDate"><Input field="preferredStartDate" required={false} /></InputGroup>
         </>
       )
     case 5:
@@ -360,6 +371,7 @@ function renderStep(step: number, data: FormData, onChange: (k: keyof FormData, 
           <InputGroup label={t("fields.name.label")} htmlFor="name"><Input field="name" /></InputGroup>
           <InputGroup label={t("fields.email.label")} htmlFor="email"><Input field="email" type="email" /></InputGroup>
           <InputGroup label={t("fields.contactMethod.label")} htmlFor="contactMethod"><Select field="contactMethod" /></InputGroup>
+          <InputGroup label={t("fields.additionalComments.label")} htmlFor="additionalComments"><Textarea field="additionalComments" required={false} /></InputGroup>
         </>
       )
     case 6:
@@ -380,12 +392,24 @@ function renderStep(step: number, data: FormData, onChange: (k: keyof FormData, 
               <span className="text-sm">{data.desiredOutcome || "—"}</span>
             </div>
             <div>
+              <span className="block text-xs font-mono text-muted-foreground mb-1">{t("fields.currentSystems.label")}</span>
+              <span className="text-sm">{data.currentSystems ? (data.currentSystems === "yes" ? "Yes" : "No") : "—"}</span>
+            </div>
+            <div>
+              <span className="block text-xs font-mono text-muted-foreground mb-1">{t("fields.preferredStartDate.label")}</span>
+              <span className="text-sm">{data.preferredStartDate || "—"}</span>
+            </div>
+            <div>
               <span className="block text-xs font-mono text-muted-foreground mb-1">{t("fields.budget.label")}</span>
               <span className="text-sm">{data.budget || "—"}</span>
             </div>
             <div>
               <span className="block text-xs font-mono text-muted-foreground mb-1">{t("fields.email.label")}</span>
               <span className="text-sm">{data.email || "—"}</span>
+            </div>
+            <div className="col-span-2">
+              <span className="block text-xs font-mono text-muted-foreground mb-1">{t("fields.additionalComments.label")}</span>
+              <span className="text-sm">{data.additionalComments || "—"}</span>
             </div>
           </div>
         </GlassCard>

@@ -83,15 +83,15 @@ export function SectionManifesto() {
               variants={fadeUp}
               className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto"
             >
-              <a 
-                href="#intake" 
+              <Link 
+                href="/intake" 
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-foreground text-background font-sans text-[15px] font-medium rounded-xl shadow-md hover:bg-foreground/90 transition-all duration-300 group"
               >
                 {t("cta")}
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
-              </a>
+              </Link>
               <Link 
-                href="/capabilities" 
+                href="/work" 
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-border bg-card/30 backdrop-blur-md text-foreground font-sans text-[15px] font-medium rounded-xl hover:bg-muted/50 hover:border-foreground/40 transition-all duration-300"
               >
                 {t("secondaryCta")}
