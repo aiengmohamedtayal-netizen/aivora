@@ -35,13 +35,13 @@ export function CommandPalette() {
   if (!isOpen) return null
 
   const items = [
-    { name: t("navigation") + " - Dashboard", href: "/admin", icon: Settings, category: t("navigation") },
-    { name: t("addLead") + " - Leads", href: "/admin/leads", icon: Inbox, category: t("actions") },
-    { name: "Inbox & Messages", href: "/admin/inbox", icon: Inbox, category: t("navigation") },
-    { name: t("newsletter"), href: "/admin/newsletter", icon: Users, category: t("navigation") },
-    { name: t("writePost") + " - Blog CMS", href: "/admin/blog", icon: FileText, category: t("navigation") },
-    { name: "Services CMS", href: "/admin/services", icon: FileText, category: t("navigation") },
-    { name: t("viewSettings"), href: "/admin/settings", icon: Settings, category: t("navigation") },
+    { name: t("navigation") + " - Dashboard", href: "/", icon: Settings, category: t("navigation") },
+    { name: t("addLead") + " - Leads", href: "/leads", icon: Inbox, category: t("actions") },
+    { name: "Inbox & Messages", href: "/inbox", icon: Inbox, category: t("navigation") },
+    { name: t("newsletter"), href: "/newsletter", icon: Users, category: t("navigation") },
+    { name: t("writePost") + " - Blog CMS", href: "/blog", icon: FileText, category: t("navigation") },
+    { name: "Services CMS", href: "/services", icon: FileText, category: t("navigation") },
+    { name: t("viewSettings"), href: "/settings", icon: Settings, category: t("navigation") },
   ]
 
   const filteredItems = items.filter((item) =>

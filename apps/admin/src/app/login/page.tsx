@@ -48,7 +48,7 @@ function AdminLoginForm() {
       return
     }
 
-    router.push('/admin')
+    router.push('/')
   }
 
   return (

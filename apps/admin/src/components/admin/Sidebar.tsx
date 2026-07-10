@@ -21,14 +21,14 @@ import {
 import { cn } from "@aivora/lib/utils"
 
 const navItems = [
-  { name: "Dashboard", href: "/admin", icon: LayoutDashboard, exact: true },
-  { name: "Leads & Intake", href: "/admin/leads", icon: Inbox },
-  { name: "Unified Inbox", href: "/admin/inbox", icon: Mail },
-  { name: "Newsletter", href: "/admin/newsletter", icon: Users },
-  { name: "Blog CMS", href: "/admin/blog", icon: FileText },
-  { name: "Services CMS", href: "/admin/services", icon: Server },
-  { name: "Visitors", href: "/admin/visitors", icon: BarChart3 },
-  { name: "Settings", href: "/admin/settings", icon: Settings },
+  { name: "Dashboard", href: "/", icon: LayoutDashboard, exact: true },
+  { name: "Leads & Intake", href: "/leads", icon: Inbox },
+  { name: "Unified Inbox", href: "/inbox", icon: Mail },
+  { name: "Newsletter", href: "/newsletter", icon: Users },
+  { name: "Blog CMS", href: "/blog", icon: FileText },
+  { name: "Services CMS", href: "/services", icon: Server },
+  { name: "Visitors", href: "/visitors", icon: BarChart3 },
+  { name: "Settings", href: "/settings", icon: Settings },
 ]
 
 export function Sidebar() {
@@ -36,14 +36,14 @@ export function Sidebar() {
   const t = useTranslations("admin.Sidebar")
 
   const navItems = [
-    { name: t("dashboard"), href: "/admin", icon: LayoutDashboard, exact: true },
-    { name: t("leads"), href: "/admin/leads", icon: Inbox },
-    { name: t("inbox"), href: "/admin/inbox", icon: Mail },
-    { name: t("newsletter"), href: "/admin/newsletter", icon: Users },
-    { name: t("blog"), href: "/admin/blog", icon: FileText },
-    { name: t("services"), href: "/admin/services", icon: Server },
-    { name: t("visitors"), href: "/admin/visitors", icon: BarChart3 },
-    { name: t("settings"), href: "/admin/settings", icon: Settings },
+    { name: t("dashboard"), href: "/", icon: LayoutDashboard, exact: true },
+    { name: t("leads"), href: "/leads", icon: Inbox },
+    { name: t("inbox"), href: "/inbox", icon: Mail },
+    { name: t("newsletter"), href: "/newsletter", icon: Users },
+    { name: t("blog"), href: "/blog", icon: FileText },
+    { name: t("services"), href: "/services", icon: Server },
+    { name: t("visitors"), href: "/visitors", icon: BarChart3 },
+    { name: t("settings"), href: "/settings", icon: Settings },
   ]
 
   return (

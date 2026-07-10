@@ -14,7 +14,7 @@ export async function deletePost(id: string) {
   
   if (error) return { error: error.message }
   
-  revalidatePath('/admin/blog')
+  revalidatePath('/blog')
   revalidatePath('/[locale]/blog', 'layout')
   return { success: true }
 }
@@ -42,6 +42,6 @@ export async function createPlaceholderPost(title: string) {
 
   if (error) return { error: error.message }
 
-  revalidatePath('/admin/blog')
+  revalidatePath('/blog')
   return { success: true }
 }
