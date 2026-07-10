@@ -4,6 +4,7 @@ import { Link } from "@/i18n/routing"
 import { Button } from "@/components/ui/Button"
 import { Input } from "@/components/ui/Input"
 import { ArrowRight, Github, Instagram, Mail } from "lucide-react"
+import { NewsletterForm } from "@/components/sections/NewsletterForm"
 
 export function Footer() {
   const t = useTranslations("footer")
@@ -105,22 +106,7 @@ export function Footer() {
                 <p className="mt-2 text-sm leading-6 text-muted-foreground">
                   {t("newsletterDesc")}
                 </p>
-                <form className="mt-6 sm:flex sm:max-w-md">
-                  <div className="w-full">
-                    <Input 
-                      label={t("emailPlaceholder")}
-                      type="email" 
-                      autoComplete="email" 
-                      required 
-                      className="w-full min-w-0" 
-                    />
-                  </div>
-                  <div className="mt-4 sm:ms-4 sm:mt-0 sm:flex-shrink-0 flex items-end">
-                    <Button type="submit" variant="primary" className="h-[46px]">
-                      {t("primaryCTA")}
-                    </Button>
-                  </div>
-                </form>
+                <NewsletterForm />
               </div>
             </div>
           </div>

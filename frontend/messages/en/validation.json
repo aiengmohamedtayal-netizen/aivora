@@ -15,5 +15,8 @@
   "email": "Invalid email address",
   "minLength": "Must be at least {min} characters",
   "maxLength": "Must be at most {max} characters",
-  "url": "Invalid URL format"
+  "url": "Invalid URL format",
+  "duplicateEmail": "This email is already subscribed",
+  "newsletterSuccess": "Thank you for subscribing!",
+  "newsletterError": "Failed to subscribe. Please try again."
 }
