@@ -29,5 +29,10 @@
     "minLength": "Must be at least {min} characters",
     "maxLength": "Must be at most {max} characters",
     "url": "Invalid URL format"
+  },
+  "Technology": {
+    "headline": "Built With Modern Technologies",
+    "subheadline": "We build with stress-tested, modern tools",
+    "supportingText": "Leveraging state-of-the-art frameworks to deliver secure, responsive, and ultra-fast applications."
   }
 }

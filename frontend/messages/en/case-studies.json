@@ -6,6 +6,12 @@
   "subheadline": "Real Problems. Real Solutions.",
   "supportingText": "Explore in-depth case studies of our work. Each case study covers the client's challenge, our approach, and the outcome.",
   "primaryCTA": "Go Back Home",
+  "labels": {
+    "client": "Client:",
+    "challenge": "Challenge:",
+    "solution": "Solution:",
+    "outcome": "Outcome:"
+  },
   "cases": [
     {
       "id": "finance-chatbot",

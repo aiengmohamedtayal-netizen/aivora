@@ -6,6 +6,12 @@
   "subheadline": "Solutions Built for Real Business Growth",
   "supportingText": "Explore our focused set of services designed to help businesses launch, automate, and scale with confidence.",
   "viewDetails": "Learn More",
+  "cardLabels": {
+    "challenge": "Challenge",
+    "solution": "Solution",
+    "outcome": "Business Outcome",
+    "explore": "Explore Service"
+  },
   "ai-solutions": {
     "title": "AI Solutions",
     "seoTitle": "AI Solutions – Aivora",

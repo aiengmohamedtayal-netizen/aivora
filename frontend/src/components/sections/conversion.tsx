@@ -82,7 +82,7 @@ Message: ${message}
           {/* Left Column: Headline and Direct Contacts */}
           <div className="lg:col-span-5 flex flex-col gap-10">
             <div>
-              <SectionLabel className="mb-4">{locale === "ar" ? "تواصل معنا" : "Let's Talk"}</SectionLabel>
+              <SectionLabel className="mb-4">{t("headline")}</SectionLabel>
               <h2 className="text-h1 text-foreground leading-[1.15] whitespace-pre-line mb-6">
                 {t("headline")}
               </h2>
@@ -284,7 +284,7 @@ Message: ${message}
                       disabled={isPending}
                       className="w-full py-4 text-xs font-mono font-medium tracking-wider uppercase text-center flex items-center justify-center gap-2"
                     >
-                      {isPending ? (locale === "ar" ? "جاري الإرسال..." : "Submitting...") : t("form.submit")}
+                      {isPending ? t("form.submitting") : t("form.submit")}
                       {!isPending && <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />}
                     </Button>
 

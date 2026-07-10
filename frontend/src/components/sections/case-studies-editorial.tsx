@@ -1,7 +1,6 @@
 "use client"
 
 import { useTranslations } from "next-intl"
-import { useParams } from "next/navigation"
 import { motion } from "framer-motion"
 import { staggerContainer, fadeUp } from "@/lib/motion"
 import { GlassCard } from "@/components/ui/GlassCard"
@@ -12,8 +11,6 @@ import { Briefcase, ArrowRight } from "lucide-react"
 
 export function CaseStudiesEditorial() {
   const t = useTranslations("case-studies")
-  const params = useParams()
-  const locale = params?.locale as string || "en"
 
   const cases = t.raw("cases") as Array<{
     id: string
@@ -25,10 +22,10 @@ export function CaseStudiesEditorial() {
   }>
 
   const labels = {
-    client: locale === "ar" ? "العميل:" : "Client:",
-    challenge: locale === "ar" ? "التحدي:" : "Challenge:",
-    solution: locale === "ar" ? "الحل:" : "Solution:",
-    outcome: locale === "ar" ? "النتيجة:" : "Outcome:"
+    client: t("labels.client"),
+    challenge: t("labels.challenge"),
+    solution: t("labels.solution"),
+    outcome: t("labels.outcome")
   }
 
   return (

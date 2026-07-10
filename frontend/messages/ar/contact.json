@@ -24,6 +24,7 @@
     "budget": "الميزانية التقديرية",
     "details": "تفاصيل المشروع",
     "submit": "إرسال الطلب",
+    "submitting": "جاري الإرسال...",
     "projectTypePlaceholder": "اختر نوع المشروع...",
     "budgetPlaceholder": "اختر نطاق الميزانية..."
   },

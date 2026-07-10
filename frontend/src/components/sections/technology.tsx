@@ -1,6 +1,6 @@
 "use client"
 
-import { useTranslations, useLocale } from "next-intl"
+import { useTranslations } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
 import { useState } from "react"
 import { SectionLabel, Card, CardContent } from "@/components/ui"
@@ -8,7 +8,7 @@ import { fadeUp, staggerContainer, collapseProps } from "@/lib/motion"
 import { ChevronDown, Plus, Minus, MessageSquare, Quote } from "lucide-react"
 
 export function SectionTechnologies() {
-  const locale = useLocale()
+  const t = useTranslations("common")
   
   const techs = ["Next.js", "React", "FastAPI", "Supabase", "TypeScript", "OpenAI", "Tailwind CSS"]
 
@@ -19,15 +19,13 @@ export function SectionTechnologies() {
         {/* Section Heading */}
         <div className="max-w-3xl mb-16">
           <SectionLabel className="mb-4">
-            {locale === "ar" ? "بنيتنا البرمجية" : "Built With Modern Technologies"}
+            {t("Technology.headline")}
           </SectionLabel>
           <h2 className="text-h2 text-foreground mb-6">
-            {locale === "ar" ? "تقنيات حديثة لمنتجات قوية" : "We build with stress-tested, modern tools"}
+            {t("Technology.subheadline")}
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            {locale === "ar"
-              ? "نعتمد على أدوات هندسية متطورة لضمان سرعة التحميل، وتوفير أمان البيانات، وقابلية التوسع الفائقة."
-              : "Leveraging state-of-the-art frameworks to deliver secure, responsive, and ultra-fast applications."}
+            {t("Technology.supportingText")}
           </p>
         </div>
 
@@ -52,7 +50,6 @@ export function SectionTechnologies() {
 
 export function SectionFAQ() {
   const t = useTranslations("faq")
-  const locale = useLocale()
   const [openIdx, setOpenIdx] = useState<number | null>(null)
 
   const faqKeys = ["timeline", "support", "integration"] as const

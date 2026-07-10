@@ -1,6 +1,6 @@
 "use client"
 
-import { useTranslations, useLocale } from "next-intl"
+import { useTranslations } from "next-intl"
 import { motion } from "framer-motion"
 import { SectionLabel, Card, CardHeader, CardTitle, CardContent } from "@/components/ui"
 import { Link } from "@/i18n/routing"
@@ -9,7 +9,6 @@ import { Brain, Rocket, Cpu, TrendingUp, HeartPulse, GraduationCap, ShoppingBag,
 
 export function SectionServices() {
   const t = useTranslations("services")
-  const locale = useLocale()
 
   const serviceKeys = ["ai-solutions", "saas-development", "automation", "custom-software"] as const
   
@@ -74,21 +73,21 @@ export function SectionServices() {
                     <div>
                       <h4 className="text-[11px] font-medium text-destructive/80 uppercase tracking-wider mb-2 flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-destructive/60" /> 
-                        {locale === "ar" ? "التحدي" : "Challenge"}
+                        {t("cardLabels.challenge")}
                       </h4>
                       <p className="text-sm text-muted-foreground/90 leading-relaxed font-medium">{t(`${key}.challenge`)}</p>
                     </div>
                     <div>
                       <h4 className="text-[11px] font-medium text-green-500/80 uppercase tracking-wider mb-2 flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-green-500/60" /> 
-                        {locale === "ar" ? "الحل" : "Solution"}
+                        {t("cardLabels.solution")}
                       </h4>
                       <p className="text-sm text-foreground/90 leading-relaxed font-medium">{t(`${key}.solution`)}</p>
                     </div>
                     <div>
                       <h4 className="text-[11px] font-medium text-gold/80 uppercase tracking-wider mb-2 flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-gold/60" /> 
-                        {locale === "ar" ? "النتيجة" : "Business Outcome"}
+                        {t("cardLabels.outcome")}
                       </h4>
                       <p className="text-sm text-muted-foreground/90 leading-relaxed font-medium">{t(`${key}.outcome`)}</p>
                     </div>
@@ -96,7 +95,7 @@ export function SectionServices() {
 
                   <div className="mt-8 pt-6 border-t border-border/50 flex items-center justify-between">
                     <Link href={`/services/${key}`} className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors group/cta focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-2 rounded">
-                      {locale === "ar" ? "استكشف الخدمة" : "Explore Service"}
+                      {t("cardLabels.explore")}
                       <ArrowRight className="w-4 h-4 ms-1.5 transition-transform group-hover/cta:translate-x-1 rtl:rotate-180 rtl:group-hover/cta:-translate-x-1" />
                     </Link>
                   </div>
@@ -112,7 +111,6 @@ export function SectionServices() {
 
 export function SectionIndustries() {
   const t = useTranslations("industries")
-  const locale = useLocale()
 
   const industries = [
     { name: t("items.healthcare"), icon: <HeartPulse className="w-5 h-5" /> },

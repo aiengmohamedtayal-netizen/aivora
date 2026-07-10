@@ -24,6 +24,7 @@
     "budget": "Estimated Budget",
     "details": "Project Details",
     "submit": "Submit Proposal",
+    "submitting": "Submitting...",
     "projectTypePlaceholder": "Choose a project type...",
     "budgetPlaceholder": "Choose a budget range..."
   },
