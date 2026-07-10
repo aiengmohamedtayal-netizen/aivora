@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { GeistSans } from "geist/font/sans"
+import { getBaseUrl } from "@aivora/lib/utils"
 import localFont from "next/font/local"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages } from "next-intl/server"
@@ -60,7 +61,7 @@ export async function generateMetadata({
       template: `%s | ${t("title")}`,
     },
     description: t("description"),
-    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://aivora.com"),
+    metadataBase: new URL(getBaseUrl()),
     alternates: {
       canonical: `/${locale}`,
       languages: {
@@ -71,7 +72,7 @@ export async function generateMetadata({
     openGraph: {
       title: t("title"),
       description: t("description"),
-      url: `https://aivora.com/${locale}`,
+      url: `${getBaseUrl()}/${locale}`,
       siteName: "Aivora",
       locale: locale,
       type: "website",

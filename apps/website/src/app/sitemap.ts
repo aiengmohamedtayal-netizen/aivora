@@ -1,7 +1,8 @@
 import { MetadataRoute } from "next"
+import { getBaseUrl } from "@aivora/lib/utils"
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aivora.com"
+  const baseUrl = getBaseUrl()
 
   const locales = ["en", "ar"]
   const routes = [

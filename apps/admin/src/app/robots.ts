@@ -1,7 +1,8 @@
 import { MetadataRoute } from "next"
+import { getBaseUrl } from "@aivora/lib/utils"
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aivora.com"
+  const baseUrl = getBaseUrl()
 
   return {
     rules: {

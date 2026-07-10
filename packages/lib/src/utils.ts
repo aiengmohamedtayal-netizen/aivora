@@ -9,3 +9,17 @@ import { twMerge } from "tailwind-merge"
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
+
+/**
+ * Resolves the base URL dynamically based on environment variables.
+ * Fallbacks: NEXT_PUBLIC_SITE_URL -> NEXT_PUBLIC_VERCEL_URL -> local fallback.
+ */
+export function getBaseUrl() {
+  if (process.env.NEXT_PUBLIC_SITE_URL) {
+    return process.env.NEXT_PUBLIC_SITE_URL
+  }
+  if (process.env.NEXT_PUBLIC_VERCEL_URL) {
+    return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+  }
+  return "http://localhost:3000"
+}
