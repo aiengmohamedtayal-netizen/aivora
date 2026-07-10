@@ -12,7 +12,12 @@
   "imageAlt": "Aivora team collaboration design blueprint",
   "structuredData": {},
   "title": "About Us",
-  "manifesto": "Aivora is an AI software engineering company founded with a vision to bridge the gap between ambitious ideas and reality. We believe every business can benefit from intelligent automation and modern software. Our mission is to design and develop custom digital solutions that streamline processes and drive growth. At Aivora, we combine years of technical expertise with a human-centered approach. Our team of engineers, designers, and strategists collaborates closely with clients to understand their goals and craft tailored solutions. Whether it’s an AI-powered assistant, a scalable SaaS platform, or a secure enterprise system, we’re committed to delivering high-quality products on time. Learn more about our values, team, and the journey that drives us.",
+  "manifestoParagraphs": [
+    "Aivora is an AI software engineering company founded with a vision to bridge the gap between ambitious ideas and reality. We believe every business can benefit from intelligent automation and modern software.",
+    "Our mission is to design and develop custom digital solutions that streamline processes and drive growth. At Aivora, we combine years of technical expertise with a human-centered approach.",
+    "Our team of engineers, designers, and strategists collaborates closely with clients to understand their goals and craft tailored solutions.",
+    "Whether it’s an AI-powered assistant, a scalable SaaS platform, or a secure enterprise system, we’re committed to delivering high-quality products on time. Learn more about our values, team, and the journey that drives us."
+  ],
   "pillars": [
     {
       "id": "why-build",

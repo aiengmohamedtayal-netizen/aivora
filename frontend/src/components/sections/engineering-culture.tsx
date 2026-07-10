@@ -28,9 +28,16 @@ export function EngineeringCulture() {
             <div>
               <SectionLabel>{t("headline")}</SectionLabel>
             </div>
-            <h1 className="text-h1 text-foreground">
-              {t("manifesto")}
-            </h1>
+            <div className="flex flex-col gap-8">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground">
+                {t("subheadline")}
+              </h1>
+              <div className="space-y-8 text-base md:text-lg leading-8 tracking-normal text-muted-foreground max-w-4xl">
+                {(t.raw("manifestoParagraphs") as string[]).map((paragraph, idx) => (
+                  <p key={idx}>{paragraph}</p>
+                ))}
+              </div>
+            </div>
           </motion.header>
 
           <hr className="border-t border-border/60" />
