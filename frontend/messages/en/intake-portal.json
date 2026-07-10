@@ -38,6 +38,7 @@
     "whyAsk": {
       "type": "We use this information to recommend the right architecture.",
       "audience": "Understanding your audience helps us optimize performance and user experience.",
+      "stage": "Knowing your current stage helps us determine the right starting point for engineering.",
       "timeline": "This allows us to allocate the right engineering resources to meet your deadlines.",
       "budget": "We align our technical recommendations with your financial framework.",
       "description": "Any context you provide helps us prepare for our first discovery call.",
@@ -62,6 +63,15 @@
           "business": "Existing Business",
           "enterprise": "Enterprise",
           "personal": "Personal Project"
+        }
+      },
+      "stage": {
+        "title": "Current project stage",
+        "options": {
+          "idea": "Idea",
+          "prototype": "Prototype",
+          "existing": "Existing Product",
+          "scaling": "Scaling"
         }
       },
       "timeline": {

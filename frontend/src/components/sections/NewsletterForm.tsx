@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/Button"
 import { Loader2, CheckCircle2, AlertCircle } from "lucide-react"
 import { z } from "zod"
 
-export function NewsletterForm() {
+export function NewsletterForm({ source = "footer" }: { source?: string }) {
   const t = useTranslations("footer")
   const v = useTranslations("validation")
   const locale = useLocale()
@@ -35,7 +35,7 @@ export function NewsletterForm() {
       const response = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: result.data, locale }),
+        body: JSON.stringify({ email: result.data, locale, source }),
       })
 
       const data = await response.json()

@@ -26,9 +26,10 @@ const baseStructure = {
   wizard: {
     progressText: "Question {current} / {total}",
     estimatedTime: "Estimated time remaining: {time} min",
-    whyAsk: {
+      whyAsk: {
       type: "We use this information to recommend the right architecture.",
       audience: "Understanding your audience helps us optimize performance and user experience.",
+      stage: "Knowing your current stage helps us determine the right starting point for engineering.",
       timeline: "This allows us to allocate the right engineering resources to meet your deadlines.",
       budget: "We align our technical recommendations with your financial framework.",
       description: "Any context you provide helps us prepare for our first discovery call.",
@@ -53,6 +54,15 @@ const baseStructure = {
           business: "Existing Business",
           enterprise: "Enterprise",
           personal: "Personal Project"
+        }
+      },
+      stage: {
+        title: "Current project stage",
+        options: {
+          idea: "Idea",
+          prototype: "Prototype",
+          existing: "Existing Product",
+          scaling: "Scaling"
         }
       },
       timeline: {
@@ -139,6 +149,7 @@ const arStructure = {
     whyAsk: {
       type: "نستخدم هذه المعلومات لاقتراح البنية التقنية المناسبة.",
       audience: "فهم جمهورك يساعدنا على تحسين الأداء وتجربة المستخدم.",
+      stage: "معرفة مرحلتك الحالية يساعدنا في تحديد نقطة البداية الهندسية المناسبة.",
       timeline: "يسمح لنا هذا بتخصيص الموارد الهندسية المناسبة لتلبية المواعيد النهائية.",
       budget: "نحن نوائم توصياتنا التقنية مع إطارك المالي.",
       description: "أي تفاصيل تقدمها تساعدنا في التحضير لمكالمتنا الاستكشافية الأولى.",
@@ -163,6 +174,15 @@ const arStructure = {
           business: "عمل قائم",
           enterprise: "مؤسسة كبيرة",
           personal: "مشروع شخصي"
+        }
+      },
+      stage: {
+        title: "المرحلة الحالية للمشروع",
+        options: {
+          idea: "فكرة",
+          prototype: "نموذج أولي (Prototype)",
+          existing: "منتج قائم",
+          scaling: "توسع (Scaling)"
         }
       },
       timeline: {

@@ -12,6 +12,7 @@ import { Check, ArrowRight, ArrowLeft } from "lucide-react"
 type FormData = {
   type: string
   audience: string
+  stage: string
   timeline: string
   budget: string
   description: string
@@ -24,6 +25,7 @@ type FormData = {
 const initialData: FormData = {
   type: "",
   audience: "",
+  stage: "",
   timeline: "",
   budget: "",
   description: "",
@@ -33,7 +35,7 @@ const initialData: FormData = {
   phone: "",
 }
 
-const TOTAL_QUESTIONS = 6
+const TOTAL_QUESTIONS = 7
 
 export function ProjectIntake() {
   const t = useTranslations("intake-portal")
@@ -55,12 +57,12 @@ export function ProjectIntake() {
   }, [])
 
   useEffect(() => {
-    if (mounted && step < 7) {
+    if (mounted && step < 8) {
       localStorage.setItem("aivora-wizard", JSON.stringify(formData))
     }
   }, [formData, mounted, step])
 
-  const handleNext = () => setStep((s) => Math.min(s + 1, 7))
+  const handleNext = () => setStep((s) => Math.min(s + 1, 8))
   const handlePrev = () => setStep((s) => Math.max(s - 1, 0))
 
   const handleChange = (field: keyof FormData, value: string) => {
@@ -84,6 +86,7 @@ export function ProjectIntake() {
       const message = `
 Project Type: ${t(`wizard.questions.type.options.${formData.type}` as any) || formData.type}
 Target Audience: ${t(`wizard.questions.audience.options.${formData.audience}` as any) || formData.audience}
+Stage: ${t(`wizard.questions.stage.options.${formData.stage}` as any) || formData.stage}
 Timeline: ${t(`wizard.questions.timeline.options.${formData.timeline}` as any) || formData.timeline}
 Budget: ${t(`wizard.questions.budget.options.${formData.budget}` as any) || formData.budget}
 Description: ${formData.description}
@@ -99,7 +102,7 @@ Phone: ${formData.phone}
 
       if (error) throw error
 
-      setStep(7)
+      setStep(8)
       localStorage.removeItem("aivora-wizard")
     } catch (error) {
       console.error("Failed to submit:", error)
@@ -154,9 +157,9 @@ Phone: ${formData.phone}
   }
 
   // ---------------------------------------------------------------------------
-  // Step 7: Premium Success Screen
+  // Step 8: Premium Success Screen
   // ---------------------------------------------------------------------------
-  if (step === 7) {
+  if (step === 8) {
     return (
       <section className="py-24 lg:py-32 min-h-screen flex items-center justify-center bg-background px-4">
         <GlassCard className="max-w-2xl w-full p-12 text-center flex flex-col gap-8 border border-primary/20">
@@ -183,11 +186,11 @@ Phone: ${formData.phone}
   }
 
   // ---------------------------------------------------------------------------
-  // Wizard (Steps 1-6)
+  // Wizard (Steps 1-7)
   // ---------------------------------------------------------------------------
   const currentQIndex = step - 1
-  const questions = ["type", "audience", "timeline", "budget", "description", "contact"] as const
-  const currentQuestion = questions[currentQIndex as 0|1|2|3|4|5]
+  const questions = ["type", "audience", "stage", "timeline", "budget", "description", "contact"] as const
+  const currentQuestion = questions[currentQIndex as 0|1|2|3|4|5|6]
   
   const progressText = t("wizard.progressText").replace("{current}", String(step)).replace("{total}", String(TOTAL_QUESTIONS))
   const estimatedTime = t("wizard.estimatedTime").replace("{time}", String(Math.ceil((TOTAL_QUESTIONS - step + 1) * 0.5)))
@@ -295,7 +298,7 @@ Phone: ${formData.phone}
         <form 
           onSubmit={(e) => {
             e.preventDefault();
-            if (step < 6) handleNext();
+            if (step < 7) handleNext();
             else handleSubmit();
           }}
           className="flex-1 flex flex-col"
@@ -366,7 +369,7 @@ Phone: ${formData.phone}
               <ArrowLeft className="mr-2 w-4 h-4" /> {t("wizard.actions.prev")}
             </Button>
             
-            {step < 6 ? (
+            {step < 7 ? (
               <Button
                 type="submit"
                 disabled={!isCurrentStepValid()}

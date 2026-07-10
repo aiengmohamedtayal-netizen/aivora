@@ -7,6 +7,7 @@ import { getTranslations } from "next-intl/server"
 const subscribeSchema = z.object({
   email: z.string().trim().toLowerCase().email("Invalid email address"),
   locale: z.string().default("en"),
+  source: z.string().optional(),
 })
 
 export async function POST(req: Request) {
@@ -20,7 +21,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: t("invalidEmail") }, { status: 400 })
     }
 
-    const { email, locale } = result.data
+    const { email, locale, source } = result.data
+
+    const ip = req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip") || "Unknown"
+    const user_agent = req.headers.get("user-agent") || "Unknown"
 
     // Initialize Supabase admin client to bypass RLS for checking duplicates safely if needed
     // However, our policy allows INSERT for anyone, but we want to gracefully handle duplicates.
@@ -41,8 +45,10 @@ export async function POST(req: Request) {
         {
           email,
           locale,
-          source: "website",
+          source: source || "website",
           status: "active",
+          ip,
+          user_agent
         },
       ])
 

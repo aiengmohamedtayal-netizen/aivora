@@ -5,6 +5,8 @@ import { ArticleGrid } from "@/components/blog/ArticleGrid"
 import { NewsletterCTA } from "@/components/blog/NewsletterCTA"
 import { SectionLabel } from "@/components/ui/SectionLabel"
 
+import { BlogContainer } from "@/components/blog/BlogContainer"
+
 export async function generateMetadata({
   params,
 }: {
@@ -47,6 +49,7 @@ export default async function BlogPage({
         authorImage: postT("authorImage"),
         coverImage: postT("coverImage"),
         category: postT("category"),
+        tags: postT.raw("tags") || [],
         publishDate: postT("publishDate"),
         readingTime: postT("readingTime"),
         featured: postT.raw("featured"),
@@ -138,8 +141,7 @@ export default async function BlogPage({
         {featuredPost && <FeaturedArticle post={featuredPost} />}
         
         <div className="my-16">
-          <h2 className="text-3xl font-bold mb-8 text-foreground tracking-tight">Latest Articles</h2>
-          <ArticleGrid posts={recentPosts} />
+          <BlogContainer posts={recentPosts} />
         </div>
 
         <NewsletterCTA />
