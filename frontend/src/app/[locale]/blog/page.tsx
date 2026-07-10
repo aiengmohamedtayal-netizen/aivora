@@ -1,8 +1,9 @@
 import { getTranslations } from "next-intl/server"
 import Script from "next/script"
-import { GlassCard } from "@/components/ui/GlassCard"
+import { FeaturedArticle } from "@/components/blog/FeaturedArticle"
+import { ArticleGrid } from "@/components/blog/ArticleGrid"
+import { NewsletterCTA } from "@/components/blog/NewsletterCTA"
 import { SectionLabel } from "@/components/ui/SectionLabel"
-import { BookOpen, Calendar, Clock } from "lucide-react"
 
 export async function generateMetadata({
   params,
@@ -14,6 +15,13 @@ export async function generateMetadata({
   return {
     title: t("seoTitle"),
     description: t("seoDescription"),
+    alternates: {
+      canonical: `https://aivora-lac.vercel.app/${locale}/blog`,
+      languages: {
+        "en": "https://aivora-lac.vercel.app/en/blog",
+        "ar": "https://aivora-lac.vercel.app/ar/blog",
+      }
+    }
   }
 }
 
@@ -24,14 +32,35 @@ export default async function BlogPage({
 }) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: "blog" })
+  const indexT = await getTranslations({ locale, namespace: "blog.index" })
+  
+  const slugs = indexT.raw("slugs") as string[]
+  
+  const allPosts = await Promise.all(slugs.map(async (slug) => {
+    try {
+      const postT = await getTranslations({ locale, namespace: `blog.${slug}` })
+      return {
+        slug,
+        title: postT("title"),
+        excerpt: postT("excerpt"),
+        author: postT("author"),
+        authorImage: postT("authorImage"),
+        coverImage: postT("coverImage"),
+        category: postT("category"),
+        publishDate: postT("publishDate"),
+        readingTime: postT("readingTime"),
+        featured: postT.raw("featured"),
+      }
+    } catch (err) {
+      console.error(`Failed to load blog post: ${slug}`)
+      return null
+    }
+  }))
 
-  const posts = t.raw("posts") as Array<{
-    title: string
-    tag: string
-    date: string
-    description: string
-    readTime: string
-  }>
+  const posts = allPosts.filter(Boolean) as any[]
+  
+  const featuredPost = posts.find(p => p.featured) || posts[0]
+  const recentPosts = posts.filter(p => p.slug !== featuredPost?.slug)
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -52,15 +81,6 @@ export default async function BlogPage({
     ]
   }
 
-  const speakableJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "speakable": {
-      "@type": "SpeakableSpecification",
-      "cssSelector": [".speakable-headline", ".speakable-description"]
-    }
-  }
-
   const blogPostingJsonLd = {
     "@context": "https://schema.org",
     "@type": "Blog",
@@ -74,14 +94,14 @@ export default async function BlogPage({
         "url": "https://aivora-lac.vercel.app/logo.png"
       }
     },
-    "blogPost": posts.map((p, idx) => ({
+    "blogPost": posts.map((p) => ({
       "@type": "BlogPosting",
       "headline": p.title,
-      "description": p.description,
-      "datePublished": p.date === "July 8, 2026" || p.date === "٨ يوليو ٢٠٢٦" ? "2026-07-08" : (p.date === "July 1, 2026" || p.date === "١ يوليو ٢٠٢٦" ? "2026-07-01" : "2026-06-25"),
+      "description": p.excerpt,
+      "datePublished": p.publishDate,
       "author": {
-        "@type": "Organization",
-        "name": "Aivora"
+        "@type": "Person",
+        "name": p.author
       }
     }))
   }
@@ -94,70 +114,35 @@ export default async function BlogPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <Script
-        id="blog-speakable-jsonld"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableJsonLd) }}
-      />
-      <Script
         id="blog-posts-jsonld"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingJsonLd) }}
       />
+      
       {/* Background gradients */}
       <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px),linear-gradient(to_bottom,#ffffff02_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl relative z-10 flex flex-col gap-12 lg:gap-16 pb-24">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10 flex flex-col pb-24">
         {/* Header */}
-        <div className="flex flex-col items-center text-center max-w-3xl mx-auto gap-4">
+        <div className="flex flex-col items-center text-center max-w-3xl mx-auto gap-4 mb-16">
           <SectionLabel>{t("headline")}</SectionLabel>
-          <h1 className="text-4xl font-semibold tracking-tight text-foreground md:text-5xl lg:text-6xl speakable-headline">
+          <h1 className="text-4xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
             {t("subheadline")}
           </h1>
-          <p className="text-xl text-muted-foreground leading-relaxed speakable-description">
+          <p className="text-xl text-muted-foreground leading-relaxed">
             {t("supportingText")}
           </p>
         </div>
 
-        {/* Blog Post List */}
-        <div className="grid gap-8">
-          {posts.map((post) => (
-            <GlassCard 
-              key={post.title}
-              className="flex flex-col gap-5 border border-white/5 bg-card/10 hover:border-primary/20 transition-all duration-300 shadow-md p-8 rounded-2xl relative overflow-hidden group"
-            >
-              <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-muted-foreground">
-                <span className="font-semibold uppercase tracking-wider px-2.5 py-1 rounded-md bg-primary/10 text-primary">
-                  {post.tag}
-                </span>
-                <span className="flex items-center gap-1">
-                  <Calendar className="w-3.5 h-3.5" />
-                  {post.date}
-                </span>
-                <span className="flex items-center gap-1">
-                  <Clock className="w-3.5 h-3.5" />
-                  {post.readTime}
-                </span>
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <h2 className="text-2xl font-medium text-foreground tracking-tight group-hover:text-primary transition-colors duration-300">
-                  {post.title}
-                </h2>
-                <p className="text-muted-foreground leading-relaxed text-sm">
-                  {post.description}
-                </p>
-              </div>
-
-              <div className="mt-2">
-                <span className="inline-flex items-center gap-2 text-sm font-mono text-primary group-hover:underline cursor-pointer">
-                  <BookOpen className="w-4 h-4" />
-                  {t("readMore")}
-                </span>
-              </div>
-            </GlassCard>
-          ))}
+        {featuredPost && <FeaturedArticle post={featuredPost} />}
+        
+        <div className="my-16">
+          <h2 className="text-3xl font-bold mb-8 text-foreground tracking-tight">Latest Articles</h2>
+          <ArticleGrid posts={recentPosts} />
         </div>
+
+        <NewsletterCTA />
       </div>
     </main>
   )
