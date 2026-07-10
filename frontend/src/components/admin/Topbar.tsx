@@ -4,12 +4,14 @@ import { useState, useEffect } from "react"
 import { Bell, Search, User } from "lucide-react"
 import { createClient } from "@/lib/supabase/client"
 import { CommandPalette } from "./CommandPalette"
+import { useTranslations } from "next-intl"
 
 export function Topbar() {
   const [userEmail, setUserEmail] = useState<string | null>(null)
   const [userRole, setUserRole] = useState<string | null>(null)
   const [notifications, setNotifications] = useState<any[]>([])
   const [showNotifications, setShowNotifications] = useState(false)
+  const t = useTranslations("admin.Topbar")
 
   const supabase = createClient()
 
@@ -39,7 +41,7 @@ export function Topbar() {
   }, [supabase])
 
   return (
-    <header className="h-16 border-b border-border bg-card fixed top-0 right-0 left-64 flex items-center justify-between px-8 z-10">
+    <header className="h-16 border-b border-border bg-card/60 backdrop-blur-xl fixed top-0 right-0 left-64 flex items-center justify-between px-8 z-10 transition-colors">
       {/* Global Search shortcut trigger */}
       <button 
         onClick={() => {
@@ -52,11 +54,11 @@ export function Topbar() {
           })
           window.dispatchEvent(event)
         }}
-        className="flex items-center gap-3 px-4 py-2 border border-border/80 rounded-lg text-sm text-muted-foreground hover:bg-secondary/40 transition-colors w-72 text-left"
+        className="flex items-center gap-3 px-4 py-2 border border-border/80 rounded-lg text-sm text-muted-foreground hover:bg-secondary/40 transition-colors w-72 text-left bg-background/50 backdrop-blur shadow-sm"
       >
         <Search className="w-4 h-4" />
-        <span className="flex-1">Search Aivora OS...</span>
-        <kbd className="px-1.5 py-0.5 bg-secondary border border-border rounded text-[10px] font-bold">Ctrl+K</kbd>
+        <span className="flex-1">{t("search")}</span>
+        <kbd className="px-1.5 py-0.5 bg-secondary border border-border rounded text-[10px] font-bold shadow-sm">Ctrl+K</kbd>
       </button>
 
       {/* Utilities */}
@@ -65,24 +67,24 @@ export function Topbar() {
         <div className="relative">
           <button 
             onClick={() => setShowNotifications(!showNotifications)}
-            className="p-2 rounded-lg hover:bg-secondary text-muted-foreground hover:text-foreground relative"
+            className="p-2 rounded-lg hover:bg-secondary text-muted-foreground hover:text-foreground relative transition-colors"
           >
             <Bell className="w-5 h-5" />
             {notifications.length > 0 && (
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-primary rounded-full" />
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-primary rounded-full animate-pulse" />
             )}
           </button>
 
           {showNotifications && (
-            <div className="absolute right-0 mt-2 w-80 bg-card border border-border rounded-xl shadow-2xl overflow-hidden py-2 z-30">
+            <div className="absolute right-0 mt-2 w-80 bg-card/80 backdrop-blur-2xl border border-border rounded-xl shadow-2xl overflow-hidden py-2 z-30">
               <div className="px-4 py-2 border-b border-border/60 flex items-center justify-between">
-                <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Notifications</span>
+                <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{t("notifications")}</span>
                 {notifications.length > 0 && (
                   <button 
                     onClick={() => setNotifications([])}
                     className="text-[10px] text-primary hover:underline font-medium"
                   >
-                    Clear All
+                    {t("clearAll")}
                   </button>
                 )}
               </div>
@@ -99,7 +101,7 @@ export function Topbar() {
                   ))
                 ) : (
                   <div className="py-8 text-center text-xs text-muted-foreground">
-                    No new alerts
+                    {t("noAlerts")}
                   </div>
                 )}
               </div>
@@ -109,12 +111,12 @@ export function Topbar() {
 
         {/* User Card */}
         <div className="flex items-center gap-3 border-l border-border/60 pl-6">
-          <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
+          <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold shadow-sm">
             <User className="w-4 h-4" />
           </div>
           <div className="flex flex-col text-left">
-            <span className="text-xs font-semibold text-foreground max-w-[150px] truncate">{userEmail || "Loading..."}</span>
-            <span className="text-[9px] text-primary uppercase tracking-widest font-bold mt-0.5">{userRole || "Viewer"}</span>
+            <span className="text-xs font-semibold text-foreground max-w-[150px] truncate">{userEmail || "..."}</span>
+            <span className="text-[9px] text-primary uppercase tracking-widest font-bold mt-0.5">{userRole || t("viewer")}</span>
           </div>
         </div>
       </div>

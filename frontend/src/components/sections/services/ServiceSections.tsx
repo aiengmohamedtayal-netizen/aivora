@@ -11,7 +11,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { collapseProps } from "@/lib/motion"
 
 export function ServiceProblems({ slug }: { slug: string }) {
-  const t = useTranslations(`services.${slug}.problems`)
+  const t = useTranslations(`service-details.${slug}.problems`)
   return (
     <GlassCard className="flex flex-col gap-4 border border-red-500/10 bg-red-500/[0.02] p-8 rounded-2xl">
       <div className="flex items-center gap-3 text-red-400">
@@ -24,7 +24,7 @@ export function ServiceProblems({ slug }: { slug: string }) {
 }
 
 export function ServiceSolution({ slug }: { slug: string }) {
-  const t = useTranslations(`services.${slug}.solution`)
+  const t = useTranslations(`service-details.${slug}.solution`)
   return (
     <GlassCard className="flex flex-col gap-4 border border-blue-500/10 bg-blue-500/[0.02] p-8 rounded-2xl">
       <div className="flex items-center gap-3 text-blue-400">
@@ -37,7 +37,7 @@ export function ServiceSolution({ slug }: { slug: string }) {
 }
 
 export function ServiceFeatures({ slug }: { slug: string }) {
-  const t = useTranslations(`services.${slug}.features`)
+  const t = useTranslations(`service-details.${slug}.features`)
   const keys = [0, 1, 2, 3] as const
   return (
     <div className="flex flex-col gap-8 py-12 border-t border-border mt-12">
@@ -55,7 +55,7 @@ export function ServiceFeatures({ slug }: { slug: string }) {
 }
 
 export function ServiceProcess({ slug }: { slug: string }) {
-  const t = useTranslations(`services.${slug}.process`)
+  const t = useTranslations(`service-details.${slug}.process`)
   const keys = [0, 1, 2, 3] as const
   return (
     <div className="flex flex-col gap-8 py-12 border-t border-border">
@@ -76,7 +76,7 @@ export function ServiceProcess({ slug }: { slug: string }) {
 }
 
 export function ServiceTechStack({ slug }: { slug: string }) {
-  const t = useTranslations(`services.${slug}.techStack`)
+  const t = useTranslations(`service-details.${slug}.techStack`)
   const keys = [0, 1, 2, 3] as const
   return (
     <div className="flex flex-col gap-8 py-12 border-t border-border">
@@ -100,7 +100,7 @@ export function ServiceTechStack({ slug }: { slug: string }) {
 }
 
 export function ServiceBenefits({ slug }: { slug: string }) {
-  const t = useTranslations(`services.${slug}.benefits`)
+  const t = useTranslations(`service-details.${slug}.benefits`)
   const keys = [0, 1, 2] as const
   return (
     <div className="flex flex-col gap-8 py-12 border-t border-border">
@@ -121,7 +121,7 @@ export function ServiceBenefits({ slug }: { slug: string }) {
 }
 
 export function ServiceFAQ({ slug }: { slug: string }) {
-  const t = useTranslations(`services.${slug}.faq`)
+  const t = useTranslations(`service-details.${slug}.faq`)
   const keys = [0, 1, 2] as const
   const [openIdx, setOpenIdx] = useState<number | null>(null)
 
@@ -169,7 +169,7 @@ export function ServiceFAQ({ slug }: { slug: string }) {
 }
 
 export function ServiceCTA({ slug }: { slug: string }) {
-  const t = useTranslations(`services.${slug}.cta`)
+  const t = useTranslations(`service-details.${slug}.cta`)
   return (
     <div className="py-16">
       <GlassCard className="flex flex-col md:flex-row items-center justify-between gap-8 p-10 lg:p-12 rounded-3xl border-primary/20 bg-primary/5">

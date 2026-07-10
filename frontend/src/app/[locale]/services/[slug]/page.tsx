@@ -43,7 +43,7 @@ export async function generateMetadata({
   const { locale, slug } = await params
   if (!SLUGS.includes(slug)) return {}
 
-  const t = await getTranslations({ locale, namespace: `services.${slug}` })
+  const t = await getTranslations({ locale, namespace: `service-details.${slug}` })
   return {
     title: t("seoTitle"),
     description: t("seoDescription"),
@@ -69,7 +69,7 @@ export default async function ServiceDetailsPage({
     notFound()
   }
 
-  const t = await getTranslations({ locale, namespace: `services.${slug}` })
+  const t = await getTranslations({ locale, namespace: `service-details.${slug}` })
   const Icon = icons[slug] || Brain
 
   const serviceJsonLd = {

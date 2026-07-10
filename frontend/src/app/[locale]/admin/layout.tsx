@@ -1,41 +1,26 @@
-import { redirect } from 'next/navigation'
-import { createClient } from '@/lib/supabase/server'
-import { Sidebar } from '@/components/admin/Sidebar'
+import "@/styles/globals.css"
+import { Inter } from "next/font/google"
+import { ThemeProvider } from "@/components/providers/ThemeProvider"
 
-export default async function AdminLayout({
+const inter = Inter({ subsets: ["latin"] })
+
+export const metadata = {
+  title: "Aivora OS",
+  description: "Enterprise Operations Portal",
+}
+
+export default function AdminRootLayout({
   children,
-  params,
 }: {
   children: React.ReactNode
-  params: Promise<{ locale: string }>
 }) {
-  const { locale } = await params
-  const supabase = await createClient()
-
-  const { data: { user }, error: authError } = await supabase.auth.getUser()
-
-  if (authError || !user) {
-    redirect(`/${locale}/admin/login`)
-  }
-
-  // Check RBAC
-  const { data: roles } = await supabase
-    .from('user_roles')
-    .select('role')
-    .eq('user_id', user.id)
-    .single()
-
-  if (!roles || !['admin', 'editor'].includes(roles.role)) {
-    // If not admin/editor, redirect to home
-    redirect(`/${locale}`)
-  }
-
   return (
-    <div className="min-h-screen flex bg-background text-foreground">
-      <Sidebar />
-      <main className="flex-1 p-8 pt-24 lg:pt-8 ml-64">
-        {children}
-      </main>
-    </div>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.className} bg-background text-foreground antialiased min-h-screen`}>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
   )
 }

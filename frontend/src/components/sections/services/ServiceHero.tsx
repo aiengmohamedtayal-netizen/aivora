@@ -4,7 +4,7 @@ import { Link } from "@/i18n/routing"
 import { Button } from "@/components/ui/Button"
 
 export function ServiceHero({ slug, icon: Icon }: { slug: string, icon: any }) {
-  const t = useTranslations(`services.${slug}.hero`)
+  const t = useTranslations(`service-details.${slug}.hero`)
   const locale = useLocale()
 
   return (
