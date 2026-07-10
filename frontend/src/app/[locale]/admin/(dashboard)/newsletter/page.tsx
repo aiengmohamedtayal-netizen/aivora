@@ -35,7 +35,7 @@ export default async function AdminNewsletterPage() {
             </tr>
           </thead>
           <tbody>
-            {(subscribers || []).map((sub) => (
+            {(subscribers || []).map((sub: any) => (
               <tr key={sub.id} className="border-b border-border/50 last:border-0 hover:bg-secondary/20 transition-colors">
                 <td className="px-6 py-4 font-medium">{sub.email}</td>
                 <td className="px-6 py-4">

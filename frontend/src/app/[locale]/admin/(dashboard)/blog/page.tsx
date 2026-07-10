@@ -40,7 +40,7 @@ export default async function AdminBlogPage() {
             </tr>
           </thead>
           <tbody>
-            {(posts || []).map((post) => (
+            {(posts || []).map((post: any) => (
               <tr key={post.id} className="border-b border-border/50 last:border-0 hover:bg-secondary/20 transition-colors">
                 <td className="px-6 py-4 font-medium">{post.title_en}</td>
                 <td className="px-6 py-4 text-muted-foreground capitalize">
