@@ -1,16 +1,30 @@
-import { NextResponse } from 'next/server';
-
-export const runtime = 'edge';
+import { NextResponse } from 'next/server'
+import { createClient } from '@/lib/supabase/server'
 
 export async function GET() {
-  return NextResponse.json({
-    status: 'healthy',
-    backend: 'nextjs-native',
-    env_check: {
-      NEXT_PUBLIC_SUPABASE_URL: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
-      SUPABASE_SERVICE_ROLE_KEY: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
-      OPENAI_API_KEY: !!process.env.OPENAI_API_KEY,
-      OPENAI_BASE_URL: process.env.OPENAI_BASE_URL || 'NOT_SET',
-    },
-  });
+  try {
+    const supabase = await createClient()
+    
+    // Check DB connection
+    const { error } = await supabase.from('categories').select('id').limit(1)
+    
+    if (error) {
+      throw new Error('Database connection failed')
+    }
+
+    return NextResponse.json({
+      status: 'healthy',
+      timestamp: new Date().toISOString(),
+      services: {
+        database: 'up',
+        api: 'up'
+      }
+    }, { status: 200 })
+  } catch (error: any) {
+    return NextResponse.json({
+      status: 'unhealthy',
+      timestamp: new Date().toISOString(),
+      error: error.message
+    }, { status: 503 })
+  }
 }

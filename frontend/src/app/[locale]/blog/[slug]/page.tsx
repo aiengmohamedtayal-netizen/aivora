@@ -8,6 +8,8 @@ import { TableOfContents } from "@/components/blog/TableOfContents"
 import { RelatedArticles } from "@/components/blog/RelatedArticles"
 import { NewsletterCTA } from "@/components/blog/NewsletterCTA"
 import { ReadingProgress } from "@/components/blog/ReadingProgress"
+import { BlogComments } from "@/components/blog/BlogComments"
+import { getPostBySlug } from "@/lib/supabase/blog"
 
 export async function generateStaticParams() {
   // Read from the English index JSON (it should match Arabic)
@@ -63,35 +65,52 @@ export default async function BlogPostPage({
   params: Promise<{ locale: string; slug: string }>
 }) {
   const { locale, slug } = await params
-  let postT;
-  
-  try {
-    postT = await getTranslations({ locale, namespace: `blog.${slug}` })
-  } catch (err) {
-    notFound()
+  let post = await getPostBySlug(slug, locale)
+
+  if (!post || !post.content) {
+    let postT;
+    try {
+      postT = await getTranslations({ locale, namespace: `blog.${slug}` })
+    } catch (err) {
+      notFound()
+    }
+
+    post = {
+      id: "json-fallback",
+      slug,
+      title: postT("title"),
+      subtitle: postT("subtitle"),
+      excerpt: postT("excerpt"),
+      author: postT("author"),
+      authorRole: postT("authorRole"),
+      authorImage: postT("authorImage"),
+      coverImage: postT("coverImage"),
+      category: postT("category"),
+      tags: postT.raw("tags") as string[],
+      publishDate: postT("publishDate"),
+      updatedDate: postT("updatedDate"),
+      readingTime: postT("readingTime"),
+      tableOfContents: postT.raw("tableOfContents") as { id: string, title: string }[],
+      content: postT.raw("content") as { type: string, id?: string, text: string }[],
+      relatedPostsSlugs: postT.raw("relatedPosts") as string[],
+    } as any
+  } else {
+    // Supabase post structure adaptation
+    post = {
+      ...post,
+      authorRole: "Software Engineer",
+      authorImage: "/team/placeholder.png",
+      updatedDate: post.publishDate,
+      tableOfContents: typeof post.content === 'string' ? [] : (post as any).tableOfContents || [],
+      content: typeof post.content === 'string' ? [{ type: 'p', text: post.content }] : post.content,
+      relatedPostsSlugs: []
+    } as any
   }
 
-  const post = {
-    slug,
-    title: postT("title"),
-    subtitle: postT("subtitle"),
-    excerpt: postT("excerpt"),
-    author: postT("author"),
-    authorRole: postT("authorRole"),
-    authorImage: postT("authorImage"),
-    coverImage: postT("coverImage"),
-    category: postT("category"),
-    tags: postT.raw("tags") as string[],
-    publishDate: postT("publishDate"),
-    updatedDate: postT("updatedDate"),
-    readingTime: postT("readingTime"),
-    tableOfContents: postT.raw("tableOfContents") as { id: string, title: string }[],
-    content: postT.raw("content") as { type: string, id?: string, text: string }[],
-    relatedPostsSlugs: postT.raw("relatedPosts") as string[],
-  }
+  const article = post as any
 
   // Load related posts dynamically
-  const relatedPosts = await Promise.all(post.relatedPostsSlugs.map(async (relatedSlug) => {
+  const relatedPosts = await Promise.all(article.relatedPostsSlugs.map(async (relatedSlug: string) => {
     try {
       const relT = await getTranslations({ locale, namespace: `blog.${relatedSlug}` })
       return {
@@ -114,14 +133,14 @@ export default async function BlogPostPage({
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": post.title,
-    "description": post.excerpt,
-    "image": `https://aivora-lac.vercel.app${post.coverImage}`,
-    "datePublished": post.publishDate,
-    "dateModified": post.updatedDate,
+    "headline": article.title,
+    "description": article.excerpt,
+    "image": `https://aivora-lac.vercel.app${article.coverImage}`,
+    "datePublished": article.publishDate,
+    "dateModified": article.updatedDate,
     "author": {
       "@type": "Person",
-      "name": post.author
+      "name": article.author
     },
     "publisher": {
       "@type": "Organization",
@@ -152,7 +171,7 @@ export default async function BlogPostPage({
       {
         "@type": "ListItem",
         "position": 3,
-        "name": post.title,
+        "name": article.title,
         "item": `https://aivora-lac.vercel.app/${locale}/blog/${slug}`
       }
     ]
@@ -173,7 +192,7 @@ export default async function BlogPostPage({
       />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
-        <ArticleHero post={post} />
+        <ArticleHero post={article} />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-24 relative">
           
@@ -181,15 +200,15 @@ export default async function BlogPostPage({
           <aside className="lg:col-span-3 hidden lg:block">
             <div className="sticky top-24 space-y-8">
               <div>
-                <ShareButtons url={`https://aivora-lac.vercel.app/${locale}/blog/${slug}`} title={post.title} />
+                <ShareButtons url={`https://aivora-lac.vercel.app/${locale}/blog/${slug}`} title={article.title} />
               </div>
-              <TableOfContents toc={post.tableOfContents} />
+              <TableOfContents toc={article.tableOfContents} />
             </div>
           </aside>
 
           {/* Main Content */}
           <article className="lg:col-span-6 flex flex-col gap-8 text-lg leading-loose text-muted-foreground">
-            {post.content.map((block, idx) => {
+            {article.content.map((block: any, idx: number) => {
               if (block.type === "h2") {
                 return <h2 key={idx} id={block.id} className="text-3xl font-bold text-foreground mt-8 mb-4 tracking-tight">{block.text}</h2>
               }
@@ -200,19 +219,23 @@ export default async function BlogPostPage({
             })}
             
             <div className="mt-12 lg:hidden">
-              <ShareButtons url={`https://aivora-lac.vercel.app/${locale}/blog/${slug}`} title={post.title} />
+              <ShareButtons url={`https://aivora-lac.vercel.app/${locale}/blog/${slug}`} title={article.title} />
             </div>
           </article>
 
           {/* Right Sidebar: Author */}
           <aside className="lg:col-span-3">
             <div className="sticky top-24">
-              <AuthorCard author={post.author} role={post.authorRole} image={post.authorImage} />
+              <AuthorCard author={article.author} role={article.authorRole} image={article.authorImage} />
             </div>
           </aside>
         </div>
 
-        <NewsletterCTA />
+        <BlogComments postId={article.id} />
+        
+        <div className="mt-24">
+          <NewsletterCTA />
+        </div>
         
         <RelatedArticles posts={validRelatedPosts} />
       </div>

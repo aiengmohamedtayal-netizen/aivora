@@ -1,30 +1,34 @@
 import { NextResponse } from 'next/server'
 import { getTranslations } from 'next-intl/server'
+import { getPosts } from '@/lib/supabase/blog'
 
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url)
     const locale = searchParams.get('locale') || 'en'
     
-    const indexT = await getTranslations({ locale, namespace: 'blog.index' })
-    const slugs = indexT.raw('slugs') as string[]
+    let posts = await getPosts(locale)
     
-    const allPosts = await Promise.all(slugs.map(async (slug) => {
-      try {
-        const postT = await getTranslations({ locale, namespace: `blog.${slug}` })
-        return {
-          slug,
-          title: postT('title'),
-          excerpt: postT('excerpt'),
-          author: postT('author'),
-          publishDate: postT('publishDate'),
+    if (!posts || posts.length === 0) {
+      const indexT = await getTranslations({ locale, namespace: 'blog.index' })
+      const slugs = indexT.raw('slugs') as string[]
+      
+      const allPosts = await Promise.all(slugs.map(async (slug) => {
+        try {
+          const postT = await getTranslations({ locale, namespace: `blog.${slug}` })
+          return {
+            slug,
+            title: postT('title'),
+            excerpt: postT('excerpt'),
+            author: postT('author'),
+            publishDate: postT('publishDate'),
+          }
+        } catch (err) {
+          return null
         }
-      } catch (err) {
-        return null
-      }
-    }))
-
-    const posts = allPosts.filter(Boolean) as any[]
+      }))
+      posts = allPosts.filter(Boolean) as any[]
+    }
 
     const baseUrl = 'https://aivora-lac.vercel.app'
     

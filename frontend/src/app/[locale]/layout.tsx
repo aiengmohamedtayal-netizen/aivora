@@ -8,6 +8,7 @@ import { routing } from "@/i18n/routing"
 import { ThemeProvider } from "@/components/providers/ThemeProvider"
 import { Navbar } from "@/components/layout/Navbar"
 import { Footer } from "@/components/layout/Footer"
+import { AnalyticsProvider } from "@/components/providers/AnalyticsProvider"
 import { AivoraAssistant } from "@/components/common/AivoraAssistant"
 import { SkipToContent } from "@/components/common/SkipToContent"
 import { ZodErrorProvider } from "@/i18n/zodErrorMap"
@@ -142,6 +143,7 @@ export default async function LocaleLayout({
                   </main>
                   <Footer />
                   <AivoraAssistant />
+                  <AnalyticsProvider />
                 </ZodErrorProvider>
             </MotionProvider>
           </NextIntlClientProvider>

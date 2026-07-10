@@ -43,19 +43,47 @@ export async function POST(req: Request) {
 
     const emails = subscribers.map(s => s.email)
 
-    // Send via Resend (Batched or Bcc depending on volume, Resend supports Batch API)
-    // For simplicity, using a basic single broadcast with Bcc for small lists, or batch for production
-    const { data, error: sendError } = await resend.emails.send({
-      from: "Aivora Engineering <hello@aivora.com>",
-      to: "subscribers@aivora.com",
-      bcc: emails,
-      subject,
-      html,
-      text,
-    })
+    // Inject into Aivora Branded HTML Template
+    const brandedHtml = `
+      <!DOCTYPE html>
+      <html>
+      <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; max-w-xl mx-auto p-4">
+        <div style="text-align: center; margin-bottom: 32px;">
+          <h2 style="color: #000; letter-spacing: -0.5px;">Aivora Engineering</h2>
+        </div>
+        <div style="background: #fff; padding: 24px; border-radius: 8px; border: 1px solid #eaeaea;">
+          ${html}
+        </div>
+        <div style="text-align: center; margin-top: 32px; font-size: 12px; color: #888;">
+          <p>You're receiving this because you subscribed to the Aivora Engineering Newsletter.</p>
+          <p><a href="https://aivora.com/unsubscribe" style="color: #666;">Unsubscribe</a></p>
+        </div>
+      </body>
+      </html>
+    `
 
-    if (sendError) {
-      throw sendError
+    // Batch emails into chunks of 50 to respect rate limits
+    const chunkSize = 50;
+    const emailChunks = [];
+    for (let i = 0; i < emails.length; i += chunkSize) {
+      emailChunks.push(emails.slice(i, i + chunkSize));
+    }
+
+    // Send via Resend
+    for (const chunk of emailChunks) {
+      const { error: sendError } = await resend.emails.send({
+        from: "Aivora Engineering <hello@aivora.com>",
+        to: "subscribers@aivora.com",
+        bcc: chunk,
+        subject,
+        html: brandedHtml,
+        text,
+      })
+
+      if (sendError) {
+        console.error("Resend Batch Error:", sendError)
+        // Note: For production, we'd log this to a tracking table and continue or retry
+      }
     }
 
     return NextResponse.json({ success: true, sentTo: emails.length }, { status: 200 })

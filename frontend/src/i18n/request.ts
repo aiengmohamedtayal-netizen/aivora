@@ -41,6 +41,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
       intelligence: (await import(`../../messages/${locale}/intelligence.json`)).default,
       showcase: (await import(`../../messages/${locale}/showcase.json`)).default,
       team: (await import(`../../messages/${locale}/team.json`)).default,
+      "not-found": (await import(`../../messages/${locale}/not-found.json`)).default,
     },
     now: new Date(),
     timeZone: "Asia/Dubai",

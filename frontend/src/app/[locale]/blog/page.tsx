@@ -4,6 +4,7 @@ import { FeaturedArticle } from "@/components/blog/FeaturedArticle"
 import { ArticleGrid } from "@/components/blog/ArticleGrid"
 import { NewsletterCTA } from "@/components/blog/NewsletterCTA"
 import { SectionLabel } from "@/components/ui/SectionLabel"
+import { getPosts } from "@/lib/supabase/blog"
 
 import { BlogContainer } from "@/components/blog/BlogContainer"
 
@@ -36,31 +37,32 @@ export default async function BlogPage({
   const t = await getTranslations({ locale, namespace: "blog" })
   const indexT = await getTranslations({ locale, namespace: "blog.index" })
   
-  const slugs = indexT.raw("slugs") as string[]
+  let posts = await getPosts(locale)
   
-  const allPosts = await Promise.all(slugs.map(async (slug) => {
-    try {
-      const postT = await getTranslations({ locale, namespace: `blog.${slug}` })
-      return {
-        slug,
-        title: postT("title"),
-        excerpt: postT("excerpt"),
-        author: postT("author"),
-        authorImage: postT("authorImage"),
-        coverImage: postT("coverImage"),
-        category: postT("category"),
-        tags: postT.raw("tags") || [],
-        publishDate: postT("publishDate"),
-        readingTime: postT("readingTime"),
-        featured: postT.raw("featured"),
+  if (!posts || posts.length === 0) {
+    // Fallback to JSON if DB is empty or connection fails
+    const slugs = indexT.raw("slugs") as string[]
+    const allPosts = await Promise.all(slugs.map(async (slug) => {
+      try {
+        const postT = await getTranslations({ locale, namespace: `blog.${slug}` })
+        return {
+          slug,
+          title: postT("title"),
+          excerpt: postT("excerpt"),
+          author: postT("author"),
+          coverImage: postT("coverImage"),
+          category: postT("category"),
+          tags: postT.raw("tags") || [],
+          publishDate: postT("publishDate"),
+          readingTime: postT("readingTime"),
+          featured: postT.raw("featured"),
+        }
+      } catch (err) {
+        return null
       }
-    } catch (err) {
-      console.error(`Failed to load blog post: ${slug}`)
-      return null
-    }
-  }))
-
-  const posts = allPosts.filter(Boolean) as any[]
+    }))
+    posts = allPosts.filter(Boolean) as any[]
+  }
   
   const featuredPost = posts.find(p => p.featured) || posts[0]
   const recentPosts = posts.filter(p => p.slug !== featuredPost?.slug)
