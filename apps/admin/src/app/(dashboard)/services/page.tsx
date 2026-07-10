@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo, useCallback } from "react"
 import { createClient } from "@aivora/lib/supabase/client"
 import { useTranslations } from "next-intl"
 import { PageHeader } from "@/components/admin/PageHeader"
@@ -10,7 +10,7 @@ import { Save, ArrowLeft, ArrowRight, Server, Plus, Trash2, Edit2, Code, Smartph
 
 export default function ServicesCMSPage() {
   const t = useTranslations("admin.Services")
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
   
   const [services, setServices] = useState<any[]>([])
   const [selectedService, setSelectedService] = useState<any | null>(null)
@@ -24,7 +24,7 @@ export default function ServicesCMSPage() {
   const [descAr, setDescAr] = useState("")
   const [icon, setIcon] = useState("Server")
 
-  const fetchServices = async () => {
+  const fetchServices = useCallback(async () => {
     setLoading(true)
     try {
       const { data, error } = await supabase.from("services").select("*").order("title_en")
@@ -35,12 +35,11 @@ export default function ServicesCMSPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [supabase])
 
   useEffect(() => {
     fetchServices()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [fetchServices])
 
   const startEdit = (srv: any) => {
     setSelectedService(srv)

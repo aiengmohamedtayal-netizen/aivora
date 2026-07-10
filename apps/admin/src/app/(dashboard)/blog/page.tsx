@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo, useCallback } from "react"
 import { createClient } from "@aivora/lib/supabase/client"
 import { useTranslations } from "next-intl"
 import { PageHeader } from "@/components/admin/PageHeader"
@@ -17,7 +17,7 @@ type ContentBlock = {
 
 export default function BlogCMSPage() {
   const t = useTranslations("admin.Blog")
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
 
   const [posts, setPosts] = useState<any[]>([])
   const [editingPost, setEditingPost] = useState<any | null>(null)
@@ -34,7 +34,7 @@ export default function BlogCMSPage() {
   const [tags, setTags] = useState("")
   const [blocks, setBlocks] = useState<ContentBlock[]>([])
 
-  const fetchPosts = async () => {
+  const fetchPosts = useCallback(async () => {
     setLoading(true)
     try {
       const { data, error } = await supabase
@@ -50,12 +50,11 @@ export default function BlogCMSPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [supabase])
 
   useEffect(() => {
     fetchPosts()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [fetchPosts])
 
   const startEdit = (post: any) => {
     setEditingPost(post)

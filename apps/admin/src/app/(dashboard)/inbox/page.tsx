@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo, useCallback } from "react"
 import { createClient } from "@aivora/lib/supabase/client"
 import { useTranslations } from "next-intl"
 import { PageHeader } from "@/components/admin/PageHeader"
@@ -23,7 +23,7 @@ type MessageItem = {
 
 export default function UnifiedInboxPage() {
   const t = useTranslations("admin.Inbox")
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
   
   const [messages, setMessages] = useState<MessageItem[]>([])
   const [activeTab, setActiveTab] = useState<"all" | "intake" | "ai">("all")
@@ -32,7 +32,7 @@ export default function UnifiedInboxPage() {
   const [replyText, setReplyText] = useState("")
   const [loading, setLoading] = useState(true)
 
-  const fetchInbox = async () => {
+  const fetchInbox = useCallback(async () => {
     setLoading(true)
     try {
       const unified: MessageItem[] = []
@@ -100,12 +100,11 @@ export default function UnifiedInboxPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [supabase])
 
   useEffect(() => {
     fetchInbox()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [fetchInbox])
 
   const filteredMessages = messages.filter(m => {
     const matchesTab = activeTab === "all" || m.type === activeTab

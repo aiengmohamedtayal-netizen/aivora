@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo, useCallback } from "react"
 import { createClient } from "@aivora/lib/supabase/client"
 import { useTranslations } from "next-intl"
 import { PageHeader } from "@/components/admin/PageHeader"
@@ -10,7 +10,7 @@ import { BarChart3, Users, Laptop, Globe, Compass, Share2 } from "lucide-react"
 
 export default function VisitorsAnalyticsPage() {
   const t = useTranslations("admin.Visitors")
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
   
   const [visitors, setVisitors] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
@@ -23,7 +23,7 @@ export default function VisitorsAnalyticsPage() {
     topReferrer: "Unknown"
   })
 
-  const fetchVisitors = async () => {
+  const fetchVisitors = useCallback(async () => {
     setLoading(true)
     try {
       const { data, error } = await supabase
@@ -79,12 +79,11 @@ export default function VisitorsAnalyticsPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [supabase])
 
   useEffect(() => {
     fetchVisitors()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [fetchVisitors])
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 ease-out">

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo, useCallback } from "react"
 import { createClient } from "@aivora/lib/supabase/client"
 import { useTranslations } from "next-intl"
 import { PageHeader } from "@/components/admin/PageHeader"
@@ -9,7 +9,7 @@ import { Save, Globe, Phone, Mail, Settings2 } from "lucide-react"
 
 export default function OSConfigSettingsPage() {
   const t = useTranslations("admin.Settings")
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
 
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
@@ -20,7 +20,7 @@ export default function OSConfigSettingsPage() {
   const [contactEmail, setContactEmail] = useState("")
   const [supportPhone, setSupportPhone] = useState("")
 
-  const fetchSettings = async () => {
+  const fetchSettings = useCallback(async () => {
     setLoading(true)
     try {
       const { data, error } = await supabase
@@ -45,12 +45,11 @@ export default function OSConfigSettingsPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [supabase])
 
   useEffect(() => {
     fetchSettings()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [fetchSettings])
 
   const saveSettings = async () => {
     setSaving(true)

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo, useCallback } from "react"
 import { createClient } from "@aivora/lib/supabase/client"
 import { useTranslations } from "next-intl"
 import { PageHeader } from "@/components/admin/PageHeader"
@@ -10,13 +10,13 @@ import { Users, Trash2, Download, Search, CheckCircle, XCircle, Mailbox } from "
 
 export default function NewsletterSubscribersPage() {
   const t = useTranslations("admin.Newsletter")
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
   
   const [subscribers, setSubscribers] = useState<any[]>([])
   const [search, setSearch] = useState("")
   const [loading, setLoading] = useState(true)
 
-  const fetchSubscribers = async () => {
+  const fetchSubscribers = useCallback(async () => {
     setLoading(true)
     try {
       const { data, error } = await supabase
@@ -32,12 +32,11 @@ export default function NewsletterSubscribersPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [supabase])
 
   useEffect(() => {
     fetchSubscribers()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [fetchSubscribers])
 
   const deleteSubscriber = async (id: string) => {
     if (!confirm("Are you sure you want to remove this subscriber?")) return

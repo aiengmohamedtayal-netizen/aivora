@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo, useCallback } from "react"
 import { createClient } from "@aivora/lib/supabase/client"
 import { useTranslations } from "next-intl"
 import { PageHeader } from "@/components/admin/PageHeader"
@@ -30,7 +30,7 @@ const columns = [
 
 export default function LeadsPipelinePage() {
   const t = useTranslations("admin.Leads")
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
   
   const [leads, setLeads] = useState<any[]>([])
   const [selectedLead, setSelectedLead] = useState<any | null>(null)
@@ -38,7 +38,7 @@ export default function LeadsPipelinePage() {
   const [assignee, setAssignee] = useState("")
   const [loading, setLoading] = useState(true)
 
-  const fetchLeads = async () => {
+  const fetchLeads = useCallback(async () => {
     setLoading(true)
     try {
       const { data, error } = await supabase
@@ -54,12 +54,11 @@ export default function LeadsPipelinePage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [supabase])
 
   useEffect(() => {
     fetchLeads()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [fetchLeads])
 
   const updateLeadStatus = async (id: string, newStatus: string) => {
     const updated = leads.map(lead => lead.id === id ? { ...lead, status: newStatus } : lead)
