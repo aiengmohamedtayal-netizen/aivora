@@ -6,15 +6,18 @@ import { CommandPalette } from '@/components/admin/CommandPalette'
 
 export default async function AdminDashboardLayout({
   children,
+  params,
 }: {
   children: React.ReactNode
+  params: Promise<{ locale: string }>
 }) {
+  const { locale } = await params
   const supabase = await createClient()
 
   const { data: { user }, error: authError } = await supabase.auth.getUser()
 
   if (authError || !user) {
-    redirect({ href: '/admin/login', locale: 'en' }) // Fallback, middleware will handle it
+    redirect({ href: '/admin/login', locale })
   }
 
   // Check RBAC role
@@ -26,7 +29,7 @@ export default async function AdminDashboardLayout({
 
   if (!roles || !['admin', 'editor', 'owner', 'marketer', 'sales', 'support'].includes(roles.role)) {
     // If not admin, editor, owner, marketer, sales, or support, block and redirect to login
-    redirect({ href: '/admin/login?error=unauthorized', locale: 'en' })
+    redirect({ href: '/admin/login?error=unauthorized', locale })
   }
 
   return (
