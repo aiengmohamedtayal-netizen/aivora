@@ -58,6 +58,7 @@ export default function LeadsPipelinePage() {
 
   useEffect(() => {
     fetchLeads()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const updateLeadStatus = async (id: string, newStatus: string) => {

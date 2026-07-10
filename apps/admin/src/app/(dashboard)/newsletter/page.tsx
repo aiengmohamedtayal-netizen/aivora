@@ -36,6 +36,7 @@ export default function NewsletterSubscribersPage() {
 
   useEffect(() => {
     fetchSubscribers()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const deleteSubscriber = async (id: string) => {

@@ -104,6 +104,7 @@ export default function UnifiedInboxPage() {
 
   useEffect(() => {
     fetchInbox()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const filteredMessages = messages.filter(m => {

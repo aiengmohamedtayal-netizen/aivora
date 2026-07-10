@@ -39,6 +39,7 @@ export default function ServicesCMSPage() {
 
   useEffect(() => {
     fetchServices()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const startEdit = (srv: any) => {
