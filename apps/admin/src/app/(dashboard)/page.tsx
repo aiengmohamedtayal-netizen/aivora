@@ -13,8 +13,8 @@ import {
 import { PageHeader } from "@/components/admin/PageHeader"
 import { EmptyState } from "@/components/admin/EmptyState"
 
-export default async function AdminDashboardPage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params
+export default async function AdminDashboardPage() {
+  const locale = "en"
   const supabase = await createClient()
   const t = await getTranslations({ locale, namespace: "admin.Dashboard" })
 
