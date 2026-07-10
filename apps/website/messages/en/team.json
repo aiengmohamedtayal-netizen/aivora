@@ -1,0 +1,32 @@
+{
+  "seoTitle": "Aivora Engineering Studio Team",
+  "seoDescription": "Meet the team of product developers, designers, and software engineers behind Aivora.",
+  "keywords": "AI team, software engineers, UI designer",
+  "headline": "Meet The Team",
+  "subheadline": "A Team Focused on Building and Growing Products",
+  "supportingText": "We work as one product team to design, build, and improve digital products that create value.",
+  "bullets": [],
+  "primaryCTA": "",
+  "secondaryCTA": "",
+  "statistics": [],
+  "imageAlt": "Aivora Engineering Studio Team Preview",
+  "structuredData": {},
+  "members": {
+    "aiArchitect": {
+      "role": "Product Strategist",
+      "skills": "Custom models, autonomous agents, reasoning pipelines"
+    },
+    "seniorDev": {
+      "role": "Software Engineer",
+      "skills": "System architecture, high load, type safety"
+    },
+    "designer": {
+      "role": "UI/UX Designer",
+      "skills": "Premium layout, fluid motion design systems"
+    },
+    "backendDev": {
+      "role": "Backend Engineer",
+      "skills": "Supabase, containerized APIs, secure data pipelines"
+    }
+  }
+}

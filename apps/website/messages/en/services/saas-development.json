@@ -1,0 +1,110 @@
+{
+  "hero": {
+    "title": "SaaS Development",
+    "description": "Modern web applications and SaaS platforms tailored to your business workflows.",
+    "primaryCta": "Start a Project",
+    "secondaryCta": "Talk to Sales"
+  },
+  "problems": {
+    "title": "The Challenge",
+    "description": "Launching a SaaS requires managing complex authentication, billing, and high-performance databases."
+  },
+  "solution": {
+    "title": "Our Solution",
+    "description": "We engineer stress-tested platforms using Next.js, Supabase, and containerized API microservices."
+  },
+  "features": {
+    "title": "Key Features",
+    "items": [
+      {
+        "title": "Scalability",
+        "description": "Built to scale seamlessly as your user base grows."
+      },
+      {
+        "title": "Security",
+        "description": "Enterprise-grade security and compliance out of the box."
+      },
+      {
+        "title": "Performance",
+        "description": "High-speed performance with optimized architectures."
+      },
+      {
+        "title": "Customization",
+        "description": "Tailored perfectly to your unique business workflows."
+      }
+    ]
+  },
+  "process": {
+    "title": "Development Process",
+    "steps": [
+      {
+        "title": "Discovery",
+        "description": "Deep dive into your requirements and business goals."
+      },
+      {
+        "title": "Planning",
+        "description": "Architecting the solution and defining milestones."
+      },
+      {
+        "title": "Development",
+        "description": "Iterative, agile building with regular updates."
+      },
+      {
+        "title": "Deployment",
+        "description": "Seamless launch and handover."
+      }
+    ]
+  },
+  "techStack": {
+    "title": "Technology Stack",
+    "technologies": [
+      "React",
+      "Next.js",
+      "Node.js",
+      "PostgreSQL",
+      "Supabase",
+      "TypeScript"
+    ]
+  },
+  "benefits": {
+    "title": "Business Benefits",
+    "items": [
+      {
+        "title": "Cost Reduction",
+        "description": "Eliminate manual errors and reduce operational overhead."
+      },
+      {
+        "title": "Time Saving",
+        "description": "Automate repetitive tasks to free up your team."
+      },
+      {
+        "title": "Growth",
+        "description": "Scale your revenue streams with robust technology."
+      }
+    ]
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "items": [
+      {
+        "question": "How long does a typical project take?",
+        "answer": "A standard project takes 4 to 12 weeks depending on the complexity and scope."
+      },
+      {
+        "question": "Do you offer post-launch support?",
+        "answer": "Yes, we provide continuous maintenance, monitoring, and feature updates."
+      },
+      {
+        "question": "Will I own the source code?",
+        "answer": "Absolutely. You retain 100% intellectual property and code ownership upon completion."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Ready to transform your business?",
+    "description": "Let's build something great together. Book a free consultation today.",
+    "button": "Get Started"
+  },
+  "seoTitle": "SaaS Development – Aivora",
+  "seoDescription": "Modern SaaS platforms built to validate ideas and dominate markets."
+}

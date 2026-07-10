@@ -1,0 +1,23 @@
+{
+  "seoTitle": "Terms of Service – Aivora",
+  "seoDescription": "Terms and conditions for using Aivora's services and website.",
+  "keywords": "Aivora terms of service, agreement, legal conditions",
+  "headline": "TERMS OF SERVICE",
+  "subheadline": "Terms & Conditions of Service",
+  "lastUpdated": "Last updated: July 10, 2026",
+  "intro": "Welcome to Aivora. By accessing our website or using our software engineering services, you agree to comply with and be bound by the following terms and conditions.",
+  "sections": [
+    {
+      "title": "1. Services Offered",
+      "content": "Aivora provides custom software development, AI solutions, workflow automation, and technical consulting. All proposals, design assets, and code repositories are subject to the specific terms set out in each individual project contract agreement."
+    },
+    {
+      "title": "2. Intellectual Property",
+      "content": "Except where otherwise specified by contract, Aivora grants clients complete ownership of all custom software artifacts, source code, and design assets developed specifically for them upon receipt of full payment."
+    },
+    {
+      "title": "3. Governing Law",
+      "content": "These terms of service and any separate contract agreements under which we provide services to you shall be governed by and construed in accordance with the laws of Egypt, without regard to conflicts of law principles."
+    }
+  ]
+}

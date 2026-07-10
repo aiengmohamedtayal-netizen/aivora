@@ -1,0 +1,16 @@
+{
+  "seoTitle": "Industries We Serve – Custom Software Solutions",
+  "seoDescription": "We build custom software and AI solutions tailored to Healthcare, Retail, Manufacturing, Startups, and Real Estate.",
+  "keywords": "Software for Healthcare, Retail AI, Manufacturing Software, Startup MVP, Real Estate Tech",
+  "headline": "INDUSTRIES WE SERVE",
+  "subheadline": "Solutions Adapted to Different Business Sectors",
+  "supportingText": "We build custom software tailored to the real needs of each industry we work with.",
+  "items": {
+    "healthcare": "Healthcare",
+    "education": "Education",
+    "retail": "Retail & Commerce",
+    "manufacturing": "Manufacturing",
+    "startups": "Startups",
+    "realestate": "Real Estate"
+  }
+}

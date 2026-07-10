@@ -1,0 +1,20 @@
+{
+  "seoTitle": "Frequently Asked Questions – Aivora",
+  "seoDescription": "Find answers to common questions about our software development process, timelines, and post-launch support.",
+  "headline": "COMMON QUESTIONS",
+  "subheadline": "Frequently Asked Questions",
+  "items": {
+    "timeline": {
+      "question": "How long does a typical project take?",
+      "answer": "Project timelines vary based on scope and complexity. A standard MVP typically takes 4-8 weeks, while comprehensive enterprise systems may take 3-6 months. We work in agile sprints to deliver value as quickly as possible."
+    },
+    "support": {
+      "question": "Do you provide support after launch?",
+      "answer": "Yes, we offer continuous technical support, maintenance, and scalability optimizations. We function as your long-term technical partner, ensuring your product remains secure and performs well as your user base grows."
+    },
+    "integration": {
+      "question": "Can you connect with our existing systems and databases?",
+      "answer": "Absolutely. We specialize in building secure integrations and data pipelines that connect seamlessly with your legacy systems, third-party APIs, and existing databases to ensure smooth operations."
+    }
+  }
+}

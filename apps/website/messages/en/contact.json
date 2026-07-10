@@ -1,0 +1,35 @@
+{
+  "seoTitle": "Contact Us – Aivora",
+  "seoDescription": "Get in touch with Aivora to discuss your next software or AI project.",
+  "headline": "LET'S TALK",
+  "subheadline": "Have an idea? Let’s turn it into a real product.",
+  "supportingText": "Aivora helps startups, founders, and businesses turn ambitious ideas into scalable digital products.",
+  "directContact": "Direct Contact",
+  "instagram": "Scan or click to connect with us on Instagram",
+  "igFollow": "Follow our journey",
+  "email": "aivoraaa@outlook.com",
+  "igHandle": "@aiivoraa",
+  "website": "https://aivora.com",
+  "helpers": {
+    "response": "Usually respond within 24 hours",
+    "consultation": "Free initial consultation",
+    "secure": "Your data is handled securely and confidentially"
+  },
+  "form": {
+    "fullName": "Full Name",
+    "companyName": "Company Name",
+    "email": "Email Address",
+    "phone": "Phone Number (Optional)",
+    "projectType": "Project Type",
+    "budget": "Estimated Budget",
+    "details": "Project Details",
+    "submit": "Submit Proposal",
+    "submitting": "Submitting...",
+    "projectTypePlaceholder": "Choose a project type...",
+    "budgetPlaceholder": "Choose a budget range..."
+  },
+  "types": ["AI Product", "Web Application", "SaaS Platform", "Automation System", "Other"],
+  "budgets": ["Under 10k EGP", "10k - 25k EGP", "25k - 50k EGP", "50k+ EGP"],
+  "successTitle": "Proposal Submitted",
+  "successMsg": "Thank you! Our engineering team will review your project details and get back to you shortly."
+}

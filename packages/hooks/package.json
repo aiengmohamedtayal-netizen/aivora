@@ -1,0 +1,15 @@
+{
+  "name": "@aivora/hooks",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "dependencies": {
+    "react": "19.1.0"
+  },
+  "devDependencies": {},
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*"
+  }
+}
