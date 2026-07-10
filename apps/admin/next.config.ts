@@ -50,8 +50,12 @@ const nextConfig: NextConfig = {
   },
 };
 
+import createNextIntlPlugin from "next-intl/plugin";
+
+const withNextIntl = createNextIntlPlugin('./src/i18n.ts');
+
 export default withSentryConfig(
-  withBundleAnalyzer(nextConfig),
+  withNextIntl(withBundleAnalyzer(nextConfig)),
   {
     silent: true,
     org: "aivora",

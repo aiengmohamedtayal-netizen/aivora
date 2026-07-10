@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { GeistSans } from "geist/font/sans"
-import localFont from "next/font/local"
+import { NextIntlClientProvider } from "next-intl"
+import adminMessages from "../../messages/en/admin.json"
 import { ThemeProvider } from "@aivora/ui/providers/ThemeProvider"
 import { AnalyticsProvider } from "@aivora/ui/providers/AnalyticsProvider"
 import { MotionProvider } from "@aivora/ui/providers/MotionProvider"
@@ -14,6 +15,10 @@ const newsreader = {
 export const metadata: Metadata = {
   title: "Aivora OS - Admin",
   description: "Aivora Operating System Dashboard",
+}
+
+const messages = {
+  admin: adminMessages,
 }
 
 export default function RootLayout({
@@ -32,14 +37,16 @@ export default function RootLayout({
           "--font-display": "var(--font-newsreader)",
         } as React.CSSProperties}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <MotionProvider>
-              {/* z-0: Animated atmospheric wave — global, page-aware intensity */}
-              <GlobalWaveBackground />
-              {children}
-              <AnalyticsProvider />
-          </MotionProvider>
-        </ThemeProvider>
+        <NextIntlClientProvider locale="en" messages={messages}>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <MotionProvider>
+                {/* z-0: Animated atmospheric wave — global, page-aware intensity */}
+                <GlobalWaveBackground />
+                {children}
+                <AnalyticsProvider />
+            </MotionProvider>
+          </ThemeProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   )
