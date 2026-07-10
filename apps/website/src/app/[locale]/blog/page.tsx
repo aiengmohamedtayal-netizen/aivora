@@ -1,12 +1,12 @@
 import { getTranslations } from "next-intl/server"
 import Script from "next/script"
-import { FeaturedArticle } from "@/components/blog/FeaturedArticle"
-import { ArticleGrid } from "@/components/blog/ArticleGrid"
-import { NewsletterCTA } from "@/components/blog/NewsletterCTA"
+import { FeaturedArticle } from "@aivora/ui/blog/FeaturedArticle"
+import { ArticleGrid } from "@aivora/ui/blog/ArticleGrid"
+import { NewsletterCTA } from "@aivora/ui/blog/NewsletterCTA"
 import { SectionLabel } from "@aivora/ui/SectionLabel"
 import { getPosts } from "@aivora/lib/supabase/blog"
 
-import { BlogContainer } from "@/components/blog/BlogContainer"
+import { BlogContainer } from "@aivora/ui/blog/BlogContainer"
 
 export async function generateMetadata({
   params,

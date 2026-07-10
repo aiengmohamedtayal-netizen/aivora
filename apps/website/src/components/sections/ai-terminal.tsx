@@ -23,7 +23,7 @@ import {
 import { GlassCard } from "@aivora/ui/GlassCard"
 import { Badge } from "@aivora/ui/Badge"
 import { cn } from "@aivora/lib/utils"
-import { ClaudeChatInput } from "@/components/common/ClaudeChatInput"
+import { ClaudeChatInput } from "@aivora/ui/common/ClaudeChatInput"
 
 // -----------------------------------------------------------------------------
 // Types

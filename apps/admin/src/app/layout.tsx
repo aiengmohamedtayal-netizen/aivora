@@ -1,10 +1,10 @@
 import type { Metadata } from "next"
 import { GeistSans } from "geist/font/sans"
 import localFont from "next/font/local"
-import { ThemeProvider } from "@/components/providers/ThemeProvider"
-import { AnalyticsProvider } from "@/components/providers/AnalyticsProvider"
-import { MotionProvider } from "@/components/providers/MotionProvider"
-import { GlobalWaveBackground } from "@/components/common/GlobalWaveBackground"
+import { ThemeProvider } from "@aivora/ui/providers/ThemeProvider"
+import { AnalyticsProvider } from "@aivora/ui/providers/AnalyticsProvider"
+import { MotionProvider } from "@aivora/ui/providers/MotionProvider"
+import { GlobalWaveBackground } from "@aivora/ui/common/GlobalWaveBackground"
 import "@/styles/globals.css"
 
 const newsreader = {
