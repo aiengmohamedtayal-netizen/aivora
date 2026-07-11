@@ -38,7 +38,9 @@
     "openConversations": "Open Conversations",
     "recentActivity": "Recent Activity",
     "healthStatus": "Health Status",
-    "emptyActivity": "No recent activity recorded."
+    "emptyActivity": "No recent activity recorded.",
+    "subscribers": "Subscribers",
+    "blog": "Blog Articles"
   },
   "Common": {
     "loading": "Loading...",

@@ -112,7 +112,7 @@ export default async function AdminDashboardPage() {
             <Activity className="w-4 h-4 text-primary" /> {t("recentActivity")}
           </h2>
           <EmptyState 
-            icon={Activity} 
+            iconNode={<Activity className="w-8 h-8" />} 
             title={t("recentActivity")} 
             description={t("emptyActivity")} 
           />

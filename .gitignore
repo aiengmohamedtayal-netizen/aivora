@@ -40,3 +40,6 @@ test-results/
 
 # Agent
 .gemini/
+
+.vercel
+.env*
