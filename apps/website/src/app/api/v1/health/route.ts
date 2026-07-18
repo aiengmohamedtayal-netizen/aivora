@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@aivora/lib/supabase/server'
 
-export async function GET() {
+export async function GET(): Promise<NextResponse> {
   try {
     const supabase = await createClient()
     
@@ -20,11 +20,12 @@ export async function GET() {
         api: 'up'
       }
     }, { status: 200 })
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
     return NextResponse.json({
       status: 'unhealthy',
       timestamp: new Date().toISOString(),
-      error: error.message
+      error: errorMessage
     }, { status: 503 })
   }
 }

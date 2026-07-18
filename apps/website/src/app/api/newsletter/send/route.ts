@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 import { createClient } from "@supabase/supabase-js"
 import { Resend } from "resend"
 
-export async function POST(req: Request) {
+export async function POST(req: Request): Promise<NextResponse> {
   try {
     const authHeader = req.headers.get("authorization")
     if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
@@ -70,6 +70,7 @@ export async function POST(req: Request) {
     }
 
     // Send via Resend
+    let failedChunks = 0;
     for (const chunk of emailChunks) {
       const { error: sendError } = await resend.emails.send({
         from: "Aivora Engineering <hello@aivora.com>",
@@ -82,13 +83,18 @@ export async function POST(req: Request) {
 
       if (sendError) {
         console.error("Resend Batch Error:", sendError)
-        // Note: For production, we'd log this to a tracking table and continue or retry
+        failedChunks++;
       }
     }
 
-    return NextResponse.json({ success: true, sentTo: emails.length }, { status: 200 })
-  } catch (error) {
-    console.error("Newsletter Broadcast Error:", error)
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
+    if (failedChunks === emailChunks.length) {
+      throw new Error("All email chunks failed to send")
+    }
+
+    return NextResponse.json({ success: true, sentTo: emails.length, failedChunks }, { status: 200 })
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : "Unknown error"
+    console.error("Newsletter Broadcast Error:", errorMessage)
+    return NextResponse.json({ error: "Internal server error", details: errorMessage }, { status: 500 })
   }
 }

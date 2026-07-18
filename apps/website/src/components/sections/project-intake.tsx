@@ -51,8 +51,16 @@ export function ProjectIntake() {
     const saved = localStorage.getItem("aivora-wizard")
     if (saved) {
       try {
-        setFormData(JSON.parse(saved))
-      } catch (e) {}
+        const parsed = JSON.parse(saved) as Partial<FormData>
+        // Only restore if it looks like valid wizard data
+        if (parsed && typeof parsed === "object" && "type" in parsed) {
+          setFormData((prev) => ({ ...prev, ...parsed }))
+        }
+      } catch (e) {
+        // Corrupted cache — clear it and start fresh
+        console.warn("[Aivora] Wizard cache corrupted, resetting.", e)
+        localStorage.removeItem("aivora-wizard")
+      }
     }
   }, [])
 
@@ -83,15 +91,21 @@ export function ProjectIntake() {
       const { createClient } = await import("@aivora/lib/supabase/client")
       const supabase = createClient()
       
-      const message = `
-Project Type: ${t(`wizard.questions.type.options.${formData.type}` as any) || formData.type}
-Target Audience: ${t(`wizard.questions.audience.options.${formData.audience}` as any) || formData.audience}
-Stage: ${t(`wizard.questions.stage.options.${formData.stage}` as any) || formData.stage}
-Timeline: ${t(`wizard.questions.timeline.options.${formData.timeline}` as any) || formData.timeline}
-Budget: ${t(`wizard.questions.budget.options.${formData.budget}` as any) || formData.budget}
-Description: ${formData.description}
-Phone: ${formData.phone}
-      `.trim()
+      // Build readable message using raw option values (translation happens server-side in email)
+      const getLabel = (field: keyof FormData): string => {
+        const val = formData[field] as string
+        return val || "—"
+      }
+
+      const message = [
+        `Project Type: ${getLabel("type")}`,
+        `Target Audience: ${getLabel("audience")}`,
+        `Stage: ${getLabel("stage")}`,
+        `Timeline: ${getLabel("timeline")}`,
+        `Budget: ${getLabel("budget")}`,
+        `Description: ${formData.description}`,
+        `Phone: ${formData.phone}`,
+      ].join("\n")
 
       const { error } = await supabase.from('leads').insert({
         name: formData.name || 'Anonymous',
@@ -297,10 +311,14 @@ Phone: ${formData.phone}
     )
   }
 
-  const isCurrentStepValid = () => {
+    const isFieldSelected = (field: keyof FormData): boolean => {
+      return !!(formData[field] as string)
+    }
+
+  const isCurrentStepValid = (): boolean => {
     if (currentQuestion === "description") return formData.description.trim().length > 0
-    if (currentQuestion === "contact") return formData.name && formData.email && formData.company
-    return !!(formData as any)[currentQuestion]
+    if (currentQuestion === "contact") return !!(formData.name && formData.email && formData.company)
+    return isFieldSelected(currentQuestion as keyof FormData)
   }
 
   return (

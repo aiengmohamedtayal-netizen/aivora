@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import { Resend } from "resend"
 
-export async function POST(req: Request) {
+export async function POST(req: Request): Promise<NextResponse> {
   try {
     const body = await req.json()
     const { name, email, company, phone, type, audience, stage, timeline, budget, description } = body
