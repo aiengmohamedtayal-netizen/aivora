@@ -19,7 +19,8 @@ import {
   ServiceTechStack, 
   ServiceBenefits, 
   ServiceFAQ, 
-  ServiceCTA 
+  ServiceCTA,
+  type ServiceTranslations
 } from "@/components/sections/services/ServiceSections"
 
 const SLUGS = [
@@ -43,10 +44,14 @@ export async function generateMetadata({
   const { locale, slug } = await params
   if (!SLUGS.includes(slug)) return {}
 
-  const t = await getTranslations({ locale, namespace: `service-details.${slug}` })
-  return {
-    title: t("seoTitle"),
-    description: t("seoDescription"),
+  try {
+    const t = await getTranslations({ locale, namespace: `service-details.${slug}` })
+    return {
+      title: t("seoTitle"),
+      description: t("seoDescription"),
+    }
+  } catch {
+    return {}
   }
 }
 
@@ -72,11 +77,26 @@ export default async function ServiceDetailsPage({
   const t = await getTranslations({ locale, namespace: `service-details.${slug}` })
   const Icon = icons[slug] || Brain
 
+  // Read all translation data server-side and pass as plain objects to client components
+  const data: ServiceTranslations = {
+    hero: t.raw("hero") as ServiceTranslations["hero"],
+    problems: t.raw("problems") as ServiceTranslations["problems"],
+    solution: t.raw("solution") as ServiceTranslations["solution"],
+    features: t.raw("features") as ServiceTranslations["features"],
+    process: t.raw("process") as ServiceTranslations["process"],
+    techStack: t.raw("techStack") as ServiceTranslations["techStack"],
+    benefits: t.raw("benefits") as ServiceTranslations["benefits"],
+    faq: t.raw("faq") as ServiceTranslations["faq"],
+    cta: t.raw("cta") as ServiceTranslations["cta"],
+    seoTitle: t("seoTitle"),
+    seoDescription: t("seoDescription"),
+  }
+
   const serviceJsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": t("hero.title"),
-    "description": t("hero.description"),
+    "name": data.hero.title,
+    "description": data.hero.description,
     "provider": {
       "@type": "Organization",
       "name": "Aivora",
@@ -104,7 +124,7 @@ export default async function ServiceDetailsPage({
       {
         "@type": "ListItem",
         "position": 3,
-        "name": t("hero.title"),
+        "name": data.hero.title,
         "item": `https://aivora-lac.vercel.app/${locale}/services/${slug}`
       }
     ]
@@ -130,21 +150,21 @@ export default async function ServiceDetailsPage({
         <ServiceHero slug={slug} icon={Icon} />
 
         <div className="grid md:grid-cols-2 gap-6">
-          <ServiceProblems slug={slug} />
-          <ServiceSolution slug={slug} />
+          <ServiceProblems data={data.problems} />
+          <ServiceSolution data={data.solution} />
         </div>
 
-        <ServiceFeatures slug={slug} />
+        <ServiceFeatures data={data.features} />
         
-        <ServiceProcess slug={slug} />
+        <ServiceProcess data={data.process} />
         
-        <ServiceTechStack slug={slug} />
+        <ServiceTechStack data={data.techStack} />
         
-        <ServiceBenefits slug={slug} />
+        <ServiceBenefits data={data.benefits} />
         
-        <ServiceFAQ slug={slug} />
+        <ServiceFAQ data={data.faq} />
         
-        <ServiceCTA slug={slug} />
+        <ServiceCTA data={data.cta} />
       </div>
     </main>
   )
