@@ -1,6 +1,5 @@
 import { notFound, redirect } from "next/navigation"
 import Script from "next/script"
-import { unstable_cache } from "next/cache"
 import { 
   Sparkles, 
   Brain, 
@@ -62,34 +61,24 @@ function localize<T>(obj: T, locale: "ar" | "en"): any {
   return result
 }
 
-// Cached content loader to avoid overhead
-const getCachedServiceData = unstable_cache(
-  async (slug: string, locale: "ar" | "en") => {
-    const rawContent = getServiceBySlug(slug)
-    if (!rawContent) return null
-    return localize(rawContent, locale) as ServiceTranslations
-  },
-  ["services-content-cache"],
-  { revalidate: 3600 } // Revalidate cache hourly
-)
-
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string; slug: string }>
 }) {
   const { locale, slug } = await params
-  
   const targetSlug = LEGACY_REDIRECTS[slug] || slug
   const cleanLocale = locale === "ar" ? "ar" : "en"
 
-  const data = await getCachedServiceData(targetSlug, cleanLocale)
-  if (!data) return {}
+  const rawContent = getServiceBySlug(targetSlug)
+  if (!rawContent) return {}
+
+  const data = localize(rawContent, cleanLocale)
 
   return {
-    title: data.seoTitle,
-    description: data.seoDescription,
-    keywords: (getServiceBySlug(targetSlug)?.seo.keywords as any)?.[cleanLocale] || "",
+    title: data.seo?.title || data.hero?.title || "Aivora",
+    description: data.seo?.description || data.hero?.description || "",
+    keywords: data.seo?.keywords || "",
     alternates: {
       canonical: `https://aivora-lac.vercel.app/${locale}/services/${targetSlug}`
     }
@@ -120,10 +109,19 @@ export default async function ServiceDetailsPage({
     notFound()
   }
 
-  // 2. Fetch Cached pre-localized CMS service content
-  const data = await getCachedServiceData(slug, cleanLocale)
-  if (!data) {
+  // 2. Fetch pre-localized CMS service content directly
+  const rawContent = getServiceBySlug(slug)
+  if (!rawContent) {
     notFound()
+  }
+
+  const localizedData = localize(rawContent, cleanLocale)
+  
+  // Guarantee full compatibility with expected ServiceTranslations layout structure
+  const data: ServiceTranslations = {
+    ...localizedData,
+    seoTitle: localizedData.seo?.title || localizedData.hero?.title || "",
+    seoDescription: localizedData.seo?.description || localizedData.hero?.description || ""
   }
 
   const Icon = icons[slug] || Sparkles
