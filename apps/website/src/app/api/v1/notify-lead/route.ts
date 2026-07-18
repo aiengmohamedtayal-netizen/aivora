@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import { createClient } from "@supabase/supabase-js"
-import nodemailer from "nodemailer"
+import { Resend } from "resend"
 
 export async function POST(req: Request): Promise<NextResponse> {
   try {
@@ -51,19 +51,15 @@ export async function POST(req: Request): Promise<NextResponse> {
       dbErrorDetails = dbCrash.message;
     }
 
-    // 2. Send email notification via Gmail SMTP (Nodemailer) — non-blocking to prevent UI crash
+    // 2. Send email notification via Resend — non-blocking to prevent UI crash
     let emailErrorDetails = null;
     try {
-      const smtpUser = process.env.SMTP_USER || "mota200615@gmail.com"
-      const smtpPass = process.env.SMTP_PASS || "iktjdsuxkbszobxx"
+      const resendApiKey = process.env.RESEND_API_KEY
+      if (!resendApiKey) {
+        throw new Error("RESEND_API_KEY is not configured in Vercel environment variables")
+      }
 
-      const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: smtpUser,
-          pass: smtpPass,
-        },
-      })
+      const resend = new Resend(resendApiKey)
 
       const htmlBody = `
         <!DOCTYPE html>
@@ -129,18 +125,22 @@ export async function POST(req: Request): Promise<NextResponse> {
         </html>
       `
 
-      await transporter.sendMail({
-        from: `"Aivora Platform" <${smtpUser}>`,
+      const { error: emailError } = await resend.emails.send({
+        from: "Aivora Platform <onboarding@resend.dev>",
         to: "aiengmohamedtayal@gmail.com",
         subject: `🚀 طلب مشروع جديد من ${name || "زائر"} – ${company || ""}`,
         html: htmlBody,
+        replyTo: email || undefined,
       })
+
+      if (emailError) {
+        throw new Error(emailError.message)
+      }
     } catch (emailError: any) {
-      console.error("Nodemailer email send error:", emailError)
+      console.error("Resend email send error:", emailError)
       emailErrorDetails = emailError.message;
     }
 
-    // Always return success if we did our best, indicating lead status
     return NextResponse.json({ 
       success: true, 
       dbSaved: !dbErrorDetails, 
