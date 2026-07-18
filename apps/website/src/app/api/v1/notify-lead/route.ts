@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import { createClient } from "@supabase/supabase-js"
-import { Resend } from "resend"
+import nodemailer from "nodemailer"
 
 export async function POST(req: Request): Promise<NextResponse> {
   try {
@@ -9,14 +9,13 @@ export async function POST(req: Request): Promise<NextResponse> {
 
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
     const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
-    const resendApiKey = process.env.RESEND_API_KEY
 
     if (!supabaseUrl || !supabaseServiceKey) {
       console.error("Missing Supabase server-side configuration")
       return NextResponse.json({ error: "Server configuration error" }, { status: 500 })
     }
 
-    // 1. Insert into Supabase database server-side using service role key (bypasses client-side RLS/401 issues)
+    // 1. Insert into Supabase database server-side using service role key
     const supabase = createClient(supabaseUrl, supabaseServiceKey, {
       auth: {
         persistSession: false,
@@ -43,63 +42,69 @@ export async function POST(req: Request): Promise<NextResponse> {
 
     if (dbError) {
       console.error("Supabase server-side insert error:", dbError)
-      // We continue to send email even if DB insert fails, to not lose the lead details
     }
 
-    // 2. Send email notification via Resend
-    if (!resendApiKey) {
-      console.warn("RESEND_API_KEY not set — skipping email notification")
-      return NextResponse.json({ success: true, emailSkipped: true })
-    }
+    // 2. Send email notification via Gmail SMTP (Nodemailer) — exactly like hospital system
+    const smtpUser = process.env.SMTP_USER || "mota200615@gmail.com"
+    const smtpPass = process.env.SMTP_PASS || "iktjdsuxkbszobxx"
 
-    const resend = new Resend(resendApiKey)
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: smtpUser,
+        pass: smtpPass,
+      },
+    })
 
     const htmlBody = `
       <!DOCTYPE html>
-      <html dir="ltr" lang="en">
-      <head><meta charset="UTF-8" /><title>New Lead - Aivora</title></head>
-      <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f9f9f9; padding: 32px;">
-        <div style="max-width: 600px; margin: 0 auto; background: #fff; border-radius: 12px; border: 1px solid #eaeaea; overflow: hidden;">
-          <div style="background: #0a0a0a; padding: 24px 32px;">
+      <html dir="rtl" lang="ar">
+      <head>
+        <meta charset="UTF-8" />
+        <title>طلب مشروع جديد - Aivora</title>
+      </head>
+      <body style="font-family: system-ui, -apple-system, sans-serif; background-color: #f9f9f9; padding: 32px; direction: rtl; text-align: right;">
+        <div style="max-width: 600px; margin: 0 auto; background: #fff; border-radius: 12px; border: 1px solid #eaeaea; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+          <div style="background: #0a0a0a; padding: 24px 32px; text-align: center;">
             <h1 style="color: #fff; font-size: 20px; margin: 0; font-weight: 600;">🚀 طلب مشروع جديد – Aivora</h1>
           </div>
           <div style="padding: 32px;">
-            <table style="width: 100%; border-collapse: collapse;">
+            <table style="width: 100%; border-collapse: collapse; text-align: right; direction: rtl;">
               <tr>
                 <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; color: #888; font-size: 13px; width: 140px;">الاسم</td>
-                <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; font-weight: 500; font-size: 14px;">${name || "—"}</td>
+                <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; font-weight: 500; font-size: 14px; color: #111;">${name || "—"}</td>
               </tr>
               <tr>
                 <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; color: #888; font-size: 13px;">البريد الإلكتروني</td>
-                <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; font-weight: 500; font-size: 14px;"><a href="mailto:${email}" style="color: #4f46e5;">${email || "—"}</a></td>
+                <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; font-weight: 500; font-size: 14px;"><a href="mailto:${email}" style="color: #0066cc; text-decoration: none;">${email || "—"}</a></td>
               </tr>
               <tr>
                 <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; color: #888; font-size: 13px;">الشركة</td>
-                <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; font-weight: 500; font-size: 14px;">${company || "—"}</td>
+                <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; font-weight: 500; font-size: 14px; color: #111;">${company || "—"}</td>
               </tr>
               <tr>
                 <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; color: #888; font-size: 13px;">الهاتف</td>
-                <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; font-weight: 500; font-size: 14px;">${phone || "—"}</td>
+                <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; font-weight: 500; font-size: 14px; color: #111;">${phone || "—"}</td>
               </tr>
               <tr>
                 <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; color: #888; font-size: 13px;">نوع المشروع</td>
-                <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; font-weight: 500; font-size: 14px;">${type || "—"}</td>
+                <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; font-weight: 500; font-size: 14px; color: #111;">${type || "—"}</td>
               </tr>
               <tr>
                 <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; color: #888; font-size: 13px;">الجمهور المستهدف</td>
-                <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; font-weight: 500; font-size: 14px;">${audience || "—"}</td>
+                <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; font-weight: 500; font-size: 14px; color: #111;">${audience || "—"}</td>
               </tr>
               <tr>
                 <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; color: #888; font-size: 13px;">مرحلة المشروع</td>
-                <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; font-weight: 500; font-size: 14px;">${stage || "—"}</td>
+                <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; font-weight: 500; font-size: 14px; color: #111;">${stage || "—"}</td>
               </tr>
               <tr>
                 <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; color: #888; font-size: 13px;">الجدول الزمني</td>
-                <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; font-weight: 500; font-size: 14px;">${timeline || "—"}</td>
+                <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; font-weight: 500; font-size: 14px; color: #111;">${timeline || "—"}</td>
               </tr>
               <tr>
                 <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; color: #888; font-size: 13px;">الميزانية</td>
-                <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; font-weight: 500; font-size: 14px;">${budget || "—"}</td>
+                <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; font-weight: 500; font-size: 14px; color: #111;">${budget || "—"}</td>
               </tr>
               <tr>
                 <td style="padding: 10px 0; color: #888; font-size: 13px; vertical-align: top;">تفاصيل المشروع</td>
@@ -108,25 +113,19 @@ export async function POST(req: Request): Promise<NextResponse> {
             </table>
           </div>
           <div style="background: #f9f9f9; padding: 20px 32px; border-top: 1px solid #eaeaea; text-align: center;">
-            <p style="color: #aaa; font-size: 12px; margin: 0;">تم الإرسال تلقائياً من نموذج الاستفسار في موقع <strong>Aivora</strong></p>
+            <p style="color: #aaa; font-size: 11px; margin: 0;">تم الإرسال تلقائياً من نموذج الاستفسار في موقع <strong>Aivora</strong></p>
           </div>
         </div>
       </body>
       </html>
     `
 
-    const { error: emailError } = await resend.emails.send({
-      from: "Aivora Leads <onboarding@resend.dev>",
+    await transporter.sendMail({
+      from: `"Aivora Platform" <${smtpUser}>`,
       to: "aiengmohamedtayal@gmail.com",
       subject: `🚀 طلب مشروع جديد من ${name || "زائر"} – ${company || ""}`,
       html: htmlBody,
-      replyTo: email || undefined,
     })
-
-    if (emailError) {
-      console.error("Resend email send error:", emailError)
-      return NextResponse.json({ success: true, emailError: emailError.message })
-    }
 
     return NextResponse.json({ success: true })
   } catch (err: unknown) {
