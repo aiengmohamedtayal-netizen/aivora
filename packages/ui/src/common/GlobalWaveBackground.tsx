@@ -305,7 +305,6 @@ export function GlobalWaveBackground() {
         zIndex: 0,
         opacity: finalOpacity,
         transition: 'opacity 800ms ease',
-        willChange: 'opacity',
       }}
     >
       <svg
