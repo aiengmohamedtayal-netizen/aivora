@@ -126,8 +126,18 @@ export function AivoraAssistant() {
     return () => window.removeEventListener("open-aivora-chat", handleOpen)
   }, [])
 
+  const isRtl = locale === "ar"
+
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+    <div 
+      className={cn("flex flex-col", isRtl ? "items-start" : "items-end")}
+      style={{
+        position: "fixed",
+        bottom: "24px",
+        [isRtl ? "left" : "right"]: "24px",
+        zIndex: 1000,
+      }}
+    >
       <AnimatePresence>
         {isOpen && (
           <ChatDialog
