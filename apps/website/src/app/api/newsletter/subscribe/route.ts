@@ -2,9 +2,21 @@ import { NextResponse } from "next/server"
 import { subscribeSchema } from "@/lib/newsletter/validation"
 import { createSubscriber } from "@/lib/newsletter/database"
 import { sendConfirmationEmail } from "@/lib/newsletter/mailer"
+import { checkRateLimit } from "@/lib/newsletter/rate-limit"
 
 export async function POST(req: Request) {
   try {
+    // Extract IP address for rate limiting
+    const ip = req.headers.get("x-forwarded-for") || "127.0.0.1"
+    
+    // Allow 5 subscription attempts per minute per IP
+    if (!checkRateLimit(ip, 5, 60000)) {
+      return NextResponse.json(
+        { error: "Too many subscription requests. Please try again in a minute." },
+        { status: 429 }
+      )
+    }
+
     const body = await req.json()
     
     // 1. Zod Validation
@@ -21,14 +33,13 @@ export async function POST(req: Request) {
     // 2. Honeypot Spam Check
     if (honeypot) {
       console.warn(`Honeypot triggered for subscriber email: ${email}`)
-      // Fake successful response for bots to prevent them trying other routes
       return NextResponse.json({ 
         status: "pending", 
         message: locale === "ar" ? "تم إرسال بريد التأكيد بنجاح." : "Verification email sent successfully." 
       })
     }
 
-    // 3. Database Insertion (defaults to status: pending)
+    // 3. Database Insertion
     const result = await createSubscriber(email, locale, source)
     if (!result) {
       return NextResponse.json(
