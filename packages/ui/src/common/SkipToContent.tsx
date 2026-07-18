@@ -10,8 +10,7 @@ export function SkipToContent() {
     <a
       href="#main-content"
       className={cn(
-        "fixed start-4 top-4 z-50 -translate-y-24 rounded-md bg-primary px-4 py-2 font-medium text-primary-foreground shadow-lg transition-transform",
-        "focus-visible:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        "sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:font-medium focus:text-primary-foreground focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background",
       )}
     >
       {t("skipToContent")}
