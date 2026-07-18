@@ -88,54 +88,25 @@ export function ProjectIntake() {
   const handleSubmit = async () => {
     setIsSubmitting(true)
     try {
-      const { createClient } = await import("@aivora/lib/supabase/client")
-      const supabase = createClient()
-      
-      // Build readable message using raw option values (translation happens server-side in email)
-      const getLabel = (field: keyof FormData): string => {
-        const val = formData[field] as string
-        return val || "—"
-      }
-
-      const message = [
-        `Project Type: ${getLabel("type")}`,
-        `Target Audience: ${getLabel("audience")}`,
-        `Stage: ${getLabel("stage")}`,
-        `Timeline: ${getLabel("timeline")}`,
-        `Budget: ${getLabel("budget")}`,
-        `Description: ${formData.description}`,
-        `Phone: ${formData.phone}`,
-      ].join("\n")
-
-      const { error } = await supabase.from('leads').insert({
-        name: formData.name || 'Anonymous',
-        email: formData.email,
-        company: formData.company,
-        message: message.length >= 10 ? message : 'Insufficient details provided.'
+      const response = await fetch("/api/v1/notify-lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          phone: formData.phone,
+          type: formData.type,
+          audience: formData.audience,
+          stage: formData.stage,
+          timeline: formData.timeline,
+          budget: formData.budget,
+          description: formData.description,
+        }),
       })
 
-      if (error) throw error
-
-      // Send email notification (fire-and-forget — don't block success)
-      try {
-        await fetch("/api/v1/notify-lead", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: formData.name,
-            email: formData.email,
-            company: formData.company,
-            phone: formData.phone,
-            type: formData.type,
-            audience: formData.audience,
-            stage: formData.stage,
-            timeline: formData.timeline,
-            budget: formData.budget,
-            description: formData.description,
-          }),
-        })
-      } catch (emailErr) {
-        console.warn("Email notification failed (non-critical):", emailErr)
+      if (!response.ok) {
+        throw new Error(`API Error: ${response.status}`)
       }
 
       setStep(8)

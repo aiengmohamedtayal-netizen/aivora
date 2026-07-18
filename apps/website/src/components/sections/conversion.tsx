@@ -29,42 +29,22 @@ export function SectionConversion() {
 
     startTransition(async () => {
       try {
-        const { createClient } = await import("@aivora/lib/supabase/client")
-        const supabase = createClient()
-
-        const messageDetail = `
-Project Type: ${projectType || 'N/A'}
-Budget: ${budget || 'N/A'}
-Phone: ${phone || 'N/A'}
-Message: ${message}
-        `.trim()
-
-        const { error } = await supabase.from('leads').insert({
-          name: name || 'Anonymous',
-          email: email,
-          company: company || 'N/A',
-          message: messageDetail
+        const response = await fetch("/api/v1/notify-lead", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name,
+            email,
+            company,
+            phone,
+            type: projectType,
+            budget,
+            description: message,
+          }),
         })
 
-        if (error) throw error
-
-        // Send email notification via Resend (fire-and-forget)
-        try {
-          await fetch("/api/v1/notify-lead", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              name,
-              email,
-              company,
-              phone,
-              type: projectType,
-              budget,
-              description: message,
-            }),
-          })
-        } catch (emailErr) {
-          console.warn("Email notification failed (non-critical):", emailErr)
+        if (!response.ok) {
+          throw new Error(`API Error: ${response.status}`)
         }
 
         setIsSuccess(true)
