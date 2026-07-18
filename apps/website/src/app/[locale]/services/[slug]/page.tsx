@@ -1,13 +1,11 @@
-import { getTranslations } from "next-intl/server"
-import { notFound } from "next/navigation"
+import { notFound, redirect } from "next/navigation"
 import Script from "next/script"
+import { unstable_cache } from "next/cache"
 import { 
-  Brain, 
-  Code, 
-  Layers, 
   Sparkles, 
-  Cpu, 
-  Rocket 
+  Brain, 
+  Layers, 
+  Cpu 
 } from "lucide-react"
 
 import { ServiceHero } from "@/components/sections/services/ServiceHero"
@@ -22,19 +20,58 @@ import {
   ServiceCTA,
   type ServiceTranslations
 } from "@/components/sections/services/ServiceSections"
+import { getServiceBySlug } from "@/content/services"
 
-const SLUGS = [
-  "ai-solutions",
-  "custom-software",
-  "saas-development",
+// Redirection mapping for legacy/old slugs to avoid 404 or 500 errors
+const LEGACY_REDIRECTS: Record<string, string> = {
+  "ai-solutions": "ai-integration",
+  "custom-software": "cloud-infrastructure",
+  "automation": "workflow-automation",
+  "saas-development": "web-development",
+  "startup-mvp": "web-development"
+}
+
+const SUPPORTED_SLUGS = [
   "web-development",
-  "automation",
-  "startup-mvp"
+  "ai-integration",
+  "cloud-infrastructure",
+  "workflow-automation"
 ]
 
 export async function generateStaticParams() {
-  return SLUGS.map((slug) => ({ slug }))
+  return SUPPORTED_SLUGS.map((slug) => ({ slug }))
 }
+
+// Deep localization helper to extract correct translation properties
+function localize<T>(obj: T, locale: "ar" | "en"): any {
+  if (obj === null || obj === undefined) return obj
+  if (typeof obj !== "object") return obj
+  
+  if ("ar" in obj && "en" in obj) {
+    return (obj as any)[locale]
+  }
+  
+  if (Array.isArray(obj)) {
+    return obj.map(item => localize(item, locale))
+  }
+  
+  const result: any = {}
+  for (const key in obj) {
+    result[key] = localize((obj as any)[key], locale)
+  }
+  return result
+}
+
+// Cached content loader to avoid overhead
+const getCachedServiceData = unstable_cache(
+  async (slug: string, locale: "ar" | "en") => {
+    const rawContent = getServiceBySlug(slug)
+    if (!rawContent) return null
+    return localize(rawContent, locale) as ServiceTranslations
+  },
+  ["services-content-cache"],
+  { revalidate: 3600 } // Revalidate cache hourly
+)
 
 export async function generateMetadata({
   params,
@@ -42,26 +79,28 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>
 }) {
   const { locale, slug } = await params
-  if (!SLUGS.includes(slug)) return {}
+  
+  const targetSlug = LEGACY_REDIRECTS[slug] || slug
+  const cleanLocale = locale === "ar" ? "ar" : "en"
 
-  try {
-    const t = await getTranslations({ locale, namespace: `service-details.${slug}` })
-    return {
-      title: t("seoTitle"),
-      description: t("seoDescription"),
+  const data = await getCachedServiceData(targetSlug, cleanLocale)
+  if (!data) return {}
+
+  return {
+    title: data.seoTitle,
+    description: data.seoDescription,
+    keywords: (getServiceBySlug(targetSlug)?.seo.keywords as any)?.[cleanLocale] || "",
+    alternates: {
+      canonical: `https://aivora-lac.vercel.app/${locale}/services/${targetSlug}`
     }
-  } catch {
-    return {}
   }
 }
 
 const icons: Record<string, any> = {
-  "ai-solutions": Brain,
-  "custom-software": Code,
-  "saas-development": Layers,
   "web-development": Sparkles,
-  "automation": Cpu,
-  "startup-mvp": Rocket
+  "ai-integration": Brain,
+  "cloud-infrastructure": Layers,
+  "workflow-automation": Cpu
 }
 
 export default async function ServiceDetailsPage({
@@ -70,27 +109,24 @@ export default async function ServiceDetailsPage({
   params: Promise<{ locale: string; slug: string }>
 }) {
   const { locale, slug } = await params
-  if (!SLUGS.includes(slug)) {
+  const cleanLocale = locale === "ar" ? "ar" : "en"
+
+  // 1. Process Redirects for legacy routes
+  if (slug in LEGACY_REDIRECTS) {
+    redirect(`/${locale}/services/${LEGACY_REDIRECTS[slug]}`)
+  }
+
+  if (!SUPPORTED_SLUGS.includes(slug)) {
     notFound()
   }
 
-  const t = await getTranslations({ locale, namespace: `service-details.${slug}` })
-  const Icon = icons[slug] || Brain
-
-  // Read all translation data server-side and pass as plain objects to client components
-  const data: ServiceTranslations = {
-    hero: t.raw("hero") as ServiceTranslations["hero"],
-    problems: t.raw("problems") as ServiceTranslations["problems"],
-    solution: t.raw("solution") as ServiceTranslations["solution"],
-    features: t.raw("features") as ServiceTranslations["features"],
-    process: t.raw("process") as ServiceTranslations["process"],
-    techStack: t.raw("techStack") as ServiceTranslations["techStack"],
-    benefits: t.raw("benefits") as ServiceTranslations["benefits"],
-    faq: t.raw("faq") as ServiceTranslations["faq"],
-    cta: t.raw("cta") as ServiceTranslations["cta"],
-    seoTitle: t("seoTitle"),
-    seoDescription: t("seoDescription"),
+  // 2. Fetch Cached pre-localized CMS service content
+  const data = await getCachedServiceData(slug, cleanLocale)
+  if (!data) {
+    notFound()
   }
+
+  const Icon = icons[slug] || Sparkles
 
   const serviceJsonLd = {
     "@context": "https://schema.org",
@@ -147,7 +183,7 @@ export default async function ServiceDetailsPage({
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#ffffff01_1px,transparent_1px),linear-gradient(to_bottom,#ffffff01_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl relative z-10 flex flex-col gap-10">
-        <ServiceHero slug={slug} icon={Icon} />
+        <ServiceHero slug={slug} icon={Icon} data={data.hero} />
 
         <div className="grid md:grid-cols-2 gap-6">
           <ServiceProblems data={data.problems} />
