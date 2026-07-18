@@ -1,9 +1,20 @@
 "use client"
 
 import { useLocale } from "next-intl"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, Sparkles, Brain, Layers, Cpu } from "lucide-react"
 import { Link } from "@/i18n/routing"
 import { Button } from "@aivora/ui/Button"
+import type { LucideIcon } from "lucide-react"
+
+// Icon resolution lives inside the client component to avoid
+// passing non-serializable React component functions across
+// the Server → Client boundary.
+const icons: Record<string, LucideIcon> = {
+  "web-development": Sparkles,
+  "ai-integration": Brain,
+  "cloud-infrastructure": Layers,
+  "workflow-automation": Cpu
+}
 
 interface ServiceHeroData {
   title: string
@@ -14,14 +25,13 @@ interface ServiceHeroData {
 
 export function ServiceHero({ 
   slug, 
-  icon: Icon,
   data 
 }: { 
   slug: string
-  icon: any
   data?: ServiceHeroData 
 }) {
   const locale = useLocale()
+  const Icon = icons[slug] || Sparkles
 
   const heroData = data || {
     title: "",

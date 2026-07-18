@@ -1,11 +1,5 @@
 import { notFound, redirect } from "next/navigation"
 import Script from "next/script"
-import { 
-  Sparkles, 
-  Brain, 
-  Layers, 
-  Cpu 
-} from "lucide-react"
 
 import { ServiceHero } from "@/components/sections/services/ServiceHero"
 import { 
@@ -84,12 +78,7 @@ export async function generateMetadata({
   }
 }
 
-const icons: Record<string, any> = {
-  "web-development": Sparkles,
-  "ai-integration": Brain,
-  "cloud-infrastructure": Layers,
-  "workflow-automation": Cpu
-}
+
 
 export default async function ServiceDetailsPage({
   params,
@@ -123,13 +112,11 @@ export default async function ServiceDetailsPage({
     seoDescription: localizedData.seo?.description || localizedData.hero?.description || ""
   }
 
-  const Icon = icons[slug] || Sparkles
-
   const serviceJsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": data.hero.title,
-    "description": data.hero.description,
+    "name": data.hero?.title || "",
+    "description": data.hero?.description || "",
     "provider": {
       "@type": "Organization",
       "name": "Aivora",
@@ -157,7 +144,7 @@ export default async function ServiceDetailsPage({
       {
         "@type": "ListItem",
         "position": 3,
-        "name": data.hero.title,
+        "name": data.hero?.title || "",
         "item": `https://aivora-lac.vercel.app/${locale}/services/${slug}`
       }
     ]
@@ -180,7 +167,7 @@ export default async function ServiceDetailsPage({
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#ffffff01_1px,transparent_1px),linear-gradient(to_bottom,#ffffff01_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl relative z-10 flex flex-col gap-10">
-        <ServiceHero slug={slug} icon={Icon} data={data.hero} />
+        <ServiceHero slug={slug} data={data.hero} />
 
         <ServiceOverview data={data.overview} />
 
