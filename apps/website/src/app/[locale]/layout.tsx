@@ -13,19 +13,8 @@ import { AnalyticsProvider } from "@aivora/ui/providers/AnalyticsProvider"
 import { SkipToContent } from "@aivora/ui/common/SkipToContent"
 import { ZodErrorProvider } from "@/i18n/zodErrorMap"
 import { MotionProvider } from "@aivora/ui/providers/MotionProvider"
-import dynamic from "next/dynamic"
+import { VisualsWrapper } from "@/components/common/VisualsWrapper"
 import "@/styles/globals.css"
-
-// Lazy load heavy interactive components to optimize FCP and LCP bundle sizes
-const GlobalWaveBackground = dynamic(
-  () => import("@aivora/ui/common/GlobalWaveBackground").then(m => m.GlobalWaveBackground),
-  { ssr: false }
-)
-
-const AivoraAssistant = dynamic(
-  () => import("@aivora/ui/common/AivoraAssistant").then(m => m.AivoraAssistant),
-  { ssr: false }
-)
 
 const newsreader = {
   variable: "font-newsreader-class",
@@ -135,14 +124,13 @@ export default async function LocaleLayout({
           <NextIntlClientProvider messages={messages}>
             <MotionProvider>
               <ZodErrorProvider>
-                <GlobalWaveBackground />
+                <VisualsWrapper />
                 <SkipToContent />
                 <Navbar />
                 <main id="main-content" className="flex-1 w-full pt-16 relative z-10">
                   {children}
                 </main>
                 <Footer />
-                <AivoraAssistant />
                 <AnalyticsProvider />
               </ZodErrorProvider>
             </MotionProvider>
