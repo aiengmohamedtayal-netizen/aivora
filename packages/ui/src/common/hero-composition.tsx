@@ -1,30 +1,47 @@
 "use client"
 
 import React, { useState, useRef } from "react"
-import { motion, useSpring } from "framer-motion"
+import { motion, useSpring, AnimatePresence } from "framer-motion"
 import { 
-  Code2, 
-  Layers, 
-  Monitor,
   Sparkles,
+  TrendingUp,
+  ArrowUpRight,
+  ShieldCheck,
+  CheckCircle2,
   Cpu,
-  Settings,
-  Boxes,
-  Play,
-  Terminal,
-  Grid,
-  FileCode2,
-  Sliders,
-  RotateCw,
-  MoreHorizontal
+  Globe,
+  Smartphone,
+  MousePointer,
+  MessageSquare,
+  Activity,
+  Layers,
+  ArrowRight
 } from "lucide-react"
+
+// ─── HELPER COMPONENT: Glass Card Wrapper ──────────────────────────────────────
+function GlassCard({ 
+  children, 
+  className = "", 
+  style = {} 
+}: { 
+  children: React.ReactNode
+  className?: string
+  style?: React.CSSProperties 
+}) {
+  return (
+    <div 
+      style={style}
+      className={`backdrop-blur-[20px] bg-[#ffffff05] dark:bg-[#00000030] border border-white/10 dark:border-white/5 rounded-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.2)] ${className}`}
+    >
+      {children}
+    </div>
+  )
+}
 
 export function HeroComposition() {
   const containerRef = useRef<HTMLDivElement>(null)
-  
-  // Parallax and Magnetic effects
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  
+
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!containerRef.current) return
     const rect = containerRef.current.getBoundingClientRect()
@@ -33,12 +50,12 @@ export function HeroComposition() {
     setMousePosition({ x, y })
   }
 
-  // Softened rotation for a 3D perspective effect
-  const rotateX = useSpring(mousePosition.y * -15, { stiffness: 120, damping: 25 })
-  const rotateY = useSpring(mousePosition.x * 15, { stiffness: 120, damping: 25 })
-  
-  // Floating animation variants (subtle and purposeful)
-  const floatAnimation = (delay = 0, yRange = 8, duration = 6) => ({
+  // Springs for smooth 3D parallax rotation
+  const rotateX = useSpring(mousePosition.y * -12, { stiffness: 100, damping: 25 })
+  const rotateY = useSpring(mousePosition.x * 12, { stiffness: 100, damping: 25 })
+
+  // Floating animation generator
+  const floatAnimation = (delay = 0, yRange = 6, duration = 6) => ({
     animate: {
       y: [-yRange, yRange, -yRange],
       transition: {
@@ -54,17 +71,29 @@ export function HeroComposition() {
     <div 
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative w-full h-[600px] lg:h-[700px] flex items-center justify-center perspective-[2000px] transform-gpu overflow-visible font-sans"
+      className="relative w-full h-[600px] lg:h-[705px] flex items-center justify-center perspective-[2000px] transform-gpu overflow-visible"
     >
-      {/* Ambient glow behind composition - soft primary and neon cyan/magenta gradients */}
-      <motion.div 
-        animate={{ 
-          opacity: [0.15, 0.35, 0.15],
-          scale: [0.95, 1.1, 0.95]
-        }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-gradient-to-tr from-primary/10 via-cyan-500/10 to-purple-500/10 blur-[120px] rounded-full pointer-events-none"
-      />
+      {/* Ambient Radial Gradient Glows */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <motion.div 
+          animate={{ 
+            scale: [1, 1.1, 1],
+            opacity: [0.15, 0.25, 0.15]
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[20%] left-[20%] -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-gradient-to-r from-blue-500/20 to-cyan-500/10 blur-[100px]"
+        />
+        <motion.div 
+          animate={{ 
+            scale: [1.1, 1, 1.1],
+            opacity: [0.1, 0.2, 0.1]
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-[20%] right-[10%] w-[350px] h-[350px] rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/10 blur-[90px]"
+        />
+        {/* Subtle grid pattern inside visual */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808005_1px,transparent_1px),linear-gradient(to_bottom,#80808005_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
+      </div>
 
       <motion.div
         style={{
@@ -72,258 +101,255 @@ export function HeroComposition() {
           rotateY,
           transformStyle: "preserve-3d"
         }}
-        className="relative w-full max-w-[800px] h-full flex items-center justify-center group"
+        className="relative w-full max-w-[780px] h-full flex items-center justify-center"
       >
         
-        {/* 1. CENTER PIECE: Futuristic 3D IDE & Live WebGL Viewport */}
+        {/* ─── 1. MAIN BROWSER WINDOW MOCKUP (Product Platform) ────────────────── */}
         <motion.div 
-          initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          initial={{ opacity: 0, scale: 0.96, y: 15 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="absolute z-10 w-[110%] sm:w-[720px] h-[440px] bg-background/55 backdrop-blur-2xl border border-border/40 rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col transition-all duration-500 hover:border-cyan-500/30 hover:shadow-cyan-500/5"
+          className="absolute z-10 w-[95%] sm:w-[680px] h-[430px] rounded-3xl overflow-hidden transition-all duration-500 hover:shadow-[0_0_50px_rgba(59,130,246,0.15)]"
           style={{ translateZ: 0 }}
         >
-          {/* Header */}
-          <div className="h-12 border-b border-border/40 flex items-center px-4 justify-between bg-muted/30">
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-red-500/60" />
-                <div className="w-3 h-3 rounded-full bg-amber-500/60" />
-                <div className="w-3 h-3 rounded-full bg-green-500/60" />
-              </div>
-              <div className="w-px h-4 bg-border" />
-              <div className="flex items-center gap-2 text-sm font-medium">
-                <div className="w-6 h-6 rounded bg-cyan-500/10 flex items-center justify-center">
-                  <Code2 className="w-3.5 h-3.5 text-cyan-400" />
+          <GlassCard className="w-full h-full flex flex-col border-white/10 dark:border-white/5 rounded-3xl">
+            
+            {/* Browser Tab/Header Bar */}
+            <div className="h-12 border-b border-white/10 dark:border-white/5 flex items-center px-5 justify-between bg-white/[0.02] dark:bg-black/[0.15]">
+              <div className="flex items-center gap-6">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-[#ef4444]/70" />
+                  <div className="w-3 h-3 rounded-full bg-[#f59e0b]/70" />
+                  <div className="w-3 h-3 rounded-full bg-[#10b981]/70" />
                 </div>
-                <span className="font-mono text-xs text-muted-foreground">aivora-app-engine</span>
+                <div className="hidden sm:flex items-center gap-2 px-3 py-1 bg-white/5 dark:bg-black/20 rounded-md border border-white/5">
+                  <Globe className="w-3.5 h-3.5 text-blue-400" />
+                  <span className="text-[10px] font-mono text-muted-foreground">aivora.studio/client-preview</span>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-4 text-xs font-medium text-foreground/80">
+                <span className="opacity-60 hover:opacity-100 transition-opacity cursor-pointer">Platform</span>
+                <span className="opacity-60 hover:opacity-100 transition-opacity cursor-pointer">Solutions</span>
+                <span className="px-2.5 py-1 rounded-full bg-primary/10 text-primary text-[10px] border border-primary/20">Live Preview</span>
               </div>
             </div>
 
-            {/* Active file tabs */}
-            <div className="hidden md:flex items-center gap-1 bg-background/30 rounded-lg p-0.5 border border-border/20">
-              <span className="px-3 py-1 text-[11px] font-mono bg-background/60 text-foreground border border-border/10 rounded-md flex items-center gap-1.5 cursor-pointer">
-                <FileCode2 className="w-3 h-3 text-cyan-400" /> canvas-3d.tsx
-              </span>
-              <span className="px-3 py-1 text-[11px] font-mono text-muted-foreground hover:text-foreground rounded-md flex items-center gap-1.5 cursor-pointer transition-colors">
-                <FileCode2 className="w-3 h-3 text-purple-400" /> global.css
-              </span>
-              <span className="px-3 py-1 text-[11px] font-mono text-muted-foreground hover:text-foreground rounded-md flex items-center gap-1.5 cursor-pointer transition-colors">
-                <FileCode2 className="w-3 h-3 text-amber-400" /> package.json
-              </span>
-            </div>
-
-            <div className="flex items-center gap-3 text-muted-foreground">
-              <div className="h-7 w-7 rounded-lg bg-green-500/10 flex items-center justify-center cursor-pointer border border-green-500/20 text-green-400 hover:bg-green-500/20 transition-colors">
-                <Play className="w-3.5 h-3.5 fill-green-400" />
+            {/* Browser Content Viewport (Stunning Client Homepage Mockup) */}
+            <div className="flex-1 overflow-y-auto p-6 sm:p-8 bg-gradient-to-b from-white/[0.01] to-transparent custom-scrollbar flex flex-col gap-6">
+              
+              {/* Client Page Navigation */}
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-sm tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70 dark:from-white dark:to-white/60">NEXUS</span>
+                <div className="flex gap-4 text-[10px] font-medium text-muted-foreground">
+                  <span>Features</span>
+                  <span>Analytics</span>
+                  <span>Docs</span>
+                </div>
+                <button className="px-3 py-1 rounded-full bg-white text-black dark:bg-white dark:text-black font-semibold text-[10px] hover:scale-105 transition-transform">
+                  Get Started
+                </button>
               </div>
-            </div>
-          </div>
-          
-          {/* Main IDE Body */}
-          <div className="flex flex-1 overflow-hidden bg-background/20">
-            {/* Left Side: Code Editor (Syntax Highlighted) */}
-            <div className="w-[50%] border-r border-border/40 p-4 font-mono text-[10.5px] leading-6 select-none overflow-y-auto custom-scrollbar flex">
-              {/* Line Numbers */}
-              <div className="text-muted-foreground/30 text-right pr-3 select-none text-[10px] w-6 border-r border-border/10 mr-3">
-                {Array.from({ length: 15 }).map((_, i) => (
-                  <div key={i}>{String(i + 1).padStart(2, "0")}</div>
+
+              {/* Client Page Hero */}
+              <div className="text-center py-4 flex flex-col items-center gap-3">
+                <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight max-w-md bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/80">
+                  Automate your enterprise intelligence.
+                </h3>
+                <p className="text-xs text-muted-foreground max-w-sm leading-relaxed">
+                  Connect all your business APIs, run secure workflows, and view real-time operations in one integrated dashboard.
+                </p>
+                <div className="flex gap-3 mt-1">
+                  <span className="px-3 py-1.5 rounded-full bg-blue-500 text-white font-medium text-[10px] shadow-lg shadow-blue-500/20">
+                    Deploy to Cloud
+                  </span>
+                  <span className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-foreground text-[10px]">
+                    Read API Docs
+                  </span>
+                </div>
+              </div>
+
+              {/* Client Page Features Grid */}
+              <div className="grid grid-cols-3 gap-3">
+                {[
+                  { icon: Cpu, title: "Custom APIs", desc: "Build tailored systems" },
+                  { icon: ShieldCheck, title: "Enterprise Grade", desc: "Highest security compliance" },
+                  { icon: Activity, title: "60fps Visuals", desc: "Stunning analytics visuals" }
+                ].map((item, idx) => (
+                  <div key={idx} className="p-3.5 rounded-xl border border-white/5 bg-white/[0.02] flex flex-col gap-1.5 hover:bg-white/[0.04] transition-all">
+                    <item.icon className="w-4 h-4 text-blue-400" />
+                    <span className="text-[10px] font-bold text-foreground">{item.title}</span>
+                    <span className="text-[9px] text-muted-foreground leading-normal">{item.desc}</span>
+                  </div>
                 ))}
               </div>
-              {/* Code Content */}
-              <div className="flex-1 text-foreground/80 overflow-x-hidden">
-                <div><span className="text-purple-400">import</span> {"{"} <span className="text-cyan-400">Canvas</span>, <span className="text-cyan-400">useFrame</span> {"}"} <span className="text-purple-400">from</span> <span className="text-green-300">"@react-three/fiber"</span></div>
-                <div><span className="text-purple-400">import</span> {"{"} <span className="text-cyan-400">OrbitControls</span> {"}"} <span className="text-purple-400">from</span> <span className="text-green-300">"@react-three/drei"</span></div>
-                <div className="text-muted-foreground/40">// Initialize WebGL 3D Scene</div>
-                <div><span className="text-purple-400">export</span> <span className="text-blue-400">const</span> <span className="text-amber-400">Web3DApp</span> = () =&gt; {"{"}</div>
-                <div className="pl-4"><span className="text-blue-400">const</span> meshRef = useRef&lt;<span className="text-cyan-400">Mesh</span>&gt;(<span className="text-blue-400">null</span>)</div>
-                <div className="pl-4"><span className="text-cyan-400">useFrame</span>((state) =&gt; {"{"}</div>
-                <div className="pl-8">meshRef.<span className="text-cyan-400">current</span>.rotation.y += <span className="text-pink-400">0.01</span></div>
-                <div className="pl-8">meshRef.<span className="text-cyan-400">current</span>.rotation.x = Math.sin(state.clock.elapsedTime) * <span className="text-pink-400">0.2</span></div>
-                <div className="pl-4">{"})"}</div>
-                <div className="pl-4"><span className="text-purple-400">return</span> (</div>
-                <div className="pl-8">&lt;<span className="text-red-400">Canvas</span> <span className="text-purple-400">camera</span>={"{{"} <span className="text-cyan-400">position</span>: [<span className="text-pink-400">0, 0, 5</span>] {"}}"}&gt;</div>
-                <div className="pl-12">&lt;<span className="text-red-400">ambientLight</span> <span className="text-purple-400">intensity</span>={"{0.5}"} /&gt;</div>
-                <div className="pl-12">&lt;<span className="text-red-400">mesh</span> <span className="text-purple-400">ref</span>={"{meshRef}"}&gt;</div>
-                <div className="pl-16">&lt;<span className="text-red-400">boxGeometry</span> /&gt;</div>
-                <div className="pl-16">&lt;<span className="text-red-400">meshStandardMaterial</span> <span className="text-purple-400">wireframe</span> /&gt;</div>
-              </div>
+
             </div>
-            
-            {/* Right Side: Interactive 3D Viewport View */}
-            <div className="flex-1 p-4 flex flex-col gap-3 bg-muted/10 relative overflow-hidden">
-              <div className="flex items-center justify-between text-xs text-muted-foreground/60 border-b border-border/20 pb-2">
-                <span className="flex items-center gap-1.5">
-                  <Monitor className="w-3.5 h-3.5 text-cyan-400" /> WebGL Render Viewport
-                </span>
-                <span className="px-2 py-0.5 bg-green-500/10 text-green-400 border border-green-500/20 text-[9px] rounded font-mono">
-                  60 FPS
-                </span>
-              </div>
-
-              {/* Dynamic 3D CSS Wireframe Scene */}
-              <div className="flex-1 relative rounded-xl border border-border/30 bg-background/50 overflow-hidden flex items-center justify-center group/viewport">
-                
-                {/* Grid Background */}
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]" />
-
-                {/* Rotating 3D Object Render Mockup */}
-                <motion.div
-                  animate={{ 
-                    rotateY: 360,
-                    rotateX: [15, 30, 15]
-                  }}
-                  transition={{ 
-                    rotateY: { duration: 15, repeat: Infinity, ease: "linear" },
-                    rotateX: { duration: 6, repeat: Infinity, ease: "easeInOut" }
-                  }}
-                  className="relative w-36 h-36 border border-dashed border-cyan-500/30 rounded-full flex items-center justify-center transform-gpu"
-                  style={{ transformStyle: "preserve-3d" }}
-                >
-                  {/* Rotating Wireframe Cube Inner */}
-                  <motion.div 
-                    animate={{ rotateZ: 360 }}
-                    transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-                    className="absolute w-20 h-20 border-2 border-primary/40 rounded flex items-center justify-center bg-primary/5 shadow-[0_0_15px_rgba(var(--primary),0.1)]"
-                  >
-                    <Grid className="w-10 h-10 text-cyan-400/50 animate-pulse" />
-                  </motion.div>
-
-                  {/* Orbiting Particles */}
-                  <div className="absolute top-0 w-3 h-3 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee] animate-ping" />
-                  <div className="absolute bottom-0 w-3 h-3 rounded-full bg-pink-500 shadow-[0_0_10px_#ec4899] animate-pulse" />
-                  <div className="absolute right-0 w-2.5 h-2.5 rounded-full bg-purple-400 shadow-[0_0_8px_#c084fc]" />
-                </motion.div>
-
-                {/* Depth overlay visualizer */}
-                <div className="absolute bottom-3 left-3 flex flex-col gap-1 text-[9px] font-mono text-muted-foreground">
-                  <div>X-ROTATION: <span className="text-cyan-400">ACTIVE</span></div>
-                  <div>Z-BUFFER: <span className="text-purple-400">ENABLE</span></div>
-                </div>
-
-                {/* Hover Interaction Tip */}
-                <div className="absolute inset-0 bg-background/80 opacity-0 group-hover/viewport:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm pointer-events-none">
-                  <div className="text-center space-y-2">
-                    <RotateCw className="w-6 h-6 text-cyan-400 animate-spin mx-auto" />
-                    <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider">Move Mouse to Rotate Scene</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          </GlassCard>
         </motion.div>
 
-        {/* 2. FLOATING LAYER: 3D Shader Controls (Bottom Left) */}
+        {/* ─── 2. FLOATING LAYER: Responsive Mobile View Mockup (Top Right) ────── */}
         <motion.div
-          {...floatAnimation(0.2, 10, 5.5)}
-          initial={{ opacity: 0, x: -40, y: 30 }}
+          {...floatAnimation(0.3, 8, 5)}
+          initial={{ opacity: 0, x: 50, y: -40 }}
           animate={{ opacity: 1, x: 0, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="absolute z-20 bottom-[-5%] sm:bottom-[-2%] -left-[5%] sm:left-[-6%] w-[210px] bg-card/85 backdrop-blur-2xl border border-border/40 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.15)] overflow-hidden hidden sm:block"
-          style={{ translateZ: 50 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="absolute z-30 top-[5%] -right-[8%] sm:-right-[12%] w-[130px] h-[255px] rounded-[24px] overflow-hidden hidden sm:block shadow-2xl"
+          style={{ translateZ: 75 }}
         >
-          <div className="p-3 border-b border-border/40 flex items-center justify-between bg-muted/20">
-            <div className="flex items-center gap-2">
-              <Sliders className="w-3.5 h-3.5 text-cyan-400" />
-              <span className="text-[10px] font-mono font-medium tracking-wider text-muted-foreground uppercase">WebGL Controls</span>
-            </div>
-            <MoreHorizontal className="w-3.5 h-3.5 text-muted-foreground" />
-          </div>
-          
-          <div className="p-4 space-y-3">
-            {/* Control Sliders */}
-            <div className="space-y-1">
-              <div className="flex justify-between text-[9px] font-mono">
-                <span className="text-muted-foreground">Bloom Threshold</span>
-                <span className="text-cyan-400">0.82</span>
-              </div>
-              <div className="h-1 bg-border rounded-full overflow-hidden">
-                <div className="h-full bg-cyan-400 w-[82%]" />
-              </div>
+          <GlassCard className="w-full h-full border-white/10 p-3.5 flex flex-col gap-4 rounded-[24px]">
+            {/* Phone notch */}
+            <div className="w-14 h-3.5 bg-black/60 dark:bg-white/5 rounded-full mx-auto flex items-center justify-center">
+              <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
             </div>
 
-            <div className="space-y-1">
-              <div className="flex justify-between text-[9px] font-mono">
-                <span className="text-muted-foreground">Camera FOV</span>
-                <span className="text-purple-400">45°</span>
-              </div>
-              <div className="h-1 bg-border rounded-full overflow-hidden">
-                <div className="h-full bg-purple-400 w-[45%]" />
-              </div>
-            </div>
+            {/* Mobile Viewport contents */}
+            <div className="flex-1 flex flex-col gap-3 text-center">
+              <span className="font-bold text-[9px] tracking-wider text-muted-foreground">NEXUS</span>
+              
+              <h4 className="text-[12px] font-black leading-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-white/70">
+                Automate intelligence.
+              </h4>
 
-            <div className="space-y-1">
-              <div className="flex justify-between text-[9px] font-mono">
-                <span className="text-muted-foreground">Anisotropy</span>
-                <span className="text-pink-400">16x</span>
+              {/* Stacked Layout visual */}
+              <div className="h-[75px] rounded-lg bg-white/5 border border-white/5 flex flex-col justify-center items-center gap-1.5 p-2">
+                <Smartphone className="w-4.5 h-4.5 text-blue-400" />
+                <span className="text-[8px] text-muted-foreground leading-snug">Fully responsive designs</span>
               </div>
-              <div className="h-1 bg-border rounded-full overflow-hidden">
-                <div className="h-full bg-pink-400 w-[100%]" />
+
+              <div className="py-1 rounded-full bg-blue-500 text-white font-medium text-[8px]">
+                Install App
               </div>
             </div>
-          </div>
+          </GlassCard>
         </motion.div>
 
-        {/* 3. FLOATING LAYER: GPU Performance Monitor (Top Left) */}
+        {/* ─── 3. FLOATING LAYER: Real-time Analytics Card (Bottom Left) ───────── */}
         <motion.div
-          {...floatAnimation(0.6, 8, 4.5)}
-          initial={{ opacity: 0, x: -40, y: -20 }}
+          {...floatAnimation(0.7, 7, 5.5)}
+          initial={{ opacity: 0, x: -50, y: 40 }}
           animate={{ opacity: 1, x: 0, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="absolute z-25 top-[0%] sm:top-[2%] -left-[5%] sm:left-[-10%] w-[190px] p-4 bg-card/90 backdrop-blur-2xl border border-border/40 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.15)] flex flex-col hidden sm:flex"
-          style={{ translateZ: 30 }}
+          className="absolute z-25 bottom-[2%] -left-[6%] sm:-left-[12%] w-[200px] p-4 hidden sm:block"
+          style={{ translateZ: 50 }}
         >
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-[9px] font-mono font-medium text-muted-foreground uppercase tracking-wider">GPU Engine</span>
-            <Cpu className="w-3.5 h-3.5 text-cyan-400" />
-          </div>
-          <div className="flex items-baseline gap-1.5 mb-2">
-            <span className="text-lg font-mono font-bold text-foreground">3.2 MB</span>
-            <span className="text-[9px] text-green-400 font-mono">Mesh Opt</span>
-          </div>
-          
-          {/* Wave/Graph simulation */}
-          <div className="flex items-end gap-0.5 h-8">
-            {[30, 45, 35, 55, 60, 40, 75, 85, 50, 40, 60, 70].map((height, i) => (
-              <motion.div 
-                key={i}
-                initial={{ height: 0 }}
-                animate={{ height: `${height}%` }}
-                transition={{ duration: 0.4, delay: 0.5 + (i * 0.05) }}
-                className={`flex-1 rounded-t-sm ${i === 7 ? 'bg-cyan-400' : 'bg-cyan-500/20 hover:bg-cyan-500/40'}`}
+          <GlassCard className="p-4 border-white/10 flex flex-col gap-2">
+            <div className="flex items-center justify-between text-muted-foreground">
+              <span className="text-[9px] font-bold tracking-widest uppercase">Live Visitors</span>
+              <TrendingUp className="w-3.5 h-3.5 text-[#10b981]" />
+            </div>
+            <div className="flex items-baseline gap-2">
+              <span className="text-2xl font-bold tracking-tight">24,580</span>
+              <span className="text-[9.5px] font-bold text-[#10b981] bg-[#10b981]/15 px-1.5 py-0.5 rounded-full">+18%</span>
+            </div>
+            
+            {/* Smooth SVG Analytics Sparkline */}
+            <svg viewBox="0 0 100 24" className="w-full h-8 mt-1 overflow-visible">
+              <defs>
+                <linearGradient id="sparkline-grad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.4" />
+                  <stop offset="100%" stopColor="#3b82f6" stopOpacity="0" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M 0,20 C 15,18 20,8 35,12 C 50,16 55,2 70,6 C 85,10 90,2 100,5"
+                fill="none"
+                stroke="#3b82f6"
+                strokeWidth="1.8"
+                strokeLinecap="round"
               />
-            ))}
-          </div>
+              <path
+                d="M 0,20 C 15,18 20,8 35,12 C 50,16 55,2 70,6 C 85,10 90,2 100,5 L 100,24 L 0,24 Z"
+                fill="url(#sparkline-grad)"
+              />
+            </svg>
+          </GlassCard>
         </motion.div>
 
-        {/* 4. FLOATING LAYER: Live Dev Server Terminal (Bottom Right) */}
+        {/* ─── 4. FLOATING LAYER: Revenue Metrics Card (Bottom Right) ─────────── */}
         <motion.div
-          {...floatAnimation(0.4, 12, 6.5)}
-          initial={{ opacity: 0, x: 40, y: 20 }}
+          {...floatAnimation(0.9, 9, 6)}
+          initial={{ opacity: 0, x: 50, y: 50 }}
           animate={{ opacity: 1, x: 0, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="absolute z-30 bottom-[3%] sm:bottom-[6%] -right-[5%] sm:-right-[10%] w-[250px] bg-card/85 backdrop-blur-xl border border-border/40 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.15)] overflow-hidden hidden sm:block"
+          className="absolute z-20 bottom-[-5%] sm:bottom-[-2%] right-[-4%] sm:-right-[10%] w-[180px] p-4 hidden sm:block"
+          style={{ translateZ: 40 }}
+        >
+          <GlassCard className="p-4 border-white/10 flex flex-col gap-2">
+            <div className="flex items-center justify-between text-muted-foreground">
+              <span className="text-[9px] font-bold tracking-widest uppercase">MRR Growth</span>
+              <div className="w-5 h-5 rounded bg-blue-500/10 flex items-center justify-center">
+                <ArrowUpRight className="w-3.5 h-3.5 text-blue-400" />
+              </div>
+            </div>
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-xl font-black">$124,000</span>
+              <span className="text-[9px] text-[#10b981] font-semibold">↑ 37%</span>
+            </div>
+            
+            {/* Modern stacked loading indicator */}
+            <div className="flex gap-1 mt-2">
+              <div className="h-1 flex-1 rounded bg-[#10b981]" />
+              <div className="h-1 flex-1 rounded bg-[#10b981]" />
+              <div className="h-1 flex-1 rounded bg-[#10b981]" />
+              <div className="h-1 flex-1 rounded bg-[#10b981]" />
+              <div className="h-1 flex-1 rounded bg-white/10" />
+            </div>
+          </GlassCard>
+        </motion.div>
+
+        {/* ─── 5. FLOATING LAYER: AI Copilot Assistant Widget (Top Left) ─────────── */}
+        <motion.div
+          {...floatAnimation(0.1, 8, 4.5)}
+          initial={{ opacity: 0, x: -50, y: -45 }}
+          animate={{ opacity: 1, x: 0, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="absolute z-35 top-[2%] -left-[8%] sm:-left-[12%] w-[210px] hidden sm:block"
+          style={{ translateZ: 90 }}
+        >
+          <GlassCard className="p-3.5 border-white/10 flex flex-col gap-3">
+            
+            {/* Header info */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-500 flex items-center justify-center">
+                  <MessageSquare className="w-3 h-3 text-white" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-bold block leading-none">AI Agent</span>
+                  <span className="text-[8px] text-[#10b981] font-medium leading-none">● Online</span>
+                </div>
+              </div>
+              <Sparkles className="w-3.5 h-3.5 text-blue-400" />
+            </div>
+
+            {/* Prompt dialog box */}
+            <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5 text-[9.5px] leading-relaxed text-foreground/90 font-medium">
+              "Building your design token system... Done. Preparing Vercel production deploy."
+            </div>
+          </GlassCard>
+        </motion.div>
+
+        {/* ─── 6. FLOATING LAYER: Deployment Success Toast (Middle Left) ───────── */}
+        <motion.div
+          {...floatAnimation(0.5, 6, 5)}
+          initial={{ opacity: 0, x: -40, y: 10 }}
+          animate={{ opacity: 1, x: 0, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="absolute z-30 top-[40%] -left-[14%] w-[190px] hidden sm:block"
           style={{ translateZ: 60 }}
         >
-          <div className="flex items-center justify-between px-3 py-2 bg-muted/20 border-b border-border/45">
-            <div className="flex items-center gap-1.5">
-              <Terminal className="w-3.5 h-3.5 text-pink-500" />
-              <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider">Dev Server Logs</span>
+          <GlassCard className="p-3 border-emerald-500/20 bg-emerald-500/[0.02] flex items-center gap-3">
+            <div className="w-7 h-7 rounded-full bg-emerald-500/10 flex items-center justify-center shrink-0">
+              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
             </div>
-            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-          </div>
-          
-          <div className="p-3 font-mono text-[9px] leading-5 text-foreground/80 space-y-1">
-            <div className="text-muted-foreground/50">$ npm run dev</div>
-            <div className="text-cyan-400">&gt; ready - started server on http://localhost:3000</div>
-            <div>&gt; event - compiled client and server successfully</div>
-            <div className="flex items-center gap-1.5 text-green-400">
-              <Sparkles className="w-3 h-3 text-green-400 shrink-0" />
-              <span>3D Assets Optimization complete.</span>
+            <div className="truncate">
+              <span className="text-[9.5px] font-bold block text-foreground leading-none">Deployment Success</span>
+              <span className="text-[8px] text-muted-foreground tracking-tight leading-none mt-1 block">Production Ready</span>
             </div>
-          </div>
+          </GlassCard>
         </motion.div>
-        
+
       </motion.div>
     </div>
   )
