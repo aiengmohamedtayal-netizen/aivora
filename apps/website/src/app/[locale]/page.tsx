@@ -1,17 +1,56 @@
-import { getTranslations } from "next-intl/server"
 import Script from "next/script"
-import { 
-  SectionManifesto, 
-  SectionServices,
-  SectionIndustries,
-  SectionWhyAivora,
-  SectionProcess,
-  SectionTeam,
-  SectionTechnologies,
-  SectionFAQ,
-  SectionConversion 
-} from "@/components/sections"
+import dynamic from "next/dynamic"
+import { SectionManifesto, SectionServices, SectionIndustries } from "@/components/sections"
 import { ProductShowcase } from "@/components/sections/product-showcase/ProductShowcase"
+
+// Lazy load below-the-fold sections with ssr enabled for SEO indexing
+const SectionWhyAivora = dynamic(
+  () => import("@/components/sections/problems").then(m => m.SectionWhyAivora),
+  { 
+    ssr: true,
+    loading: () => <div className="min-h-[300px] w-full bg-background animate-pulse" />
+  }
+)
+
+const SectionProcess = dynamic(
+  () => import("@/components/sections/process").then(m => m.SectionProcess),
+  { 
+    ssr: true,
+    loading: () => <div className="min-h-[400px] w-full bg-background animate-pulse" />
+  }
+)
+
+const SectionTeam = dynamic(
+  () => import("@/components/sections/process").then(m => m.SectionTeam),
+  { 
+    ssr: true,
+    loading: () => <div className="min-h-[300px] w-full bg-background animate-pulse" />
+  }
+)
+
+const SectionTechnologies = dynamic(
+  () => import("@/components/sections/technology").then(m => m.SectionTechnologies),
+  { 
+    ssr: true,
+    loading: () => <div className="min-h-[250px] w-full bg-background animate-pulse" />
+  }
+)
+
+const SectionFAQ = dynamic(
+  () => import("@/components/sections/technology").then(m => m.SectionFAQ),
+  { 
+    ssr: true,
+    loading: () => <div className="min-h-[350px] w-full bg-background animate-pulse" />
+  }
+)
+
+const SectionConversion = dynamic(
+  () => import("@/components/sections/conversion").then(m => m.SectionConversion),
+  { 
+    ssr: true,
+    loading: () => <div className="min-h-[450px] w-full bg-background animate-pulse" />
+  }
+)
 
 export default async function HomePage() {
   const organizationJsonLd = {
@@ -58,34 +97,18 @@ export default async function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
       />
       
-      {/* 1. Hero / Title */}
+      {/* Above the fold (eager loaded) */}
       <SectionManifesto />
-      
-      {/* 3. Interactive Product Showcase */}
       <ProductShowcase />
-      
-      {/* 4. Result-Oriented Services */}
       <SectionServices />
-      
-      {/* 5. Industries served */}
       <SectionIndustries />
       
-      {/* 6. Why Aivora (Comparison / Benefits) */}
+      {/* Below the fold (lazy loaded) */}
       <SectionWhyAivora />
-      
-      {/* 8. Process Flow */}
       <SectionProcess />
-      
-      {/* 9. Meet The Team */}
       <SectionTeam />
-      
-      {/* 10. Modern Technologies badges */}
       <SectionTechnologies />
-      
-      {/* 12. FAQ Accordion */}
       <SectionFAQ />
-      
-      {/* 13. Contact Form & Lead Intake (Supabase integration) */}
       <SectionConversion />
     </div>
   )

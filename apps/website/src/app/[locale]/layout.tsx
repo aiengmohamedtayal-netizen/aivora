@@ -10,12 +10,22 @@ import { ThemeProvider } from "@aivora/ui/providers/ThemeProvider"
 import { Navbar } from "@/components/layout/Navbar"
 import { Footer } from "@/components/layout/Footer"
 import { AnalyticsProvider } from "@aivora/ui/providers/AnalyticsProvider"
-import { AivoraAssistant } from "@aivora/ui/common/AivoraAssistant"
 import { SkipToContent } from "@aivora/ui/common/SkipToContent"
 import { ZodErrorProvider } from "@/i18n/zodErrorMap"
 import { MotionProvider } from "@aivora/ui/providers/MotionProvider"
-import { GlobalWaveBackground } from "@aivora/ui/common/GlobalWaveBackground"
+import dynamic from "next/dynamic"
 import "@/styles/globals.css"
+
+// Lazy load heavy interactive components to optimize FCP and LCP bundle sizes
+const GlobalWaveBackground = dynamic(
+  () => import("@aivora/ui/common/GlobalWaveBackground").then(m => m.GlobalWaveBackground),
+  { ssr: false }
+)
+
+const AivoraAssistant = dynamic(
+  () => import("@aivora/ui/common/AivoraAssistant").then(m => m.AivoraAssistant),
+  { ssr: false }
+)
 
 const newsreader = {
   variable: "font-newsreader-class",
@@ -125,27 +135,16 @@ export default async function LocaleLayout({
           <NextIntlClientProvider messages={messages}>
             <MotionProvider>
               <ZodErrorProvider>
-                  {/*
-                    ─── Global Z-Index Design System ─────────────────────────────
-                    z-0  → GlobalWaveBackground (fixed, pointer-events-none)
-                    z-10 → Page content (main)
-                    z-20 → Navbar
-                    z-30 → Drawers / Sheet panels
-                    z-40 → Toasts / Dialogs
-                    ──────────────────────────────────────────────────────────────
-                  */}
-                  {/* z-0: Animated atmospheric wave — global, page-aware intensity */}
-                  <GlobalWaveBackground />
-
-                  <SkipToContent />
-                  <Navbar />
-                  <main id="main-content" className="flex-1 w-full pt-16 relative z-10">
-                    {children}
-                  </main>
-                  <Footer />
-                  <AivoraAssistant />
-                  <AnalyticsProvider />
-                </ZodErrorProvider>
+                <GlobalWaveBackground />
+                <SkipToContent />
+                <Navbar />
+                <main id="main-content" className="flex-1 w-full pt-16 relative z-10">
+                  {children}
+                </main>
+                <Footer />
+                <AivoraAssistant />
+                <AnalyticsProvider />
+              </ZodErrorProvider>
             </MotionProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
