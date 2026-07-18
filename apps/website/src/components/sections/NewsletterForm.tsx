@@ -13,6 +13,7 @@ export function NewsletterForm({ source = "footer" }: { source?: string }) {
   const locale = useLocale()
 
   const [email, setEmail] = useState("")
+  const [honeypot, setHoneypot] = useState("") // Spam honeypot field
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
   const [message, setMessage] = useState("")
 
@@ -32,31 +33,51 @@ export function NewsletterForm({ source = "footer" }: { source?: string }) {
     }
 
     try {
-      const response = await fetch("/api/newsletter", {
+      const response = await fetch("/api/newsletter/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: result.data, locale, source }),
+        body: JSON.stringify({ 
+          email: result.data, 
+          locale, 
+          source,
+          honeypot // Bot protection field
+        }),
       })
 
       const data = await response.json()
 
       if (response.ok) {
         setStatus("success")
-        setMessage(v("newsletterSuccess"))
+        setMessage(data.message || (locale === "ar" 
+          ? "تم إرسال بريد تأكيد. يرجى تفعيل اشتراكك!" 
+          : "Verification email sent. Please confirm!"))
         setEmail("")
       } else {
         setStatus("error")
-        setMessage(data.error || v("newsletterError"))
+        setMessage(data.error || (locale === "ar" ? "فشل الاشتراك." : "Subscription failed."))
       }
     } catch (err) {
       setStatus("error")
-      setMessage(v("newsletterError"))
+      setMessage(locale === "ar" ? "فشل الاتصال بالخادم." : "Could not connect to subscription server.")
     }
   }
 
   return (
-    <form className="mt-6 flex flex-col gap-3" onSubmit={handleSubmit}>
-      <div className="sm:flex sm:max-w-md w-full gap-4">
+    <form className="mt-4 flex flex-col gap-3" onSubmit={handleSubmit}>
+      
+      {/* Honeypot Spam Protection Field (visually hidden) */}
+      <div className="absolute opacity-0 pointer-events-none w-0 h-0 overflow-hidden" aria-hidden="true">
+        <input 
+          type="text" 
+          name="website_url_verify" 
+          value={honeypot} 
+          onChange={(e) => setHoneypot(e.target.value)} 
+          tabIndex={-1} 
+          autoComplete="off" 
+        />
+      </div>
+
+      <div className="sm:flex sm:max-w-md w-full gap-4 items-end">
         <div className="w-full relative">
           <Input 
             label={t("emailPlaceholder")}
@@ -75,7 +96,7 @@ export function NewsletterForm({ source = "footer" }: { source?: string }) {
           <Button 
             type="submit" 
             variant="primary" 
-            className="h-[46px] min-w-[120px]" 
+            className="h-[46px] min-w-[120px] rounded-xl cursor-pointer" 
             disabled={status === "loading" || status === "success"}
           >
             {status === "loading" ? (
@@ -87,21 +108,21 @@ export function NewsletterForm({ source = "footer" }: { source?: string }) {
         </div>
       </div>
       
-      {/* Feedback Message */}
+      {/* Feedback Message with elegant status colors */}
       {message && (
         <div 
           id="newsletter-message" 
-          className={`text-sm flex items-center gap-2 ${
-            status === "success" ? "text-emerald-500" : "text-destructive"
+          className={`text-sm flex items-center gap-2 mt-1 font-medium transition-all ${
+            status === "success" ? "text-emerald-400" : "text-red-400"
           }`}
           role="alert"
         >
           {status === "success" ? (
-            <CheckCircle2 className="w-4 h-4" />
+            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 animate-pulse" />
           ) : (
-            <AlertCircle className="w-4 h-4" />
+            <AlertCircle className="w-4 h-4 text-red-400 shrink-0 animate-bounce" />
           )}
-          {message}
+          <span>{message}</span>
         </div>
       )}
     </form>

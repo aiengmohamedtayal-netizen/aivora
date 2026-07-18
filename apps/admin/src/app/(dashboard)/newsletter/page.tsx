@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl"
 import { PageHeader } from "@/components/admin/PageHeader"
 import { EmptyState } from "@/components/admin/EmptyState"
 import { LoadingState } from "@/components/admin/LoadingState"
-import { Users, Trash2, Download, Search, CheckCircle, XCircle, Mailbox } from "lucide-react"
+import { Users, Trash2, Download, Search, CheckCircle, Clock, XCircle, Mailbox } from "lucide-react"
 
 export default function NewsletterSubscribersPage() {
   const t = useTranslations("admin.Newsletter")
@@ -65,17 +65,41 @@ export default function NewsletterSubscribersPage() {
     (s.source || "").toLowerCase().includes(search.toLowerCase())
   )
 
+  // Compute subscriber statistics
+  const stats = useMemo(() => {
+    const total = subscribers.length
+    const confirmed = subscribers.filter(s => s.status === "confirmed").length
+    const pending = subscribers.filter(s => s.status === "pending").length
+    const unsubscribed = subscribers.filter(s => s.status === "unsubscribed").length
+    return { total, confirmed, pending, unsubscribed }
+  }, [subscribers])
+
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 ease-out">
       <PageHeader title={t("title")} description={t("subtitle")}>
         <button 
           onClick={exportCSV}
           disabled={subscribers.length === 0}
-          className="flex items-center gap-2 px-4 py-2 border border-border/80 rounded-lg text-sm text-foreground hover:bg-secondary/40 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex items-center gap-2 px-4 py-2 border border-border/80 rounded-lg text-sm text-foreground hover:bg-secondary/40 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
         >
           <Download className="w-4 h-4" /> Export CSV
         </button>
       </PageHeader>
+
+      {/* Admin Stats Grid */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {[
+          { label: "Total Subscribers", count: stats.total, color: "border-blue-500/20 bg-blue-500/5 text-blue-400" },
+          { label: "Confirmed Opt-in", count: stats.confirmed, color: "border-emerald-500/20 bg-emerald-500/5 text-emerald-400" },
+          { label: "Pending Verification", count: stats.pending, color: "border-amber-500/20 bg-amber-500/5 text-amber-400" },
+          { label: "Unsubscribed", count: stats.unsubscribed, color: "border-red-500/20 bg-red-500/5 text-red-400" }
+        ].map((item, idx) => (
+          <div key={idx} className={`p-5 rounded-2xl border ${item.color} flex flex-col gap-1`}>
+            <span className="text-xs font-medium opacity-80">{item.label}</span>
+            <span className="text-2xl font-bold tracking-tight">{item.count}</span>
+          </div>
+        ))}
+      </div>
 
       <div className="flex gap-4 items-center max-w-md">
         <div className="relative flex-1">
@@ -129,12 +153,20 @@ export default function NewsletterSubscribersPage() {
                     <td className="px-6 py-4 text-muted-foreground text-xs">{new Date(sub.created_at).toLocaleDateString()}</td>
                     <td className="px-6 py-4 text-muted-foreground text-xs uppercase font-medium">{sub.locale || "en"}</td>
                     <td className="px-6 py-4">
-                      <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium capitalize border ${
-                        sub.status === 'active' 
+                      <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold capitalize border ${
+                        sub.status === 'confirmed' 
                           ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' 
+                          : sub.status === 'pending'
+                          ? 'bg-amber-500/10 text-amber-400 border-amber-500/20'
                           : 'bg-red-500/10 text-red-400 border-red-500/20'
                       }`}>
-                        {sub.status === 'active' ? <CheckCircle className="w-3.5 h-3.5" /> : <XCircle className="w-3.5 h-3.5" />}
+                        {sub.status === 'confirmed' ? (
+                          <CheckCircle className="w-3.5 h-3.5" />
+                        ) : sub.status === 'pending' ? (
+                          <Clock className="w-3.5 h-3.5" />
+                        ) : (
+                          <XCircle className="w-3.5 h-3.5" />
+                        )}
                         {sub.status}
                       </span>
                     </td>
@@ -142,7 +174,7 @@ export default function NewsletterSubscribersPage() {
                       <div className="flex justify-end">
                         <button 
                           onClick={() => deleteSubscriber(sub.id)}
-                          className="p-2 rounded-lg hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-colors"
+                          className="p-2 rounded-lg hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-colors cursor-pointer"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
