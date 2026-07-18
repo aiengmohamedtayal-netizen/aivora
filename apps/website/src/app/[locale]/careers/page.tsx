@@ -95,10 +95,10 @@ export default async function CareersPage({
             {t("applyText")}
           </p>
           <a 
-            href="mailto:careers@aivora-lac.vercel.app" 
+            href="mailto:aiengmohamedtayal@gmail.com" 
             className="text-xl font-semibold text-primary hover:underline font-mono"
           >
-            careers@aivora-lac.vercel.app
+            aiengmohamedtayal@gmail.com
           </a>
         </div>
       </div>

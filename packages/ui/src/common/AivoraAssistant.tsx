@@ -116,11 +116,18 @@ export function AivoraAssistant() {
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [isOpen])
 
+  // Programmatic open trigger
+  useEffect(() => {
+    const handleOpen = () => {
+      setIsOpen(true)
+      setHasUnread(false)
+    }
+    window.addEventListener("open-aivora-chat", handleOpen)
+    return () => window.removeEventListener("open-aivora-chat", handleOpen)
+  }, [])
+
   return (
-    <div className={cn(
-      "fixed bottom-6 right-6 z-50 flex flex-col items-end",
-      locale === "ar" && "right-auto left-6"
-    )}>
+    <div className="fixed bottom-6 end-6 z-50 flex flex-col items-end">
       <AnimatePresence>
         {isOpen && (
           <ChatDialog

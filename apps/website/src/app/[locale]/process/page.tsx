@@ -1,3 +1,4 @@
+import React from "react"
 import { getTranslations } from "next-intl/server"
 import { GlassCard } from "@aivora/ui/GlassCard"
 import { SectionLabel } from "@aivora/ui/SectionLabel"
@@ -6,7 +7,6 @@ import {
   Map, 
   Palette, 
   Terminal, 
-  CheckCircle, 
   Rocket, 
   ShieldCheck 
 } from "lucide-react"
@@ -24,7 +24,7 @@ export async function generateMetadata({
   }
 }
 
-const icons = [Eye, Map, Palette, Terminal, CheckCircle, Rocket, ShieldCheck]
+const icons = [Eye, Map, Palette, Terminal, Rocket, ShieldCheck]
 const stepKeys = ["discover", "plan", "design", "develop", "launch", "support"]
 
 export default async function ProcessPage({

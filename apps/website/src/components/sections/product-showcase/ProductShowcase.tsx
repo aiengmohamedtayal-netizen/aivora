@@ -118,13 +118,16 @@ export function ProductShowcase() {
               {t('primaryCTA')}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
             </Link>
-            <Link
-              href="/intelligence"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-6 py-3.5 text-[15px] font-medium text-foreground backdrop-blur-md transition-all duration-300 hover:bg-white/10 hover:border-white/20"
+            <button
+              type="button"
+              onClick={() => {
+                window.dispatchEvent(new CustomEvent("open-aivora-chat"))
+              }}
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-6 py-3.5 text-[15px] font-medium text-foreground backdrop-blur-md transition-all duration-300 hover:bg-white/10 hover:border-white/20 cursor-pointer"
             >
               <MessageSquare className="h-4 w-4" />
               {t('secondaryCTA')}
-            </Link>
+            </button>
           </div>
         </div>
       </div>

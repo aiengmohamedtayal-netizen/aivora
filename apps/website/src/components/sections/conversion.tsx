@@ -48,14 +48,24 @@ Message: ${message}
 
         if (error) throw error
 
-        // Send email via API route
-        await fetch('/next-api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name, email, company, projectType, budget, phone, message
+        // Send email notification via Resend (fire-and-forget)
+        try {
+          await fetch("/api/v1/notify-lead", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              name,
+              email,
+              company,
+              phone,
+              type: projectType,
+              budget,
+              description: message,
+            }),
           })
-        })
+        } catch (emailErr) {
+          console.warn("Email notification failed (non-critical):", emailErr)
+        }
 
         setIsSuccess(true)
         setName("")

@@ -102,6 +102,28 @@ Phone: ${formData.phone}
 
       if (error) throw error
 
+      // Send email notification (fire-and-forget — don't block success)
+      try {
+        await fetch("/api/v1/notify-lead", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            company: formData.company,
+            phone: formData.phone,
+            type: formData.type,
+            audience: formData.audience,
+            stage: formData.stage,
+            timeline: formData.timeline,
+            budget: formData.budget,
+            description: formData.description,
+          }),
+        })
+      } catch (emailErr) {
+        console.warn("Email notification failed (non-critical):", emailErr)
+      }
+
       setStep(8)
       localStorage.removeItem("aivora-wizard")
     } catch (error) {
