@@ -1,6 +1,6 @@
 "use client"
 
-import { HelpCircle, CpuIcon, CheckCircle2, Code2, Minus, Plus } from "lucide-react"
+import { CpuIcon, CheckCircle2, Code2, Minus, Plus } from "lucide-react"
 import { GlassCard } from "@aivora/ui/GlassCard"
 import { Button } from "@aivora/ui/Button"
 import { Link } from "@/i18n/routing"
@@ -11,8 +11,7 @@ import { collapseProps } from "@aivora/lib/motion"
 // ─── Types ───────────────────────────────────────────────────────────────────
 
 export type ServiceTranslations = {
-  problems: { title: string; description: string }
-  solution: { title: string; description: string }
+  overview?: { title: string; description: string; valueProps?: string[] }
   features: {
     title: string
     items: Array<{ title: string; description: string }>
@@ -41,26 +40,25 @@ export type ServiceTranslations = {
 
 // ─── Individual Section Components (pure, accept data as props) ──────────────
 
-export function ServiceProblems({ data }: { data: ServiceTranslations["problems"] }) {
+export function ServiceOverview({ data }: { data: ServiceTranslations["overview"] }) {
+  if (!data) return null
   return (
-    <GlassCard className="flex flex-col gap-4 border border-red-500/10 bg-red-500/[0.02] p-8 rounded-2xl">
-      <div className="flex items-center gap-3 text-red-400">
-        <HelpCircle className="w-6 h-6" />
-        <h2 className="text-xl font-semibold tracking-tight">{data.title}</h2>
-      </div>
-      <p className="text-base leading-relaxed text-muted-foreground">{data.description}</p>
-    </GlassCard>
-  )
-}
-
-export function ServiceSolution({ data }: { data: ServiceTranslations["solution"] }) {
-  return (
-    <GlassCard className="flex flex-col gap-4 border border-blue-500/10 bg-blue-500/[0.02] p-8 rounded-2xl">
+    <GlassCard className="flex flex-col gap-6 border border-blue-500/10 bg-blue-500/[0.02] p-8 rounded-2xl">
       <div className="flex items-center gap-3 text-blue-400">
         <CpuIcon className="w-6 h-6" />
         <h2 className="text-xl font-semibold tracking-tight">{data.title}</h2>
       </div>
       <p className="text-base leading-relaxed text-muted-foreground">{data.description}</p>
+      {data.valueProps && data.valueProps.length > 0 && (
+        <ul className="space-y-2 mt-2">
+          {data.valueProps.map((prop, idx) => (
+            <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
+              <CheckCircle2 className="w-4 h-4 text-emerald-400 mt-0.5 shrink-0" />
+              <span>{prop}</span>
+            </li>
+          ))}
+        </ul>
+      )}
     </GlassCard>
   )
 }

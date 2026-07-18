@@ -9,8 +9,7 @@ import {
 
 import { ServiceHero } from "@/components/sections/services/ServiceHero"
 import { 
-  ServiceProblems, 
-  ServiceSolution, 
+  ServiceOverview,
   ServiceFeatures, 
   ServiceProcess, 
   ServiceTechStack, 
@@ -183,10 +182,7 @@ export default async function ServiceDetailsPage({
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl relative z-10 flex flex-col gap-10">
         <ServiceHero slug={slug} icon={Icon} data={data.hero} />
 
-        <div className="grid md:grid-cols-2 gap-6">
-          <ServiceProblems data={data.problems} />
-          <ServiceSolution data={data.solution} />
-        </div>
+        <ServiceOverview data={data.overview} />
 
         <ServiceFeatures data={data.features} />
         
