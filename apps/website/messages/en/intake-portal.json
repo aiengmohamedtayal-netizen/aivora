@@ -86,10 +86,10 @@
       "budget": {
         "title": "Budget",
         "options": {
-          "tier1": "<$10k",
-          "tier2": "$10k-$50k",
-          "tier3": "$50k-$100k",
-          "tier4": "$100k+"
+          "tier1": "<100k EGP",
+          "tier2": "100k-500k EGP",
+          "tier3": "500k-1M EGP",
+          "tier4": "1M+ EGP"
         }
       },
       "description": {

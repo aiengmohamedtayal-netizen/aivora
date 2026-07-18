@@ -8,22 +8,22 @@
   "viewCaseStudies": "View Case Studies",
   "projects": [
     {
-      "title": "E-Commerce Analytics Dashboard",
-      "tag": "Analytics & Data",
-      "description": "We built a real-time analytics dashboard for an online retailer, integrating sales data, customer trends, and inventory management into one platform. It helped the client make data-driven decisions and increase efficiency.",
-      "outcome": "Improved inventory turnover rate and enabled instant sales forecasting."
-    },
-    {
-      "title": "AI Customer Assistant",
+      "title": "Aivora OS AI Terminal & Workspace",
       "tag": "Artificial Intelligence",
-      "description": "Developed an intelligent chatbot for a financial services startup to handle common customer inquiries, reducing response time by 60%. The assistant uses natural language understanding to route questions and automate support.",
-      "outcome": "Reduced support ticket volume by 50% and improved satisfaction."
+      "description": "We developed a real-time developer workspace with active AI agent simulations (Qualification Agent, Support Agent, and Director) and live telemetry logs. The assistant utilizes natural language understanding to qualify leads and manage operations.",
+      "outcome": "Reduced manual lead triage to zero and automated initial customer qualification."
     },
     {
-      "title": "Custom CRM Platform",
-      "tag": "Custom Enterprise",
-      "description": "Designed a multi-tenant CRM system for a B2B logistics company with strict data security. The platform aligned with the client’s processes and synchronized sales pipelines across their global team.",
-      "outcome": "Synchronized global logistics pipeline with zero operational lag."
+      "title": "Multi-Tenant Admin & Telemetry Portal",
+      "tag": "Custom Enterprise SaaS",
+      "description": "Designed a secure and comprehensive administrative portal for management of leads, services, newsletter subscriptions, and visitor statistics. Features modern glassmorphism UI, real-time syncs, and multi-language dashboard controls.",
+      "outcome": "Unified client CRM, system telemetry, and marketing lists under a single pane of glass."
+    },
+    {
+      "title": "Relational Data Schema & Event Pipeline",
+      "tag": "Database & Integration",
+      "description": "Engineered a high-performance PostgreSQL/Supabase relational database architecture and SMTP dispatch flows. Configured secure connection boundaries, automatic audit logs, and instant notifications to centralize business leads.",
+      "outcome": "Synchronized global operations pipeline with zero lag and high security compliance."
     }
   ]
 }

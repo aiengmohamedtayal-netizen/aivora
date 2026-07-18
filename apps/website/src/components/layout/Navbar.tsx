@@ -35,7 +35,6 @@ export function Navbar() {
   const navLinks = [
     { href: "/services", label: t("capabilities") },
     { href: "/about", label: t("about") },
-    { href: "/intelligence", label: t("intelligence") },
   ] as const
 
   return (

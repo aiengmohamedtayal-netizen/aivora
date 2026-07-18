@@ -87,11 +87,7 @@ export function Footer() {
                       {t("services")}
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/blog" className="text-sm leading-6 text-muted-foreground hover:text-foreground">
-                      {t("links.blog")}
-                    </Link>
-                  </li>
+
                   <li>
                     <Link href="/intake" className="text-sm leading-6 text-muted-foreground hover:text-foreground">
                       {t("links.contact")}

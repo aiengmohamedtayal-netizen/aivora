@@ -1,23 +1,10 @@
-import { getTranslations } from "next-intl/server"
-import { IntelligenceWorkspace } from "@/components/sections/ai-terminal"
+import { redirect } from "next/navigation"
 
-export async function generateMetadata({
+export default async function IntelligencePage({
   params,
 }: {
   params: Promise<{ locale: string }>
 }) {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "intelligence" })
-  return {
-    title: t("title"),
-    description: t("description"),
-  }
-}
-
-export default function IntelligencePage() {
-  return (
-    <main className="flex min-h-screen flex-col bg-background pt-16">
-      <IntelligenceWorkspace />
-    </main>
-  )
+  redirect(`/${locale}`)
 }
