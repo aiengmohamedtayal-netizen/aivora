@@ -4,7 +4,7 @@ import { useTranslations, useLocale } from "next-intl"
 import { Link } from "@/i18n/routing"
 import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@aivora/lib/utils"
-import { fadeUp, staggerContainer, heroEntrance } from "@aivora/lib/motion"
+import { fadeUp, staggerContainer } from "@aivora/lib/motion"
 import { SectionLabel, Card, Button } from "@aivora/ui"
 import { HeroComposition } from "@aivora/ui/common/hero-composition"
 import { ClaudeChatInput } from "@aivora/ui/common/ClaudeChatInput"
@@ -100,14 +100,9 @@ export function SectionManifesto() {
           </motion.div>
           
           {/* Right Column: Premium Hero Composition */}
-          <motion.div 
-            variants={heroEntrance}
-            initial="hidden"
-            animate="visible"
-            className="lg:col-span-7 flex justify-center lg:justify-end w-full"
-          >
+          <div className="lg:col-span-7 flex justify-center lg:justify-end w-full">
             <HeroComposition />
-          </motion.div>
+          </div>
 
         </div>
       </div>
