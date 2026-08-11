@@ -12,9 +12,15 @@ const systems = [
 
 export function HeroComposition() {
   return (
-    <div className="relative flex h-[440px] w-full items-center justify-center sm:h-[520px] lg:h-[620px]">
+    <div
+      className="relative flex w-full items-center justify-center"
+      style={{ height: 'clamp(440px, 52vw, 620px)' }}
+    >
       <div className="relative w-full max-w-[800px]">
-        <div className="group relative h-[280px] overflow-hidden rounded-[28px] border border-sky-200/15 bg-[#050a13] shadow-[0_32px_90px_rgba(15,23,42,0.28)] sm:h-[360px] sm:rounded-[34px] md:h-[430px] lg:h-[500px]">
+        <div
+          className="group relative overflow-hidden rounded-[28px] border border-sky-200/15 bg-[#050a13] shadow-[0_32px_90px_rgba(15,23,42,0.28)] sm:rounded-[34px]"
+          style={{ height: 'clamp(280px, 38vw, 500px)' }}
+        >
           <Image
             src="/aivora-hero-intelligence-constellation.jpg"
             alt="Aivora intelligence constellation connecting AI, data, automation, and cloud systems"
