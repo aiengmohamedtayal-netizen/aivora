@@ -11,7 +11,7 @@ export function Topbar() {
   const [userRole, setUserRole] = useState<string | null>(null)
   const [notifications, setNotifications] = useState<any[]>([])
   const [showNotifications, setShowNotifications] = useState(false)
-  const t = useTranslations("admin.Topbar")
+  const t = useTranslations("Topbar")
 
   const supabase = createClient()
 

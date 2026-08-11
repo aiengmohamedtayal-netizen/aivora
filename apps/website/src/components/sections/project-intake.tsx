@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useTranslations } from "next-intl"
+import { useRouter } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { fadeUp } from "@aivora/lib/motion"
 import { cn } from "@aivora/lib/utils"
@@ -39,6 +40,7 @@ const TOTAL_QUESTIONS = 7
 
 export function ProjectIntake() {
   const t = useTranslations("intake-portal")
+  const router = useRouter()
   
   // 0 = Intro, 1-6 = Wizard, 7 = Success
   const [step, setStep] = useState(0)
@@ -183,7 +185,7 @@ export function ProjectIntake() {
             <Button className="w-full sm:w-auto h-12 px-8 rounded-full">
               {t("success.ctaCall")}
             </Button>
-            <Button variant="outline" onClick={() => window.location.href = '/'} className="w-full sm:w-auto h-12 px-8 rounded-full">
+            <Button variant="outline" onClick={() => router.push("/")} className="w-full sm:w-auto h-12 px-8 rounded-full">
               {t("success.ctaHome")}
             </Button>
           </div>

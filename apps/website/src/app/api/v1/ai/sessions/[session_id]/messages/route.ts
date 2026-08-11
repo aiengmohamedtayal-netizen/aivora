@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-export const runtime = 'edge';
+export const runtime = "nodejs"
 
 // We need an async function for Route Handlers with dynamic params in Next.js 15
 export async function GET(

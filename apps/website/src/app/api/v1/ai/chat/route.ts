@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 
-export const runtime = 'edge';
+export const runtime = "nodejs"
 
 const systemPrompt = `You are the "Aivora AI Assistant" (مساعد إيفورا الذكي), an advanced and helpful AI assistant for the Aivora digital business platform.
 Your goal is to help users understand our products, manage their business processes, and get support.

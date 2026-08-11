@@ -16,7 +16,7 @@ import { EmptyState } from "@/components/admin/EmptyState"
 export default async function AdminDashboardPage() {
   const locale = "en"
   const supabase = await createClient()
-  const t = await getTranslations({ locale, namespace: "admin.Dashboard" })
+  const t = await getTranslations({ locale, namespace: "Dashboard" })
 
   // Safely fetch metrics with fallbacks
   let stats = {

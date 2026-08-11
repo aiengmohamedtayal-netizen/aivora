@@ -10,7 +10,7 @@ export function CommandPalette() {
   const [query, setQuery] = useState("")
   const router = useRouter()
   const inputRef = useRef<HTMLInputElement>(null)
-  const t = useTranslations("admin.CommandPalette")
+  const t = useTranslations("CommandPalette")
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {

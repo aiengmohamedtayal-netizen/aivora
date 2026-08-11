@@ -3,7 +3,7 @@ import { GeistSans } from "geist/font/sans"
 import { getBaseUrl } from "@aivora/lib/utils"
 import localFont from "next/font/local"
 import { NextIntlClientProvider } from "next-intl"
-import { getMessages } from "next-intl/server"
+import { getMessages, setRequestLocale } from "next-intl/server"
 import { notFound } from "next/navigation"
 import { routing } from "@/i18n/routing"
 import { ThemeProvider } from "@aivora/ui/providers/ThemeProvider"
@@ -105,6 +105,9 @@ export default async function LocaleLayout({
   if (!routing.locales.includes(locale as (typeof routing.locales)[number])) {
     notFound()
   }
+
+  // Ensure next-intl can statically render all locale-scoped routes.
+  setRequestLocale(locale)
 
   const messages = await getMessages()
   const dir = locale === "ar" ? "rtl" : "ltr"

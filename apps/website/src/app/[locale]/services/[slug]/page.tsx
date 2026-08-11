@@ -15,6 +15,10 @@ import {
 import { getServiceBySlug } from "@/content/services"
 
 // Redirection mapping for legacy/old slugs to avoid 404 or 500 errors
+// This route reads locale-aware request state through the shared layout.
+// Render it on demand to avoid Next.js static-generation dynamic-usage failures.
+export const dynamic = "force-dynamic"
+
 const LEGACY_REDIRECTS: Record<string, string> = {
   "ai-solutions": "ai-integration",
   "custom-software": "cloud-infrastructure",
