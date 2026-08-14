@@ -35,7 +35,8 @@ export async function POST(req: Request) {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   const apiKey = process.env.OPENAI_API_KEY;
-  const baseUrl = process.env.OPENAI_BASE_URL;
+  const baseUrl = process.env.OPENAI_BASE_URL?.replace(/\/+$/, '');
+  const model = process.env.OPENAI_DEFAULT_MODEL || 'gpt-5.6-terra';
 
   if (!supabaseUrl || !supabaseKey) {
     return Response.json({ error: 'Missing Supabase env vars' }, { status: 500 });
@@ -60,7 +61,7 @@ export async function POST(req: Request) {
       await supabase.from('chat_sessions').insert({
         id: currentSessionId,
         title: query.substring(0, 50) + '...',
-        model: 'llama-3.3-70b-versatile',
+        model,
         user_agent: 'Aivora Assistant',
       });
     } else {
@@ -76,7 +77,7 @@ export async function POST(req: Request) {
         await supabase.from('chat_sessions').insert({
           id: currentSessionId,
           title: query.substring(0, 50) + '...',
-          model: 'llama-3.3-70b-versatile',
+          model,
           user_agent: 'Aivora Assistant',
         });
       }
@@ -103,7 +104,7 @@ export async function POST(req: Request) {
     { role: 'user', content: query }
   ];
 
-  // Step 5: Call Dahl (OpenAI-compatible) using OPENAI_BASE_URL
+  // Step 5: Call the configured OpenAI-compatible provider using OPENAI_BASE_URL
   let llmResponse: Response;
   try {
     llmResponse = await fetch(`${baseUrl}/chat/completions`, {
@@ -113,7 +114,7 @@ export async function POST(req: Request) {
         'Authorization': `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile',
+        model,
         messages,
         stream: true,
       }),
