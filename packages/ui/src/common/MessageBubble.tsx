@@ -12,7 +12,7 @@ import { ErrorMessage } from "./ErrorMessage";
 
 const MemoizedMarkdown = React.memo(function MemoizedMarkdown({ content }: { content: string }) {
   return (
-    <div className="prose prose-sm dark:prose-invert max-w-none prose-p:leading-relaxed prose-pre:bg-black/20 prose-pre:border prose-pre:border-white/10">
+    <div className="prose prose-sm dark:prose-invert max-w-none break-words prose-p:leading-relaxed prose-pre:max-w-full prose-pre:overflow-x-auto prose-pre:bg-black/20 prose-pre:border prose-pre:border-white/10">
       <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
     </div>
   );
@@ -54,20 +54,20 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
   return (
     <div
       className={cn(
-        "flex flex-col gap-1.5 max-w-[88%]",
+        "flex max-w-[90%] flex-col gap-1.5 sm:max-w-[88%]",
         msg.role === "user" ? "ms-auto items-end" : "me-auto items-start"
       )}
     >
       <div
         className={cn(
-          "px-4 py-3 rounded-2xl leading-relaxed shadow-sm flex flex-col gap-3",
+          "flex min-w-0 flex-col gap-3 break-words rounded-2xl px-3 py-2.5 leading-relaxed shadow-sm sm:px-4 sm:py-3",
           msg.role === "user"
             ? "bg-primary text-primary-foreground rounded-se-sm"
             : "bg-muted/40 border border-border/50 text-foreground rounded-ss-sm"
         )}
       >
         {msg.role === "user" ? (
-          <span className="whitespace-pre-wrap leading-relaxed font-medium">{msg.text}</span>
+          <span className="whitespace-pre-wrap break-words leading-relaxed font-medium">{msg.text}</span>
         ) : (
           <MemoizedMarkdown content={msg.text} />
         )}
@@ -93,7 +93,7 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
             {msg.pastedContent.map(snippet => (
               <div
                 key={snippet.id}
-                className="p-2.5 rounded-lg bg-black/10 font-mono text-[11px] border border-white/5 whitespace-pre-wrap max-h-[100px] overflow-y-auto"
+                className="max-h-[100px] overflow-x-auto overflow-y-auto break-words rounded-lg border border-white/5 bg-black/10 p-2.5 font-mono text-[11px] whitespace-pre-wrap"
               >
                 {snippet.content}
               </div>

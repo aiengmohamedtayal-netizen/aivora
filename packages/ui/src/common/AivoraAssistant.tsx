@@ -34,6 +34,9 @@ export function AivoraAssistant() {
       voiceNotSupported: "Voice input is not supported in your browser.",
       botName: "Aivora AI",
       botSubtitle: "Business & Digital Product Consultant",
+      openAssistant: "Open Aivora Assistant",
+      closeAssistant: "Close Aivora Assistant",
+      unreadMessage: "Unread message",
       chips: [
         { label: "🚀 Start a Project", query: "I'd like to start a project with Aivora." },
         { label: "💰 Request a Quote", query: "Can I get a quote for a project?" },
@@ -56,6 +59,9 @@ export function AivoraAssistant() {
       voiceNotSupported: "الإدخال الصوتي غير مدعوم في متصفحك.",
       botName: "أيفورا الذكي",
       botSubtitle: "مستشار الأعمال والمنتجات الرقمية",
+      openAssistant: "فتح مساعد أيفورا الذكي",
+      closeAssistant: "إغلاق مساعد أيفورا الذكي",
+      unreadMessage: "رسالة غير مقروءة",
       chips: [
         { label: "🚀 ابدأ مشروعك", query: "أريد بدء مشروع مع أيفورا." },
         { label: "💰 اطلب تسعيرة", query: "هل يمكنني الحصول على عرض سعر؟" },
@@ -112,8 +118,26 @@ export function AivoraAssistant() {
     }
     window.addEventListener("keydown", handleKeyDown)
     const textarea = textareaRef.current
-    if (textarea) textarea.focus()
+    const isTouchDevice = window.matchMedia?.("(pointer: coarse)").matches
+    if (textarea && !isTouchDevice) textarea.focus()
     return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [isOpen])
+
+  // Keep a modal dialog from scrolling its background content.
+  useEffect(() => {
+    if (!isOpen) return
+    const { body, documentElement } = document
+    const previousOverflow = body.style.overflow
+    const previousPaddingRight = body.style.paddingRight
+    const scrollbarWidth = window.innerWidth - documentElement.clientWidth
+
+    body.style.overflow = "hidden"
+    if (scrollbarWidth > 0) body.style.paddingRight = `${scrollbarWidth}px`
+
+    return () => {
+      body.style.overflow = previousOverflow
+      body.style.paddingRight = previousPaddingRight
+    }
   }, [isOpen])
 
   // Programmatic open trigger
@@ -127,14 +151,17 @@ export function AivoraAssistant() {
   }, [])
 
   const isRtl = locale === "ar"
+  const sideOffset = isRtl
+    ? "calc(env(safe-area-inset-left, 0px) + 16px)"
+    : "calc(env(safe-area-inset-right, 0px) + 16px)"
 
   return (
-    <div 
-      className={cn("flex flex-col", isRtl ? "items-start" : "items-end")}
+    <div
+      className={cn("flex max-w-[calc(100vw-2rem)] flex-col", isRtl ? "items-start" : "items-end")}
       style={{
         position: "fixed",
-        bottom: "24px",
-        [isRtl ? "left" : "right"]: "24px",
+        bottom: "calc(env(safe-area-inset-bottom, 0px) + 12px)",
+        [isRtl ? "left" : "right"]: sideOffset,
         zIndex: 1000,
       }}
     >
@@ -159,8 +186,8 @@ export function AivoraAssistant() {
           setIsOpen(!isOpen)
           setHasUnread(false)
         }}
-        className="w-14 h-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all duration-300 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-        aria-label={isOpen ? "Close Aivora Assistant" : "Open Aivora Assistant"}
+        className="h-14 w-14 touch-manipulation rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all duration-300 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        aria-label={isOpen ? dict.closeAssistant : dict.openAssistant}
         aria-expanded={isOpen}
       >
         {chat.healthStatus === null && (
@@ -174,7 +201,7 @@ export function AivoraAssistant() {
             {hasUnread && (
               <span
                 className="absolute top-0 right-0 w-3.5 h-3.5 bg-destructive border-[2.5px] border-background rounded-full"
-                aria-label="Unread message"
+                aria-label={dict.unreadMessage}
               />
             )}
           </>

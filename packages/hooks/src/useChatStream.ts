@@ -7,7 +7,8 @@ export function useChatStream() {
 
   const startStream = useCallback(async (
     query: string, 
-    sessionId: string, 
+    sessionId: string,
+    locale: string,
     onSuccess: (text: string) => void, 
     onError: (err: any) => void,
     signal?: AbortSignal
@@ -21,7 +22,8 @@ export function useChatStream() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           query,
-          session_id: sessionId
+          session_id: sessionId,
+          locale
         })
       };
       if (signal) {

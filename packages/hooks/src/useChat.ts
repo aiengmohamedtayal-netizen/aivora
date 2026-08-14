@@ -80,6 +80,7 @@ export function useChat(locale: string, dict: any) {
     await chatStream.startStream(
       trimmed,
       history.sessionId ?? "fallback",
+      locale,
       (completeResponse) => {
         history.setMessages(prev => [...prev, {
           role: "assistant",

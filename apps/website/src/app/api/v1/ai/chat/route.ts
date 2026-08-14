@@ -2,19 +2,27 @@ import { createClient } from '@supabase/supabase-js';
 
 export const runtime = "nodejs"
 
-const systemPrompt = `You are the "Aivora AI Assistant" (مساعد إيفورا الذكي), an advanced and helpful AI assistant for the Aivora digital business platform.
+function createSystemPrompt(locale: "ar" | "en") {
+  const languageInstruction = locale === "ar"
+    ? "Respond only in clear Modern Standard Arabic. Do not use Chinese, English, or any other language unless the user explicitly requests it."
+    : "Respond only in clear English. Do not use Arabic, Chinese, or any other language unless the user explicitly requests it.";
+
+  return `You are the "Aivora AI Assistant" (مساعد إيفورا الذكي), an advanced and helpful AI assistant for the Aivora digital business platform.
 Your goal is to help users understand our products, manage their business processes, and get support.
-You can communicate fluently in both Arabic and English. If the user speaks Arabic, reply in Arabic. If they speak English, reply in English.
+${languageInstruction}
 Keep your answers professional, concise, and helpful. Format your responses using markdown.`;
+}
 
 export async function POST(req: Request) {
   // Step 1: Parse request
   let query: string;
   let session_id: string | undefined;
+  let locale: "ar" | "en" = "en";
   try {
     const body = await req.json();
     query = body.query;
     session_id = body.session_id;
+    locale = body.locale === "ar" ? "ar" : "en";
   } catch (e) {
     return Response.json({ error: 'Invalid JSON body', detail: String(e) }, { status: 400 });
   }
@@ -90,7 +98,7 @@ export async function POST(req: Request) {
 
   // Step 4: Build messages
   const messages = [
-    { role: 'system', content: systemPrompt },
+    { role: 'system', content: createSystemPrompt(locale) },
     ...history.map(m => ({ role: m.role, content: m.content })),
     { role: 'user', content: query }
   ];

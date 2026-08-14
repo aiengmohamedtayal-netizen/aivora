@@ -65,7 +65,7 @@ export const ChatDialog: React.FC<ChatDialogProps> = ({
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 30, scale: 0.95 }}
       transition={motionTransition}
-      className="w-[360px] sm:w-[445px] h-[640px] border border-border/80 bg-card/95 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden flex flex-col mb-4 relative"
+      className="h-[calc(100dvh-6.5rem)] max-h-[620px] w-[calc(100vw-2rem)] max-w-[360px] sm:h-[640px] sm:max-h-[calc(100dvh-7rem)] sm:w-[445px] sm:max-w-none border border-border/80 bg-card/95 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden flex flex-col mb-3 sm:mb-4 relative"
       onDragOver={chat.onDragOver}
       onDragLeave={chat.onDragLeave}
       onDrop={chat.onDrop}
@@ -74,20 +74,20 @@ export const ChatDialog: React.FC<ChatDialogProps> = ({
       aria-modal="true"
     >
       {/* Header */}
-      <div className="p-4 bg-primary text-primary-foreground flex items-center justify-between z-10 relative shrink-0">
-        <div className="flex items-center gap-3">
+      <div className="p-3 sm:p-4 bg-primary text-primary-foreground flex items-center justify-between z-10 relative shrink-0">
+        <div className="flex min-w-0 items-center gap-3">
           <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
             <Bot className="w-4 h-4" aria-hidden="true" />
           </div>
-          <div>
-            <span className="font-medium text-sm block">{dict.botName}</span>
-            <span className="text-[10px] opacity-75 block">{dict.botSubtitle}</span>
+          <div className="min-w-0">
+            <span className="block truncate font-medium text-sm">{dict.botName}</span>
+            <span className="block truncate text-[10px] opacity-75">{dict.botSubtitle}</span>
           </div>
         </div>
         <div className="flex items-center gap-1">
           <button
             onClick={chat.exportTranscript}
-            className="p-1.5 rounded-lg hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
+            className="hidden h-9 w-9 items-center justify-center rounded-lg hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary sm:inline-flex"
             aria-label="Export conversation transcript"
             title="Export Transcript"
           >
@@ -95,7 +95,7 @@ export const ChatDialog: React.FC<ChatDialogProps> = ({
           </button>
           <button
             onClick={() => setIsOpen(false)}
-            className="p-1.5 rounded-lg hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-lg hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
             aria-label="Close Aivora Assistant"
           >
             <X className="w-4 h-4" aria-hidden="true" />
@@ -121,7 +121,7 @@ export const ChatDialog: React.FC<ChatDialogProps> = ({
       {/* Messages */}
       <div
         ref={scrollRef}
-        className="flex-1 p-4 overflow-y-auto space-y-5 font-sans text-[13px] sm:text-sm scroll-smooth"
+        className="flex-1 overscroll-contain overflow-y-auto p-3 sm:p-4 space-y-4 sm:space-y-5 font-sans text-[13px] sm:text-sm scroll-smooth"
         aria-live="polite"
         aria-label="Conversation"
       >
@@ -181,13 +181,13 @@ export const ChatDialog: React.FC<ChatDialogProps> = ({
       </div>
 
       {/* Suggestion Chips */}
-      <div className="px-4 py-2 border-t border-border/40 bg-muted/10 flex flex-wrap gap-2 max-h-[85px] overflow-y-auto shrink-0">
+      <div className="flex shrink-0 gap-2 overflow-x-auto overflow-y-hidden border-t border-border/40 bg-muted/10 px-3 py-2 sm:max-h-[85px] sm:flex-wrap sm:overflow-y-auto sm:px-4">
         {dict.chips.map((chip: any, idx: number) => (
           <button
             key={idx}
             onClick={() => void chat.handleSend(chip.query)}
             disabled={chat.isStreaming}
-            className="px-2.5 py-1 border border-border hover:border-primary/30 bg-background text-[10px] font-mono font-medium text-muted-foreground hover:text-foreground rounded-lg transition-colors whitespace-nowrap disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="min-h-8 shrink-0 px-2.5 py-1 border border-border hover:border-primary/30 bg-background text-[10px] font-mono font-medium text-muted-foreground hover:text-foreground rounded-lg transition-colors whitespace-nowrap disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             {chip.label}
           </button>
@@ -195,8 +195,8 @@ export const ChatDialog: React.FC<ChatDialogProps> = ({
       </div>
 
       {/* Input Area */}
-      <div className="p-4 border-t border-border/40 bg-background/50 z-10 relative shrink-0">
-        <div className="flex flex-col border border-border/80 focus-within:border-primary/30 rounded-2xl p-3 bg-card/60 transition-all duration-200 shadow-sm relative">
+      <div className="p-3 sm:p-4 border-t border-border/40 bg-background/50 z-10 relative shrink-0">
+        <div className="flex flex-col border border-border/80 focus-within:border-primary/30 rounded-2xl p-2.5 sm:p-3 bg-card/60 transition-all duration-200 shadow-sm relative">
           {/* Attached Previews */}
           {(chat.attachedFiles.length > 0 || chat.pastedSnippets.length > 0) && (
             <div className="flex gap-2 overflow-x-auto pb-2 mb-2 border-b border-border/30 max-h-[110px]">
@@ -280,7 +280,7 @@ export const ChatDialog: React.FC<ChatDialogProps> = ({
                 onClick={chat.toggleRecording}
                 disabled={chat.voiceUnsupported}
                 className={cn(
-                  "p-1.5 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                  "inline-flex h-10 w-10 items-center justify-center rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                   chat.isRecording
                     ? "text-red-500 bg-red-500/10 animate-pulse"
                     : "text-muted-foreground hover:text-foreground hover:bg-muted/40",
@@ -295,7 +295,7 @@ export const ChatDialog: React.FC<ChatDialogProps> = ({
 
               <button
                 onClick={() => fileInputRef.current?.click()}
-                className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 type="button"
                 aria-label="Attach file"
               >
@@ -305,7 +305,7 @@ export const ChatDialog: React.FC<ChatDialogProps> = ({
               <button
                 onClick={() => chat.setIsThinkingEnabled(!chat.isThinkingEnabled)}
                 className={cn(
-                  "p-1.5 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                  "inline-flex h-10 w-10 items-center justify-center rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                   chat.isThinkingEnabled ? "text-primary bg-primary/10" : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
                 )}
                 type="button"
@@ -320,7 +320,7 @@ export const ChatDialog: React.FC<ChatDialogProps> = ({
               onClick={() => void chat.handleSend(chat.messageText)}
               disabled={!hasContent || chat.isStreaming || charOverLimit}
               className={cn(
-                "w-7 h-7 rounded-lg flex items-center justify-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                "inline-flex h-10 w-10 items-center justify-center rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                 hasContent && !charOverLimit
                   ? "bg-primary text-primary-foreground shadow"
                   : "bg-muted text-muted-foreground cursor-default"

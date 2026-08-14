@@ -1,15 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import { Message } from "@aivora/hooks/useChat";
 
-const SESSION_STORAGE_KEY = "aivora_chat_session_id";
 const HEALTH_TIMEOUT_MS = 3000;
 
-function getOrCreateSessionId(): string {
+function getOrCreateSessionId(locale: string): string {
+  const storageKey = `aivora_chat_session_id_${locale === "ar" ? "ar" : "en"}`;
   try {
-    const existing = sessionStorage.getItem(SESSION_STORAGE_KEY);
+    const existing = sessionStorage.getItem(storageKey);
     if (existing) return existing;
     const newId = crypto.randomUUID();
-    sessionStorage.setItem(SESSION_STORAGE_KEY, newId);
+    sessionStorage.setItem(storageKey, newId);
     return newId;
   } catch {
     return crypto.randomUUID();
@@ -24,8 +24,9 @@ export function useAssistantHistory(locale: string, dict: any) {
   const welcomeTriggered = useRef(false);
 
   useEffect(() => {
-    sessionIdRef.current = getOrCreateSessionId();
-  }, []);
+    sessionIdRef.current = getOrCreateSessionId(locale);
+    welcomeTriggered.current = false;
+  }, [locale]);
 
   useEffect(() => {
     async function init() {
