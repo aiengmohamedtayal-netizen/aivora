@@ -27,13 +27,32 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // Close mobile menu on route change
+  // Keep the menu state in sync with route changes.
   React.useEffect(() => {
     setIsMobileMenuOpen(false)
   }, [pathname])
 
+  // A modal-like mobile menu must not allow accidental background scrolling.
+  React.useEffect(() => {
+    if (!isMobileMenuOpen) return
+
+    const originalOverflow = document.body.style.overflow
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsMobileMenuOpen(false)
+    }
+
+    document.body.style.overflow = "hidden"
+    window.addEventListener("keydown", closeOnEscape)
+
+    return () => {
+      document.body.style.overflow = originalOverflow
+      window.removeEventListener("keydown", closeOnEscape)
+    }
+  }, [isMobileMenuOpen])
+
   const navLinks = [
     { href: "/services", label: t("capabilities") },
+    { href: "/case-studies", label: t("caseStudies") },
     { href: "/about", label: t("about") },
   ] as const
 
@@ -156,6 +175,7 @@ export function Navbar() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
                       className={cn(
                         "block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-secondary/50",
                         isActive ? "bg-primary/10 text-primary" : "text-muted-foreground"
@@ -174,7 +194,7 @@ export function Navbar() {
               </div>
               <div className="px-2">
                 <Button asChild variant="primary" className="w-full h-10 shadow-md shadow-primary/20">
-                  <Link href="/intake">{t("contact")}</Link>
+                  <Link href="/intake" onClick={() => setIsMobileMenuOpen(false)}>{t("contact")}</Link>
                 </Button>
               </div>
             </div>

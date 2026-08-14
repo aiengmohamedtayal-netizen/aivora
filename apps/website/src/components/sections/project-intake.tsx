@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
@@ -46,7 +46,9 @@ export function ProjectIntake() {
   const [step, setStep] = useState(0)
   const [formData, setFormData] = useState<FormData>(initialData)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
   const [mounted, setMounted] = useState(false)
+  const autoAdvanceTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     setMounted(true)
@@ -72,22 +74,43 @@ export function ProjectIntake() {
     }
   }, [formData, mounted, step])
 
-  const handleNext = () => setStep((s) => Math.min(s + 1, 8))
-  const handlePrev = () => setStep((s) => Math.max(s - 1, 0))
+  useEffect(() => () => {
+    if (autoAdvanceTimer.current) clearTimeout(autoAdvanceTimer.current)
+  }, [])
+
+  const clearAutoAdvance = () => {
+    if (!autoAdvanceTimer.current) return
+    clearTimeout(autoAdvanceTimer.current)
+    autoAdvanceTimer.current = null
+  }
+
+  const handleNext = () => {
+    clearAutoAdvance()
+    setStep((s) => Math.min(s + 1, 8))
+  }
+
+  const handlePrev = () => {
+    clearAutoAdvance()
+    setStep((s) => Math.max(s - 1, 0))
+  }
 
   const handleChange = (field: keyof FormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
+    if (submitError) setSubmitError(null)
   }
 
-  // Auto-advance for cards if we want to, but standard explicitly clicks Next.
-  const handleSelectOption = (field: string, value: string) => {
+  // Keep one intentional auto-advance in flight so rapid taps cannot skip questions.
+  const handleSelectOption = (field: keyof FormData, value: string) => {
     handleChange(field as keyof FormData, value)
-    setTimeout(() => {
+    clearAutoAdvance()
+    autoAdvanceTimer.current = setTimeout(() => {
+      autoAdvanceTimer.current = null
       handleNext()
     }, 300)
   }
 
   const handleSubmit = async () => {
+    setSubmitError(null)
     setIsSubmitting(true)
     try {
       const response = await fetch("/api/v1/notify-lead", {
@@ -115,6 +138,7 @@ export function ProjectIntake() {
       localStorage.removeItem("aivora-wizard")
     } catch (error) {
       console.error("Failed to submit:", error)
+      setSubmitError("We could not send your project details. Please try again in a moment.")
     } finally {
       setIsSubmitting(false)
     }
@@ -217,6 +241,7 @@ export function ProjectIntake() {
           value={formData.description}
           onChange={(e) => handleChange("description", e.target.value)}
           placeholder={t("wizard.questions.description.placeholder")}
+          aria-label={t("wizard.questions.description.title")}
           rows={6}
           className="w-full bg-card border border-border focus:border-primary p-6 outline-none text-xl text-foreground placeholder:text-muted-foreground/50 transition-colors rounded-2xl resize-none focus-visible:ring-2 focus-visible:ring-ring"
         />
@@ -231,6 +256,7 @@ export function ProjectIntake() {
             value={formData.name}
             onChange={(e) => handleChange("name", e.target.value)}
             placeholder={t("wizard.questions.contact.fields.name")}
+            aria-label={t("wizard.questions.contact.fields.name")}
             required
             className="w-full bg-card border border-border focus:border-primary p-6 outline-none text-lg text-foreground placeholder:text-muted-foreground transition-colors rounded-2xl focus-visible:ring-2 focus-visible:ring-ring"
           />
@@ -239,6 +265,7 @@ export function ProjectIntake() {
             value={formData.email}
             onChange={(e) => handleChange("email", e.target.value)}
             placeholder={t("wizard.questions.contact.fields.email")}
+            aria-label={t("wizard.questions.contact.fields.email")}
             required
             className="w-full bg-card border border-border focus:border-primary p-6 outline-none text-lg text-foreground placeholder:text-muted-foreground transition-colors rounded-2xl focus-visible:ring-2 focus-visible:ring-ring"
           />
@@ -247,6 +274,7 @@ export function ProjectIntake() {
             value={formData.company}
             onChange={(e) => handleChange("company", e.target.value)}
             placeholder={t("wizard.questions.contact.fields.company")}
+            aria-label={t("wizard.questions.contact.fields.company")}
             required
             className="w-full bg-card border border-border focus:border-primary p-6 outline-none text-lg text-foreground placeholder:text-muted-foreground transition-colors rounded-2xl focus-visible:ring-2 focus-visible:ring-ring"
           />
@@ -255,6 +283,7 @@ export function ProjectIntake() {
             value={formData.phone}
             onChange={(e) => handleChange("phone", e.target.value)}
             placeholder={t("wizard.questions.contact.fields.phone")}
+            aria-label={t("wizard.questions.contact.fields.phone")}
             className="w-full bg-card border border-border focus:border-primary p-6 outline-none text-lg text-foreground placeholder:text-muted-foreground transition-colors rounded-2xl focus-visible:ring-2 focus-visible:ring-ring"
           />
         </div>
@@ -270,6 +299,7 @@ export function ProjectIntake() {
             key={k}
             type="button"
             onClick={() => handleSelectOption(currentQuestion, k)}
+            aria-pressed={(formData as Record<string, string>)[currentQuestion] === k}
             className={cn(
               "p-6 md:p-8 rounded-2xl border text-start transition-all hover:shadow-md",
               (formData as any)[currentQuestion] === k 
@@ -310,9 +340,10 @@ export function ProjectIntake() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl pt-40 lg:pt-48 flex-1 flex flex-col">
         <form 
           onSubmit={(e) => {
-            e.preventDefault();
-            if (step < 7) handleNext();
-            else handleSubmit();
+            e.preventDefault()
+            if (!isCurrentStepValid()) return
+            if (step < 7) handleNext()
+            else void handleSubmit()
           }}
           className="flex-1 flex flex-col"
         >
@@ -370,6 +401,12 @@ export function ProjectIntake() {
               </div>
             </motion.div>
           </AnimatePresence>
+
+          {submitError && (
+            <p role="alert" className="mt-8 rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive" aria-live="assertive">
+              {submitError}
+            </p>
+          )}
 
           {/* Navigation */}
           <div className="flex items-center justify-between pt-12 mt-auto">
