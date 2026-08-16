@@ -1,0 +1,57 @@
+[
+  {
+    "id": "code-01",
+    "name": "Python utility generation",
+    "category": "Code generation",
+    "description": "Generate syntactically valid Python from a concise specification.",
+    "system_instruction": "Return only executable Python code. Do not use markdown fences.",
+    "prompt": "Write a Python function named summarize_sales that accepts a list of numeric sales values and returns a dictionary with count, total, and average. Handle an empty list without division by zero.",
+    "params": {"temperature": 0.1, "max_tokens": 300, "top_p": 0.9},
+    "validator": "code",
+    "expected_keys": []
+  },
+  {
+    "id": "reasoning-01",
+    "name": "Multi-step arithmetic",
+    "category": "Reasoning",
+    "description": "Solve a chained arithmetic word problem with an explicit final answer.",
+    "system_instruction": "Show concise reasoning, then finish with a line beginning 'Answer:'.",
+    "prompt": "A team processes 18 requests per hour. After a 25% efficiency improvement, how many requests can it process in 4 hours? Calculate carefully and state the final numeric answer.",
+    "params": {"temperature": 0.0, "max_tokens": 300, "top_p": 0.9},
+    "validator": "math",
+    "expected_keys": []
+  },
+  {
+    "id": "json-01",
+    "name": "Structured extraction",
+    "category": "JSON reliability",
+    "description": "Extract a stable object with required keys and no prose.",
+    "system_instruction": "Return a single valid JSON object and no surrounding markdown.",
+    "prompt": "Extract the following product brief into JSON with keys 'name', 'price', 'in_stock', and 'tags': Atlas Notebook costs 24.50, is currently in stock, and is designed for research notes and field work.",
+    "params": {"temperature": 0.0, "max_tokens": 250, "top_p": 0.9},
+    "validator": "json",
+    "expected_keys": ["name", "price", "in_stock", "tags"]
+  },
+  {
+    "id": "context-01",
+    "name": "Long-context recall",
+    "category": "Context length",
+    "description": "Locate a planted fact after distractor context.",
+    "system_instruction": "Answer in one sentence and preserve the exact identifier.",
+    "prompt": "Review this context and identify the project codename: memo A says the launch is in June; memo B discusses regional owners; memo C says the internal codename is ORBIT-17; memo D lists three risks; memo E covers support coverage. What is the project codename?",
+    "params": {"temperature": 0.0, "max_tokens": 180, "top_p": 0.9},
+    "validator": "context",
+    "expected_keys": []
+  },
+  {
+    "id": "synthesis-01",
+    "name": "Decision synthesis",
+    "category": "Instruction following",
+    "description": "Produce a concise trade-off summary from multiple constraints.",
+    "system_instruction": "Be direct, balanced, and specific. Use no more than 120 words.",
+    "prompt": "Compare batch inference and online inference for a customer-support classifier. Cover latency, cost, operational complexity, and a practical recommendation for a team that needs sub-second responses but has uneven traffic.",
+    "params": {"temperature": 0.2, "max_tokens": 220, "top_p": 0.95},
+    "validator": "text",
+    "expected_keys": []
+  }
+]
