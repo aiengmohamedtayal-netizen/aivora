@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic"
+
 const styles = {
   page: {
     minHeight: "100vh",
